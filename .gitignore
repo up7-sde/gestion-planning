@@ -1,5 +1,5 @@
-# Fichier dans lequel je note l'ensemble des problèmes rencontrés
-notes.md
-
-# Contient le cahier des charges et le fichier de données excel
+# Contient le cahier des charges et le fichier de données excel (avec de vrai données!)
 documents/*
+
+# Contient id/mdp
+creer_variable_environnement.sh

@@ -3,10 +3,17 @@
 > Explique les procédures et documente le script bash d'installation.
 
 
-## Création de la BDD
+## 1. Création des variables d'environnements
 
-cf [documentation officielle](https://dev.mysql.com/doc/refman/8.0/en/mysql-batch-commands.html) :
+Ce fichier contient beaucoup de données sensibles : il est donc listé dans le .gitignore.
+A la place on laissera un template (qu'il suffiera de mettre à jour).
+
+usage :
+
+    source creer_variable_environnement.sh
+
+## 2. Installation de la BDD
+
+cf [documentation officielle](https://dev.mysql.com/doc/refman/8.0/en/mysql-batch-commands.html), usage :
 
     mysql db_name < projet/bdd/creation_bdd.sql
-
-## Utiliser des variables d'environnement pour les mdp (mysql/admin du site/etc.)

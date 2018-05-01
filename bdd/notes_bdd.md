@@ -24,7 +24,7 @@ CM + nbGroupe * TD
 Dans le CDC il est fait référence au CDC pour identifier un enseignement mais dans le tableau excel le terme ECUE est utilisé : est-ce qu'il s'agit de la même chose ?
 
 ## Les vues
-L'idée consiste à limiter les droits du schéma applicatif à des SELECT sur 3 VIEWS prédéfinies :
+3 VIEWS prédéfinies correspondant au vue coté PHP:
 
 - liste des enseignants :
     - Enseignants.nom
@@ -52,16 +52,23 @@ L'idée consiste à limiter les droits du schéma applicatif à des SELECT sur 3
 
 ## Procédures
 
-Afin d'améliorer la sécurité ET les performances on utilisera des **procédures**. Allez voir le petit rappel sur les procédure en MySQL sur [openclassroom](https://openclassrooms.com/courses/administrez-vos-bases-de-donnees-avec-mysql/procedures-stockees).
+Allez voir le petit rappel sur les procédure en MySQL sur [openclassroom](https://openclassrooms.com/courses/administrez-vos-bases-de-donnees-avec-mysql/procedures-stockees).
 
 On aura besoin des procédures :
 
-- ajouter : un Enseignants, Enseignements, Cours, Formations **FAIT**
-- modifier : un Enseignants, Enseignements, Cours, Formations **UPDATE de l'ensemble des champs!**
-- supprimer : un cours
+- ajouter : un Enseignants, Enseignements, Cours, Formations
+- modifier : un Enseignants, Enseignements, Cours, Formations (UPDATE sur l'ensemble des champs)
+- supprimer : un cours (Et c'est tout car sinon on va devoir gérer énormément de CASCADE)
 
-> Dans le script les paramètres des procédure sont préfixées pas un p
+> Dans le script les paramètres des procédures sont préfixées pas un p
 
-## A faire :
-- extraire diplome de la table Formation (créer une entité Diplome)
-- revoir les droits
+## Sécurité
+
+Afin d'améliorer la sécurité ET les performances on utilisera des **procédures** et des **vues**. Il faudra limiter les droits des comptes applicatif à des select les vues et des call sur les procédures.
+
+On aura 2 users :
+
+- admin (avec des droits sur les vues ET les procédures)
+- enseignant (avec des droits sur les vues uniquement)
+
+Cette séparation suit la logique au niveau de l'application
