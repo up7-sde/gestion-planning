@@ -88,7 +88,7 @@ insert into `sde`.`Cours` (Enseignants_idEnseignants, TypesCours_idTypesCours, a
 values
     (1, 1, 2018, "54AEE1EC", 26),
     (1, 1, 2018, "43IF5073", 48),
-    (1, 1, 2018, "43IF5084", 40),
+    (1, 1, 2018, "43IF5084", 20),
     (3, 1, 2018, "43QE1443", 24),
     (2, 1, 2018, "43IF5044", 21),
     (3, 1, 2018, "43IF5044", 6),

@@ -8,3 +8,5 @@ CALL ModifierCours(1, 1, 1, 2018, "54AEE1EC", 15);
 CALL ModifierEnseignement("43IF5073", "BLOB", "Un cours chouette sur les blobs", 12, 13, 5, 3);
 CALL ModifierFormation("PISE", "PAAASE", 2);
 CALL SupprimerCours(2);
+
+-- CALL calculerNbHeureCMAffecte("43IF5084");
