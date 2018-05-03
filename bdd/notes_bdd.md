@@ -11,7 +11,9 @@ Ecrire le MCD sur JMerise. Ensuite reporter le MLD sur MysqlWorkbench pour :
 ## Modélisation
 
 ### Relation de reflexivité dans Catégories
-On pourrait distinguer le statut (PR, MCF, etc.) et la catégorie des enseignant dans deux tables. Pourtant un enseignant tituliare du département (catégorie 1) ne pourra être que du status PR, MCF, PAST, PRAG et pas ATER ou Moniteur. En utilisat une relation de reflexivité on regroupe les deux informations dans une seule table. On a un système à tiroir avec au premier niveau les catégories qui pourront (ou pas pour les non-titulaires) faire référence à un deuxième niveau : les statuts. Ainsi on cloisonne les statuts dans des catégories.
+On pourrait distinguer le statut (PR, MCF, etc.) et la catégorie des enseignant dans deux tables. Pourtant un enseignant tituliare du département (catégorie 1) ne pourra être que du status PR, MCF, PRAG et un NON-TITULAIRE RATTACHE (Catégorie 2) ne pourra être que PAST, ATER, DEMI-ATER, MONITEUR.
+
+En utilisant une relation de reflexivité on regroupe les deux informations dans une seule table. On a un système à tiroir avec au premier niveau les catégories qui pourront (ou pas pour les TITULAIRE HORS DEPARTEMENT et les EXTERIEUR) faire référence à un deuxième niveau : les statuts. Ainsi on cloisonne les statuts dans des catégories.
 
 ### Relation tripates et entité Cours
 Les Enseignements sont découpés en cours (morceau d'enseignements), voir si ça ne correspond pas plutot à une relation tripates.
@@ -57,11 +59,15 @@ Dans le CDC il est fait référence au CDC pour identifier un enseignement mais 
 
 Allez voir le petit rappel sur les procédure en MySQL sur [openclassroom](https://openclassrooms.com/courses/administrez-vos-bases-de-donnees-avec-mysql/procedures-stockees).
 
-On aura besoin des procédures :
+On aura besoin des procédures "métier":
 
 - ajouter : un Enseignants, Enseignements, Cours, Formations
 - modifier : un Enseignants, Enseignements, Cours, Formations (UPDATE sur l'ensemble des champs)
 - supprimer : un cours (Et c'est tout car sinon on va devoir gérer énormément de CASCADE)
+
+et de procédures d'"administration":
+- modifier les catégories (nom, nb d'heure)
+- attention on ne pourra pas modifier TypesCours, car bcp de procédures repose sur le fait que TypesCours 1 vaut CM et 2 vaut TP
 
 Ces procédures reposeront sur des procédures de controle :
 
@@ -72,10 +78,29 @@ Ces procédures reposeront sur des procédures de controle :
 ## VueListeEnseignements et Procédure SelectionnerEnseignements
 
 Afin d'afficher les champs :
+
 - heureCMAffecte (somme des nb d'heure des cours CM de l'enseigmenet)
 - heureTPAffecte (somme des nb d'heure des cours TP de l'enseigmenet)
 - heureTotal (heureCM + nbGroupes*heureTP)
-Il est nécessaire de faire des sous-requetes, ce qui est interdi dans une view (cf [issue](https://stackoverflow.com/questions/23765093/mysql-error-code-1349-views-select-contains-a-subquery-in-the-from-clause)). On devra donc passer par une procédure (sur laquelle l'user admin et enseignant auront des droits)
+
+Il est nécessaire de faire des sous-requetes, ce qui est interdit dans une view (cf [issue](https://stackoverflow.com/questions/23765093/mysql-error-code-1349-views-select-contains-a-subquery-in-the-from-clause)). On devra donc passer par une procédure (sur laquelle l'user admin et enseignant auront des droits)
+
+## Contraint check
+
+Ajouter des contraintes de types check pour s'assurer que les données sont cohérente.
+
+Forme :
+
+  CREATE TABLE WhatEver
+  (
+      ...
+      NumericField INTEGER NOT NULL CHECK(NumericField BETWEEN 1234 AND 4523),
+      ...
+  );
+
+Exemple :
+- semestre de 1 à 6 max pour un enseignements de type licence ou de 1 à 4 pour un enseignement de type master.
+- pas d'enseignant avec idCategories valant 1 ou 2 : car il correspond aux catégories "TITULAIRE" ET "NON-TITULAIRE RATTACHE".
 
 ## Sécurité
 

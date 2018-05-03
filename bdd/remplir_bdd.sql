@@ -20,9 +20,10 @@ insert into `sde`.`Categories` (nom, heureService, Categories_idCategories)
 values
     ("PR", 192, 1),
     ("MCF", 192, 1),
-    ("PAST", 96, 1),
     ("PRAG", 384, 1),
+    ("PAST", 96, 2),
     ("ATER", 192, 2),
+    ("DEMI-ATER", 96, 2),
     ("MONITEUR", 384, 2);
 
 -- -----------------------------------------------------
