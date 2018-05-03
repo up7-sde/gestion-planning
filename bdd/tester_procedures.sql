@@ -1,6 +1,6 @@
 -- petit script pour faire des tests pendant l'ecriture des procédures
-CALL InsererEnseignant("Jean", "Louis", 1);
-CALL InsererEnseignement("54AEe3EC", "Introduction à la biogeographie", 26, 18, 5, 1);
+-- CALL InsererEnseignant("Jean", "Louis", 1);
+-- CALL InsererEnseignement("54AEe3EC", "Introduction à la biogeographie", 26, 18, 5, 1);
 -- Insérer une série de cours (TD puis CM qui dont les 2 ou 3 premiers seulement doivent passer)
 -- CALL InsererCours(1, 2, 1999, "54AEE1EC", 6);
 -- CALL InsererCours(1, 2, 1998, "54AEE1EC", 6);
@@ -19,10 +19,10 @@ CALL InsererEnseignement("54AEe3EC", "Introduction à la biogeographie", 26, 18,
 -- CALL ModifierCours(1, 1, 1, 1800, "54AEE1EC", 5);
 -- CALL ModifierCours(1, 1, 1, 1800, "54AEE1EC", 15);
 -- CALL ModifierCours(1, 1, 1, 1800, "54AEE1EC", 60);
-CALL InsererFormation("EDMR", 1);
-CALL ModifierEnseignant(1, "Jean", "DarmanGeaT", 1);
-CALL ModifierEnseignement("43IF5073", "BLOB", "Un cours chouette sur les blobs", 12, 13, 5, 3);
-CALL ModifierFormation("PISE", "PAAASE", 2);
+-- CALL InsererFormation("EDMR", 1);
+-- CALL ModifierEnseignant(1, "Jean", "DarmanGeaT", 1);
+-- CALL ModifierEnseignement("43IF5073", "BLOB", "Un cours chouette sur les blobs", 12, 13, 5, 3);
+-- CALL ModifierFormation("PISE", "PAAASE", 2);
 -- CALL SupprimerCours(2);
 
 -- CALL calculerNbHeureCMAffecte("43IF5084");

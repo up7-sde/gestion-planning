@@ -683,34 +683,39 @@ insert into `sde`.`TypesCours` (nom) values("TD");
 -- -----------------------------------------------------
 -- Table Categories
 -- -----------------------------------------------------
--- niveau 1
+-- niveau 0 (obligé d'avoir un noeud de départ)
 insert into `sde`.`Categories` (nom)
+  values ("ENSEIGNANT");
+-- niveau 1 catégorie
+insert into `sde`.`Categories` (nom, Categories_idCategories)
 values
-    ("TITULAIRE"),
-    ("NON-TITULAIRE RATTACHE"),
-    ("TITULAIRE HORS DEPARTEMENT"),
-    ("CHARGE ENSEIGNEMENTS EXTERIEUR");
+    ("TITULAIRE", 1),
+    ("NON-TITULAIRE RATTACHE", 1),
+    ("TITULAIRE HORS DEPARTEMENT", 1),
+    ("CHARGE ENSEIGNEMENTS EXTERIEUR", 1);
 
--- niveau 2 (tps à modifier pour ater et prag)
+-- niveau 2 statut (tps à modifier pour ater et prag)
 insert into `sde`.`Categories` (nom, heureService, Categories_idCategories)
 values
-    ("PR", 192, 1),
-    ("MCF", 192, 1),
-    ("PRAG", 384, 1),
-    ("PAST", 96, 2),
-    ("ATER", 192, 2),
-    ("DEMI-ATER", 96, 2),
-    ("MONITEUR", 384, 2);
+    ("PR", 192, (SELECT idCategories FROM Categories AS toto WHERE toto.nom = "TITULAIRE")),
+    ("MCF", 192, 2),
+    ("PRAG", 384, 2),
+    ("PAST", 96, 3),
+    ("ATER", 192, 3),
+    ("DEMI-ATER", 96, 3),
+    ("MONITEUR", 384, 3);
 
 -- -----------------------------------------------------
 -- Table Enseignants
 -- -----------------------------------------------------
 insert into `sde`.`Enseignants`  (nom, prenom, Categories_idCategories)
 values
-    ("DARMANGEAT", "CHRISTOPHE", 8),
+    ("DARMANGEAT", "CHRISTOPHE", 7),
     ("GROUIEZ", "PASCALE", 6),
     ("LAMARCHE", "THIERY", 5),
-    ("DOSQUET", "YVON", 3);
+    ("DOSQUET", "YVON", 3),
+    ("DUPONT EXTERIEUR", "JEAN", 4),
+    ("DUPONT PAST", "JEAN", 4);
 
 -- -----------------------------------------------------
 -- Table Diplomes

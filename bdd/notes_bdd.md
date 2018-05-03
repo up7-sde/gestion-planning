@@ -15,6 +15,8 @@ On pourrait distinguer le statut (PR, MCF, etc.) et la catégorie des enseignant
 
 En utilisant une relation de reflexivité on regroupe les deux informations dans une seule table. On a un système à tiroir avec au premier niveau les catégories qui pourront (ou pas pour les TITULAIRE HORS DEPARTEMENT et les EXTERIEUR) faire référence à un deuxième niveau : les statuts. Ainsi on cloisonne les statuts dans des catégories.
 
+Voir cet [article](http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/)
+
 ### Relation tripates et entité Cours
 Les Enseignements sont découpés en cours (morceau d'enseignements), voir si ça ne correspond pas plutot à une relation tripates.
 
