@@ -41,6 +41,9 @@ Dans le CDC il est fait référence au CDC pour identifier un enseignement mais 
     - Enseignements.nbGroupes
     - Formations.nom
     - Formations.diplome
+    - heureCMAffecte (somme des nb d'heure des cours CM de l'enseigmenet)
+    - heureTPAffecte (somme des nb d'heure des cours TP de l'enseigmenet)
+    - heureTotal (heureCM + nbGroupes*heureTP)
 - La liste des cours (a filtrer par enseignant pour avoir le détail de ses cours ou par enseignements pour le détail des enseignements) :
     - Enseignements.apogee
     - Enseignement.intitule,
@@ -65,6 +68,14 @@ Ces procédures reposeront sur des procédures de controle :
 - Les procédures InsererCours et ModifierCours utilisent VeérifierNbHCours et CalculerNbHeuresAffectees permettent de vérifier qu'on ne va pas créer un cours qui rendrait le total des heures de cours d'un enseignement supérieur à son champ nbHeure (les procédures gèrent les deux type de cours TD et CM et sont utilisé pour). **Attention**, ces procédure repose sur le fait que les enregistrement CM et TP dans la tables TypesCours ont pour id respectif 1 et 2 !
 
 > Dans le script les paramètres des procédures sont préfixées pas un p
+
+## VueListeEnseignements et Procédure SelectionnerEnseignements
+
+Afin d'afficher les champs :
+- heureCMAffecte (somme des nb d'heure des cours CM de l'enseigmenet)
+- heureTPAffecte (somme des nb d'heure des cours TP de l'enseigmenet)
+- heureTotal (heureCM + nbGroupes*heureTP)
+Il est nécessaire de faire des sous-requetes, ce qui est interdi dans une view (cf [issue](https://stackoverflow.com/questions/23765093/mysql-error-code-1349-views-select-contains-a-subquery-in-the-from-clause)). On devra donc passer par une procédure (sur laquelle l'user admin et enseignant auront des droits)
 
 ## Sécurité
 
