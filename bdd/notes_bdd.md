@@ -60,6 +60,10 @@ On aura besoin des procédures :
 - modifier : un Enseignants, Enseignements, Cours, Formations (UPDATE sur l'ensemble des champs)
 - supprimer : un cours (Et c'est tout car sinon on va devoir gérer énormément de CASCADE)
 
+Ces procédures reposeront sur des procédures de controle :
+
+- Les procédures InsererCours et ModifierCours utilisent VeérifierNbHCours et CalculerNbHeuresAffectees permettent de vérifier qu'on ne va pas créer un cours qui rendrait le total des heures de cours d'un enseignement supérieur à son champ nbHeure (les procédures gèrent les deux type de cours TD et CM et sont utilisé pour). **Attention**, ces procédure repose sur le fait que les enregistrement CM et TP dans la tables TypesCours ont pour id respectif 1 et 2 !
+
 > Dans le script les paramètres des procédures sont préfixées pas un p
 
 ## Sécurité
