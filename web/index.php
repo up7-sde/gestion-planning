@@ -5,6 +5,7 @@
         <title>Projet Web</title>
     </head>
     <body>
-        <p>Services du Département d'Economie</p>
+        <h1>Services du Département d'Economie</h1>
+        <a href="enseignements.php">Liste des enseignements</a>
     </body>
 </html>

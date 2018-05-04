@@ -2,7 +2,7 @@
 -- Donner les droits de selection sur les vues
 GRANT SELECT ON `sde`.`VueListeCours` TO 'enseignant';
 GRANT SELECT ON `sde`.`VueListeEnseignants` TO 'enseignant';
--- GRANT SELECT ON `sde`.`VueListeEnseignements` TO 'enseignant';
+GRANT SELECT ON `sde`.`VueListeEnseignements` TO 'enseignant';
 -- Donner droit de selection sur la liste des Enseignements
 GRANT EXECUTE ON PROCEDURE `sde`.`SelectionnerEnseignements` TO 'enseignant';
 
@@ -23,3 +23,4 @@ GRANT EXECUTE ON PROCEDURE `sde`.`ModifierEnseignant` TO 'admin';
 GRANT EXECUTE ON PROCEDURE `sde`.`ModifierEnseignement` TO 'admin';
 GRANT EXECUTE ON PROCEDURE `sde`.`ModifierFormation` TO 'admin';
 GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerCours` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SelectionnerCours` TO 'admin';

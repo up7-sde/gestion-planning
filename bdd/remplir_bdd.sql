@@ -81,10 +81,9 @@ values
 insert into `sde`.`Cours` (Enseignants_idEnseignants, TypesCours_idTypesCours, annee, Enseignements_apogee, nbHeures)
 values
     (1, 1, 2018, "54AEE1EC", 10),
-    (1, 1, 2018, "54AEE1EC", 15),
+    (2, 1, 2018, "54AEE1EC", 15),
     (1, 1, 2018, "54AEE1EC", 5),
-    (1, 2, 2018, "43QE1443", 2),
-    (1, 2, 2018, "43QE1443", 7);
+    (1, 1, 2019, "43QE1443", 20);
     -- (1, 1, 2018, "43IF5073", 48),
     -- (1, 1, 2018, "43IF5084", 20),
     -- (3, 1, 2018, "43QE1443", 24),

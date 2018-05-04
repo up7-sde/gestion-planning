@@ -44,3 +44,12 @@ WHERE t2.idCategories IS NULL;
 -- category AS t1 LEFT JOIN category as t2
 -- ON t1.category_id = t2.parent
 -- WHERE t2.category_id IS NULL;
+
+
+
+BEGIN
+SELECT *
+    FROM VueListeCours
+    WHERE `VueListeCours`.`apogee` = p_apogee
+    GROUP BY `VueListeCours`.`idEnseignants`;
+END
