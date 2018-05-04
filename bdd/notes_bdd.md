@@ -10,10 +10,13 @@ Ecrire le MCD sur JMerise. Ensuite reporter le MLD sur MysqlWorkbench pour :
 
 ## Modélisation
 
-### Relation de reflexivité dans Catégories
-On pourrait distinguer le statut (PR, MCF, etc.) et la catégorie des enseignant dans deux tables. Pourtant un enseignant tituliare du département (catégorie 1) ne pourra être que du status PR, MCF, PRAG et un NON-TITULAIRE RATTACHE (Catégorie 2) ne pourra être que PAST, ATER, DEMI-ATER, MONITEUR.
+### Entité Statuts
 
-En utilisant une relation de reflexivité on regroupe les deux informations dans une seule table. On a un système à tiroir avec au premier niveau les catégories qui pourront (ou pas pour les TITULAIRE HORS DEPARTEMENT et les EXTERIEUR) faire référence à un deuxième niveau : les statuts. Ainsi on cloisonne les statuts dans des catégories.
+L'ensemble des combinaisons possible (titulaire / non titulaire, departement / hors département, et les status) peut être stocker dans une entité Statuts (nom, heureService, titulaire (bool)) et e champ depEco (bool) dans l'Entité Enseignants
+
+**Relation de reflexivité dans l'entité Statuts**
+
+On pourrait distinguer le statut (PR, MCF, etc.) et la catégorie des enseignant dans une seule table avec  une relation de reflexivité on regroupe les deux informations dans une seule table. On a un système à tiroir avec au premier niveau les catégories qui pourront (ou pas pour les TITULAIRE HORS DEPARTEMENT et les EXTERIEUR) faire référence à un deuxième niveau : les statuts. Ainsi on cloisonne les statuts dans des catégories.
 
 Voir cet [article](http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/)
 
@@ -102,7 +105,6 @@ Forme :
 
 Exemple :
 - semestre de 1 à 6 max pour un enseignements de type licence ou de 1 à 4 pour un enseignement de type master.
-- pas d'enseignant avec idCategories valant 1 ou 2 : car il correspond aux catégories "TITULAIRE" ET "NON-TITULAIRE RATTACHE".
 
 ## Sécurité
 
