@@ -62,7 +62,7 @@ values
     ("43IF5073", "Algorithmique", 48, 0, 9, 1),
     ("43IF5084", "C#", 40, 0, 10, 1),
     ("43QE1443", "Economie servicielle", 24, 0, 10, 1),
-    ("54AEE1EC", "Introduction à l'économie", 50, 18, 5, 1);
+    ("54AEE1EC", "Introduction à l'économie", 50, 18, 5, 2);
 
 -- -----------------------------------------------------
 -- Table EnseignementsFormations
@@ -82,8 +82,11 @@ insert into `sde`.`Cours` (Enseignants_idEnseignants, TypesCours_idTypesCours, a
 values
     (1, 1, 2018, "54AEE1EC", 10),
     (2, 1, 2018, "54AEE1EC", 15),
-    (1, 1, 2018, "54AEE1EC", 5),
-    (1, 1, 2019, "43QE1443", 20);
+    (3, 1, 2018, "54AEE1EC", 5),
+    (1, 2, 2018, "54AEE1EC", 9),
+    (2, 2, 2018, "54AEE1EC", 9),
+    (2, 2, 2018, "54AEE1EC", 9),
+    (3, 1, 2019, "43QE1443", 20);
     -- (1, 1, 2018, "43IF5073", 48),
     -- (1, 1, 2018, "43IF5084", 20),
     -- (3, 1, 2018, "43QE1443", 24),
