@@ -12,6 +12,11 @@ Il faut ajouter PDO::FETCH_ASSOC dans le fetc() pour obtenir un tableau associat
 
     while ($donnees = $reponse->fetch(PDO::FETCH_ASSOC))
 
-## Extraire le nom des champs d'une table
+## La Classe DBManager
 
-Il trouver un moyen pour extraire les noms des champs sans avoir à les écrire à la mano
+Cette classe repose sur la classe PDO et permet d'écrire toute les requêtes SQL (des applels à des procédures essentiellement) dans un seul endroit ! Il y a 2 types de DBManager (pour distinguer la connection à la base de donnée en tant qu'admin et enseignant)
+
+A la fin on n'a plus qu'à l'instancier et à lancer une de ses méthodes pour obtenir ce que l'on souhaite :
+
+$dbbManager = new DBManager('infodb', 'username', 'password');
+$enseignements = $dbbManager->obtenirEnseignements();
