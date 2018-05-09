@@ -135,7 +135,7 @@ Ajouter une connexion sécurisée en suivant ce [tuto](https://www.digitalocean.
 
 
 
-### Déploiements
+### Déploiement
 
 - Le script doit être lancé en tant que sde avec la commande :
 
