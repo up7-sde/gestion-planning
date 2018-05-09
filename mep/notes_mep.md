@@ -128,6 +128,10 @@ Php : PHP 7.1.15-0
 
     # Maintenant on doit avoir accès au contenu du dossier web de notre repo git !
 
+
+    # Mettre en place la base de données
+    (trouver un moyen pour charger les mdp dans le script .sql)
+
 - sécuriser le server en suivant quelques [consignes](https://www.tecmint.com/apache-security-tips/)
 
 
@@ -141,20 +145,7 @@ Ajouter une connexion sécurisée en suivant ce [tuto](https://www.digitalocean.
 
     ssh sde@ip 'bash -s' < deployer.sh
 
-- le script bash
-
-    # Se mettre dans le bon dossier
-    cd ~/sites/sde
-
-    # Sourcer les .env
-    source mep/.env
-
-    # Obtenir les dernières sources de la branche master
-    git pull origin master
-
-    # Recharger la dernière base de données (a enlever quand la bdd sera finalisée)
-    "$DIR_BIN/mysql" -u $ROOT_MYSQL_LOGIN -p$ROOT_MYSQL_PASSWD < creer_bdd.sql
-
+- le script bash cf. `mep/deploter.sh`
 ## Deploiement sur Heroku
 
 Procfile :
