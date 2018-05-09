@@ -49,6 +49,11 @@ Php : PHP 7.1.15-0
     sudo apt-get update
     sudo apt-get install mysql-server
 
+
+- Configurer mysql pour [améliorer la sécurité des mdp](https://www.howtoforge.com/setting-changing-resetting-mysql-root-passwords)
+
+    mysql_secure_installation
+
 - Installer [PHP 7.1](https://www.vultr.com/docs/how-to-install-and-configure-php-70-or-php-71-on-ubuntu-16-04)
 
     # Ajouter les sources des packages pour php 7
@@ -132,7 +137,9 @@ Php : PHP 7.1.15-0
     # Mettre en place la base de données
     (trouver un moyen pour charger les mdp dans le script .sql)
 
-- sécuriser le server en suivant quelques [consignes](https://www.tecmint.com/apache-security-tips/)
+- sécuriser le server en suivant quelques consignes
+
+ [consignes](https://www.tecmint.com/apache-security-tips/)
 
 
 Ajouter une connexion sécurisée en suivant ce [tuto](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-16-04)

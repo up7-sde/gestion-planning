@@ -277,7 +277,7 @@ USE `sde`$$
 CREATE PROCEDURE `ModifierEnseignant` (IN p_idEnseignants INT, IN p_nom VARCHAR(45), IN p_prenom VARCHAR(45), IN p_idStatuts INT)
 BEGIN
 	UPDATE `sde`.`Enseignants`
-    SET 
+    SET
 		nom = UPPER(p_nom),
         prenom = UPPER(p_prenom),
         Statuts_idStatuts = p_idStatuts
@@ -300,7 +300,7 @@ CREATE PROCEDURE `ModifierCours` (IN p_idCours INT, IN p_idEnseignants INT, IN p
 BEGIN
 	-- Vérifier que les modifications sur le nbHeure du cours ne va pas dépasser le nb d'heure de cours de l'enseignement
 	DECLARE v_valide BOOLEAN;
-    
+
     -- On va prendre en compte l'ancien horaire du cours et faire la différence avec le nouveau
     -- pour pouvoir utiliser la procédure VerifierNbHCours
     DECLARE v_ancienNbHeures INT;
@@ -314,7 +314,7 @@ BEGIN
     IF (v_valide)
     THEN
 		UPDATE `sde`.`Cours`
-		SET 
+		SET
 			Enseignants_idEnseignants = p_idEnseignants,
 			TypesCours_idTypesCours = p_idTypesCours,
 			annee = p_annee,
@@ -338,8 +338,8 @@ DELIMITER $$
 USE `sde`$$
 CREATE PROCEDURE `ModifierEnseignement` (IN p_apogeeOri VARCHAR(45), IN p_apogee VARCHAR(45), IN p_intitule VARCHAR(45), IN p_heureCM INT, IN p_heureTP INT, IN p_semestre INT, IN p_nbGroupes INT)
 BEGIN
-	UPDATE `sde`.`Enseignements` 
-    SET 
+	UPDATE `sde`.`Enseignements`
+    SET
 		apogee = UPPER(p_apogee),
         intitule = p_intitule,
         heureCM = p_heureCM,
@@ -426,7 +426,7 @@ BEGIN
             `sde`.`Cours`.`annee` = p_annee
 		;
 	END IF;
-    
+
 	-- Initialisé la variable à zerro dans le cas ou il n'y a pas encore de cours affecté
     IF (p_nbHeures IS NULL)
     THEN
@@ -469,7 +469,7 @@ BEGIN
     END IF;
     -- Calcule le nouveau temps (fait la somme)
     SET v_nbHTemp = v_nbHDejaAffectee +  p_nbHeures;
-    -- Vérifie que le nombre d'heure de cours d'un enseignement ne dépasse pas le nb CM 
+    -- Vérifie que le nombre d'heure de cours d'un enseignement ne dépasse pas le nb CM
     IF (v_nbHTemp <= v_nbHTotal)
     THEN
 		SELECT TRUE INTO valide;
@@ -584,7 +584,7 @@ DELIMITER $$
 USE `sde`$$
 CREATE PROCEDURE `SelectionnerEnseignantsParEnseignement` (IN p_apogee INT, IN p_annee INT)
 BEGIN
-	SELECT 
+	SELECT
 		`VueListeCours`.`annee`,
 		`VueListeCours`.`apogee`,
 		`VueListeCours`.`nom`,
@@ -714,13 +714,13 @@ SET SQL_MODE = '';
 GRANT USAGE ON *.* TO admin;
  DROP USER admin;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'admin' IDENTIFIED BY 'azerty';
+CREATE USER 'admin' IDENTIFIED BY 'mdpadmin';
 
 SET SQL_MODE = '';
 GRANT USAGE ON *.* TO enseignant;
  DROP USER enseignant;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'enseignant' IDENTIFIED BY 'azerty';
+CREATE USER 'enseignant' IDENTIFIED BY 'mdpenseignant';
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
