@@ -12,7 +12,12 @@
         require("../php/functions.php");
         require("../php/class.php");
 
-        $dbbManager = new DBManager('mysql:host=localhost;dbname=sde;charset=utf8', 'admin', 'wqaZSX23!');
+        // Obtenir les infos de connexion à la bdd via les variables d'environnement
+        $bdd = getenv('BDD');
+        $password = getenv('ADMIN_MYSQL_PASSWD');
+        $user = getenv('ADMIN_MYSQL_LOGIN');
+        
+        $dbbManager = new DBManager('mysql:host=localhost;dbname='. $bdd .';charset=utf8', $user, $password);
         $enseignements = $dbbManager->obtenirEnseignements();
         $tabEnseignements = ecrireTab($enseignements);
         echo $tabEnseignements;

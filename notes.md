@@ -6,9 +6,18 @@
 
 - Voir s'il est possible de connecter MySQL Workbench sur le mysql de xampp ?
 
+
+## Apache 2
+
+## Variable d'environnement
+
+Pour pouvoir utiliser getenv() il faut ajouter les variables d'environnement dans un fichier de conf qui est utilisé à apache lorsqu'il lance php. Ajouter les variable à la fin du fichier `/opt/lampp/apache2`
+
+En production il faudra les ajouter dans le fichier de conf du VH.
+
 ## PHP
 
-### Cookie / Session
+## Cookie / Session
 
 Rappel sur les cookies et session sur le site d'[openclassroom](https://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql/session-cookies)
 
