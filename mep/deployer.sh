@@ -18,7 +18,7 @@ cat "$DIR_BDD/creer_bdd.sql" "$DIR_BDD/donner_droit.sql" "$DIR_BDD/remplir_bdd.s
 $MYSQL -u $ROOT_MYSQL_LOGIN -p$ROOT_MYSQL_PASSWD < "$DIR_BDD/toto.sql"
 
 # Supprimer le fichier temp toto
-rm "$DIR_BDD/toto.sql"
+# rm "$DIR_BDD/toto.sql"
 
 # TEST (a commenter en prod)
 

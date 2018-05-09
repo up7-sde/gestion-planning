@@ -12,7 +12,7 @@
         require("../php/functions.php");
         require("../php/class.php");
 
-        $dbbManager = new DBManager('mysql:host=localhost;dbname=sde;charset=utf8', 'admin', 'wqa&2ZSX');
+        $dbbManager = new DBManager('mysql:host=localhost;dbname=sde;charset=utf8', 'admin', 'wqaZSX23!');
         $enseignements = $dbbManager->obtenirEnseignements();
         $tabEnseignements = ecrireTab($enseignements);
         echo $tabEnseignements;
