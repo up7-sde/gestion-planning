@@ -137,30 +137,23 @@ Ajouter une connexion sécurisée en suivant ce [tuto](https://www.digitalocean.
 
 ### Déploiements
 
-- Le script doit être lancé en tant que root avec la comande :
+- Le script doit être lancé en tant que sde avec la commande :
 
-
+    ssh sde@ip 'bash -s' < deployer.sh
 
 - le script bash
 
-    # Eteindre le serveur
-    sudo service apache2 restart
-
     # Se mettre dans le bon dossier
-    cd /home/username/sites/sde
+    cd ~/sites/sde
 
     # Sourcer les .env
-    source .env
+    source mep/.env
 
     # Obtenir les dernières sources de la branche master
     git pull origin master
 
     # Recharger la dernière base de données (a enlever quand la bdd sera finalisée)
     "$DIR_BIN/mysql" -u $ROOT_MYSQL_LOGIN -p$ROOT_MYSQL_PASSWD < creer_bdd.sql
-
-    # Relancer apache 2 (**inutile ?**)
-    sudo service apache2 restart
-
 
 ## Deploiement sur Heroku
 

@@ -2,4 +2,4 @@
 documents/*
 
 # Contient les ids / login / nom de bdd / etc
-.env.sh
+.env
