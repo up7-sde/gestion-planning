@@ -30,8 +30,8 @@ Php : PHP 7.1.15-0
 > Necessite d'installer un Apache Mysql et PHP comme indiqué qur le tuto [digital ocean](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04)
 
 2 étapes à distinguer pour le déploiements:
-- provisionning : consiste à mettre en marche le serveur pour qu'il puisse fonctionner la 1ere fois (installer Apache2, PhP 7 et Mysql et configurer apache2)
-- deploiement en tant que tel : met en place la dernière version de l'application
+- provisionning : consiste à mettre en marche le serveur pour qu'il puisse fonctionner la 1ere fois, installation (Apache2, PhP 7 et Mysql), configuration (apache2), telecharger le projet depuis git
+- deploiement en tant que tel : met en place la dernière version de l'application. Comme on aura a le faire souvant cette partie sera automatiser avec un fichier bash
 
 ### provisionning
 
@@ -91,9 +91,9 @@ Php : PHP 7.1.15-0
     touch /home/sde/sites/sde/index.html
     echo "hello world" > /home/sde/sites/sde/index.html
 
-    # Ajouter un lien vers le dossier /home/sde/sites/sde dans la racine du server apache
+    # Ajouter un lien vers le dossier /home/sde/sites/sde/web
     cd /var/www
-    ln -s /home/sde/sites/sde sde
+    ln -s /home/sde/sites/sde/web sde
 
     # Créer le VH
     sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/sde.conf
@@ -118,9 +118,15 @@ Php : PHP 7.1.15-0
     a2ensite sde.conf
     service apache2 reload
 
-    # A ce moment le site doit fonctionner !
+    # A ce moment le site doit fonctionner avec un fichier test
+    # Ajouter notre repo
+    su sde
+    cd ~/sites/sde
+    git init
+    git remote add origin https://github.com/remidlnn/gestion-planning.git
+    git pull origin master
 
-
+    # Maintenant on doit avoir accès au contenu du dossier web de notre repo git !
 
 - sécuriser le server en suivant quelques [consignes](https://www.tecmint.com/apache-security-tips/)
 
@@ -131,20 +137,29 @@ Ajouter une connexion sécurisée en suivant ce [tuto](https://www.digitalocean.
 
 ### Déploiements
 
+- Le script doit être lancé en tant que root avec la comande :
+
+
+
+- le script bash
+
+    # Eteindre le serveur
+    sudo service apache2 restart
+
     # Se mettre dans le bon dossier
     cd /home/username/sites/sde
 
     # Sourcer les .env
     source .env
 
-    # Obtenir les dernières sources
-    git pull $GIT_URL
+    # Obtenir les dernières sources de la branche master
+    git pull origin master
 
-    # Recharger la dernière base de données (a enlever par la suite)
+    # Recharger la dernière base de données (a enlever quand la bdd sera finalisée)
     "$DIR_BIN/mysql" -u $ROOT_MYSQL_LOGIN -p$ROOT_MYSQL_PASSWD < creer_bdd.sql
 
     # Relancer apache 2 (**inutile ?**)
-    service apache2 restart
+    sudo service apache2 restart
 
 
 ## Deploiement sur Heroku
