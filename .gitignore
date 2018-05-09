@@ -1,5 +1,5 @@
-# Contient le cahier des charges et le fichier de données excel (avec de vrai données!)
+# Contient le cahier des charges et le fichier de données excel (avec de vrais données!)
 documents/*
 
-# Contient id/mdp
-creer_variable_environnement.sh
+# Contient les ids / login / nom de bdd / etc
+.env.sh
