@@ -3,3 +3,4 @@ documents/*
 
 # Contient les ids / login / nom de bdd / etc
 .env
+deployer_dev.sh

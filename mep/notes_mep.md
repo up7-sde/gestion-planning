@@ -137,6 +137,10 @@ Php : PHP 7.1.15-0
     # Mettre en place la base de données
     (trouver un moyen pour charger les mdp dans le script .sql)
 
+    # Ajouter les variables d'environnement dans apache2 (pour pouvoir les utiliser dans php avec getenv())
+
+    un72hycuuzr74ih78ky55ab!DEUS
+
 - sécuriser le server en suivant quelques consignes
 
  [consignes](https://www.tecmint.com/apache-security-tips/)
