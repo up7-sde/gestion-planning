@@ -4,17 +4,17 @@
 //chaque fonction de sa classe est traduiite en une string qui sert à query la db
 
 class Database {
-    
+
     private $connection;
     private $servername;
     private $username;
     private $password;
     private $dbname;
-    
+
     //voir si on passe en arg les params... plusieurs connections?
     //bref c'est possible
     public function __construct($servername,  $username, $password, $dbname){
-        
+
         $this->connection = null;
         $this->servername = $servername;
         $this->username = $username;
@@ -54,7 +54,7 @@ class Database {
             $password = getenv('ENSEIGNANT_MYSQL_PASSWD');
 
         }
-        
+
         // Obtenir la liste des cours en fonction de l'année passé en parametre dans l'url
 
         if (!$this->connectionExists()){
@@ -73,29 +73,29 @@ class Database {
     }
 
     public function query($action = null){
-        
+
         //var_dump($this->connection);
         $this->connect();
-        
-        $res = $this->connection->prepare('CALL SelectionnerCours(?)');
 
-        $data = $res->fetchAll();
-        
-        var_dump($data);
+        // $res = $this->connection->prepare('CALL SelectionnerCours(?)');
+        //
+        // $data = $res->fetchAll();
+        //
+        // var_dump($data);
 
         //var_dump($this->connection);
-        
+
         //$donnees = $res->fetchAll(PDO::FETCH_ASSOC);
-        
+
         // appel de la procédure stockée
-       
-        
+
+
         //connect if not exists, pas besoin de se connecter manuellement, juste query
         //ça connecte automatiquement si tu fais query
-        //ce serait magnifique si tu pouvais intégrer ton code dedans 
-        //je pense qu'un héritage serait cool 
-        //en mode Model extends db ou l'inverse avec model qui est ta classe 
-        // un systeme ou action c'est genre une string ou autre 
+        //ce serait magnifique si tu pouvais intégrer ton code dedans
+        //je pense qu'un héritage serait cool
+        //en mode Model extends db ou l'inverse avec model qui est ta classe
+        // un systeme ou action c'est genre une string ou autre
         //et tu fais un genre de switch ici
         // ou de reconnaissance par le nom avec une concatenation
         //je verrais bien deux methodes query
