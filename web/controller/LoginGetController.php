@@ -17,7 +17,7 @@ class LoginGetController extends Controller {
         //créer un component 
         $this->content = 
             '<h1>Login</h1>
-            <form action="/work/auth/login" method="post">
+            <form action="/web/auth/login" method="post">
             Login: <input type="text" name="name"><br>
             Password: <input type="password" name="password"><br>
             <input type="submit">
@@ -28,7 +28,7 @@ class LoginGetController extends Controller {
         if ($from !== "" && $from !== null && $from !== '/home') 
             $this->content = "<h3>you cant access : $from</h3>".$this->content;
         
-        $this->style = '<link href="/work/static/css/style.css" rel="stylesheet"/>';
+        $this->style = '<link href="/web/static/css/style.css" rel="stylesheet"/>';
         $this->script = null;
         
         return include('view/template.php');

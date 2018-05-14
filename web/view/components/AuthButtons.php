@@ -12,7 +12,7 @@ class AuthButtons extends Component {
     public function build(){
         
         if (!$this->user) {
-            $content = '<a href="/work/auth/login">
+            $content = '<a href="/web/auth/login">
                         <button>Login</button>
                         </a>
                         <br/>';
@@ -21,7 +21,7 @@ class AuthButtons extends Component {
                         .'<br/>'
                         .$this->user['email']
                         .'<br/>'
-                        .'<form action="/work/auth/logout" method="post">
+                        .'<form action="/web/auth/logout" method="post">
                         <input type="submit" value="Logout">
                         </form>';
         }    

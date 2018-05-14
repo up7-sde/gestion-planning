@@ -5,7 +5,7 @@ class Table extends Component {
         $this->array = $array;
     }
     public function build() {
-        return '<script type="text/javascript" src="/work/static/javascript/createTable.js"></script>'
+        return '<script type="text/javascript" src="/web/static/javascript/createTable.js"></script>'
                 .'<script>var data='.json_encode($this->array).';createTable(data);</script>';
     }
 }

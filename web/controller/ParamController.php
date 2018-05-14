@@ -51,8 +51,8 @@ class ParamController extends Controller {
         
         //le templating
         $this->title = 'Param | '.$param;
-        $this->style = '<link href="/work/static/css/style.css" rel="stylesheet"/>';
-        $this->script = '<script type="text/javascript" src="/work/static/javascript/toggleMenu.js"></script>';
+        $this->style = '<link href="/web/static/css/style.css" rel="stylesheet"/>';
+        $this->script = '<script type="text/javascript" src="/web/static/javascript/toggleMenu.js"></script>';
         $this->content = $header.$menu.'<div class="Main">'.$breadCrumbs.'<h2>'.$param.'</h2></div>';
 
         //le render

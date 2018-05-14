@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 require('Route.php');
 
 class Router {
-    
+
         private $url; // Contiendra l'URL sur laquelle on souhaite se rendre
         private $routes = []; // Contiendra la liste des routes
 
@@ -26,7 +26,7 @@ class Router {
             $this->routes["POST"][] = $route;
             return $route; // On retourne la route pour "enchainer" les méthodes
         }
-    
+
         public function listen(){
             if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])){
                 throw new RouterException('REQUEST_METHOD does not exist');
@@ -43,7 +43,7 @@ class Router {
         }
 
         public function redirect($to = '/home'){
-            header("Location: http://localhost/work$to");
+            header("Location: http://localhost/web$to");
             die();
         }
 
@@ -58,7 +58,7 @@ class Router {
             call_user_func($callable);
             die();
         }
-        
+
         /*peut-être faire une classe History*/
         private function updateHistory($path){
             $_SESSION["router_history"][]=$path;

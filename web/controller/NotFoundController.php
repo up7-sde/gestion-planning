@@ -7,7 +7,7 @@ class NotFoundController extends Controller {
 
         $this->title = '404';
         $this->content = '<h1>404 Not found</h1>';    
-        $this->style = '<link href="/work/static/css/style.css" rel="stylesheet"/>';
+        $this->style = '<link href="/web/static/css/style.css" rel="stylesheet"/>';
         $this->script = null;    
         
         return include('view/template.php');

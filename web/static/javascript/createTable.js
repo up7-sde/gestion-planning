@@ -43,7 +43,7 @@ function createTable(data){
         Object.entries(data[i]).forEach(
             ([key, value]) => {
                 if (key == 'color'){
-                    value = '<a href="/work/param/' + value + '">'+ value +'<a>';
+                    value = '<a href="/web/param/' + value + '">'+ value +'<a>';
                 }
                 var td = document.createElement('td');
                 td.innerHTML = value;

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*les exceptions*/
 require('exceptions.php');
@@ -26,7 +26,7 @@ include('routes/paramRoutes.php');
 
 try {
     //on essaye d'executer le callback associé à la route
-    $router->listen();  
+    $router->listen();
 
 //pas de redirect! on veut un code 401 pas un code redirect!
 //on redir vers login que quand on logout sans erreur
@@ -34,25 +34,25 @@ try {
 
 } catch (NotFoundException $e) { //si il y aun pb au niveau du router
     $router->force404(function(){
-        $controller = new NotFoundController();    
+        $controller = new NotFoundController();
         $controller->render();
     });
 
-} catch (PassportException $e) { 
+} catch (PassportException $e) {
     //si il a un pb ac l'auth
     $router->redirect('/auth/login');
 
-} catch (RouterException $e) { 
+} catch (RouterException $e) {
     //si il y a un pb avec l'a route
     $router->force404(function(){
-        $controller = new NotFoundController();    
+        $controller = new NotFoundController();
         $controller->render();
     });
 
-} catch (PDOException $e) { 
+} catch (PDOException $e) {
     //si il y a un pb avec la bdd
     $router->force404(function(){
-        $controller = new NotFoundController();    
+        $controller = new NotFoundController();
         $controller->render();
     });
 }
@@ -60,10 +60,10 @@ try {
 //TODO create lib folder avec les classes Route, Router, Service
 //TODO split Passport => Passport / Strtegy / history
 //utiliser la synthaxe namespaces => refactoring
-//reflechir au choix techniques => CDN ? 
+//reflechir au choix techniques => CDN ?
 //regarder secu => quel fichiers accessibles, comment?
 //sanitize user inputs => sql injection, xcsrf, javascript injection, http, cookie httphonly, encryption
 //login mots de passes encripter concat login mot de passe date inscription salt
-//best practices 
+//best practices
 
 ?>

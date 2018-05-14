@@ -74,8 +74,8 @@ class HomeController extends Controller {
 
         //le templating
         !$user ? $this->title = 'Home | Visitor' :  $this->title = 'Home | '.$user['name'];
-        $this->style = '<link href="/work/static/css/style.css" rel="stylesheet"/>';
-        $this->script = '<script type="text/javascript" src="/work/static/javascript/toggleMenu.js"></script>';
+        $this->style = '<link href="/web/static/css/style.css" rel="stylesheet"/>';
+        $this->script = '<script type="text/javascript" src="/web/static/javascript/toggleMenu.js"></script>';
         $this->content = $header
                         .$menu
                         .$main;
