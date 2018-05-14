@@ -18,6 +18,7 @@ class HomeController extends Controller {
     } 
 
     public function render(){
+
         //dans render on définit juste les variables utilisées dans la view correspondaante
 
         //on dispose de la db, du passport, si on veut du router aussi
@@ -27,6 +28,9 @@ class HomeController extends Controller {
         //la logique est aussi dans les components
 
         //les props
+        
+        $this->db->query();
+
         $user = $this->passport->getUser();
 
         $array = array(

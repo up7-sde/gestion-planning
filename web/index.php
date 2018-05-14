@@ -1,4 +1,5 @@
 <?php
+var_dump(getenv('TEST'));
 
 /*les exceptions*/
 require('exceptions.php');
@@ -12,7 +13,7 @@ $router = new Router($_GET['url']);
 require('services/Database.php');
 require('services/Passport.php');
 
-$db = new Database("localhost",  "root", "123azerty", "php");
+$db = new Database("localhost",  "root", "123azerty", "sakila");
 $passport = new Passport($db, $router);
 
 /*les controlleurs pour les erreurs*/
