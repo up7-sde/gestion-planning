@@ -1,7 +1,7 @@
 <?php
 
-include_once('services/Database.php');
-include_once('services/Passport.php');
+include_once('services/Db.php');
+include_once('services/Auth.php');
 //pas de surcharge de classe 
 //comme ça on peut forcer le render mais aussi y ajouter un param
 
@@ -15,13 +15,13 @@ class Controller {
     protected $auth;
 
     public function __construct(){
-        $this->db = new Database("localhost",  "root", "123azerty", "sakila");
-        $this->auth = new Passport($this->db);
+        $this->db = new Db("localhost",  "root", "123azerty", "sakila");
+        $this->auth = new Auth($this->db);
     }
 
-    /*public function render(){
+    public function render(){
         echo 'Hello world!';
-    }*/
+    }
 
     public function getUserInfos(){
         if (isset($_SESSION) && isset($_SESSION['passport'])){

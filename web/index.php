@@ -6,8 +6,6 @@ require('exceptions.php');
 
 /*le super router*/
 require('Router.php');
-require('Request.php');
-require('Response.php');
 
 $router = new Router();
 

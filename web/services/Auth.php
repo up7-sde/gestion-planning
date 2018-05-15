@@ -1,6 +1,6 @@
 <?php
 
-class Passport {
+class Auth {
     
     //private $sessionStore;
     private $db;
