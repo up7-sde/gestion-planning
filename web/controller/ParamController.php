@@ -8,14 +8,6 @@ include_once('view/components/Table.php');
 
 class ParamController extends Controller {
     
-    private $passport;
-    private $router;
-
-    public function __construct($passport, $router){
-        $this->passport = $passport;
-        $this->router = $router;
-    }
-
     public function render($param = null){
 
         //si c'est une route sans argument c'est à dire sans :id
@@ -40,9 +32,9 @@ class ParamController extends Controller {
 
         //les props
         //c'est ici par exemple qu'on va aller chercher un dataset en db
-        $user = $this->passport->getUser();
+        $user = $this->getUserInfos();
 
-        if (!$user) $this->router->redirect('/auth/login');
+        if (!$user) $this->redirect('/auth/login');
             
         if ($param === null) $param = 'All Parameters';
 

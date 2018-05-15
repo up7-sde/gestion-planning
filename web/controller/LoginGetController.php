@@ -4,12 +4,6 @@ include_once('Controller.php');
 
 class LoginGetController extends Controller {
 
-    private $router;
-    
-    public function __construct($router){
-        $this->router = $router;
-    } 
-
     public function render(){
 
         $this->title = 'Login';
@@ -23,7 +17,8 @@ class LoginGetController extends Controller {
             <input type="submit">
             </form><br/>';
         
-        $from= $this->router->getReferer();
+        /*pas nécéssaire car utilisateur forcément loggé*/
+        $from= $this->getReferrer();
 
         if ($from !== "" && $from !== null && $from !== '/home') 
             $this->content = "<h3>you cant access : $from</h3>".$this->content;

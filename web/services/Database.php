@@ -60,10 +60,16 @@ class Database {
         if (!$this->connectionExists()){
 
             try {
+                
                 $this->connection = new PDO("mysql:host=localhost; dbname=$bdd", $user, $password);
                 // set the PDO error mode to exception
                 $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 echo "Connected successfully<br/>";
+
+                /*$bdd = new PDO("mysql:host=localhost;dbname=sde", "admin", getenv('ADMIN_MYSQL_PASSWD'));
+                $bdd->exec('SET CHARACTER SET utf8');
+                $reponse = $bdd->query("CALL SelectionnerEnseignements()");     
+                $tab = $reponse->fetchAll(PDO::FETCH_ASSOC); */
             } catch(PDOException $e){
 
                 //créer des classes erreurs ppersonnalisées pour redirect ou 404 si il faut suivant les cas

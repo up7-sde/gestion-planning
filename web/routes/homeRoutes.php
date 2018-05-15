@@ -4,13 +4,13 @@
 
 require('controller/HomeController.php');
 
-$router->onGET('/', function() use($router) {
-    $router->redirect('/home');    
+$router->onGET('/', function(){
+   (new controller())->redirect('/home');    
 });
 
 /*protected!!*/
-$router->onGET('/home', function() use($db, $passport) {
-    (new HomeController($db, $passport))->render();
+$router->onGET('/home', function() {
+    (new HomeController())->render();
 });
 
 ?>

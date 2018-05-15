@@ -1,18 +1,12 @@
 <?php 
-include_once('Controller.php');
-class LogoutController extends Controller {
-   
-    private $passport;
-    private $router;
 
-    public function __construct($passport, $router){
-        $this->passport = $passport;
-        $this->router = $router;
-    } 
+include_once('Controller.php');
+
+class LogoutController extends Controller {
     
     public function render(){
-        $this->passport->logout();
-        $this->router->redirect('/home');
+        $this->auth->logout();
+        $this->redirect('/auth/login');
     }
 }
 

@@ -25,7 +25,8 @@ class Route {
             }
             array_shift($matches);
             
-            $this->matches = $matches;  // On sauvegarde les paramètre dans l'instance pour plus tard
+            $this->matches = $matches;
+            //$_SESSION['params'] = $matches;              // On sauvegarde les paramètre dans l'instance pour plus tard
             return true;
         }
 

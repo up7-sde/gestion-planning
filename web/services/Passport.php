@@ -5,18 +5,11 @@ class Passport {
     //private $sessionStore;
     private $db;
 
-    public function __construct($db, $router){
+    public function __construct($db){
         //$this->sessionStore = $sessionStore;7
         
         $this->db = $db;
-        $this->router = $router;
-    }
-
-    public function getUser(){
-        if ($this->isAuthenticated()){
-            return $_SESSION['passport'];
-        }
-        return FALSE;
+        
     }
 
     /*!!!!!!!*/
@@ -25,7 +18,7 @@ class Passport {
 
     //a voir
     public function login(){
-        var_dump($_POST);
+    
         //voir en base de données si il y a correspondance
         //requete attendue => une requette qui renvoie -1 ou la pk de la table 
         if ($_POST["name"] === "adnls" && $_POST["password"] === "123azerty") {
