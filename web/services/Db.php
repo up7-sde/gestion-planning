@@ -6,20 +6,17 @@
 class Db {
 
     private $connection;
-    private $servername;
-    private $username;
+    private $server;
+    private $user;
     private $password;
-    private $dbname;
+    private $schema;
 
     //voir si on passe en arg les params... plusieurs connections?
     //bref c'est possible
-    public function __construct($servername,  $username, $password, $dbname){
+    public function __construct(){
 
         $this->connection = null;
-        $this->servername = $servername;
-        $this->username = $username;
-        $this->password = $password;
-        $this->dbname = $dbname;
+        $this->server = "localhost";
     }
 
     private function connectionExists(){
@@ -33,25 +30,20 @@ class Db {
             //echo "Auth ok<br/>";
             return $_SESSION["passport"]["level"];
         }
-        return 0;
+        throw new Exception('problem with session');
     }
 
     public function connect(){
 
-        //var_dump($this->getAuthLevel());
-
-        $bdd = getenv('BDD_NOM');
+        $this->schema = getenv('BDD_NOM');
 
         if ($this->getAuthLevel() === 1){
-            $user = getenv('ADMIN_MYSQL_LOGIN');
-            $password = getenv('ADMIN_MYSQL_PASSWD');
-            /*var_dump($password);
-            var_dump($user);
-            var_dump($bdd);*/
+            $this->user = getenv('ADMIN_MYSQL_LOGIN');
+            $this->password = getenv('ADMIN_MYSQL_PASSWD');
 
         } else {
-            $user = getenv('ENSEIGNANT_MYSQL_LOGIN');
-            $password = getenv('ENSEIGNANT_MYSQL_PASSWD');
+            $this->user = getenv('ENSEIGNANT_MYSQL_LOGIN');
+            $this->password = getenv('ENSEIGNANT_MYSQL_PASSWD');
 
         }
 
@@ -61,7 +53,7 @@ class Db {
 
             try {
                 
-                $this->connection = new PDO("mysql:host=localhost; dbname=$bdd", $user, $password);
+                $this->connection = new PDO("mysql:host=$this->server; dbname=$this->schema", $this->user, $this->password);
                 // set the PDO error mode to exception
                 $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $this->connection->exec('SET CHARACTER SET utf8');
