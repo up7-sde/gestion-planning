@@ -9,16 +9,19 @@ include_once('view/components/Table.php');
 //class Home extends Controller
 class HomeController extends Controller {
 
-    private $db;
     private $passport;
+    private $db;
 
     public function __construct($db, $passport){
-        $this->passport = $passport;
+        
         $this->db = $db;
+        $this->passport = $passport;
     }
 
     public function render(){
 
+        $user = $this->passport->getUser();
+        
         // Debug : temporaire j'instanci un db ici pour faciliter le dev (utiliser le service bdd par la suite)
         try
         {
@@ -28,11 +31,11 @@ class HomeController extends Controller {
         {
             echo $e->getMessage();
         }
+        
         $reponse = $bdd->query("CALL SelectionnerEnseignements()");
         $tab = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
-        $user = $this->passport->getUser();
-        !$user ? $title = 'Home | Visitor' :  $title = 'Home | '.$user['name'];
+        $user !== null ? $title = 'Home | Visitor' :  $title = 'Home | '.$user['passport'];
 
         // appelle la vu correspondante (pour l'instant la vue de base, à modifier)
         require('view/HomeView.php');

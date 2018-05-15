@@ -9,16 +9,16 @@ require('controller/LoginGetController.php');
 require('controller/LoginPostController.php');
 require('controller/LogoutController.php');
 
-$router->get('/auth/login', function() use($router){
+$router->onGET('/auth/login', function() use($router){
     (new LoginGetController($router))->render();
 });
 
-$router->post('/auth/login', function() use($passport) {
-    (new LoginPostController($passport))->render();
+$router->onPOST('/auth/login', function() use($passport, $router) {
+    (new LoginPostController($passport, $router))->render();
 });
 
-$router->post('/auth/logout', function() use($passport) {
-    (new LogoutController($passport))->render();
+$router->onPOST('/auth/logout', function() use($passport, $router) {
+    (new LogoutController($passport, $router))->render();
 });
 
 

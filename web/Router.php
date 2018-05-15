@@ -1,5 +1,5 @@
 <?php
-
+//split with app // router // history
 require('Route.php');
 
 class Router {
@@ -15,13 +15,13 @@ class Router {
             return call_user_func($callable);
         }
 
-        public function get($path, $callable){
+        public function onGET($path, $callable){
             $route = new Route($path, $callable);
             $this->routes["GET"][] = $route;
             return $route; // On retourne la route pour "enchainer" les méthodes
         }
 
-        public function post($path, $callable){
+        public function onPOST($path, $callable){
             $route = new Route($path, $callable);
             $this->routes["POST"][] = $route;
             return $route; // On retourne la route pour "enchainer" les méthodes

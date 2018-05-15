@@ -9,9 +9,11 @@ include_once('view/components/Table.php');
 class ParamController extends Controller {
     
     private $passport;
+    private $router;
 
-    public function __construct($passport){
+    public function __construct($passport, $router){
         $this->passport = $passport;
+        $this->router = $router;
     }
 
     public function render($param = null){
@@ -34,12 +36,13 @@ class ParamController extends Controller {
 
         //si ça fail ça redirect et ça lance pas la suite
         
-        //les credentials
-        $this->passport->authorize(); //on check si auth ok sur la session    
+        //les credentialsh ok sur la session    
 
         //les props
         //c'est ici par exemple qu'on va aller chercher un dataset en db
         $user = $this->passport->getUser();
+
+        if (!$user) $this->router->redirect('/auth/login');
             
         if ($param === null) $param = 'All Parameters';
 

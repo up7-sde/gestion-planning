@@ -5,12 +5,12 @@
 
 require('controller/ParamController.php');
 
-$router->get('/param', function() use ($passport) {
-    (new ParamController($passport))->render();
+$router->onGET('/param', function() use ($passport, $router) {
+    (new ParamController($passport, $router))->render();
 });
 
-$router->get('/param/:id', function($id) use ($passport) {
-    (new ParamController($passport))->render($id);
+$router->onGET('/param/:id', function($id) use ($passport, $router) {
+    (new ParamController($passport, $router))->render($id);
 });
 
 ?>

@@ -1,6 +1,6 @@
 <?php
-var_dump(getenv('TEST'));
-
+//var_dump(getenv('TEST'));
+if (!isset($_SESSION)) session_start();
 /*les exceptions*/
 require('exceptions.php');
 
