@@ -3,8 +3,8 @@
 function toggleMenu() {
 
     var nav = document.querySelector("nav");
-    var main = document.querySelector(".Main");
-    
+    var main = document.querySelector("article");
+
     if (nav.style.width === "0px"){
         nav.style.width = "250px";
         main.style.marginLeft = "250px";

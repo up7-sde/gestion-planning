@@ -1,5 +1,8 @@
 <?php
-//var_dump(getenv('TEST'));
+// Variable global debug affiché dans le footer
+// ajouter les message séparé par  un " > " pour connaitre le chemin traversé
+$GLOBALS["DEBUG"] = "";
+
 if (!isset($_SESSION)) session_start();
 /*les exceptions*/
 require('exceptions.php');
@@ -8,7 +11,6 @@ require('exceptions.php');
 require('Router.php');
 
 $router = new Router();
-
 /*les services*/
 /*
 $db = new Database("localhost",  "root", "123azerty", "sakila");
@@ -39,10 +41,10 @@ try {
 
 } catch (RouterException $e) {
     (new Controller)->force400();
-    
-} catch (PDOException $e) {   
+
+} catch (PDOException $e) {
     (new Controller)->force400();
-    
+
 }
 
 //TODO create lib folder avec les classes Route, Router, Service

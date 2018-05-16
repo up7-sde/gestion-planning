@@ -1,7 +1,6 @@
 <?php
 //split with app // router // history
 require('Route.php');
-
 class Router {
 
         private $url; // Contiendra l'URL sur laquelle on souhaite se rendre

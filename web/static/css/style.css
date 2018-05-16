@@ -1,42 +1,27 @@
-body {
-    margin: 0;
-    background-color: 100%;
-    background-color: lightgrey;
-}
-
-h1 {
-    margin: 0;
-    color: white;
-}
-
 header{
-    margin: 0;
-    height: 150px;
-    background-color: red;
+    background-color: LightSlateGrey ;
 }
 
 nav {
-    position: fixed;
-    left: 0;
-    top: 150px;
-    overflow-x: hidden; /* Disable horizontal scroll */
-    z-index: 1;
-    background-color: green;
-    width: 250px;
-    transition: 0.5s;
+    background-color: Silver;
 }
 
-nav ul {
-  list-style-type: none;
-}
-
+/*classe temp à modifier.*/
 .casetab a {
     text-decoration: none;
     color : grey;
 }
 
-.Main {
-    margin-left: 250px;
-    transition: 0.5s;
-    background-color: orange;
+article {
+    display : inline-block;
+    background-color: grey;
+}
+
+footer {
+    background-color: LightSlateGrey ;
+}
+
+/*debug : classe temporaire pour faciliter dev*/
+.debug {
+    background-color: red;
 }
