@@ -1,13 +1,13 @@
 -- -----------------------------------------------------
--- Table TypesCours
+-- Table TypeService
 -- -----------------------------------------------------
-insert into `sde`.`TypesCours` (nom) values("CM");
-insert into `sde`.`TypesCours` (nom) values("TD");
+insert into `sde`.`TypeService` (nom) values("CM");
+insert into `sde`.`TypeService` (nom) values("TD");
 
 -- -----------------------------------------------------
--- Table Statuts
+-- Table Statut
 -- -----------------------------------------------------
-insert into `sde`.`Statuts`  (nom, heureService, titulaire)
+insert into `sde`.`Statut`  (nom, heureService, titulaire)
 values
     ("PR", 192, 1),
     ("MCF", 192, 1),
@@ -18,9 +18,9 @@ values
 
 
 -- -----------------------------------------------------
--- Table Enseignants
+-- Table Enseignant
 -- -----------------------------------------------------
-insert into `sde`.`Enseignants`  (nom, prenom, depEco, statuts_idStatuts)
+insert into `sde`.`Enseignant`  (nom, prenom, depEco, statut_idStatut)
 values
     ("DARMANGEAT", "CHRISTOPHE", 1, 3),
     ("GROUIEZ", "PASCALE", 1, 2),
@@ -30,17 +30,17 @@ values
     ("LERY", "JEAN-MICHEL", 0, 6);
 
 -- -----------------------------------------------------
--- Table Diplomes
+-- Table Diplome
 -- -----------------------------------------------------
-insert into `sde`.`Diplomes` (nom)
+insert into `sde`.`Diplome` (nom)
 values
     ("LICENCE"),
     ("MASTER");
 
 -- -----------------------------------------------------
--- Table Formations
+-- Table Formation
 -- -----------------------------------------------------
-insert into `sde`.`Formations` (nom, Diplomes_idDiplomes)
+insert into `sde`.`Formation` (nom, Diplome_idDiplome)
 values
     ("ECONOMIE", 1),
     ("MIASHS", 1),
@@ -54,9 +54,9 @@ values
     ("ILTS", 2);
 
 -- -----------------------------------------------------
--- Table Enseignements
+-- Table Enseignement
 -- -----------------------------------------------------
-insert into `sde`.`Enseignements` (apogee, intitule, heureCM, heureTP, semestre, nbGroupes)
+insert into `sde`.`Enseignement` (apogee, intitule, heureCM, heureTP, semestre, nbGroupes)
 values
     ("43IF5044", "Stratégie d'entreprise et système d'info", 27, 0, 9, 1),
     ("43IF5073", "Algorithmique", 48, 0, 9, 1),
@@ -65,9 +65,9 @@ values
     ("54AEE1EC", "Introduction à l'économie", 50, 18, 5, 2);
 
 -- -----------------------------------------------------
--- Table EnseignementsFormations
+-- Table EnseignementsFormation
 -- -----------------------------------------------------
-insert into `sde`.`EnseignementsFormations` (Formations_idFormations, Enseignements_apogee)
+insert into `sde`.`EnseignementFormation` (Formation_idFormation, Enseignement_apogee)
 values
     (6, "43IF5044"),
     (6, "43IF5073"),
@@ -76,9 +76,9 @@ values
     (1, "54AEE1EC");
 
 -- -----------------------------------------------------
--- Table Cours
+-- Table Service
 -- -----------------------------------------------------
-insert into `sde`.`Cours` (Enseignants_idEnseignants, TypesCours_idTypesCours, annee, Enseignements_apogee, nbHeures)
+insert into `sde`.`Service` (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures)
 values
     (1, 1, 2018, "54AEE1EC", 10),
     (2, 1, 2018, "54AEE1EC", 15),
