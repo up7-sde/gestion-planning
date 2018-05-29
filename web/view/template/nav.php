@@ -1,9 +1,33 @@
-<ul class="nav nav-pills nav-fill flex-column">
-    <!-- debug : a variabiliser (ne pas laisser d'url en dur comme ça) -->
-    <li class="nav-item active"><a class="nav-link" href="/web/home">Home</a></li>
-    <li class="nav-item"><a class="nav-link" href="/web/param">Param</a></li>
-    <li class="nav-item"><a class="nav-link disabled" href="#">Enseignements</a></li>
-    <li class="nav-item"><a class="nav-link disabled" href="#">Enseignants</a></li>
-    <li class="nav-item"><a class="nav-link disabled" href="#">Cours</a></li>
-</li>
+<!-- debug : a variabiliser (ne pas laisser d'url en dur comme ça) -->
+<ul class="nav nav-tabs">
+  <!-- HOME -->
+  <li>
+    <a href="/web/home" role="button" aria-haspopup="true" aria-expanded="false">
+      Home</span>
+    </a>
+  </li>
+  <!-- LES FORMATIONS -->
+  <li>
+    <a href="/web/formation" role="button" aria-haspopup="true" aria-expanded="false">
+      Formation</span>
+    </a>
+  </li>
+  <!-- LES ENSEIGNEMENTS -->
+  <li>
+    <a href="/web/enseignement" role="button" aria-haspopup="true" aria-expanded="false">
+      Enseignements</span>
+    </a>
+  </li>
+  <!-- LES ENSEIGNANTS -->
+  <li>
+    <a href="/web/enseignant" role="button" aria-haspopup="true" aria-expanded="false">
+      Enseignant</span>
+    </a>
+  </li>
+  <!-- LES SERVICES -->
+  <li>
+    <a href="/web/service" role="button" aria-haspopup="true" aria-expanded="false">
+      Service</span>
+    </a>
+  </li>
 </ul>

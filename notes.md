@@ -17,9 +17,13 @@ En production il faudra les ajouter dans le fichier de conf du VH.
 
 ## PHP
 
-## Cookie / Session
+### Cookie / Session
 
 Rappel sur les cookies et session sur le site d'[openclassroom](https://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql/session-cookies)
+
+### Formulaire
+
+Les formulaires sont découpés par champ. Chaque controleur appelant une vue Form devra donc vérifier qu'il envoit les données nécessaire (idEnseignant, apogee, etc.)
 
 ## Questions CHRISTOPHE
 

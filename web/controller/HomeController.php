@@ -5,14 +5,12 @@ include_once('Controller.php');
 //class Home extends Controller
 class HomeController extends Controller {
 
-    public function render(){
+    public function render($args=null){
         $user = $this->getUserInfos();
-        $title = "Home | " . $user['name'];
+        $pageTitle = "Home | " . $user['name'];
+        $title = "Home";
+        $tab = null; // debug envoyer un tableau vide pour home
         if (!$user) $this->redirect('/auth/login');
-
-        $tab = $this->db->query("SelectionnerEnseignements");
-
-        // appelle la vu correspondante (pour l'instant la vue de base, à modifier)
         include('view/HomeView.php');
     }
 }

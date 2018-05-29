@@ -139,8 +139,6 @@ Php : PHP 7.1.15-0
 
     # Ajouter les variables d'environnement dans apache2 (pour pouvoir les utiliser dans php avec getenv())
 
-    un72hycuuzr74ih78ky55ab!DEUS
-
 - sécuriser le server en suivant quelques consignes
 
  [consignes](https://www.tecmint.com/apache-security-tips/)

@@ -57,12 +57,91 @@ class Db {
 
     public function query($action = null, $args = null){
         //var_dump($this->connection);
+        $GLOBALS["DEBUG"] .= "avant connexion !";
         $this->connect();
         //SelectionnerEnseignements
         $res = $this->connection->query("CALL $action();");
         $data = $res->fetchAll(PDO::FETCH_ASSOC);
-
         return $data;
+    }
+
+    /*
+     * Obtenir les vues par leur nom
+     */
+    public function getVueByName($nom_vue)
+    {
+      $this->connect();
+      $res = $this->connection->query("SELECT * FROM " . $nom_vue);
+      $data = $res->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+
+    public function getAllEnseignant()
+    {
+      return $this->getVueByName("VueListeEnseignant");
+    }
+    public function getAllEnseignement()
+    {
+      return $this->getVueByName("VueListeEnseignement");
+    }
+    public function getAllFormation()
+    {
+      return $this->getVueByName("VueListeFormation");
+    }
+    public function getAllService()
+    {
+      return $this->getVueByName("VueListeService");
+    }
+    public function getLabelEnseignant()
+    {
+      return $this->getVueByName("VueLabelEnseignant");
+    }
+    public function getLabelEnseignement()
+    {
+      return $this->getVueByName("VueLabelEnseignement");
+    }
+    public function getLabelFormation()
+    {
+      return $this->getVueByName("VueLabelFormation");
+    }
+    public function getLabelTypeService()
+    {
+      return $this->getVueByName("VueLabelTypeService");
+    }
+    public function getLabelStatut()
+    {
+      return $this->getVueByName("VueLabelStatut");
+    }
+    public function getLabelDiplome()
+    {
+      return $this->getVueByName("VueLabelDiplome");
+    }
+
+    /*
+     * Obtenir un enregistrement d'un item (Formation, enseignant, etc.)
+     */
+     public function getService($id)
+     {
+       $this->connect();
+       $res = $this->connection->query("SELECT * FROM Service WHERE idService = " . $id);
+       $data = $res->fetchAll(PDO::FETCH_ASSOC);
+       // debug : vérifier le retour de la requête avant de poursuivre (id valide...)
+       return $data;
+     }
+
+    // debug tester l'utilisation d'une procédure
+    public function modifierService($args)
+    {
+      $this->connect();
+      $sth = $this->connection->prepare("CALL ModifierService(:idService, :idEnseignant, :idTypeService, :annee, :apogee, :nbHeures)");
+      $sth->bindParam(':idService', $args["idService"], PDO::PARAM_INT);
+      $sth->bindParam(':idEnseignant', $args["idEnseignant"], PDO::PARAM_INT);
+      $sth->bindParam(':idTypeService', $args["idTypeService"], PDO::PARAM_INT);
+      $sth->bindParam(':annee', $args["annee"], PDO::PARAM_INT);
+      $sth->bindParam(':apogee', $args["apogee"], PDO::PARAM_STR);
+      $sth->bindParam(':nbHeures', $args["nbHeures"], PDO::PARAM_INT);
+      $res = $sth->execute();
+      return $res;
     }
 
     public function kill(){
