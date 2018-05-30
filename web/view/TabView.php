@@ -12,7 +12,8 @@
               <tr>
                 <?php
                   // Obtenir le lien d'ajout pour le type (ex : /ajouter/service)
-                  if (isset($prefix)) $link = '"/ajouter'. $prefix .'"';
+                  // Debug rendre cette info dynamique
+                  if (isset($prefix)) $link = '"ajouter/'. $prefix .'"';
                   else $link = "#";
                 ?>
                       <th scope="col">#</th>

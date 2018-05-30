@@ -1,9 +1,10 @@
 <?php ob_start(); ?>
 <h1><?= $title ?></h1>
 
-<form method="POST" action="/web/modifier/service" class="form-horizontal">
+<form method="POST" action="/web/modifier/service/<?= $thisServiceid ?>" class="form-horizontal">
 <fieldset>
 <legend>Service</legend>
+
 <!-- permet de passer l'id du service -->
 <input type="hidden" name="idService" value=<?= $thisServiceid ?>>
 
