@@ -10,36 +10,25 @@
           <caption>Liste des enseignements</caption>
           <thead>
               <tr>
-                <?php
-                  // Obtenir le lien d'ajout pour le type (ex : /ajouter/service)
-                  // Debug rendre cette info dynamique
-                  if (isset($prefix)) $link = '"ajouter/'. $prefix .'"';
-                  else $link = "#";
-                ?>
                       <th scope="col">#</th>
                   <?php foreach ($tab[0] as $key => $value) { ?>
                       <th scope="col"><?= $key ?></th>
                   <?php } ?>
                       <th>
-                          <a class="btn btn-success" href=<?= $link ?> role="button">New</a>
+                          <a class="btn btn-success" href="nouveau" role="button">New</a>
                       </th>
               </tr>
           </thead>
           <tbody>
               <?php foreach ($tab as $ligne) { ?>
                   <tr>
-                    <?php
-                      // Obtenir le lien de modification pour chaque enregistrement
-                      if (isset($prefix)) $link = '"'.$prefix . $ligne["id"].'"';
-                      else $link = "#";
-                    ?>
                       <!-- Debug : voir si on veut utiliser le scope qui pourrait être basé sur l'id-->
                       <th scope="row">X</th>
                       <?php foreach ($ligne as $val) { ?>
                           <td class="casetab"><?= $val ?></td>
                       <?php } ?>
                           <td>
-                            <a class="btn btn-primary" href=<?= $link ?> role="button">Modifier</a>
+                            <a class="btn btn-primary" href=<?=  $ligne["id"] ?> role="button">Modifier</a>
                           </td>
                   </tr>
               <?php } ?>

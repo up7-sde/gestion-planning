@@ -129,12 +129,24 @@ class Db {
        return $data;
      }
 
-    // debug tester l'utilisation d'une procédure
     public function modifierService($args)
     {
       $this->connect();
       $sth = $this->connection->prepare("CALL ModifierService(:idService, :idEnseignant, :idTypeService, :annee, :apogee, :nbHeures)");
       $sth->bindParam(':idService', $args["idService"], PDO::PARAM_INT);
+      $sth->bindParam(':idEnseignant', $args["idEnseignant"], PDO::PARAM_INT);
+      $sth->bindParam(':idTypeService', $args["idTypeService"], PDO::PARAM_INT);
+      $sth->bindParam(':annee', $args["annee"], PDO::PARAM_INT);
+      $sth->bindParam(':apogee', $args["apogee"], PDO::PARAM_STR);
+      $sth->bindParam(':nbHeures', $args["nbHeures"], PDO::PARAM_INT);
+      $res = $sth->execute();
+      return $res;
+    }
+
+    public function ajouterService($args)
+    {
+      $this->connect();
+      $sth = $this->connection->prepare("CALL InsererService(:idEnseignant, :idTypeService, :annee, :apogee, :nbHeures)");
       $sth->bindParam(':idEnseignant', $args["idEnseignant"], PDO::PARAM_INT);
       $sth->bindParam(':idTypeService', $args["idTypeService"], PDO::PARAM_INT);
       $sth->bindParam(':annee', $args["annee"], PDO::PARAM_INT);

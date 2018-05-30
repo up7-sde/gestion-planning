@@ -2,7 +2,9 @@
 
 include_once('Controller.php');
 
-//  la liste des services
+/*
+ * Affiche la liste de l'ensemble des services
+ */
 class ServiceListeController extends Controller {
 
     public function render($args=null){
@@ -12,7 +14,6 @@ class ServiceListeController extends Controller {
         $title = "Service";
         $pageTitle = "Service | " . $user['name'];
         $tab = $this->db->getAllService();
-        $prefix = 'service/'; // permettra de générer des liens dynamiquement
         include('view/TabView.php');
     }
 }

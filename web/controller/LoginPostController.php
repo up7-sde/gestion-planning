@@ -1,5 +1,9 @@
 <?php
 include_once('Controller.php');
+
+/*
+ * Effectue le login et redirige en fonction du résultat
+ */
 class LoginPostController extends Controller  {
 
     public function render($args=null){

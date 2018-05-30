@@ -6,10 +6,14 @@
       <?php foreach ($labelEnseignant as $e) { ?>
         <option value="<?= $e["id"] ?>"
           <?php
-          // Selectionner le bon élément
-          if ($e["id"] == $data["Enseignant_idEnseignant"])
+          // S'il y a des données (dans le cas d'une modification)
+          if (isset($data))
           {
-            echo ' selected';
+            // Selectionner le bon élément
+            if ($e["id"] == $data["Enseignant_idEnseignant"])
+            {
+              echo ' selected';
+            }
           }
         ?>>
         <?= $e["nom"]?></option>

@@ -7,10 +7,14 @@
         foreach ($labelEnseignement as $e) { ?>
         <option name="apogee" value="<?= $e["id"] ?>"
           <?php
-          // Selectionner le bon élément
-          if ($e["id"] == $data["Enseignement_apogee"])
+          // S'il y a des données (dans le cas d'une modification)
+          if (isset($data))
           {
-            echo ' selected';
+            // Selectionner le bon élément
+            if ($e["id"] == $data["Enseignement_apogee"])
+            {
+              echo ' selected';
+            }
           }
         ?>>
           <?= $e["nom"]?>

@@ -8,10 +8,14 @@
             <input name="idTypeService" value="<?= $e["id"] ?>"
 
             <?php
-              // Selectionner le bon element dans la liste
-              if ($e["id"] == $data["TypeService_idTypeService"])
+              // S'il y a des données (dans le cas d'une modification) 
+              if (isset($data))
               {
-                echo 'checked="checked"';
+                // Selectionner le bon element dans la liste
+                if ($e["id"] == $data["TypeService_idTypeService"])
+                {
+                  echo 'checked="checked"';
+                }
               }
              ?>
 

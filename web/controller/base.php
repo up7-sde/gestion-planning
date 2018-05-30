@@ -30,14 +30,16 @@
       <?php } ?>
       <!-- ARTICLE -->
       <div class="row">
-          <!-- afficher un message s'il y en a un -->
-          <?php if (isset($message)) { ?>
-          <div class="col-xl-12">
-            <p class="important"> <?= $message ?></p>
-          </div>
-          <?php } ?>
           <article class="col-xl-12">
-              <?= $article ?>
+            <!-- afficher un message s'il y en a un -->
+            <?php if (isset($_SESSION["message"])) { ?>
+              <div class="col-xl-12 alert alert-success">
+                <strong><?= $_SESSION["message"] ?></strong>
+              </div>
+            <?php }
+            unset($_SESSION["message"]);?>
+
+            <?= $article ?>
           </article>
       </div>
       <!-- FOOTER -->
@@ -48,14 +50,7 @@
             </div>
           </footer>
       </div>
-      <!-- DEBUG -->
-      <div class="row">
-          <div class="col-xl-12 debug">
-            <div class="row">
-              <?php require('debug.php'); ?>
-            </div>
-          </div>
-      </div>
+
     </div>
     <!-- Sourcer les script JS -->
     <!-- Pour Bootstrapt :jQuery, Popper.js, Bootstrap JS -->

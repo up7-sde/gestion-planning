@@ -2,9 +2,10 @@
 
 include_once('Controller.php');
 
-//class Home extends Controller
+/*
+ *
+ */
 class HomeController extends Controller {
-
     public function render($args=null){
         $user = $this->getUserInfos();
         $pageTitle = "Home | " . $user['name'];
