@@ -5,6 +5,7 @@ require('controller/ServiceListeController.php');
 require('controller/ServiceAfficherController.php');
 require('controller/ServiceModifierController.php');
 require('controller/ServiceAjouterController.php');
+require('controller/ServiceSupprimerController.php');
 
 /* Associer les routes au routeur */
 $router->onGET('/service/', function(){
@@ -23,6 +24,10 @@ $router->onPOST('/ajouter/service/', function(){
 });
 $router->onPOST('/modifier/service/:id', function($id){
   (new ServiceModifierController())->render($id);
+});
+$router->onPOST('/supprimer/service/:id', function($id){
+    $GLOBALS["DEBUG"] .= "ajouter la route supprimer/service/:id > ";
+  (new ServiceSupprimerController())->render($id);
 });
 
 ?>

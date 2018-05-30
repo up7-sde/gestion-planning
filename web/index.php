@@ -1,5 +1,7 @@
 <?php
 
+$GLOBALS["DEBUG"] = "START DEBUG >";
+
 if (!isset($_SESSION)) session_start();
 /*les exceptions*/
 require('exceptions.php');
@@ -33,7 +35,6 @@ $router->onPOST('/auth/logout', function(){
     (new LogoutController())->render();
 });
 
-
 $router->onGET('/enseignant/', function(){
     (new EnseignantController())->render();
 });
@@ -45,7 +46,6 @@ $router->onGET('/enseignement/', function(){
 $router->onGET('/formation/', function(){
     (new FormationController())->render();
 });
-
 
 $router->onGET('/', function(){
    (new controller())->redirect('/home');

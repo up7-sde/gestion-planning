@@ -20,11 +20,12 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="validerBtn"></label>
   <div class="col-md-8">
-    <button id="validerBtn" name="validerBtn" class="btn btn-success">Modifier</button>
+
+    <button id="validerBtn" name="validerBtn" class="btn btn-success"><?= (isset($thisServiceid)) ? "Modifier" : "Ajouter" ?></button>
     <!-- debug : variabliser le lien de retour -->
     <a class="btn btn-primary" href="/web/service" role="button">Retour</a>
     <?php if (isset($thisServiceid)) { ?>
-      <a class="btn btn-danger" href="/web/supprimer/service/<?= $thisServiceid ?>" role="button">Retour</a>
+      <a class="btn btn-danger" href="/web/supprimer/service/<?= $thisServiceid ?>" role="button">Supprimer</a>
     <?php } ?>
 
   </div>
