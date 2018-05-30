@@ -28,16 +28,21 @@
           </nav>
         </div>
       <?php } ?>
+      <!-- MESSAGE -->
+      <div class="row">
+          <div class="col-xl-12">
+              <!-- afficher un message s'il y en a un -->
+              <?php if (isset($_SESSION["message"])) { ?>
+                  <div class="col-xl-12 alert alert-success">
+                      <strong><?= $_SESSION["message"] ?></strong>
+                  </div>
+                  <?php }
+                  unset($_SESSION["message"]);?>
+          </div>
+      </div>
       <!-- ARTICLE -->
       <div class="row">
           <article class="col-xl-12">
-            <!-- afficher un message s'il y en a un -->
-            <?php if (isset($_SESSION["message"])) { ?>
-              <div class="col-xl-12 alert alert-success">
-                <strong><?= $_SESSION["message"] ?></strong>
-              </div>
-            <?php }
-            unset($_SESSION["message"]);?>
 
             <?= $article ?>
           </article>

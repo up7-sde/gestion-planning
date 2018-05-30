@@ -12,6 +12,6 @@ class ServiceAjouterController extends Controller {
         if (!$user) $this->redirect('/auth/login');
         $res = $this->db->ajouterService($_POST);
         $_SESSION["message"] = $res ? "Service ajouté " : "Impossible d'ajouter ce service";
-        $this->redirect('/service/');
+        $this->redirect('/service');
     }
 }

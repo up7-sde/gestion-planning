@@ -12,6 +12,6 @@ class ServiceModifierController extends Controller {
         if (!$user) $this->redirect('/auth/login');
         $res = $this->db->modifierService($_POST);
         $_SESSION["message"] = $res ? "Service bien modifié" : "Modification impossible";
-        $this->redirect('/service/');
+        $this->redirect('/service');
     }
 }
