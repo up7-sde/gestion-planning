@@ -1,3 +1,5 @@
+-- Se connecter à la base de données
+use sde
 -- petit script pour faire des tests pendant l'ecriture des procédures
 CALL InsererEnseignant("Jean", "Louis", 1, 1);
 CALL InsererEnseignement("BLOB", "Introduction à la biogeographie", 26, 18, 5, 1, 1);
