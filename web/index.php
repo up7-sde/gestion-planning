@@ -8,6 +8,9 @@ require('exceptions.php');
 require('Router.php');
 $router = new Router();
 
+require('routes/service.php');
+
+
 /* Les controlleurs */
 require('controller/EnseignantController.php');
 require('controller/LoginGetController.php');
@@ -16,10 +19,6 @@ require('controller/LogoutController.php');
 require('controller/EnseignementController.php');
 require('controller/FormationController.php');
 require('controller/HomeController.php');
-require('controller/ServiceListeController.php');
-require('controller/ServiceAfficherController.php');
-require('controller/ServiceModifierController.php');
-require('controller/ServiceAjouterController.php');
 
 /* Associer les routes au routeur */
 $router->onGET('/auth/login', function(){
@@ -47,23 +46,6 @@ $router->onGET('/formation/', function(){
     (new FormationController())->render();
 });
 
-$router->onGET('/service/', function(){
-    (new ServiceListeController())->render();
-});
-
-$router->onGET('/service/nouveau', function(){
-  (new ServiceAfficherController())->render();
-});
-
-$router->onGET('/service/:id', function($id){
-    (new ServiceAfficherController())->render($id);
-});
-$router->onPOST('/ajouter/service/', function(){
-  (new ServiceAjouterController())->render();
-});
-$router->onPOST('/modifier/service/:id', function($id){
-  (new ServiceModifierController())->render($id);
-});
 
 $router->onGET('/', function(){
    (new controller())->redirect('/home');

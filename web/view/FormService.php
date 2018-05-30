@@ -5,7 +5,7 @@
 <fieldset>
 <legend>Service</legend>
 
-<!-- permet de passer l'id du service -->
+<!-- permet de passer l'id du service et d'afficher un form vide si nouvel ajout -->
 <?php if (isset($thisServiceid)) { ?>
   <input type="hidden" name="idService" value=<?= $thisServiceid ?>>
 <?php } ?>
@@ -20,9 +20,13 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="validerBtn"></label>
   <div class="col-md-8">
-    <button id="validerBtn" name="validerBtn" class="btn btn-success">Valider</button>
+    <button id="validerBtn" name="validerBtn" class="btn btn-success">Modifier</button>
     <!-- debug : variabliser le lien de retour -->
     <a class="btn btn-primary" href="/web/service" role="button">Retour</a>
+    <?php if (isset($thisServiceid)) { ?>
+      <a class="btn btn-danger" href="/web/supprimer/service/<?= $thisServiceid ?>" role="button">Retour</a>
+    <?php } ?>
+
   </div>
 </div>
 
