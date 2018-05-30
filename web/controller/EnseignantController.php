@@ -11,6 +11,7 @@ class EnseignantController extends Controller {
         $pageTitle = "Enseignant | " . $user['name'];
         if (!$user) $this->redirect('/auth/login');
         $tab = $this->db->getAllEnseignant();
+        $prefix = 'enseignant/';
 
         // appelle la vu correspondante (pour l'instant la vue de base, à modifier)
         include('view/TabView.php');

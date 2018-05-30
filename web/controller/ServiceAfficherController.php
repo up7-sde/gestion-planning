@@ -22,7 +22,7 @@ class ServiceAfficherController extends Controller {
         else { // Affichage d'un nouveau service : formulaire vide
           $title = "Nouveau service ";
           $pageTitle = " Nouveau service | " . $user['name'];
-          $action = "/web/ajouter/service"; // action du form
+          $action = "/web/ajouter/service"; // debug adresse dynamique
         }
         // Extraire les labels pour le formulaire
         $labelEnseignant = $this->db->getLabelEnseignant();

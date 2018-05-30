@@ -11,7 +11,7 @@ class FormationController extends Controller {
         $title = "Formation";
         if (!$user) $this->redirect('/auth/login');
         $tab = $this->db->getAllFormation();
-
+        $prefix = 'formation/';
         // appelle la vu correspondante (pour l'instant la vue de base, à modifier)
         include('view/TabView.php');
     }

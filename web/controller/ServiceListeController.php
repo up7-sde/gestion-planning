@@ -14,6 +14,7 @@ class ServiceListeController extends Controller {
         $title = "Service";
         $pageTitle = "Service | " . $user['name'];
         $tab = $this->db->getAllService();
+        $prefix = 'service/'; // permettra de générer des liens dynamiquement
         include('view/TabView.php');
     }
 }

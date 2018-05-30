@@ -7,7 +7,8 @@
     <!-- le tableau prend toute la largeur avec des options -->
     <div class="table-responsive">
       <table class="table table-dark table-striped">
-          <caption>Liste des enseignements</caption>
+          <!-- debug a variabiliser -->
+          <caption>Liste des XXXX</caption>
           <thead>
               <tr>
                       <th scope="col">#</th>
@@ -15,7 +16,7 @@
                       <th scope="col"><?= $key ?></th>
                   <?php } ?>
                       <th>
-                          <a class="btn btn-success" href="nouveau" role="button">New</a>
+                          <a class="btn btn-success" href="<?= $prefix ?>nouveau" role="button">New</a>
                       </th>
               </tr>
           </thead>
@@ -28,7 +29,7 @@
                           <td class="casetab"><?= $val ?></td>
                       <?php } ?>
                           <td>
-                            <a class="btn btn-primary" href=<?=  $ligne["id"] ?> role="button">Modifier</a>
+                            <a class="btn btn-primary" href=<?= $prefix . $ligne["id"] ?> role="button">Modifier</a>
                           </td>
                   </tr>
               <?php } ?>
