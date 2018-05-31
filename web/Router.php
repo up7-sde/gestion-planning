@@ -1,6 +1,11 @@
 <?php
-//split with app // router // history
+
 require('Route.php');
+
+/*
+ * Représente le routeur. Contient les différentes routes.
+ * Recoit les requêtes et fait le lien avec la bonne route
+ */
 class Router {
 
         private $url; // Contiendra l'URL sur laquelle on souhaite se rendre

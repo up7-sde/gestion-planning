@@ -156,6 +156,15 @@ class Db {
       return $res;
     }
 
+    public function supprimerService($id)
+    {
+        $this->connect();
+        $sth = $this->connection->prepare("CALL SupprimerService(:idService)");
+        $sth->bindParam(':idService', $id, PDO::PARAM_INT);
+        $res = $sth->execute();
+        return $res;
+    }
+
     public function kill(){
         $this->connection = null;
     }
