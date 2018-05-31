@@ -9,9 +9,11 @@ class ServiceAfficherController extends Controller {
     public function render($args=null){
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth/login');
+
+
         if ($args != null) // Affichage d'un service existant
         {
-          $thisServiceid = $args;
+          $thisServiceid = $args[0];
           $title = "Service id " . $thisServiceid;
           $pageTitle = "Service $thisServiceid | " . $user['name'];
           $data = $this->db->getService($thisServiceid);

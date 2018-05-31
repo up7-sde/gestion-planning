@@ -10,50 +10,9 @@ require('exceptions.php');
 require('Router.php');
 $router = new Router();
 
-require('routes/service.php');
+/* le controller de base */
+require('controller/Controller.php');
 
-
-/* Les controlleurs */
-require('controller/EnseignantController.php');
-require('controller/LoginGetController.php');
-require('controller/LoginPostController.php');
-require('controller/LogoutController.php');
-require('controller/EnseignementController.php');
-require('controller/FormationController.php');
-require('controller/HomeController.php');
-
-/* Associer les routes au routeur */
-$router->onGET('/auth/login', function(){
-    (new LoginGetController())->render();
-});
-
-$router->onPOST('/auth/login', function(){
-    (new LoginPostController())->render();
-});
-
-$router->onPOST('/auth/logout', function(){
-    (new LogoutController())->render();
-});
-
-$router->onGET('/enseignant/', function(){
-    (new EnseignantController())->render();
-});
-
-$router->onGET('/enseignement/', function(){
-    (new EnseignementController())->render();
-});
-
-$router->onGET('/formation/', function(){
-    (new FormationController())->render();
-});
-
-$router->onGET('/', function(){
-   (new controller())->redirect('/home');
-});
-
-$router->onGET('/home', function() {
-    (new HomeController())->render();
-});
 
 try {
     //on essaye d'executer le callback associé à la route
