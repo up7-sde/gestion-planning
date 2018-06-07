@@ -1,5 +1,12 @@
 <?php
 
+/*todo*/
+//revoir db
+//fusionner route et router
+//revoir completement organisation des controlleurs avec bonnes methodes
+//refactor errors => integrer dans app
+//passer au webdesign vmnt
+
 $GLOBALS["DEBUG"] = "START DEBUG >";
 
 if (!isset($_SESSION)) session_start();
@@ -12,7 +19,6 @@ $router = new Router();
 
 /* le controller de base */
 require('controller/Controller.php');
-
 
 try {
     //on essaye d'executer le callback associé à la route

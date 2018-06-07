@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <routes>
     <route>
         <method>GET</method>
@@ -37,33 +38,28 @@
     </route>
     <route>
         <method>GET</method>
-        <path>/service/</path>
-        <controller>ServiceListeController</controller>
+        <path>/cours</path>
+        <controller>CoursGETController</controller>
     </route>
     <route>
         <method>GET</method>
-        <path>/service/nouveau</path>
-        <controller>ServiceAfficherController</controller>
-    </route>
-    <route>
-        <method>GET</method>
-        <path>/service/:id</path>
-        <controller>ServiceAfficherController</controller>
+        <path>/cours/:id</path>
+        <controller>CoursGETController</controller>
     </route>
     <route>
         <method>POST</method>
-        <path>/ajouter/service/</path>
-        <controller>ServiceAjouterController</controller>
+        <path>/cours</path>
+        <controller>CoursPOSTController</controller>
     </route>
     <route>
         <method>POST</method>
-        <path>/modifier/service/:id</path>
-        <controller>ServiceModifierController</controller>
+        <path>/cours/:id</path>
+        <controller>CoursPOSTController</controller>
     </route>
-    <route>
-        <method>GET</method>
-        <path>/supprimer/service/:id</path>
-        <controller>ServiceSupprimerController</controller>
-    </route>
+    
+    <redirect>
+        <from>/</from>
+        <to>/home</to>
+    </redirect>
 
 </routes>

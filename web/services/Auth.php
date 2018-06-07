@@ -38,13 +38,11 @@ class Auth {
         return FALSE;
     }
     
-    private function isAuthenticated(){
-        return isset($_SESSION) && isset($_SESSION["passport"]);
-    }
-    
     public function logout(){
         if (isset($_SESSION)) session_destroy();
     }
+
+    /**sign in sign out*/
 }
 
 ?>

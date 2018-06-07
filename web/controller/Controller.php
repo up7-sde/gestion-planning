@@ -24,6 +24,15 @@ class Controller {
         echo 'Hello world!';
     }
 
+    /*mettre dans auth*/
+    public function isUserAuthenticated(){
+        return isset($_SESSION) && isset($_SESSION['passport']);
+    }
+    
+    public function isUserAdmin(){
+        return isset($_SESSION) && isset($_SESSION['passport']) && $_SESSION['passport']['level'] === 1;
+    }
+
     public function getUserInfos(){
         if (isset($_SESSION) && isset($_SESSION['passport'])){
             return $_SESSION['passport'];
@@ -31,15 +40,22 @@ class Controller {
         return FALSE;
     }
 
-    /*public function getParams(){
-        if (isset($_SESSION) && isset($_SESSION['params'])){
+    public function getParams(){
+        if (isset($_SESSION) && isset($_SESSION['params']) && count($_SESSION['params']) > 0 ){
             return $_SESSION['params'];
         }
         return FALSE;
-    }*/
+    }
 
-    public function redirect($to = '/home'){
-        header("Location: http://localhost/web$to");
+    public function getExtraParams(){
+        if (isset($_SESSION) && isset($_SESSION['extraParams']) && count($_SESSION['extraParams']) > 0){
+            return $_SESSION['extraParams'];
+        }
+        return FALSE;
+    }
+
+    public function redirect($path = '/home'){
+        header("Location: http://localhost/web$path");
         die();
     }
 

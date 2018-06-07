@@ -26,7 +26,7 @@
   </li>
   <!-- LES SERVICES -->
   <li>
-    <a href="/web/service" role="button" aria-haspopup="true" aria-expanded="false">
+    <a href="/web/cours?action=show" role="button" aria-haspopup="true" aria-expanded="false">
       Service</span>
     </a>
   </li>

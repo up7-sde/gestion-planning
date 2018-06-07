@@ -16,7 +16,7 @@
                       <th scope="col"><?= $key ?></th>
                   <?php } ?>
                       <th>
-                          <a class="btn btn-success" href="<?= $prefix ?>nouveau" role="button">New</a>
+                          <a class="btn btn-success" href="/web/cours?action=add" role="button">New</a>
                       </th>
               </tr>
           </thead>
@@ -29,7 +29,7 @@
                           <td class="casetab"><?= $val ?></td>
                       <?php } ?>
                           <td>
-                            <a class="btn btn-primary" href=<?= $prefix . $ligne["id"] ?> role="button">Modifier</a>
+                            <a class="btn btn-primary" href=<?="/web/cours/" . $ligne["id"] ."?action=edit" ?> role="button">Modifier</a>
                           </td>
                   </tr>
               <?php } ?>

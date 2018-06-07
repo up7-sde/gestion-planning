@@ -282,7 +282,7 @@ DROP procedure IF EXISTS `sde`.`InsererService`;
 
 DELIMITER $$
 USE `sde`$$
-CREATE PROCEDURE `InsererService` (IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT)
+CREATE PROCEDURE `InsererService` (IN p_apogee VARCHAR(45), IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_nbHeures INT)
 BEGIN
 	-- Vérifier que le nouveau cours ne va pas dépasser le nb d'heure de cours de l'enseignement
 	DECLARE v_valide BOOLEAN;
@@ -344,7 +344,7 @@ DROP procedure IF EXISTS `sde`.`ModifierService`;
 
 DELIMITER $$
 USE `sde`$$
-CREATE PROCEDURE `ModifierService` (IN p_idService INT, IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT)
+CREATE PROCEDURE `ModifierService` (IN p_idService INT, IN p_apogee VARCHAR(45), IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT,  IN p_nbHeures INT)
 BEGIN
 	-- Vérifier que les modifications sur le nbHeure du cours ne va pas dépasser le nb d'heure de cours de l'enseignement
 	DECLARE v_valide BOOLEAN;

@@ -1,19 +1,22 @@
 <?php
 
 //chaque fonction de sa classe est traduiite en une string qui sert à query la db
+include_once('model/Model.php');
 
-class Db {
+class Db{
 
     private $connection = null;
     private $host = "localhost";
     private $user;
     private $password;
     private $dbname;
+    private $attributes;
+    private $query;
 
     public function __construct(){
-        // Voir si on passe des paramètre au constructeur...
+        $this->attributes = Model::$attributes;
     }
-
+    
     private function connectionExists(){
         //check if exists
         return $this->connection != null;
@@ -43,7 +46,7 @@ class Db {
         // Obtenir la liste des cours en fonction de l'année passé en parametre dans l'url
         if (!$this->connectionExists()){
             try {
-                $this->connection = new PDO("mysql:host=$this->host; dbname=$this->dbname", $this->user, $this->password);
+                $this->connection = new PDO("mysql:host=$this->host; dbname=$this->dbname", $this->user, $this->password, array(PDO::ATTR_PERSISTENT => TRUE));
                 // set the PDO error mode to exception
                 $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $this->connection->exec('SET CHARACTER SET utf8');
@@ -55,114 +58,50 @@ class Db {
         }
     }
 
-    public function query($action = null, $args = null){
-        //var_dump($this->connection);
-        $GLOBALS["DEBUG"] .= "avant connexion !";
-        $this->connect();
-        //SelectionnerEnseignements
-        $res = $this->connection->query("CALL $action();");
-        $data = $res->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
-    }
-
     /*
      * Obtenir les vues par leur nom
      */
-    public function getVueByName($nom_vue)
-    {
+    public function findAll($entity){
       $this->connect();
-      $res = $this->connection->query("SELECT * FROM " . $nom_vue);
-      $data = $res->fetchAll(PDO::FETCH_ASSOC);
-      return $data;
-    }
-
-    public function getAllEnseignant()
-    {
-      return $this->getVueByName("VueListeEnseignant");
-    }
-    public function getAllEnseignement()
-    {
-      return $this->getVueByName("VueListeEnseignement");
-    }
-    public function getAllFormation()
-    {
-      return $this->getVueByName("VueListeFormation");
-    }
-    public function getAllService()
-    {
-      return $this->getVueByName("VueListeService");
-    }
-    public function getLabelEnseignant()
-    {
-      return $this->getVueByName("VueLabelEnseignant");
-    }
-    public function getLabelEnseignement()
-    {
-      return $this->getVueByName("VueLabelEnseignement");
-    }
-    public function getLabelFormation()
-    {
-      return $this->getVueByName("VueLabelFormation");
-    }
-    public function getLabelTypeService()
-    {
-      return $this->getVueByName("VueLabelTypeService");
-    }
-    public function getLabelStatut()
-    {
-      return $this->getVueByName("VueLabelStatut");
-    }
-    public function getLabelDiplome()
-    {
-      return $this->getVueByName("VueLabelDiplome");
+      $res = $this->connection->query("SELECT * FROM " . $entity);
+      return $res->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /*
      * Obtenir un enregistrement d'un item (Formation, enseignant, etc.)
      */
-     public function getService($id)
+     public function findOne($entity, $id)
      {
        $this->connect();
-       $res = $this->connection->query("SELECT * FROM Service WHERE idService = " . $id);
+       $res = $this->connection->query("SELECT * FROM $entity WHERE id$entity = " . $id);
        $data = $res->fetchAll(PDO::FETCH_ASSOC);
        // debug : vérifier le retour de la requête avant de poursuivre (id valide...)
        return $data;
-     }
-
-    public function modifierService($args)
-    {
-      $this->connect();
-      $sth = $this->connection->prepare("CALL ModifierService(:idService, :idEnseignant, :idTypeService, :annee, :apogee, :nbHeures)");
-      $sth->bindParam(':idService', $args["idService"], PDO::PARAM_INT);
-      $sth->bindParam(':idEnseignant', $args["idEnseignant"], PDO::PARAM_INT);
-      $sth->bindParam(':idTypeService', $args["idTypeService"], PDO::PARAM_INT);
-      $sth->bindParam(':annee', $args["annee"], PDO::PARAM_INT);
-      $sth->bindParam(':apogee', $args["apogee"], PDO::PARAM_STR);
-      $sth->bindParam(':nbHeures', $args["nbHeures"], PDO::PARAM_INT);
-      $res = $sth->execute();
-      return $res;
     }
 
-    public function ajouterService($args)
-    {
-      $this->connect();
-      $sth = $this->connection->prepare("CALL InsererService(:idEnseignant, :idTypeService, :annee, :apogee, :nbHeures)");
-      $sth->bindParam(':idEnseignant', $args["idEnseignant"], PDO::PARAM_INT);
-      $sth->bindParam(':idTypeService', $args["idTypeService"], PDO::PARAM_INT);
-      $sth->bindParam(':annee', $args["annee"], PDO::PARAM_INT);
-      $sth->bindParam(':apogee', $args["apogee"], PDO::PARAM_STR);
-      $sth->bindParam(':nbHeures', $args["nbHeures"], PDO::PARAM_INT);
-      $res = $sth->execute();
-      return $res;
-    }
-
-    public function supprimerService($id)
-    {
+    public function callProcedure($name, $args){
         $this->connect();
-        $sth = $this->connection->prepare("CALL SupprimerService(:idService)");
-        $sth->bindParam(':idService', $id, PDO::PARAM_INT);
-        $res = $sth->execute();
-        return $res;
+        
+        //tout se joue sur la pos des args!!!
+        $sql = "CALL $name(";        
+        
+        foreach($args as $key => $value){
+          $sql = $sql.':'.$key.',';
+        }
+        $sql = trim($sql, ',');
+        $sql = $sql.')';
+        
+        $statement = $this->connection->prepare($sql);
+
+        foreach($args as $key => $value){
+          foreach($this->attributes as $attribute){
+            if($attribute['name'] === $key){
+              $param = ':'.$key;
+              $statement->bindParam($param, $args[$key], $attribute['type']);
+            }
+          }
+        }
+        return $statement->execute();
     }
 
     public function kill(){

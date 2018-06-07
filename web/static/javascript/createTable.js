@@ -1,29 +1,3 @@
-/*function createTable() {
-    
-    var main = document.querySelector('.Main');
-    var table = document.createElement('table');
-    table.style.width = '100%';
-    
-    var header = document.createElement('tr');
-    for (var i = 0; i<3;i++){
-        var th = document.createElement('th');
-        th.innerHTML = "truc";
-        header.appendChild(th)
-    }
-    table.appendChild(header);
-    
-    for (var i = 0; i < data.length; i++) {
-        var tr = document.createElement('tr');
-        for (var j = 0; j < 3; j++) {
-            var td = document.createElement('td');
-            td.innerHTML = "truc";
-            tr.appendChild(td)
-        }
-        table.appendChild(tr);
-    }
-    main.appendChild(table);
-}*/
-
 function createTable(data){
     
     var main = document.querySelector('.Main');
