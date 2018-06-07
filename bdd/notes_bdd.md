@@ -7,10 +7,21 @@
 Ecrire le MCD sur JMerise. Ensuite reporter le MLD sur MysqlWorkbench pour :
 - générer le script (il y a beaucoup plus d'options que sur JMerise)
 - et accessoirement exporter le MLD (le rendu graphique est nettement plus lisible !)
+- nettoyer le fichier généré par MysqlWorkbench en :
+    - supprimant les trigger 'ON DELETE NO ACTION'
+    - choissisant les index à garder
+    - choissisant le moteur lors de la création des tables pour l'instant InnoDB
+    - sortir les contraintes de la création des tables
+    - supprimer les 'USE sde' redondant
+    - passer les comment avec le mot clé 'COMMENT' en commentaire classique (avec -- mon comment)
+    - pour les vues enlever 'CREATE  OR REPLACE VIEW'  et laisser un simple CREATE
+    - pour les users enlever tout et remettre un simple drop use / create users
+    - enlever tous les SET SQL_MODE = ''; SET SQL_MODE = 'TRADITIONAL,ALLOW_INVALID_DATES';
+
 
 ## Modélisation
 
-### Entité Statuts
+### Entité Statut
 
 L'ensemble des combinaisons possible (titulaire / non titulaire, departement / hors département, et les status) peut être stocker dans une entité Statuts (nom, heureService, titulaire (bool)) et e champ depEco (bool) dans l'Entité Enseignant
 
@@ -85,3 +96,9 @@ On aura 2 users :
 - enseignant (avec des droits sur les vues uniquement)
 
 Cette séparation suit la logique au niveau de l'application
+
+## Retour des procédures
+
+Pour les traitements en php il est nécessaire d'avoir l'information sur le succès/echec d'une procédure (savoir le nombre de ligne affecté par une requete). Il faut utiliser la méthode `rowCount` après l'appel d'une méthode `execute`.
+
+[cf issue](http://php.net/manual/fr/pdostatement.rowcount.php)

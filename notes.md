@@ -27,7 +27,11 @@ Les formulaires sont découpés par champ. Chaque controleur appelant une vue Fo
 
 ## Questions CHRISTOPHE
 
-- type de cours CM TP et CMTD, a quoi correspond CMTD ??
+- type de cours CM TP et CMTD, a quoi correspond CMTD et quelle est leur valeur ??
+- est-ce que la partie "front office" signifie que chaque enseingnant à son login/mdp et ne peut voir que ses infos ? Ou bien c'est un login/mdp générique qui permet seulement de consulté l'ensemble des items (enseignement/service/...)
+- notion de groupe sert à quoi exactement  ? Est-ce que le nombre de groupe varie en fonction des années (au quel cas il faut soit sortir le champ groupe de la table enseignement soit lui ajouter une année...). Sinon on pourrait déduire le nombre de groupe en fonction des services qui y sont rattaché ? 
+- ajouter un champ commentaire dans la table Service (pour documenter les cas compliqué)
+
 
 ## Fonctionnalités :
 
