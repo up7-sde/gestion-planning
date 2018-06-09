@@ -38,19 +38,22 @@ class EnseignementsGETController extends Controller {
                     break;
 
                 case "add":
-                    $this->pageName = 'Nouveau Cours';
-                    $this->title = "Nouveau Cours";
+                    $this->pageName = 'Nouvel Enseignement';
+                    $this->title = 'Nouvel Enseignement';
                     $titleButton = null;
                     
                     $this->data = null;
                     
-                    $formInputs = array('apogee' => $this->db->findAll('VueLabelEnseignement'), 
-                                        'idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
-                                        'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
-                                        'annee' => null, 
-                                        'nbHeures' => null);
+                    //(IN p_apogee VARCHAR(45), IN p_intitule VARCHAR(45), IN p_heureCM INT, IN p_heureTP 0000000INT, IN p_semestre INT, IN p_nbGroupes INT, IN p_idFormation INT)
+                    $formInputs = array('apogee2' => null, 
+                                        'intitule' => null, 
+                                        'hCM' => null, 
+                                        'hTP' => null, 
+                                        'semestre' => null,
+                                        'nbGroupes' => null,
+                                        'idFormation' => $this->db->findAll('VueLabelFormation'));
                     
-                    $formActions = array('form' => '/web/cours', 'back' => '/web/cours?action=show'); 
+                    $formActions = array('form' => '/web/enseignements', 'back' => '/web/enseignements?action=show'); 
 
                     include('view2/forms.php');
                     break;

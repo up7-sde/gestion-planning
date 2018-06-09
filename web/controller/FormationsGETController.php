@@ -31,8 +31,8 @@ class FormationsGETController extends Controller {
                 case "show":
                     // Get sans argument : vue de la liste
                     $this->title = 'Toutes les Formations';
-                    $this->data = $this->db->findAll('VueListeFormation');
                     
+                    $this->data = $this->db->findAll('VueListeFormation');
                     $titleButton = array('icon' => 'add', 'action' => '/web/formations?action=add');
                     $tableAction = '/web/formations';
                     //var_dump($_SESSION['message']);
@@ -40,19 +40,17 @@ class FormationsGETController extends Controller {
                     break;
 
                 case "add":
-                    $this->pageName = 'Nouveau Cours';
-                    $this->title = "Nouveau Cours";
+                    $this->pageName = 'Nouvelle Formation';
+                    $this->title = 'Nouvelle Formation';
                     $titleButton = null;
                     
                     $this->data = null;
+
+                    //(IN p_nom VARCHAR(45), IN p_idDiplome INT)
+                    $formInputs = array('intitule' => null, 
+                                        'idDiplome' => $this->db->findAll('VueLabelDiplome'));
                     
-                    $formInputs = array('apogee' => $this->db->findAll('VueLabelEnseignement'), 
-                                        'idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
-                                        'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
-                                        'annee' => null, 
-                                        'nbHeures' => null);
-                    
-                    $formActions = array('form' => '/web/cours', 'back' => '/web/cours?action=show'); 
+                    $formActions = array('form' => '/web/formations', 'back' => '/web/formations?action=show'); 
 
                     include('view2/forms.php');
                     break;

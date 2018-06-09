@@ -38,8 +38,8 @@ class EnseignantsGETController extends Controller {
                     break;
 
                 case "add":
-                    $this->pageName = 'Nouveau Cours';
-                    $this->title = "Nouveau Cours";
+                    $this->pageName = 'Nouvel Enseignant';
+                    $this->title = "Nouvel Enseignant";
                     $titleButton = null;
                     
                     $this->data = null;

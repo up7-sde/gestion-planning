@@ -221,7 +221,7 @@ BEGIN
     VALUES (p_idFormation, p_apogee);
 END;$$
 
-DELIMITER ;
+DELIMITER;
 
 -- -----------------------------------------------------
 -- procedure InsererService

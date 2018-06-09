@@ -8,7 +8,6 @@ class Model {
             'alias' => 'Cours',
             'type' => PDO::PARAM_INT,
             'inputType' => 'hidden',
-            'optionsEntity' => null,
             'default' => null
         ),
         'idEnseignant' =>
@@ -17,7 +16,6 @@ class Model {
             'alias' => 'Enseignant',
             'type' => PDO::PARAM_INT,
             'inputType' => 'options',
-            'optionsEntity' => null,
             'default' => null
         ),
         'idTypeService' =>
@@ -26,7 +24,6 @@ class Model {
             'alias' => 'Type de Cours',
             'type' => PDO::PARAM_INT,
             'inputType' => 'radio',
-            'optionsEntity' => null,
             'default' => null
         ),
         'annee' =>
@@ -35,7 +32,6 @@ class Model {
             'alias' => 'Année',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'optionsEntity' => null,
             'default' => 2018
         ),
 
@@ -45,7 +41,6 @@ class Model {
             'alias' => 'Référence Apogée',
             'type' => PDO::PARAM_STR,
             'inputType' => 'options',
-            'optionsEntity' => null,
             'default' => null
         ),
 
@@ -55,7 +50,6 @@ class Model {
             'alias' => 'Nombre d\'heures',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'optionsEntity' => null,
             'default' => 4
         ),
 
@@ -65,7 +59,6 @@ class Model {
             'alias' => 'Nom',
             'type' => PDO::PARAM_STR,
             'inputType' => 'text',
-            'optionsEntity' => null,
             'default' => 'Nom'
         ),
 
@@ -73,9 +66,8 @@ class Model {
         array(
             'name' => 'prenom',
             'alias' => 'Prénom',
-            'type' => PDO::PARAM_INT,
+            'type' => PDO::PARAM_STR,
             'inputType' => 'text',
-            'optionsEntity' => null,
             'default' => 'Prénom'
         ),
 
@@ -85,18 +77,83 @@ class Model {
             'alias' => 'Statut',
             'type' => PDO::PARAM_INT,
             'inputType' => 'options',
-            'optionsEntity' => null,
             'default' => 'Statut'
         ),
 
         'depEco' =>
         array(
             'name' => 'depEco',
-            'alias' => 'depEco',
+            'alias' => 'Département',
             'type' => PDO::PARAM_INT,
             'inputType' => 'radio',
-            'optionsEntity' => null,
-            'default' => 'depEco'
+            'default' => 'Département'
+        ),
+
+        'intitule' =>
+        array(
+            'name' => 'intitule',
+            'alias' => 'Intitulé',
+            'type' => PDO::PARAM_STR,
+            'inputType' => 'text',
+            'default' => 'Intitulé'
+        ),
+
+        'idDiplome' =>
+        array(
+            'name' => 'idDiplome',
+            'alias' => 'Diplôme',
+            'type' => PDO::PARAM_STR,
+            'inputType' => 'radio',
+            'default' => 'Diplôme'
+        ),
+
+        'hCM' =>
+        array(
+            'name' => 'hCM',
+            'alias' => 'Heures de CM',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'number',
+            'default' => 0
+        ),
+        'hTP' =>
+        array(
+            'name' => 'hTP',
+            'alias' => 'Heures de TP',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'number',
+            'default' => 0
+        ),
+        'semestre' =>
+        array(
+            'name' => 'semestre',
+            'alias' => 'Semestre',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'number',
+            'default' => 0
+        ),
+        'nbGroupes' =>
+        array(
+            'name' => 'nbGroupes',
+            'alias' => 'Nombre de groupes',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'number',
+            'default' => 0
+        ),
+        'idFormation' =>
+        array(
+            'name' => 'idFormation',
+            'alias' => 'Formation',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'options',
+            'default' => 'Formation'
+        ),
+        'apogee2' =>
+        array(
+            'name' => 'idFormatiapogee2on',
+            'alias' => 'Code Apogée',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'text',
+            'default' => 'Code Apogée'
         )
     );
 }
