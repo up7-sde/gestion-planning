@@ -18,18 +18,18 @@
     </route>
     <route>
         <method>GET</method>
-        <path>/enseignant</path>
-        <controller>EnseignantController</controller>
+        <path>/enseignants</path>
+        <controller>EnseignantsGETController</controller>
     </route>
     <route>
         <method>GET</method>
-        <path>/enseignement</path>
-        <controller>EnseignementController</controller>
+        <path>/enseignements</path>
+        <controller>EnseignementsGETController</controller>
     </route>
     <route>
         <method>GET</method>
-        <path>/formation</path>
-        <controller>FormationController</controller>
+        <path>/formations</path>
+        <controller>FormationsGETController</controller>
     </route>
     <route>
         <method>GET</method>

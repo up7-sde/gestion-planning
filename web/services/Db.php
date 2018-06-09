@@ -11,7 +11,6 @@ class Db{
     private $password;
     private $dbname;
     private $attributes;
-    private $query;
 
     public function __construct(){
         $this->attributes = Model::$attributes;
@@ -63,6 +62,7 @@ class Db{
      */
     public function findAll($entity){
       $this->connect();
+      /*prepare-execute?*/
       $res = $this->connection->query("SELECT * FROM " . $entity);
       return $res->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -73,6 +73,7 @@ class Db{
      public function findOne($entity, $id)
      {
        $this->connect();
+       /*prepare-execute?*/
        $res = $this->connection->query("SELECT * FROM $entity WHERE id$entity = " . $id);
        $data = $res->fetchAll(PDO::FETCH_ASSOC);
        // debug : vérifier le retour de la requête avant de poursuivre (id valide...)
@@ -81,10 +82,16 @@ class Db{
 
     public function callProcedure($name, $args){
         $this->connect();
-        
+
+        /*variable d'environnement ou ailleurs*/
+        $autocommit = FALSE;
+        /*pas obligé si on est en autocommit et qu'on fait que des procs*/
+        if (!$autocommit) $this->connection->beginTransaction();
+
         //tout se joue sur la pos des args!!!
         $sql = "CALL $name(";        
         
+        /*on créé la str à partir des args*/
         foreach($args as $key => $value){
           $sql = $sql.':'.$key.',';
         }
@@ -93,6 +100,9 @@ class Db{
         
         $statement = $this->connection->prepare($sql);
 
+        /*remplacer par un while ;)*/
+        /*regler question de la liste des params => pas de model*/
+        /*on cherche le type du param dans la liste des params puis on le bind*/
         foreach($args as $key => $value){
           foreach($this->attributes as $attribute){
             if($attribute['name'] === $key){
@@ -101,7 +111,17 @@ class Db{
             }
           }
         }
-        return $statement->execute();
+
+        $res = $statement->execute();
+
+        if ($statement->rowCount()){
+            /*en attendant l'autocommit*/
+            if (!$autocommit) $this->connection->commit();
+            return TRUE;
+        };
+        /*en attendant l'autocommit*/
+        if (!$autocommit) $this->connection->rollBack();        
+        return FALSE;
     }
 
     public function kill(){

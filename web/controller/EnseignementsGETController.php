@@ -5,7 +5,7 @@ include_once('Controller.php');
 /*
  * Modifier un service existant et rediriger vers la liste des services avec un message
  */
-class CoursGETController extends Controller {
+class EnseignementsGETController extends Controller {
     
     public function render($args=null){
    
@@ -28,27 +28,26 @@ class CoursGETController extends Controller {
             switch ($extraParams['action']) {
                 case "show":
                     // Get sans argument : vue de la liste
-                   
-                    $this->title = 'Tous les Cours';
-                    $this->data = $this->db->findAll('VueListeService');
+                    $this->title = 'Tous les Enseignements';
+                    $this->data = $this->db->findAll('VueListeEnseignement');
                     
-                    $titleButton = array('icon' => 'add', 'action' => '/web/cours?action=add');
-                    $tableAction = '/web/cours';
+                    $titleButton = array('icon' => 'add', 'action' => '/web/enseignements?action=add');
+                    $tableAction = '/web/enseignements';
                     //var_dump($_SESSION['message']);
                     include('view2/tables.php');
                     break;
 
                 case "add":
-                   
+                    $this->pageName = 'Nouveau Cours';
                     $this->title = "Nouveau Cours";
                     $titleButton = null;
                     
                     $this->data = null;
                     
-                    $formInputs = array('idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
+                    $formInputs = array('apogee' => $this->db->findAll('VueLabelEnseignement'), 
+                                        'idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
                                         'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
                                         'annee' => null, 
-                                        'apogee' => $this->db->findAll('VueLabelEnseignement'),
                                         'nbHeures' => null);
                     
                     $formActions = array('form' => '/web/cours', 'back' => '/web/cours?action=show'); 

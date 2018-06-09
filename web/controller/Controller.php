@@ -2,21 +2,31 @@
 
 include_once('services/Db.php');
 include_once('services/Auth.php');
+include_once('services/Messenger.php');
+include_once('services/ViewEngine.php');
 //pas de surcharge de classe
 //comme ça on peut forcer le render mais aussi y ajouter un param
 
 class Controller {
 
     protected $title;
+    protected $data;
     protected $content;
     protected $style;
     protected $script;
     protected $db;
     protected $auth;
+    protected $messenger;
+    protected $viewEngine;
+    protected $pageName;
+    protected $id;
 
     public function __construct(){
+        /*args de la db ici? => non*/
         $this->db = new Db("localhost",  "root", "123azerty", "sakila");
         $this->auth = new Auth($this->db);
+        $this->messenger = new Messenger();
+        $this->viewEngine = new ViewEngine();
     }
 
     // Prends une liste d'arguments $args

@@ -20,8 +20,9 @@ class CoursPOSTController extends Controller {
         /cours => ajoute une nouvelle ressource
         */
         if (!$params){
+            var_dump($_POST);
             $res = $this->db->callProcedure('InsererService', $_POST);
-            $_SESSION["message"] = $res;                    
+            //$_SESSION["message"] = $res;                    
             $this->redirect('/cours?action=show');
         /*
         case
