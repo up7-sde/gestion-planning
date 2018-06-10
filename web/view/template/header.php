@@ -4,9 +4,7 @@
     <li class="list-inline-item"><?= $user['name']?></li>
     <li class="list-inline-item"><?= $user['email']?></li>
     <li class="list-inline-item">
-      <form action="/web/auth/logout" method="post">
-        <input type="submit" value="Logout">
-      </form>
+      <a href="/web/auth?action=quit">Logout</a>
     </li>
   </ul>
 </div>

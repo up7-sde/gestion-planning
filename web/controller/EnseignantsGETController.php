@@ -51,6 +51,7 @@ class EnseignantsGETController extends Controller {
                                         'depEco' => array(array('id' => 1, 'nom' => 'SDE'), array('id' => 0, 'nom' => 'hors-SDE')));
                     
                     //if(`sde`.`Enseignant`.`depEco`, "SDE", "Hors SDE") AS Departement,
+                    $hiddenInput = null;
                     
                     $formActions = array('form' => '/web/enseignants', 'back' => '/web/enseignants?action=show'); 
 
@@ -72,21 +73,19 @@ class EnseignantsGETController extends Controller {
                 
                 case "edit":
                     
-                    $this->pageName = 'Modification du Cours n°'.$params['id'];
-                    $this->title = 'Modification du Cours n°'.$params['id'];
+                    $this->title = 'Modification de l\'enseignant n°'.$params['id'];
 
-                    $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');
+                    $titleButton = array('icon' => 'delete', 'action' => '/web/enseignants/'.$params['id'].'?action=delete');
+                    //(IN p_idEnseignant INT, IN p_nom VARCHAR(45), IN p_prenom VARCHAR(45), IN p_idStatut INT, IN p_depEco TINYINT)
+                    $formInputs = array('nom' => null, 
+                                        'prenom' => null, 
+                                        'idStatut' => $this->db->findAll('VueLabelStatut'), 
+                                        'depEco' => array(array('id' => 1, 'nom' => 'SDE'), array('id' => 0, 'nom' => 'hors-SDE')));
 
-                    $formInputs = array('idService' => null,
-                                        'apogee' => $this->db->findAll('VueLabelEnseignement'), 
-                                        'idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
-                                        'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
-                                        'annee' => null, 
-                                        'nbHeures' => null);
+                    $formActions = array('form' => '/web/enseignants/'.$params['id'], 'back' => '/web/enseignants?action=show'); 
+                    $hiddenInput = 'idEnseignant';
                     
-                    $formActions = array('form' => '/web/cours/'.$params['id'], 'back' => '/web/cours/'.$params['id'].'?action=show'); 
-                    
-                    $this->data = $this->db->findOne('Service', $params['id']);                    
+                    $this->data = $this->db->findOne('Enseignant', $params['id']);                    
     
                     include('view2/forms.php');
                     
@@ -94,9 +93,9 @@ class EnseignantsGETController extends Controller {
 
                 case "delete":
                     $id = $params['id'];
-                    $res = $this->db->callProcedure("SupprimerService", array("idService" => $params['id']));
+                    $res = $this->db->callProcedure("SupprimerEnseignant", array("idEnseignant" => $params['id']));
                     $_SESSION["message"] = $res;
-                    $this->redirect('/cours?action=show');
+                    $this->redirect('/enseignants?action=show');
                     break;
                 
                 default:

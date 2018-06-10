@@ -5,13 +5,17 @@ include_once('Controller.php');
 /*
  *
  */
-class HomeController extends Controller {
+class AccueilGETController extends Controller {
     public function render($args=null){
+        
         $user = $this->getUserInfos();
+        
+        if (!$user) $this->redirect('/auth?action=process');
+        
         $pageTitle = "Home | " . $user['name'];
         $title = "Home";
-        $tab = null; // debug envoyer un tableau vide pour home
-        if (!$user) $this->redirect('/auth/login');
+        $tab = null;
+
         include('view/HomeView.php');
     }
 }

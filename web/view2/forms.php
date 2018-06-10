@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <title>View Form</title>
+    <title><?=$this->title?></title>
   </head>
   <body style="padding-top:56px;">
 
@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Acceuil</a>
+              <a class="nav-link active" href="#">Acceuil</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/web/formations?action=show">Formations</a>
@@ -83,7 +83,7 @@
       </nav>
 
       <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
-      <?=$this->viewEngine->generateForm($formInputs, $formActions, $this->data);?>
+      <?=$this->viewEngine->generateForm($formInputs, $formActions, $this->data, $hiddenInput);?>
     
 </div>
 </div>

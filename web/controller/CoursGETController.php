@@ -52,7 +52,8 @@ class CoursGETController extends Controller {
                                         'nbHeures' => null);
                     
                     $formActions = array('form' => '/web/cours', 'back' => '/web/cours?action=show'); 
-
+                    $hiddenInput = null;
+                    
                     include('view2/forms.php');
                     break;
                 
@@ -71,19 +72,19 @@ class CoursGETController extends Controller {
                 
                 case "edit":
                     
-                    $this->pageName = 'Modification du Cours n°'.$params['id'];
                     $this->title = 'Modification du Cours n°'.$params['id'];
 
                     $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');
-
-                    $formInputs = array('idService' => null,
-                                        'apogee' => $this->db->findAll('VueLabelEnseignement'), 
+                    //(IN p_idService INT, IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT)
+                    $formInputs = array('apogee' => $this->db->findAll('VueLabelEnseignement'), 
                                         'idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
                                         'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
                                         'annee' => null, 
                                         'nbHeures' => null);
                     
-                    $formActions = array('form' => '/web/cours/'.$params['id'], 'back' => '/web/cours/'.$params['id'].'?action=show'); 
+                    $hiddenInput = 'idService';
+
+                    $formActions = array('form' => '/web/cours/'.$params['id'], 'back' => '/web/cours/?action=show'); 
                     
                     $this->data = $this->db->findOne('Service', $params['id']);                    
     

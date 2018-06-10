@@ -5,14 +5,14 @@ include_once('Controller.php');
 /*
  * Modifier un service existant et rediriger vers la liste des services avec un message
  */
-class CoursPOSTController extends Controller {
+class FormationsPOSTController extends Controller {
     public function render($args=null){
         
         /*verifier auth*/
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth/login');
         
-        /*on récupère tous les params*/
+        /*on récupère les params => l'id de la ressource*/
         $params = $this->getParams();
         
         /*
@@ -21,19 +21,19 @@ class CoursPOSTController extends Controller {
         */
         if (!$params){
             var_dump($_POST);
-            $res = $this->db->callProcedure('InsererService', $_POST);
+            $res = $this->db->callProcedure('InsererFormation', $_POST);
             //$_SESSION["message"] = $res;                    
-            $this->redirect('/cours?action=show');
+            $this->redirect('/formations?action=show');
         /*
         case
         /cours/:id => modifie la ressource :id
         */
         } else {
             
-            $res = $this->db->callProcedure('ModifierService', $_POST);
+            $res = $this->db->callProcedure('ModifierFormation', $_POST);
             /*$this->db->modifierService($_POST);
             $_SESSION["message"] = $res;*/
-            $this->redirect('/cours?action=show');
+            $this->redirect('/formations?action=show');
         }
     }
 }

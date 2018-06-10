@@ -4,15 +4,18 @@ include_once('Controller.php');
 /*
  * Effectue le login et redirige en fonction du résultat
  */
-class LoginPostController extends Controller  {
+class AuthPostController extends Controller  {
 
     public function render($args=null){
         $pageTitle = 'SDE | Login';
+        var_dump('in');
+
         if ($this->auth->login()){
-            $to = $this->getReferrer();
+            $to = '/';
         } else {
-            $to = '/auth/login';
+            $to = '/auth?action=process';
         }
+        
         $this->redirect($to);
     }
 }

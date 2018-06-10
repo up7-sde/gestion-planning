@@ -70,11 +70,15 @@ class Db{
     /*
      * Obtenir un enregistrement d'un item (Formation, enseignant, etc.)
      */
-     public function findOne($entity, $id)
+     public function findOne($entity, $id, $column = null, $isStr = FALSE)
      {
        $this->connect();
        /*prepare-execute?*/
-       $res = $this->connection->query("SELECT * FROM $entity WHERE id$entity = " . $id);
+       $idColumn = "id$entity";
+       if ($column!==null) $idColumn = $column;
+       if ($isStr) $id = '"'.$id.'"';
+
+       $res = $this->connection->query("SELECT * FROM $entity WHERE $idColumn = " . $id);
        $data = $res->fetchAll(PDO::FETCH_ASSOC);
        // debug : vérifier le retour de la requête avant de poursuivre (id valide...)
        return $data;
@@ -111,7 +115,7 @@ class Db{
             }
           }
         }
-
+        //var_dump($args);
         $res = $statement->execute();
 
         if ($statement->rowCount()){

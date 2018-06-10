@@ -51,7 +51,8 @@ class FormationsGETController extends Controller {
                                         'idDiplome' => $this->db->findAll('VueLabelDiplome'));
                     
                     $formActions = array('form' => '/web/formations', 'back' => '/web/formations?action=show'); 
-
+                    $hiddenInput = null;
+                    
                     include('view2/forms.php');
                     break;
                 
@@ -64,37 +65,33 @@ class FormationsGETController extends Controller {
         /cours/:id?action=(show|edit|delete)
         */
         } elseif (!!$params && !!$extraParams && isset($extraParams['action'])) { 
-            $this->pageName = 'Cours n°'.$params['id'];
+            
 
             switch ($extraParams['action']) {
                 
                 case "edit":
                     
-                    $this->pageName = 'Modification du Cours n°'.$params['id'];
-                    $this->title = 'Modification du Cours n°'.$params['id'];
+                //(IN p_idFormation INT, IN p_nom VARCHAR(45), IN p_idDiplome INT)
+                    $this->title = 'Modification de la formation n°'.$params['id'];
 
                     $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');
 
-                    $formInputs = array('idService' => null,
-                                        'apogee' => $this->db->findAll('VueLabelEnseignement'), 
-                                        'idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
-                                        'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
-                                        'annee' => null, 
-                                        'nbHeures' => null);
+                    $formInputs = array('intitule' => null, 'idDiplome' => $this->db->findAll('VueLabelDiplome'));
+                    $formActions = array('form' => '/web/formations/'.$params['id'], 'back' => '/web/formations?action=show'); 
+                    $hiddenInput = 'idFormation';
                     
-                    $formActions = array('form' => '/web/cours/'.$params['id'], 'back' => '/web/cours/'.$params['id'].'?action=show'); 
-                    
-                    $this->data = $this->db->findOne('Service', $params['id']);                    
+                    $this->data = $this->db->findOne('Formation', $params['id']);                    
     
                     include('view2/forms.php');
                     
                     break;
 
                 case "delete":
+                    var_dump($params['id']);
                     $id = $params['id'];
-                    $res = $this->db->callProcedure("SupprimerService", array("idService" => $params['id']));
+                    $res = $this->db->callProcedure("SupprimerFormation", array("idFormation" => $params['id']));
                     $_SESSION["message"] = $res;
-                    $this->redirect('/cours?action=show');
+                    $this->redirect('/formations?action=show');
                     break;
                 
                 default:

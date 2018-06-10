@@ -2,25 +2,25 @@
 <ul class="nav nav-tabs">
   <!-- HOME -->
   <li>
-    <a href="/web/home" role="button" aria-haspopup="true" aria-expanded="false">
+    <a href="/web/accueil" role="button" aria-haspopup="true" aria-expanded="false">
       Home</span>
     </a>
   </li>
   <!-- LES FORMATIONS -->
   <li>
-    <a href="/web/formation" role="button" aria-haspopup="true" aria-expanded="false">
+    <a href="/web/formations?action=show" role="button" aria-haspopup="true" aria-expanded="false">
       Formation</span>
     </a>
   </li>
   <!-- LES ENSEIGNEMENTS -->
   <li>
-    <a href="/web/enseignement" role="button" aria-haspopup="true" aria-expanded="false">
+    <a href="/web/enseignements?action=show" role="button" aria-haspopup="true" aria-expanded="false">
       Enseignements</span>
     </a>
   </li>
   <!-- LES ENSEIGNANTS -->
   <li>
-    <a href="/web/enseignant" role="button" aria-haspopup="true" aria-expanded="false">
+    <a href="/web/enseignants?action=show" role="button" aria-haspopup="true" aria-expanded="false">
       Enseignant</span>
     </a>
   </li>
