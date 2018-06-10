@@ -90,7 +90,11 @@ class FormationsGETController extends Controller {
                     var_dump($params['id']);
                     $id = $params['id'];
                     $res = $this->db->callProcedure("SupprimerFormation", array("idFormation" => $params['id']));
-                    $_SESSION["message"] = $res;
+                    if ($res) {
+                        $this->messenger->push(array('status'=>'success', 'message'=>'Success_Formation modifiée'));
+                    } else {
+                        $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+                    }
                     $this->redirect('/formations?action=show');
                     break;
                 

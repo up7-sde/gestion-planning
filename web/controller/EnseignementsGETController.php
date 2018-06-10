@@ -45,7 +45,7 @@ class EnseignementsGETController extends Controller {
                     $this->data = null;
                     
                     //(IN p_apogee VARCHAR(45), IN p_intitule VARCHAR(45), IN p_heureCM INT, IN p_heureTP 0000000INT, IN p_semestre INT, IN p_nbGroupes INT, IN p_idFormation INT)
-                    $formInputs = array('apogee2' => null, 
+                    $formInputs = array('apogee' => $this->db->findAll('VueLabelEnseignement'), 
                                         'intitule' => null, 
                                         'hCM' => null, 
                                         'hTP' => null, 
@@ -86,9 +86,9 @@ class EnseignementsGETController extends Controller {
                                         'idFormation' => $this->db->findAll('VueLabelFormation'));
                     
                     $formActions = array('form' => '/web/enseignements/'.$params['id'], 'back' => '/web/enseignements?action=show'); 
-                    $hiddenInput = 'apogee';
+                    $hiddenInput = 'id';
                     
-                    $this->data = $this->db->findOne('Enseignement', $params['id'], 'apogee', TRUE);                    
+                    $this->data = $this->db->findOne('VueListeEnseignement', $params['id'], 'apogee2', TRUE);                    
     
                     include('view2/forms.php');
                     
@@ -97,7 +97,13 @@ class EnseignementsGETController extends Controller {
                 case "delete":
                     $id = $params['id'];
                     $res = $this->db->callProcedure("SupprimerEnseignement", array("apogee" => $params['id']));
-                    $_SESSION["message"] = $res;
+                    
+                    if ($res) {
+                        $this->messenger->push(array('status'=>'success', 'message'=>'Success_Enseignement n°'.$params['id'].' supprimé'));
+                    } else {
+                        $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la suppression'));                        
+                    }
+
                     $this->redirect('/enseignements?action=show');
                     break;
                 

@@ -76,10 +76,10 @@ class CoursGETController extends Controller {
 
                     $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');
                     //(IN p_idService INT, IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT)
-                    $formInputs = array('apogee' => $this->db->findAll('VueLabelEnseignement'), 
-                                        'idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
+                    $formInputs = array('idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
                                         'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
-                                        'annee' => null, 
+                                        'annee' => null,
+                                        'apogee' => $this->db->findAll('VueLabelEnseignement'), 
                                         'nbHeures' => null);
                     
                     $hiddenInput = 'idService';
@@ -95,7 +95,13 @@ class CoursGETController extends Controller {
                 case "delete":
                     $id = $params['id'];
                     $res = $this->db->callProcedure("SupprimerService", array("idService" => $params['id']));
-                    $_SESSION["message"] = $res;
+                    
+                    if ($res) {
+                        $this->messenger->push(array('status'=>'success', 'message'=>'Success_Cours n°'.$params['id'].' supprimé'));
+                    } else {
+                        $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la suppression'));                        
+                    }
+
                     $this->redirect('/cours?action=show');
                     break;
                 

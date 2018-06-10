@@ -20,8 +20,14 @@ class FormationsPOSTController extends Controller {
         /cours => ajoute une nouvelle ressource
         */
         if (!$params){
-            var_dump($_POST);
+            
             $res = $this->db->callProcedure('InsererFormation', $_POST);
+            
+            if ($res) {
+                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Formation ajoutée'));
+            } else {
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+            }
             //$_SESSION["message"] = $res;                    
             $this->redirect('/formations?action=show');
         /*
@@ -31,8 +37,13 @@ class FormationsPOSTController extends Controller {
         } else {
             
             $res = $this->db->callProcedure('ModifierFormation', $_POST);
-            /*$this->db->modifierService($_POST);
-            $_SESSION["message"] = $res;*/
+
+            if ($res) {
+                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Formation modifiée'));
+            } else {
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+            }
+            
             $this->redirect('/formations?action=show');
         }
     }

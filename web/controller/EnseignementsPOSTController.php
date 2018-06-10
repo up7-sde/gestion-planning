@@ -22,7 +22,11 @@ class EnseignementsPOSTController extends Controller {
         if (!$params){
             var_dump($_POST);
             $res = $this->db->callProcedure('InsererEnseignement', $_POST);
-            //$_SESSION["message"] = $res;                    
+            if ($res) {
+                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Enseignement ajouté'));
+            } else {
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+            }                   
             $this->redirect('/enseignements?action=show');
         /*
         case
@@ -31,8 +35,13 @@ class EnseignementsPOSTController extends Controller {
         } else {
             
             $res = $this->db->callProcedure('ModifierEnseignement', $_POST);
-            /*$this->db->modifierService($_POST);
-            $_SESSION["message"] = $res;*/
+            
+            if ($res) {
+                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Enseignement modifié'));
+            } else {
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+            }
+            
             $this->redirect('/enseignements?action=show');
         }
     }

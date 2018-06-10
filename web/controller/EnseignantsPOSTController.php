@@ -22,6 +22,12 @@ class EnseignantsPOSTController extends Controller {
         if (!$params){
             var_dump($_POST);
             $res = $this->db->callProcedure('InsererEnseignant', $_POST);
+            
+            if ($res) {
+                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Enseignant ajouté'));
+            } else {
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+            }
             //$_SESSION["message"] = $res;                    
             $this->redirect('/enseignants?action=show');
         /*
@@ -31,8 +37,11 @@ class EnseignantsPOSTController extends Controller {
         } else {
             
             $res = $this->db->callProcedure('ModifierEnseignant', $_POST);
-            /*$this->db->modifierService($_POST);
-            $_SESSION["message"] = $res;*/
+            if ($res) {
+                $this->messenger->push(array('status'=>'success', 'message'=>'Succes_Eseignant modifié'));
+            } else {
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+            }
             $this->redirect('/enseignants?action=show');
         }
     }

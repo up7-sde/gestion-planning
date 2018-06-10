@@ -71,8 +71,8 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="#">Modifier</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Deconnection</a>
-                </div>
+                  <a class="dropdown-item bg-light" href="/web/auth?action=quit"><i class="fas fa-power-off"></i> Déconnexion</a>
+                  </div>
               </li>
             </ul>
         </div>
@@ -81,6 +81,7 @@
       </nav>
       
       <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
+      <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
       <?=$this->viewEngine->generateTable($this->data, $tableAction);?>
 
     </div>

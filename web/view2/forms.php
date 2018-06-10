@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <title><?=$this->title?></title>
   </head>
-  <body style="padding-top:56px;">
+  <body style="padding-top:56px;" class="bg-light">
 
     <div class="container">
     
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark shadow">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-danger shadow">
         <div class="container">
         <a class="navbar-brand" href="#">Navbar</a> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="#">Modifier</a>
                 
-                  <a class="dropdown-item bg-light" href="#"><i class="fas fa-power-off"></i> Déconnexion</a>
+                  <a class="dropdown-item bg-light" href="/web/auth?action=quit"><i class="fas fa-power-off"></i> Déconnexion</a>
                 </div>
               </li>
             </ul>

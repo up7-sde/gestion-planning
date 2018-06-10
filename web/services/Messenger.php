@@ -6,7 +6,7 @@ class Messenger {
     }
 
     public function pop(){
-        $message = null;
+    
         if (isset($_SESSION) && isset($_SESSION['message'])){
             $message = $_SESSION['message'];
             unset($_SESSION['message']);

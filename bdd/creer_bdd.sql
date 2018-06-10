@@ -659,7 +659,7 @@ USE `sde`;
 CREATE  OR REPLACE VIEW VueListeEnseignement AS
 SELECT
     `sde`.`Enseignement`.`apogee` AS id,
-    `sde`.`Enseignement`.`apogee`,
+    `sde`.`Enseignement`.`apogee` AS apogee2,
     `sde`.`Enseignement`.`intitule`,
     `sde`.`Enseignement`.`heureCM` AS heureCM,
     -- Calculer le nombre d'heure de service correspondant à l'enseignenment et au type CM

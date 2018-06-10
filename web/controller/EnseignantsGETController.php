@@ -94,7 +94,13 @@ class EnseignantsGETController extends Controller {
                 case "delete":
                     $id = $params['id'];
                     $res = $this->db->callProcedure("SupprimerEnseignant", array("idEnseignant" => $params['id']));
-                    $_SESSION["message"] = $res;
+                    
+                    if ($res) {
+                        $this->messenger->push(array('status'=>'success', 'message'=>'Success_Enseignant n°'.$params['id'].' supprimé'));
+                    } else {
+                        $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la suppression'));                        
+                    }
+
                     $this->redirect('/enseignants?action=show');
                     break;
                 

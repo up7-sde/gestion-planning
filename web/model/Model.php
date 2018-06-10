@@ -12,7 +12,7 @@ class Model {
         ),
         'idEnseignant' =>
         array(
-            'name' => 'idEnseignant',
+            'name' => 'Enseignant_idEnseignant',
             'alias' => 'Enseignant',
             'type' => PDO::PARAM_INT,
             'inputType' => 'options',
@@ -20,7 +20,7 @@ class Model {
         ),
         'idTypeService' =>
         array(
-            'name' => 'idTypeService',
+            'name' => 'TypeService_idTypeService',
             'alias' => 'Type de Cours',
             'type' => PDO::PARAM_INT,
             'inputType' => 'radio',
@@ -37,7 +37,7 @@ class Model {
 
         'apogee' =>
         array(
-            'name' => 'apogee',
+            'name' => 'Enseignement_apogee',
             'alias' => 'Référence Apogée',
             'type' => PDO::PARAM_STR,
             'inputType' => 'options',
@@ -70,10 +70,10 @@ class Model {
             'inputType' => 'text',
             'default' => 'Prénom'
         ),
-
+       
         'idStatut' =>
         array(
-            'name' => 'idStatut',
+            'name' => 'Statut_idStatut',
             'alias' => 'Statut',
             'type' => PDO::PARAM_INT,
             'inputType' => 'options',
@@ -91,7 +91,7 @@ class Model {
 
         'intitule' =>
         array(
-            'name' => 'intitule',
+            'name' => 'nom',
             'alias' => 'Intitulé',
             'type' => PDO::PARAM_STR,
             'inputType' => 'text',
@@ -99,8 +99,9 @@ class Model {
         ),
 
         'idDiplome' =>
+        
         array(
-            'name' => 'idDiplome',
+            'name' => 'Diplome_idDiplome',
             'alias' => 'Diplôme',
             'type' => PDO::PARAM_STR,
             'inputType' => 'radio',
@@ -109,7 +110,7 @@ class Model {
 
         'hCM' =>
         array(
-            'name' => 'hCM',
+            'name' => 'heureCM',
             'alias' => 'Heures de CM',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
@@ -117,7 +118,7 @@ class Model {
         ),
         'hTP' =>
         array(
-            'name' => 'hTP',
+            'name' => 'hTPtotal',
             'alias' => 'Heures de TP',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
@@ -133,7 +134,7 @@ class Model {
         ),
         'nbGroupes' =>
         array(
-            'name' => 'nbGroupes',
+            'name' => 'nbGroupe',
             'alias' => 'Nombre de groupes',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
@@ -141,7 +142,7 @@ class Model {
         ),
         'idFormation' =>
         array(
-            'name' => 'idFormation',
+            'name' => 'intitule',
             'alias' => 'Formation',
             'type' => PDO::PARAM_INT,
             'inputType' => 'options',
@@ -149,7 +150,7 @@ class Model {
         ),
         'apogee2' =>
         array(
-            'name' => 'idFormatiapogee2on',
+            'name' => 'nom',
             'alias' => 'Code Apogée',
             'type' => PDO::PARAM_INT,
             'inputType' => 'text',

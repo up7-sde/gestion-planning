@@ -22,17 +22,25 @@ class CoursPOSTController extends Controller {
         if (!$params){
             var_dump($_POST);
             $res = $this->db->callProcedure('InsererService', $_POST);
-            //$_SESSION["message"] = $res;                    
+            if ($res) {
+                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Cours ajouté'));
+            } else {
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+            }                 
             $this->redirect('/cours?action=show');
         /*
         case
         /cours/:id => modifie la ressource :id
         */
         } else {
-            
+
             $res = $this->db->callProcedure('ModifierService', $_POST);
-            /*$this->db->modifierService($_POST);
-            $_SESSION["message"] = $res;*/
+            
+            if ($res) {
+                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Cours modifié'));
+            } else {
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+            }
             $this->redirect('/cours?action=show');
         }
     }
