@@ -7,7 +7,7 @@ include_once('Controller.php');
 /*
  * Modifier un service existant et rediriger vers la liste des services avec un message
  */
-class FormationsGETController extends Controller {
+class StatutsGETController extends Controller {
     
     public function render($args=null){
    
@@ -30,11 +30,11 @@ class FormationsGETController extends Controller {
             switch ($extraParams['action']) {
                 case "show":
                     // Get sans argument : vue de la liste
-                    $this->title = 'Toutes les Formations';
+                    $this->title = 'Tous les Statuts Enseignant';
                     
-                    $this->data = $this->db->findAll('VueListeFormation');
-                    $titleButton = array('icon' => 'add', 'action' => '/web/formations?action=add');
-                    $tableAction = '/web/formations';
+                    $this->data = $this->db->findAll('VueListeStatut');
+                    $titleButton = array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=add');
+                    $tableAction = '/web/referentiels/statuts';
                     //var_dump($_SESSION['message']);
                     include('view2/tables.php');
                     break;

@@ -29,6 +29,7 @@ class Auth {
             $_SESSION["passport"]["name"] = "adnls";
             $_SESSION["passport"]["email"] = "david.ayache90@gmail.com";
             $_SESSION["passport"]["level"] = 1;
+            $_SESSION["passport"]["color"] = ' bg-info ';
             
             //on met la pk de l'user en db dans les var de session pour pouvoir les retrouver facilement
             //var_dump($this->router->getRefferer());

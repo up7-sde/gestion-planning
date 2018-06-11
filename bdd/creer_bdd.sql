@@ -738,6 +738,30 @@ SELECT
 FROM `sde`.`VueListeEnseignement`
 GROUP BY `sde`.`VueListeEnseignement`.`idFormation`;
 
+DROP VIEW IF EXISTS `sde`.`VueListeDiplome` ;
+USE `sde`;
+CREATE  OR REPLACE VIEW `VueListeDiplome` AS
+SELECT
+    `sde`.`Diplome`.`idDiplome` AS id,
+    `sde`.`Diplome`.`*`
+FROM `sde`.`Diplome`;
+
+DROP VIEW IF EXISTS `sde`.`VueListeStatut` ;
+USE `sde`;
+CREATE  OR REPLACE VIEW `VueListeStatut` AS
+SELECT
+    `sde`.`Statut`.`idStatut` AS id,
+    `sde`.`Statut`.`*`
+FROM `sde`.`Statut`;
+
+DROP VIEW IF EXISTS `sde`.`VueListeType` ;
+USE `sde`;
+CREATE  OR REPLACE VIEW `VueListeType` AS
+SELECT
+    `sde`.`TypeService`.`idTypeService` AS id,
+    `sde`.`TypeService`.`*`
+FROM `sde`.`TypeService`;
+
 -- -----------------------------------------------------
 -- View `sde`.`VueLabelEnseignant`
 -- -----------------------------------------------------

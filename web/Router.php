@@ -53,7 +53,16 @@ class Router {
         }
 
         private function storeHistory(){
-            $_SESSION['history'][] = '/'.$this->url;
+            
+            $query = "";
+
+            if (count($_GET)>1){
+                $params = $_GET;
+                array_shift($params);                
+                $query = '?'. http_build_query($params);
+            }
+
+            $_SESSION['history'][] = '/'.$this->url . $query;
         }
 
         /*enlever les callbacks pour stocker les routes en session*/

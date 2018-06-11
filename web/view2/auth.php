@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <title>View | Table</title>
+    <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet"> 
 
   </head>
 
@@ -17,9 +18,11 @@
       <!--logo-->
       
       <div class="col-md-4 col-sm-6 align-self-center">
-          <h4>Authentification</h4>
-          <hr/>
-        <form method="post" action="/web/auth">
+      
+      <h1 style="text-align:center;"><i class="fas fa-2x fa-cube"></i></h1>
+      <h1 style="font-family: 'Fugaz One', cursive; text-align:center;">Admin-Sde</h1>
+
+      <form method="post" action="/web/auth">
           <div class="form-group">
             <label for="exampleInputEmail1">Login</label>
             <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Login">
@@ -28,7 +31,7 @@
             <label for="exampleInputPassword1">Mot de passe</label>
             <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
           </div>
-          <button type="submit" class="btn btn-primary" class="align-self-center"><i class="fas fa-chevron-right"></i> Connexion</button>
+          <button type="submit" class="btn btn-primary w-100" class="align-self-center"><i class="fas fa-chevron-right"></i> Connexion</button>
         </form>
       </div>
     </div>

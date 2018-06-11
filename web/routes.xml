@@ -96,6 +96,26 @@
         <path>/cours/:id</path>
         <controller>CoursPOSTController</controller>
     </route>
+    <route>
+        <method>GET</method>
+        <path>/referentiels/diplomes</path>
+        <controller>DiplomesGETController</controller>
+    </route>
+    <route>
+        <method>GET</method>
+        <path>/referentiels/statuts</path>
+        <controller>StatutsGETController</controller>
+    </route>
+    <route>
+        <method>GET</method>
+        <path>/referentiels/types</path>
+        <controller>TypesGETController</controller>
+    </route>
+    <route>
+        <method>GET</method>
+        <path>/reglages</path>
+        <controller>ReglagesGETController</controller>
+    </route>
     <redirect>
         <from>/</from>
         <to>/accueil</to>

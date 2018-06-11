@@ -87,6 +87,10 @@ class Controller {
         return $_SESSION["history"][count($_SESSION["history"])-1];
     }
 
+    public function getLastUrl(){
+        return isset($_SESSION["history"][count($_SESSION["history"])-2])? $_SESSION["history"][count($_SESSION["history"])-2] : '/';
+    }
+
     public function force400(){
         header("HTTP/1.1 400 Bad request");
         die();

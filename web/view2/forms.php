@@ -9,22 +9,28 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet"> 
+    <link href="/web/static/css/style.css" rel="stylesheet"/>
+
     <title><?=$this->title?></title>
   </head>
   <body style="padding-top:56px;" class="bg-light">
 
     <div class="container">
     
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-danger shadow">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark <?=$user['color']?> shadow">
         <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a> 
+        <a class="navbar-brand" style="font-family: 'Fugaz One', cursive;" href="/web/accueil">
+        <i class="fas fa-cube"></i>
+          Admin-Sde
+        </a> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Acceuil</a>
+              <a class="nav-link active" href="/web/accueil">Acceuil</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/web/formations?action=show">Formations</a>
@@ -45,9 +51,9 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 
-                <a class="dropdown-item" href="#">Truc</a>
-                <a class="dropdown-item" href="#">Machin</a>
-                <a class="dropdown-item" href="#">Chose</a>
+                <a class="dropdown-item" href="/web/referentiels/diplomes?action=show">Diplômes</a>
+                <a class="dropdown-item" href="/web/referentiels/types?action=show">Types de cours</a>
+                <a class="dropdown-item" href="/web/referentiels/statuts?action=show">Statuts Enseignants</a>
                      
               </div>
             </li>
@@ -64,17 +70,27 @@
             </ul>
           
             <ul class="navbar-nav ml-auto">
-            
-              <li class="nav-item dropdown">
-                
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Mon profil
+                <i class="fa fa-user"></i>
                 </a>
-                
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="#">Modifier</a>
-                
-                  <a class="dropdown-item bg-light" href="/web/auth?action=quit"><i class="fas fa-power-off"></i> Déconnexion</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/web/auth?action=quit"><i class="fas fa-power-off"></i> Déconnexion</a>
+                  </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-header">Thème</div>
+                  <a class="dropdown-item" href="/web/reglages?color=bg-info"><div class='ColorDiv bg-info'></div> Blue</a>
+                  <a class="dropdown-item" href="/web/reglages?color=bg-danger"><div class='ColorDiv bg-danger'></div> Red</a>
+                  <a class="dropdown-item" href="/web/reglages?color=bg-success"><div class='ColorDiv bg-success'></div> Green</a>
+                  <a class="dropdown-item" href="/web/reglages?color=bg-warning"><div class='ColorDiv bg-warning'></div> Orange</a>
+                  <a class="dropdown-item" href="/web/reglages?color=bg-dark"><div class='ColorDiv bg-dark'></div> Black</a>
                 </div>
               </li>
             </ul>

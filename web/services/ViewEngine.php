@@ -197,13 +197,19 @@ class ViewEngine {
         public function generateMessage($message){
             if ($message){
                 if ($message['status'] == 'success'){
-                    return '<div class="alert alert-success" role="alert">'
+                    return '<div class="alert alert-success alert-dismissible fade show" role="alert">'
                     .$message['message'].
-                    '</div>';
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>';
                 }
-                return '<div class="alert alert-danger" role="alert">'
+                return '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
                         .$message['message'].
-                        '</div>';
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>';
             }
             return "";
         }
