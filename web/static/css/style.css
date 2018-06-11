@@ -10,3 +10,21 @@
     border-radius:1px;
     margin:2% 0;
 }
+  
+text {
+    font-size: 4rem;
+    line-height: 16rem;
+    fill: #1072b8;
+}
+
+#donut {
+    text-align: center;
+}
+
+path.color0 {
+    fill: #1072b8;
+}
+
+path.color1 {
+    fill: #35526b;
+}

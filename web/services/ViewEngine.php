@@ -9,15 +9,12 @@ class ViewEngine {
             $table = "";
 
             if (!isset($data) || !$data || count($data) == 0){
-                $table = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                $table = '<div class="alert alert-warning" role="alert">
                             Warning_Pas de données
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
                             </div>';
             } else {
                 $table = '<div class="table-responsive">
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered  table-sm">
                 <thead>
                     <tr>';
 

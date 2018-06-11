@@ -22,11 +22,20 @@
 
         
         <?=$this->viewEngine->generateNavbar($this->namespace, $user['color']);?>
-      
-      
         <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
        
-      
+
+        <div class="d-flex flex-column justify-content-center my-5">
+            <h3 style="text-align:center;">Heures affectées</h3>
+            <div id="donut" data-donut="42"></div> 
+        </div>
+
+
+
+        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script src="/web/static/javascript/pie.js"></script>
 
       </div>
     </div>
