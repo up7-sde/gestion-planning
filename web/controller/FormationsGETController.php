@@ -34,6 +34,7 @@ class FormationsGETController extends Controller {
                     $this->title = 'Toutes les Formations';
                     
                     $this->data = $this->db->findAll('VueListeFormation');
+
                     $titleButton = array('icon' => 'add', 'action' => '/web/formations?action=add');
                     $tableAction = '/web/formations';
                     //var_dump($_SESSION['message']);
@@ -43,8 +44,9 @@ class FormationsGETController extends Controller {
                 case "add":
                     $this->pageName = 'Nouvelle Formation';
                     $this->title = 'Nouvelle Formation';
+                   
                     $titleButton = null;
-                    
+
                     $this->data = null;
 
                     //(IN p_nom VARCHAR(45), IN p_idDiplome INT)
@@ -74,7 +76,7 @@ class FormationsGETController extends Controller {
                     
                 //(IN p_idFormation INT, IN p_nom VARCHAR(45), IN p_idDiplome INT)
                     $this->title = 'Modification de la formation n°'.$params['id'];
-
+                    
                     $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');
 
                     $formInputs = array('intitule' => null, 'idDiplome' => $this->db->findAll('VueLabelDiplome'));
@@ -88,8 +90,7 @@ class FormationsGETController extends Controller {
                     break;
 
                 case "delete":
-                    var_dump($params['id']);
-                    $id = $params['id'];
+
                     $res = $this->db->callProcedure("SupprimerFormation", array("idFormation" => $params['id']));
                     if ($res) {
                         $this->messenger->push(array('status'=>'success', 'message'=>'Success_Formation modifiée'));

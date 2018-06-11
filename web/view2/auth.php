@@ -17,7 +17,7 @@
   <body class="bg-light container-fluid d-flex justify-content-center" style="min-height:100%;">
       <!--logo-->
       
-      <div class="col-md-4 col-sm-8 align-self-center">
+      <div class="col-md-3 col-sm-5 align-self-center mt-5">
       
       <h2 style="text-align:center;"><i class="fas fa-2x fa-cube"></i></h2>
       <h2 style="font-family: 'Fugaz One', cursive; text-align:center;">Admin-Sde</h2>
@@ -25,7 +25,8 @@
       <div class="card align-self-center mb-2 mt-5">
         <div class="card-body">
 
-      <h4>Authentification</h4>
+      <h4>Login</h4>
+
       <hr/>
       <form method="post" action="/web/auth">
 
@@ -41,7 +42,7 @@
 
       <div class="form-group">
       <label for="inlineFormInputGroupUsername2">Mot de passe</label>
-      <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group mb-5 mr-sm-2">
         <div class="input-group-prepend">
           <div class="input-group-text"><i class="fas fa-lock"></i>
         </div>
@@ -59,7 +60,7 @@
       </div>
 
      
-    <div class="mb-5">
+    <div class="mb-5 small">
     <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
   </div>
 

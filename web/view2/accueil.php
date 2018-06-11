@@ -25,10 +25,10 @@
         <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
        
 
-        <div class="d-flex flex-column justify-content-center my-5">
+        <!--<div class="d-flex flex-column justify-content-center my-5">
             <h3 style="text-align:center;">Heures affectées</h3>
             <div id="donut" data-donut="42"></div> 
-        </div>
+        </div>-->
 
 
 
@@ -44,7 +44,7 @@
       
       <!--card avec un donut chiffre clé-->
 
-      <div class="mb-5">
+      <div class="mb-5 small">
         <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
     </div>
 

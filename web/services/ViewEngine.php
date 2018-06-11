@@ -37,8 +37,8 @@ class ViewEngine {
                     
                     $table = $table . 
                     '<td>
-                        <a class="btn btn-primary" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i> Modifier</a>
-                        <a class="btn btn-danger" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>
+                        <a class="btn btn-primary btn-sm" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i> Modifier</a>
+                        <a class="btn btn-danger btn-sm" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>
                     </td>';
                     
                     $table = $table . '</tr>';
@@ -179,8 +179,8 @@ class ViewEngine {
             $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ok</button>
-                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
+                        <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ok</button>
+                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
             </form>';
@@ -300,23 +300,23 @@ class ViewEngine {
         }
 
         public function generateTitle($str, $button = null){
-            
-            $btn = "";
 
             if ($button['icon'] === 'delete') {
-                $btn = '<a class="btn btn-danger" href="'. $button['action'] .'" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>';
+                $btn = '<a class="btn btn-danger btn-sm" href="'. $button['action'] .'" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>';
             } elseif ($button['icon'] === 'add') {
-                $btn = '<a class="btn btn-success" href="'. $button['action'] .'" role="button"><i class="fas fa-plus"></i>  Ajouter</a>';
+                $btn = '<a class="btn btn-success btn-sm" href="'. $button['action'] .'" role="button"><i class="fas fa-plus"></i>  Ajouter</a>';
+            } else {
+                $btn = "";
             }
-            $title = 
-            '<div class="btn-toolbar justify-content-between" role="toolbar" 
-                aria-label="Toolbar with button groups">
-                <h3 style="padding:0;margin:0; vertical-align:middle">'. $str. '</h3>
-                '.$btn.'
-            </div>
-            <hr/>';
+
+            return 
+                '<div class="btn-toolbar justify-content-between" role="toolbar" 
+                    aria-label="Toolbar with button groups">
+                    <h4 style="padding:0;margin:0;">' . $str . '</h4>
+                    '.$btn.'
+                </div>
+                <hr/>';
     
-            return $title;
         }
 }
 ?>

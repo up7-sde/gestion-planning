@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="mb-5">
+    <div class="mb-5 small">
     <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
   </div>
 

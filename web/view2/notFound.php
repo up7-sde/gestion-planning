@@ -17,7 +17,7 @@
   <body class="bg-light container-fluid d-flex justify-content-center" style="min-height:100%;">
       <!--logo-->
       
-      <div class="col-md-5 col-sm-5 align-self-center">
+    <div class="col-md-5 col-sm-5 align-self-center mt-5">
       
       <h1 style="text-align:center;"><i class="fas fa-2x fa-cube align-self-center"></i></h1>
       <h1 style="font-family: 'Fugaz One', cursive; text-align:center;" class="align-self-center">Admin-Sde</h1>
@@ -26,14 +26,14 @@
         <div class="card-body">
             <h1>404</h1>
             <hr/>
-            <p>La page que vous avez demandé n'existe pas.</p>
-            <a class="btn btn-primary btn-block align-self-center mt-4" role="button" href="/web/accueil"><i class="fas fa-home"></i> Accueil</a>
+            <p>Ouch! La page demandée n'existe pas...</p>
+            <a class="btn btn-primary btn-block align-self-center mt-5 btn-lg" role="button" href="/web/accueil"><i class="fas fa-home"></i> Accueil</a>
 
         </div>
       </div>
 
 
-      <div class="mb-5">
+      <div class="mb-5 small">
     <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
   </div>
 
