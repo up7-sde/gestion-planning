@@ -11,7 +11,8 @@ class FormationsGETController extends Controller {
     
     public function render($args=null){
    
-        
+        $this->namespace = 'Formations';
+
         /*verifier auth*/
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth?action=process');

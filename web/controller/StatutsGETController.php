@@ -11,7 +11,7 @@ class StatutsGETController extends Controller {
     
     public function render($args=null){
    
-        
+        $this->namespace = 'Statuts Enseignant';
         /*verifier auth*/
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth?action=process');

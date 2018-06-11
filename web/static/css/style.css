@@ -4,3 +4,9 @@
     width: 12px;
     border-radius: 100%;
 }
+
+.Line{
+    height: 2px;
+    border-radius:1px;
+    margin:2% 0;
+}

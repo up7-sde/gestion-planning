@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en">
-  
+<html lang="en" style="height:100%;">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,34 +9,40 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <title>View | Table</title>
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet"> 
-    <link href="/web/static/css/style.css" rel="stylesheet"/>
 
-    <title><?=$this->title?></title>
   </head>
-  <body style="padding-top:56px;" class="bg-light">
 
-    <div class="container">
-    
-      <?=$this->viewEngine->generateNavbar($this->namespace, $user['color']);?>
+  <body class="bg-light container-fluid d-flex justify-content-center" style="min-height:100%;">
+      <!--logo-->
+      
+      <div class="col-md-5 col-sm-5 align-self-center">
+      
+      <h1 style="text-align:center;"><i class="fas fa-2x fa-cube align-self-center"></i></h1>
+      <h1 style="font-family: 'Fugaz One', cursive; text-align:center;" class="align-self-center">Admin-Sde</h1>
 
       <div class="card align-self-center mt-5 mb-2">
         <div class="card-body">
-
-        <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
-        <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
-        <?=$this->viewEngine->generateTable($this->data, $tableAction);?>
+            <h1>404</h1>
+            <hr/>
+            <p>La page que vous avez demandé n'existe pas.</p>
+            <a class="btn btn-primary btn-block align-self-center mt-4" role="button" href="/web/accueil"><i class="fas fa-home"></i> Accueil</a>
 
         </div>
       </div>
 
+
       <div class="mb-5">
-      <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
-    </div>
+    <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
+  </div>
 
-      
 
+      </div>
     </div>
+  </div>
+   
+    
     <!-- Optional JavaScript -->
     <!-- Optional JavaScript -->
 

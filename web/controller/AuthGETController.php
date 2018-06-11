@@ -8,6 +8,8 @@ include_once('Controller.php');
 class AuthGETController extends Controller {
     public function render($args=null){
         
+        $this->namespace = 'Auth';
+
         /*on recupère l'action process ou quit*/
         $params = $this->getExtraParams();
         

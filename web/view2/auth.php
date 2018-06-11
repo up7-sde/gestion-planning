@@ -17,22 +17,53 @@
   <body class="bg-light container-fluid d-flex justify-content-center" style="min-height:100%;">
       <!--logo-->
       
-      <div class="col-md-3 col-sm-6 align-self-center">
+      <div class="col-md-4 col-sm-8 align-self-center">
       
       <h2 style="text-align:center;"><i class="fas fa-2x fa-cube"></i></h2>
       <h2 style="font-family: 'Fugaz One', cursive; text-align:center;">Admin-Sde</h2>
 
+      <div class="card align-self-center mb-2 mt-5">
+        <div class="card-body">
+
+      <h4>Authentification</h4>
+      <hr/>
       <form method="post" action="/web/auth">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Login</label>
-            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Login">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Mot de passe</label>
-            <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
-          </div>
-          <button type="submit" class="btn btn-primary w-100" class="align-self-center"><i class="fas fa-chevron-right"></i> Connexion</button>
-        </form>
+
+      <div class="form-group">
+      <label for="inlineFormInputGroupUsername1">Login</label>
+      <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-user"></i></div>
+        </div>
+        <input name='name' type="text" class="form-control" id="inlineFormInputGroupUsername1" placeholder="Login">
+      </div>
+      </div>
+
+      <div class="form-group">
+      <label for="inlineFormInputGroupUsername2">Mot de passe</label>
+      <div class="input-group mb-4 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-lock"></i>
+        </div>
+        </div>
+        <input name='password' type="password" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Mot de passe">
+      </div>
+      </div>
+
+      
+        <button type="submit" class="btn btn-primary btn-block" class="align-self-center"><i class="fas fa-chevron-right"></i> Se connecter</button>
+
+      </form>
+      
+      </div>
+      </div>
+
+     
+    <div class="mb-5">
+    <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
+  </div>
+
+    
       </div>
     </div>
   </div>

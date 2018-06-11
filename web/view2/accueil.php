@@ -15,26 +15,30 @@
     <title><?=$this->title?></title>
   </head>
   <body style="padding-top:56px;" class="bg-light">
-
-    <div class="container">
+  <div class="container">
     
-      <?=$this->viewEngine->generateNavbar($this->namespace, $user['color']);?>
-
-      <div class="card align-self-center mt-5 mb-2">
+  <div class="card align-self-center mt-5 mb-2">
         <div class="card-body">
 
+        
+        <?=$this->viewEngine->generateNavbar($this->namespace, $user['color']);?>
+      
+      
         <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
-        <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
-        <?=$this->viewEngine->generateTable($this->data, $tableAction);?>
+       
+      
 
-        </div>
       </div>
-
-      <div class="mb-5">
-      <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
     </div>
 
+   
       
+      <!--card avec un donut chiffre clé-->
+
+      <div class="mb-5">
+        <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
+    </div>
+
 
     </div>
     <!-- Optional JavaScript -->

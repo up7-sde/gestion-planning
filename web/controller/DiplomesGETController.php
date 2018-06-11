@@ -10,7 +10,7 @@ include_once('Controller.php');
 class DiplomesGETController extends Controller {
     
     public function render($args=null){
-   
+        $this->namespace = 'Diplômes';
         
         /*verifier auth*/
         $user = $this->getUserInfos();

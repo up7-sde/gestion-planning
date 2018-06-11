@@ -11,7 +11,7 @@ class ReglagesGETController extends Controller {
     
     public function render($args=null){
    
-        
+        $this->namespace = 'Réglages';
         /*verifier auth*/
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth?action=process');

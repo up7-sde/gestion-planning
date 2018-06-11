@@ -9,12 +9,15 @@ class ViewEngine {
             $table = "";
 
             if (!isset($data) || !$data || count($data) == 0){
-                $table = '<div class="alert alert-light" role="alert">
-                            Pas de données-tableau vide
-                        </div>';
+                $table = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            Warning_Pas de données
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>';
             } else {
                 $table = '<div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-striped table-bordered">
                 <thead>
                     <tr>';
 
@@ -310,11 +313,11 @@ class ViewEngine {
             }
             $title = 
             '<div class="btn-toolbar justify-content-between" role="toolbar" 
-                aria-label="Toolbar with button groups"
-                style="padding-top:36px;">
-                <h2 style="padding:0;margin:0">'. $str. '</h2>
+                aria-label="Toolbar with button groups">
+                <h3 style="padding:0;margin:0; vertical-align:middle">'. $str. '</h3>
                 '.$btn.'
-            </div><hr/>';
+            </div>
+            <hr/>';
     
             return $title;
         }

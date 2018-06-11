@@ -112,7 +112,7 @@ class Controller {
 
     public function force404(){
         header('HTTP/1.1 404 Not Found');
-        include('view/erreur/404.php');
+        include('view2/notFound.php');
         die();
     }
 }

@@ -18,14 +18,22 @@
 
     <div class="container">
    
+        <?=$this->viewEngine->generateNavbar($this->namespace, $user['color']);?>
 
-      <?=$this->viewEngine->generateNavbar('Accueil', $user['color']);?>
-      <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
-      <?=$this->viewEngine->generateForm($formInputs, $formActions, $this->data, $hiddenInput);?>
+        <div class="card align-self-center mt-5 mb-2">
+        <div class="card-body">
+
+        <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
+        <?=$this->viewEngine->generateForm($formInputs, $formActions, $this->data, $hiddenInput);?>
+      
+      </div>
+    </div>
+
+    <div class="mb-5">
+    <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
+  </div>
+
     
-      <hr/>
-
-      <p>The Company© 2018</p>
       </div>
 </div>
     <!-- Optional JavaScript -->

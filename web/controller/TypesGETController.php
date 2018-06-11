@@ -11,7 +11,7 @@ class TypesGETController extends Controller {
     
     public function render($args=null){
    
-        
+        $this->namespace = 'Types de cours';
         /*verifier auth*/
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth?action=process');

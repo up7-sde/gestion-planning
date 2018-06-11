@@ -9,7 +9,7 @@ class EnseignementsGETController extends Controller {
     
     public function render($args=null){
    
-        
+        $this->namespace = 'Enseignements';
         /*verifier auth*/
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth?action=process');
