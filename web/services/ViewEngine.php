@@ -9,7 +9,7 @@ class ViewEngine {
             $table = "";
 
             if (!isset($data) || !$data || count($data) == 0){
-                $table = '<div class="alert alert-warning" role="alert">
+                $table = '<div class="alert alert-light" role="alert">
                             Pas de données-tableau vide
                         </div>';
             } else {
@@ -80,7 +80,7 @@ class ViewEngine {
                         '<div class="form-group row">
                             <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . '</label>
                             <div class="col-sm-10">
-                                <input name="' . $key . '" type="number" class="form-control" id="'
+                                <input name="' . $key . '" type="text" class="form-control" id="'
                                 . $key . '" placeholder="'.$placeholder.'" value="'.$inputValue.'">
                             </div>
                         </div>'; 
@@ -101,19 +101,20 @@ class ViewEngine {
                         }
              
                         $form  = $form . 
-                        '<fieldset class="form-group">
+                        '
+                        <fieldset class="form-group">
                             <div class="row">
                                 <legend class="col-form-label col-sm-2 pt-0">' .$attributes['alias']. '</legend>
                                 <div class="col-sm-10">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="'.$key.'" id="'.$key.'" value="'.$value[0]['id'].'" '.$checked0.'>
-                                        <label class="form-check-label" for="gridRadios1">
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'1" value="'.$value[0]['id'].'" '.$checked0.'>
+                                        <label class="custom-control-label" for="'.$key.'1">
                                             '.$value[0]['nom'].'
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="'.$key.'" id="'.$key.'" value="'.$value[1]['id'].'" '.$checked1.'>
-                                        <label class="form-check-label" for="gridRadios2">
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'2" value="'.$value[1]['id'].'" '.$checked1.'>
+                                        <label class="custom-control-label" for="'.$key.'2">
                                         '.$value[1]['nom'].'
                                         </label>
                                     </div>
@@ -143,7 +144,7 @@ class ViewEngine {
                         '<div class="form-group row">
                             <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . '</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="'.$key.'">' .
+                                <select class="form-control custom-select" name="'.$key.'">' .
                                     $inputOptions .
                                 '</select>
                             </div>
@@ -190,8 +191,92 @@ class ViewEngine {
             
         }
 
-        public function generateNavbar($user = null, $active = null){
+        public function generateNavbar($active, $color){
 
+            $nav =     
+            '<nav class="navbar fixed-top navbar-expand-lg navbar-dark '.$color.' shadow">
+            <div class="container">
+            <a class="navbar-brand" style="font-family: \'Fugaz One\', cursive;" href="/web/accueil">
+            <i class="fas fa-lg fa-cube"></i>
+              Admin-Sde
+            </a> 
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a href="/web/accueil" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/web/formations?action=show" class="nav-link">Formations</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/web/enseignants?action=show" class="nav-link">Enseignants</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/web/enseignements?action=show" class="nav-link">Enseignements</a>
+                  </li>
+                <li class="nav-item">
+                <a href="/web/cours?action=show" class="nav-link">Cours</a>
+                </li>
+              
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Référentiels
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    
+                    <a href="/web/referentiels/diplomes?action=show" class="dropdown-item">Diplômes</a>
+                    <a href="/web/referentiels/types?action=show" class="dropdown-item">Types de cours</a>
+                    <a href="/web/referentiels/statuts?action=show" class="dropdown-item">Statuts Enseignant</a>
+                         
+                  </div>
+                </li>
+    
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Routines
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Nouvelle Année</a>      
+                </div>
+                </li>
+    
+                </ul>
+              
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="#">Modifier</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="/web/auth?action=quit"><i class="fas fa-power-off"></i> Déconnexion</a>
+                      </div>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cog"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-header">Thème</div>
+                      <a class="dropdown-item" href="/web/reglages?color=bg-info"><div class="ColorDiv bg-info"></div> Blue</a>
+                      <a class="dropdown-item" href="/web/reglages?color=bg-danger"><div class="ColorDiv bg-danger"></div> Red</a>
+                      <a class="dropdown-item" href="/web/reglages?color=bg-success"><div class="ColorDiv bg-success"></div> Green</a>
+                      <a class="dropdown-item" href="/web/reglages?color=bg-warning"><div class="ColorDiv bg-warning"></div> Orange</a>
+                      <a class="dropdown-item" href="/web/reglages?color=bg-dark"><div class="ColorDiv bg-dark"></div> Black</a>
+                    </div>
+                  </li>
+                </ul>
+            </div>
+          </div>
+          </nav>';
+
+          $nav = preg_replace('/">'. $active . '/', ' active">'. $active, $nav);
+          return $nav;
+        
         }
 
         public function generateMessage($message){

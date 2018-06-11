@@ -9,17 +9,14 @@ include_once('services/ViewEngine.php');
 
 class Controller {
 
+    protected $namespace;
     protected $title;
     protected $data;
-    protected $content;
-    protected $style;
-    protected $script;
+
     protected $db;
     protected $auth;
     protected $messenger;
     protected $viewEngine;
-    protected $pageName;
-    protected $id;
 
     public function __construct(){
         /*args de la db ici? => non*/
@@ -88,7 +85,8 @@ class Controller {
     }
 
     public function getLastUrl(){
-        return isset($_SESSION["history"][count($_SESSION["history"])-2])? $_SESSION["history"][count($_SESSION["history"])-2] : '/';
+        return isset($_SESSION["history"][count($_SESSION["history"])-2])? 
+            $_SESSION["history"][count($_SESSION["history"])-2] : '/';
     }
 
     public function force400(){

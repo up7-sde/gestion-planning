@@ -17,10 +17,10 @@
   <body class="bg-light container-fluid d-flex justify-content-center" style="min-height:100%;">
       <!--logo-->
       
-      <div class="col-md-4 col-sm-6 align-self-center">
+      <div class="col-md-3 col-sm-6 align-self-center">
       
-      <h1 style="text-align:center;"><i class="fas fa-2x fa-cube"></i></h1>
-      <h1 style="font-family: 'Fugaz One', cursive; text-align:center;">Admin-Sde</h1>
+      <h2 style="text-align:center;"><i class="fas fa-2x fa-cube"></i></h2>
+      <h2 style="font-family: 'Fugaz One', cursive; text-align:center;">Admin-Sde</h2>
 
       <form method="post" action="/web/auth">
           <div class="form-group">

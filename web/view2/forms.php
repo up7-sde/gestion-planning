@@ -17,91 +17,16 @@
   <body style="padding-top:56px;" class="bg-light">
 
     <div class="container">
-    
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark <?=$user['color']?> shadow">
-        <div class="container">
-        <a class="navbar-brand" style="font-family: 'Fugaz One', cursive;" href="/web/accueil">
-        <i class="fas fa-cube"></i>
-          Admin-Sde
-        </a> 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="/web/accueil">Acceuil</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/web/formations?action=show">Formations</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/web/enseignants?action=show">Enseignants</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/web/enseignements?action=show">Enseignements</a>
-              </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/web/cours?action=show">Cours</a>
-            </li>
-          
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Référentiels
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                
-                <a class="dropdown-item" href="/web/referentiels/diplomes?action=show">Diplômes</a>
-                <a class="dropdown-item" href="/web/referentiels/types?action=show">Types de cours</a>
-                <a class="dropdown-item" href="/web/referentiels/statuts?action=show">Statuts Enseignants</a>
-                     
-              </div>
-            </li>
+   
 
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Routines
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Nouvelle Année</a>      
-            </div>
-            </li>
-
-            </ul>
-          
-            <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Modifier</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/web/auth?action=quit"><i class="fas fa-power-off"></i> Déconnexion</a>
-                  </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-cog"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <div class="dropdown-header">Thème</div>
-                  <a class="dropdown-item" href="/web/reglages?color=bg-info"><div class='ColorDiv bg-info'></div> Blue</a>
-                  <a class="dropdown-item" href="/web/reglages?color=bg-danger"><div class='ColorDiv bg-danger'></div> Red</a>
-                  <a class="dropdown-item" href="/web/reglages?color=bg-success"><div class='ColorDiv bg-success'></div> Green</a>
-                  <a class="dropdown-item" href="/web/reglages?color=bg-warning"><div class='ColorDiv bg-warning'></div> Orange</a>
-                  <a class="dropdown-item" href="/web/reglages?color=bg-dark"><div class='ColorDiv bg-dark'></div> Black</a>
-                </div>
-              </li>
-            </ul>
-        </div>
-      </div>
-      </nav>
-
+      <?=$this->viewEngine->generateNavbar('Accueil', $user['color']);?>
       <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
       <?=$this->viewEngine->generateForm($formInputs, $formActions, $this->data, $hiddenInput);?>
     
-</div>
+      <hr/>
+
+      <p>The Company© 2018</p>
+      </div>
 </div>
     <!-- Optional JavaScript -->
     <!-- Optional JavaScript -->
