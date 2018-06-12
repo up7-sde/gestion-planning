@@ -24,10 +24,11 @@
 
       <div class="card align-self-center mt-5 mb-2">
         <div class="card-body">
-            <h1>404</h1>
+            <h4>404 Not Found</h4>
+            
             <hr/>
-            <p>Ouch! La page demandée n'existe pas...</p>
-            <a class="btn btn-primary btn-block align-self-center mt-5 btn-lg" role="button" href="/web/accueil"><i class="fas fa-home"></i> Accueil</a>
+            <p>Oups! La page demandée n'existe pas...</p>
+            <a class="btn btn-primary btn-block align-self-center mt-5" role="button" href="/web/accueil"><i class="fas fa-home"></i> Accueil</a>
 
         </div>
       </div>

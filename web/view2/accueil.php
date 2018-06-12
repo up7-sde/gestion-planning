@@ -16,12 +16,15 @@
   </head>
   <body style="padding-top:56px;" class="bg-light">
   <div class="container">
-    
-  <div class="card align-self-center mt-5 mb-2">
+  
+  <h4 class="mt-5 font-weight-bold"><i class="fa fa-home"></i> Accueil</h4>
+  
+  <div class="card align-self-center mt-4 mb-2">
         <div class="card-body">
 
         
-        <?=$this->viewEngine->generateNavbar($this->namespace, $user['color']);?>
+        <?=$this->viewEngine->generateNavbar($this->namespace, $user);?>
+       
         <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
        
 

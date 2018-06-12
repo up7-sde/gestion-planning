@@ -68,6 +68,27 @@ class Db{
     }
 
     /*
+    pour la pagination des tableaux
+    */
+
+    public function findChunk($entity, $limit, $offset){
+        $this->connect();
+        /*prepare-execute?*/
+        $res = $this->connection->query("SELECT * FROM " . $entity . " LIMIT " .$limit ." OFFSET ". $offset);
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function findChunkAndOrder($entity, $limit, $offset, $orderBy, $asc = ""){
+
+        $this->connect();
+        /*prepare-execute?*/
+        $res = $this->connection->query("SELECT * FROM " . $entity . 
+                                        " LIMIT " .$limit ." OFFSET ". $offset . 
+                                        " ORDER BY " . $orderBy . " " . $asc);
+
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
+    /*
      * Obtenir un enregistrement d'un item (Formation, enseignant, etc.)
      */
      public function findOne($entity, $id, $column = null, $isStr = FALSE)

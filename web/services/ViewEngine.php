@@ -14,9 +14,11 @@ class ViewEngine {
                             </div>';
             } else {
                 $table = '<div class="table-responsive">
-                <table class="table table-striped table-bordered  table-sm">
-                <thead>
-                    <tr>';
+                            <table class="table table-striped table-bordered table-sm" 
+                            style="font-size:0.8rem;
+                            white-space: nowrap;">
+                            <thead>
+                                <tr>';
 
                 foreach($data[0] as $key => $value){
                     $table = $table . '<th scope="col">'. $key . '</th>';
@@ -37,8 +39,8 @@ class ViewEngine {
                     
                     $table = $table . 
                     '<td>
-                        <a class="btn btn-primary btn-sm" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i> Modifier</a>
-                        <a class="btn btn-danger btn-sm" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>
+                        <a class="btn btn-primary btn-xs" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i> Modifier</a>
+                        <a class="btn btn-danger btn-xs" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>
                     </td>';
                     
                     $table = $table . '</tr>';
@@ -191,10 +193,10 @@ class ViewEngine {
             
         }
 
-        public function generateNavbar($active, $color){
+        public function generateNavbar($active, $user){
 
             $nav =     
-            '<nav class="navbar fixed-top navbar-expand-lg navbar-dark '.$color.' shadow">
+            '<nav class="navbar fixed-top navbar-expand-lg navbar-dark '.$user['color'].' shadow">
             <div class="container">
             <a class="navbar-brand" style="font-family: \'Fugaz One\', cursive;" href="/web/accueil">
             <i class="fas fa-lg fa-cube"></i>
@@ -205,21 +207,21 @@ class ViewEngine {
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a href="/web/accueil" class="nav-link">Accueil</a>
-                </li>
-                <li class="nav-item">
-                  <a href="/web/formations?action=show" class="nav-link">Formations</a>
-                </li>
-                <li class="nav-item">
-                  <a href="/web/enseignants?action=show" class="nav-link">Enseignants</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/web/enseignements?action=show" class="nav-link">Enseignements</a>
-                  </li>
-                <li class="nav-item">
-                <a href="/web/cours?action=show" class="nav-link">Cours</a>
-                </li>
+            
+
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Fichiers
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  
+                  <a href="/web/formations?action=show" class="dropdown-item">Formations</a>
+                  <a href="/web/enseignants?action=show" class="dropdown-item">Enseignants</a>
+                  <a href="/web/enseignements?action=show" class="dropdown-item">Enseignements</a>
+                  <a href="/web/cours?action=show" class="dropdown-item">Cours</a>
+                       
+                </div>
+              </li>
               
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -248,7 +250,7 @@ class ViewEngine {
                 <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-user"></i>
+                    <i class="fa fa-user"></i> '. $user['name'] .'
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="#">Modifier</a>
@@ -258,7 +260,7 @@ class ViewEngine {
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-cog"></i>
+                    <i class="fas fa-cog"></i> Réglages
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <div class="dropdown-header">Thème</div>
@@ -310,9 +312,8 @@ class ViewEngine {
             }
 
             return 
-                '<div class="btn-toolbar justify-content-between" role="toolbar" 
-                    aria-label="Toolbar with button groups">
-                    <h4 style="padding:0;margin:0;">' . $str . '</h4>
+                '<div class="btn-toolbar justify-content-between">
+                    <h5 class="font-weight-light" style="padding:0;margin:0;">' . $str . '</h5>
                     '.$btn.'
                 </div>
                 <hr/>';

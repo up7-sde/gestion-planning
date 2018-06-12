@@ -18,16 +18,51 @@
 
     <div class="container">
     
-      <?=$this->viewEngine->generateNavbar($this->namespace, $user['color']);?>
+      <?=$this->viewEngine->generateNavbar($this->namespace, $user);?>
 
-      <div class="card align-self-center mt-5 mb-2">
+      <h5 class="mt-5 font-weight-bold"><i class="fa fa-list"></i> Tableau</h5>
+
+      <div class="card align-self-center mt-4 mb-2">
         <div class="card-body">
 
         <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
         <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
-        <?=$this->viewEngine->generateTable($this->data, $tableAction);?>
 
+        <div class="btn-toolbar justify-content-between btn-toolbar mb-2" role="toolbar" aria-label="Toolbar with button groups">
+          
+          <div class="input-group input-group-sm">
+            <select class="custom-select custom-select-sm" id="inlineFormCustomSelect">
+              <option selected disable>Voir</option>
+              <option value="1">10</option>
+              <option value="2">20</option>
+              <option value="3">50</option>
+            </select>
+          </div>
+
+          <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+            <button type="button" class="btn btn-outline-secondary"><i class="fas fa-search-plus"></i></button>
+            <button type="button" class="btn btn-outline-secondary"><i class="fas fa-search-minus"></i></button>
+          </div>
+      
         </div>
+
+        <?=$this->viewEngine->generateTable($this->data, $tableAction);?>
+        
+        <nav aria-label="Page navigation example">
+          <ul class="pagination pagination-sm justify-content-start">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+          </ul>
+        </nav>
+        
+      </div>
       </div>
 
       <div class="mb-5 small">

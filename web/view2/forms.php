@@ -16,11 +16,14 @@
   </head>
   <body style="padding-top:56px;" class="bg-light">
 
+      
     <div class="container">
    
-        <?=$this->viewEngine->generateNavbar($this->namespace, $user['color']);?>
+        <?=$this->viewEngine->generateNavbar($this->namespace, $user);?>
 
-        <div class="card align-self-center mt-5 mb-2">
+        <h6 class="mt-5 font-weight-bold"><i class="fa fa-file-alt"></i> Formulaire</h6>
+
+        <div class="card align-self-center mt-4 mb-2">
         <div class="card-body">
 
         <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>

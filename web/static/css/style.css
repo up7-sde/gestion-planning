@@ -1,3 +1,6 @@
+/*animation donut*/
+/*voir comment intégrer si oui*/
+
 .ColorDiv {
     display: inline-block;
     height: 12px;
@@ -28,3 +31,40 @@ path.color0 {
 path.color1 {
     fill: #35526b;
 }
+
+.btn-xs {
+    padding  : .25rem .4rem;
+    font-size  : .8rem;
+    line-height  : .12;
+    border-radius : .2rem;
+}
+
+td {
+    vertical-align: bottom !important;
+    text-align: left;
+  }
+
+tdTxt{
+    text-align: left;
+}
+
+tdNb{
+    text-align: right;
+}
+
+/*TABLEAU*/
+/*faire un td txt et un td num*/
+/*voir quelles colonnes garder*/
+/*mettre alias noms de colonnes*/
+/*pagination nb lignes*/
+
+/*1 requette => select * from truc where truc limit truc offset truc*/
+
+/*TITRES*/
+
+/*choisir idée la plus simple à mettre en place*/
+/*=> avec ou sans logo? avec ou sans sous-titre?*/
+
+/*pour les tables => on doit stocker visible?, alias, typed dans "model"*/
+
+/*renommer model en types ou ...*/
