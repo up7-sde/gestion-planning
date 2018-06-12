@@ -29,7 +29,7 @@ class EnseignementsGETController extends Controller {
                 case "show":
                     // Get sans argument : vue de la liste
                     $this->title = 'Tous les Enseignements';
-                    $this->data = $this->db->findAll('VueListeEnseignement');
+                    $this->data = $this->db->findChunk('VueListeEnseignement', 10, 0);
                     
                     $titleButton = array('icon' => 'add', 'action' => '/web/enseignements?action=add');
                     $tableAction = '/web/enseignements';

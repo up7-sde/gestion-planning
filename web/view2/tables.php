@@ -14,62 +14,90 @@
 
     <title><?=$this->title?></title>
   </head>
-  <body style="padding-top:56px;" class="bg-light">
+  <body style="padding-top:56px;">
 
     <div class="container">
     
       <?=$this->viewEngine->generateNavbar($this->namespace, $user);?>
 
-      <h5 class="mt-5 font-weight-bold"><i class="fa fa-list"></i> Tableau</h5>
+      <div class="card align-self-center mt-5 mb-5">
 
-      <div class="card align-self-center mt-4 mb-2">
+      <div class="card-header font-weight-bold"><i class="fa fa-list"></i> Tableau</div>
         <div class="card-body">
-
+        <h5 class="card-title">Special title treatment</h5>
         <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
         <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
 
-        <div class="btn-toolbar justify-content-between btn-toolbar mb-2" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-toolbar mb-2" role="toolbar" aria-label="Toolbar with button groups">
           
-          <div class="input-group input-group-sm">
+          <div class="input-group input-group-sm mr-2">
             <select class="custom-select custom-select-sm" id="inlineFormCustomSelect">
-              <option selected disable>Voir</option>
-              <option value="1">10</option>
+              <option class="selected" value="1">10</option>
               <option value="2">20</option>
               <option value="3">50</option>
             </select>
           </div>
 
-          <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+          <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
+            <button type="button" class="btn btn-outline-secondary"><i class="fas fa-chevron-left"></i></button>
+            <button type="button" class="btn btn-outline-secondary"><i class="fas fa-chevron-right"></i></button>
+          </div>
+
+          <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
             <button type="button" class="btn btn-outline-secondary"><i class="fas fa-search-plus"></i></button>
             <button type="button" class="btn btn-outline-secondary"><i class="fas fa-search-minus"></i></button>
           </div>
-      
+
+          
+          <div class="btn-group-sm mr-2" role="group" aria-label="Third group">
+          <button type="button" class="btn btn-warning"><i class="fas fa-download"></i> CSV</button>
+        </div>
+
+          <div class="btn-group-sm mr-2" role="group" aria-label="Third group">
+          <button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Ajouter</button>
+        </div>
+
+        <div class="btn-group-sm mr-2" role="group" aria-label="Third group">
+          <button type="button" class="btn btn-warning"><i class="fas fa-download"></i></button>
+        </div>
+
+          <div class="btn-group-sm" role="group" aria-label="Third group">
+          <button type="button" class="btn btn-success"><i class="fas fa-plus"></i></button>
+        </div>
+            
         </div>
 
         <?=$this->viewEngine->generateTable($this->data, $tableAction);?>
         
-        <nav aria-label="Page navigation example">
-          <ul class="pagination pagination-sm justify-content-start">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-          </ul>
-        </nav>
+     
+          
+        <ul class="pagination pagination-primary pagination-sm mt-2">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+          
+
         
       </div>
-      </div>
-
-      <div class="mb-5 small">
-      <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
-    </div>
 
       
+    <div class="card-footer text-muted">
+   
+      <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank" class="small">The Company© 2018</a>
+      </div>
 
     </div>
     <!-- Optional JavaScript -->
