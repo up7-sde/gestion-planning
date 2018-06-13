@@ -2,6 +2,7 @@
 class ViewEngine {
         public function __construct(){
             $this->attributes = Model::$attributes;
+            $this->tables = Model::$tables;
         }
 
         public function generateTable($data, $path){
@@ -35,6 +36,79 @@ class ViewEngine {
                     
                     foreach($obs as $key => $value){
                         $table = $table . '<td><span class="badge badge-pill badge-success">32%</span> '. $value .'</td>';
+                    }
+                    
+                    $table = $table . 
+                    '<td>
+                        <a class="btn btn-primary btn-xs" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i> Modifier</a>
+                        <a class="btn btn-danger btn-xs" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>
+                    </td>';
+                    
+                    $table = $table . '</tr>';
+                }
+                
+                $table = $table . 
+                        '</tbody>
+                    </table>
+                </div>';
+            }
+            return $table;
+        }
+
+        public function generateTable2($name, $data, $path){
+            
+            $table = "";
+            $model = $this->tables[$name];
+         
+            if (!isset($data) || !$data || count($data) == 0){
+                $table = '<div class="alert alert-warning" role="alert">
+                            Warning_Pas de données
+                            </div>';
+            } else {
+                $table = '<div class="table-responsive">
+                            <table class="table table-striped table-bordered table-sm" 
+                            style="font-size:0.8rem;
+                            white-space: nowrap;">
+                            <thead>
+                                <tr>';
+
+                foreach($data[0] as $key => $value){
+                    if($key !== 'id' && $model[$key]['show']){
+                        $table = $table . '<th scope="col">'. $model[$key]['name'] . '</th>';                        
+                    }
+                }
+
+                $table = $table . '<th scope="col">Actions</th>';
+                $table = $table . '</tr></thead>';
+
+                $table = $table . '<tbody>';
+                
+                foreach($data as $key => $obs){
+
+                    $table = $table . '<tr>';
+                    
+                    foreach($obs as $key => $value){
+                        if($key !== 'id' && $model[$key]['show']){
+
+                            /*gauge */
+                            $gauge = "";
+                            if($model[$key]['gauge']){
+                                $gaugeValue = (int) $value * 100 / (int) $data[0][$model[$key]['gauge']];
+                                if($gaugeValue < 34){
+                                    $gauge = '<span class="badge badge-pill badge-danger mr-2">'. (int) $gaugeValue.'%</span>';
+                                } elseif ($gaugeValue > 33 && $gaugeValue < 67){
+                                    $gauge = '<span class="badge badge-pill badge-warning mr-2">'. (int) $gaugeValue.'%</span>';                                
+                                } else {
+                                    $gauge = '<span class="badge badge-pill badge-success mr-2">'. (int) $gaugeValue.'%</span>';                                
+                                }
+                            }
+
+                            /**alignement */
+                            $model[$key]['type'] === 1? $align = "tdTxt" : $align = "tdNb";
+                            
+                            /*création de la données ac align, valeur et eventuellement gauge */
+                            $table = $table . '<td class="'. $align .'"> '. $gauge . $value .'</td>';
+                        }
                     }
                     
                     $table = $table . 

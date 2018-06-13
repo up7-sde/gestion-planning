@@ -41,14 +41,13 @@ path.color1 {
 
 td {
     vertical-align: bottom !important;
-    text-align: left;
   }
 
-tdTxt{
+.tdTxt{
     text-align: left;
 }
 
-tdNb{
+.tdNb{
     text-align: right;
 }
 

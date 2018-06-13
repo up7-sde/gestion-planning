@@ -75,7 +75,7 @@
             
         </div>
 
-        <?=$this->viewEngine->generateTable($this->data, $tableAction);?>
+        <?=$this->viewEngine->generateTable2($this->namespace, $this->data, $tableAction);?>
         
      
           

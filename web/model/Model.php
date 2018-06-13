@@ -158,6 +158,272 @@ class Model {
             'default' => 'Code Apogée'
         )
     );
+
+    
+    public static $tables = array(
+
+        /*table enseignants */
+        'Enseignants' => array( //la table dans la base
+            'nom' => array( //nom dans la bdd
+                'name' => 'Nom', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            ),
+            'prenom' => array( //nom dans la bdd
+                'name' => 'Prénom', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'Departement' => array( //nom dans la bdd
+                'name' => 'Département', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'Titulaire' => array( //nom dans la bdd
+                'name' => 'Titulaire', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'Categorie' => array( //nom dans la bdd
+                'name' => 'Catégorie', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'HeuresDues' => array( //nom dans la bdd
+                'name' => 'Heures dues', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'HeuresAffectees' => array( //nom dans la bdd
+                'name' => 'Titulaire', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => 'HeuresDues', //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+        ),
+
+        /**table enseignements */
+        'Enseignements' => array( //la table dans la base
+            'apogee2' => array( //nom dans la bdd
+                'name' => 'Référence Apogée', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            ),
+            'intitule' => array( //nom dans la bdd
+                'name' => 'Intitulé', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'heureCM' => array( //nom dans la bdd
+                'name' => 'Heures CM', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+
+            'heureCMAffectee' => array( //nom dans la bdd
+                'name' => 'Heures CM afféctées', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => 'heureCM', //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'hTPparGroupe' => array( //nom dans la bdd
+                'name' => 'Heures TP par groupe', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'nbGroupe' => array( //nom dans la bdd
+                'name' => 'Nombre de groupes', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'hTPtotal' => array( //nom dans la bdd
+                'name' => 'Heures TP total', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'heureTPAffectee' => array( //nom dans la bdd
+                'name' => 'Heures TP afféctées', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => 'hTPtotal', //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'semestre' => array( //nom dans la bdd
+                'name' => 'Semestre', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'formation' => array( //nom dans la bdd
+                'name' => 'Formation', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'idFormation' => array( //nom dans la bdd
+                'name' => 'Id formation', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => false, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'diplome' => array( //nom dans la bdd
+                'name' => 'Diplôme', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            )),
+
+        /**Table services */
+        'Cours' => array( //la table dans la base
+            'apogee' => array( //nom dans la bdd
+                'name' => 'Code Apogée', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            ),
+            'intitule' => array( //nom dans la bdd
+                'name' => 'Intitulé', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'type' => array( //nom dans la bdd
+                'name' => 'Type', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'heure' => array( //nom dans la bdd
+                'name' => 'Nombre d\'heures', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'annee' => array( //nom dans la bdd
+                'name' => 'Année', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'idEnseignant' => array( //nom dans la bdd
+                'name' => 'Heures dues', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'nom' => array( //nom dans la bdd
+                'name' => 'Nom enseignant', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'prenom' => array( //nom dans la bdd
+                'name' => 'Prénom enseignant', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'formation' => array( //nom dans la bdd
+                'name' => 'Formation', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'diplome' => array( //nom dans la bdd
+                'name' => 'Diplôme', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            )
+        ),
+        
+        /**Table des forrmations */
+        'Formations' => array( //la table dans la base
+            'diplome' => array( //nom dans la bdd
+                'name' => 'Diplôme', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            ),
+            'formation' => array( //nom dans la bdd
+                'name' => 'Formation', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'heureCM' => array( //nom dans la bdd
+                'name' => 'Heures CM', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'heureCMAffectee' => array( //nom dans la bdd
+                'name' => 'Heures CM afféctées', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => 'heureCM', //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'heureTP' => array( //nom dans la bdd
+                'name' => 'Heures TP', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'heureTPAffectee' => array( //nom dans la bdd
+                'name' => 'Heures TP afféctées', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => 'heureTP', //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            )
+        )
+        /*fonctionnement pour les tableaux */
+    );
 }
 
 ?>
