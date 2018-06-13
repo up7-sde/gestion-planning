@@ -53,12 +53,16 @@
           <button type="button" class="btn btn-warning"><i class="fas fa-download"></i> CSV</button>
         </div>
 
+        <div class="btn-group-sm mr-2" role="group" aria-label="Third group">
+          <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Télécharger"><i class="fas fa-download"></i></button>
+        </div>
+
           <div class="btn-group-sm mr-2" role="group" aria-label="Third group">
           <button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Ajouter</button>
         </div>
 
         <div class="btn-group-sm mr-2" role="group" aria-label="Third group">
-          <button type="button" class="btn btn-warning"><i class="fas fa-download"></i></button>
+          <button type="button" class="btn btn-warning"><i class="fas fa-download"></i> Télécharger</button>
         </div>
 
           <div class="btn-group-sm" role="group" aria-label="Third group">

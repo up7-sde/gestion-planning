@@ -34,7 +34,7 @@ class ViewEngine {
                     $table = $table . '<tr>';
                     
                     foreach($obs as $key => $value){
-                        $table = $table . '<td>'. $value .'</td>';
+                        $table = $table . '<td><span class="badge badge-pill badge-danger">32%</span> '. $value .'</td>';
                     }
                     
                     $table = $table . 
@@ -197,7 +197,7 @@ class ViewEngine {
 
             $nav =     
             '<nav class="navbar fixed-top navbar-expand-lg navbar-dark '.$user['color'].' shadow">
-            <div class="container">
+            <div class="container-fluid">
             <a class="navbar-brand" style="font-family: \'Fugaz One\', cursive;" href="/web/accueil">
             <i class="fas fa-lg fa-cube"></i>
               Admin-Sde
@@ -251,7 +251,7 @@ class ViewEngine {
                 <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-user"></i> '. $user['name'] .'
+                    <i class="fa fa-user"></i> '. $user['email'] .'
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="#">Modifier</a>
