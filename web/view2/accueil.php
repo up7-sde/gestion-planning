@@ -28,10 +28,9 @@
         <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
        
 
-        <!--<div class="d-flex flex-column justify-content-center my-5">
-            <h3 style="text-align:center;">Heures affectées</h3>
+        <div class="d-flex flex-row justify-content-center my-5">
             <div id="donut" data-donut="42"></div> 
-        </div>-->
+        </div>
 
 
 
