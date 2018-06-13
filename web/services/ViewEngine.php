@@ -74,7 +74,7 @@ class ViewEngine {
 
                 foreach($data[0] as $key => $value){
                     if($key !== 'id' && $model[$key]['show']){
-                        $table = $table . '<th scope="col">'. $model[$key]['name'] . '</th>';                        
+                        $table = $table . '<th scope="col">'. $model[$key]['name'] . '<i class="fas fa-sort mr-auto"></i></th>';                        
                     }
                 }
 
@@ -91,23 +91,32 @@ class ViewEngine {
                         if($key !== 'id' && $model[$key]['show']){
 
                             /*gauge */
-                            $gauge = "";
+                            $gauge = null;
+
                             if($model[$key]['gauge']){
-                                $gaugeValue = (int) $value * 100 / (int) $data[0][$model[$key]['gauge']];
-                                if($gaugeValue < 34){
-                                    $gauge = '<span class="badge badge-pill badge-danger mr-2">'. (int) $gaugeValue.'%</span>';
-                                } elseif ($gaugeValue > 33 && $gaugeValue < 67){
-                                    $gauge = '<span class="badge badge-pill badge-warning mr-2">'. (int) $gaugeValue.'%</span>';                                
+                            
+                                /*évite division par zéro*/
+                                $obs[$model[$key]['gauge']] > 0 ? 
+                                    $gaugeValue =  ($value * 100) / $obs[$model[$key]['gauge']]
+                                    :
+                                    $gaugeValue = 0;
+                                
+                                if($gaugeValue < 20){
+                                    $gauge = '<span class="badge badge-danger">'. (int) $gaugeValue.'%</span>';
+                                } elseif ($gaugeValue > 21 && $gaugeValue < 100){
+                                    $gauge = '<span class="badge badge-pill badge-warning">'. (int) $gaugeValue.'%</span>';                                
                                 } else {
-                                    $gauge = '<span class="badge badge-pill badge-success mr-2">'. (int) $gaugeValue.'%</span>';                                
+
+                                    $gauge = '<span class="badge badge-pill badge-success">'. (int) $gaugeValue.'%</span>';                                
                                 }
                             }
 
                             /**alignement */
-                            $model[$key]['type'] === 1? $align = "tdTxt" : $align = "tdNb";
+                            $model[$key]['type'] === 1? $align = "tdTxt table-danger" : $align = "tdNb table-warning";
                             
-                            /*création de la données ac align, valeur et eventuellement gauge */
-                            $table = $table . '<td class="'. $align .'"> '. $gauge . $value .'</td>';
+                            if ($value == "0") {$innerHtml = "-";} else {$innerHtml = $value . ' ' . $gauge;}
+                            /*création de la données ac align, valeur et eventuellement gauge*/
+                            $table = $table . '<td class="'. $align .'">'. $innerHtml .'</td>';
                         }
                     }
                     

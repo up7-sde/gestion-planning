@@ -185,9 +185,9 @@ class Model {
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
-            'Titulaire' => array( //nom dans la bdd
+            'Tituaire' => array( //nom dans la bdd
                 'name' => 'Titulaire', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
@@ -207,7 +207,7 @@ class Model {
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'HeuresAffectees' => array( //nom dans la bdd
-                'name' => 'Titulaire', //nom à afficher
+                'name' => 'Heures afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => 'HeuresDues', //avec quelle colonne de la table on fait le pourcentage
@@ -219,7 +219,7 @@ class Model {
         'Enseignements' => array( //la table dans la base
             'apogee2' => array( //nom dans la bdd
                 'name' => 'Référence Apogée', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
@@ -283,7 +283,7 @@ class Model {
             ),
             'formation' => array( //nom dans la bdd
                 'name' => 'Formation', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
@@ -291,8 +291,8 @@ class Model {
             'idFormation' => array( //nom dans la bdd
                 'name' => 'Id formation', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite 
-                'show' => TRUE, //on le montre ou pas
-                'gauge' => false, //avec quelle colonne de la table on fait le pourcentage
+                'show' => FALSE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'diplome' => array( //nom dans la bdd
@@ -341,9 +341,9 @@ class Model {
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'idEnseignant' => array( //nom dans la bdd
-                'name' => 'Heures dues', //nom à afficher
+                'name' => '', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite 
-                'show' => TRUE, //on le montre ou pas
+                'show' => FALSE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
@@ -395,7 +395,7 @@ class Model {
             ),
             'heureCM' => array( //nom dans la bdd
                 'name' => 'Heures CM', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
