@@ -28,3 +28,7 @@ function createTable(data){
     }
     main.appendChild(table);    
 }
+
+$(function () {
+  $('[data-toggle="popover"]').tooltip()
+})

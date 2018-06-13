@@ -1,5 +1,6 @@
 <?php
-
+/*refactor avec une liste par form*/
+/*faire la même chose avec les tables*/
 class Model {
     public static $attributes = array(
         'idService' =>

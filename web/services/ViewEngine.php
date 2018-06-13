@@ -34,7 +34,7 @@ class ViewEngine {
                     $table = $table . '<tr>';
                     
                     foreach($obs as $key => $value){
-                        $table = $table . '<td><span class="badge badge-pill badge-danger">32%</span> '. $value .'</td>';
+                        $table = $table . '<td><span class="badge badge-pill badge-success">32%</span> '. $value .'</td>';
                     }
                     
                     $table = $table . 
