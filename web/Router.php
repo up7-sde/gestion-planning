@@ -24,9 +24,9 @@ class Router {
         {
             // Importer le fichier dans un tableau
             $routes = simplexml_load_string(file_get_contents("routes.xml"));
-            
+
             //ajouter les redirects
-            foreach ($routes->redirect as $redirect){       
+            foreach ($routes->redirect as $redirect){
                 $from = (string) $redirect->from;
                 $to = (string) $redirect->to;
 
@@ -38,27 +38,26 @@ class Router {
             }
 
             // Ajouter chaque route
-            foreach ($routes->route as $item) {    
+            foreach ($routes->route as $item) {
                 $controllerName = (string) $item->controller;
                 $path = (string) $item->path;
                 $method = (string) $item->method;
-
                 $route = new Route($path, function() use($controllerName) {
                     require('controller/'.$controllerName.'.php');
                     (new $controllerName())->render();
                 });
-  
+
                 $this->routes[$method][] = $route;
             }
         }
 
         private function storeHistory(){
-            
+
             $query = "";
 
             if (count($_GET)>1){
                 $params = $_GET;
-                array_shift($params);                
+                array_shift($params);
                 $query = '?'. http_build_query($params);
             }
 

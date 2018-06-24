@@ -9,12 +9,12 @@
     <route>
         <method>GET</method>
         <path>/auth</path>
-        <controller>AuthGetController</controller>
+        <controller>AuthGETController</controller>
     </route>
     <route>
         <method>POST</method>
         <path>/auth</path>
-        <controller>AuthPostController</controller>
+        <controller>AuthPOSTController</controller>
     </route>
     <route>
         <method>GET</method>
