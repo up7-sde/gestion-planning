@@ -936,7 +936,7 @@ INSERT INTO `sde`.`Enseignement` (`apogee`, `intitule`, `heureCM`, `heureTP`, `s
 INSERT INTO `sde`.`Enseignement` (`apogee`, `intitule`, `heureCM`, `heureTP`, `semestre`, `nbGroupes`) VALUES ('43QE1643', 'MUTAT. DU SYST. PROD.', 20, 0, 10, 0);
 INSERT INTO `sde`.`Enseignement` (`apogee`, `intitule`, `heureCM`, `heureTP`, `semestre`, `nbGroupes`) VALUES ('43QE1843', 'MESURE DE LA PERFORMANCE MARKETING', 18, 0, 10, 0);
 INSERT INTO `sde`.`Enseignement` (`apogee`, `intitule`, `heureCM`, `heureTP`, `semestre`, `nbGroupes`) VALUES ('43QE1943', 'APPROCHES DIGITALES DES ÉTUDES MARKETING', 18, 0, 10, 0);
-INSERT INTO `sde`.`Enseignement` (`apogee`, `intitule`, `heureCM`, `heureTP`, `semestre`, `nbGroupes`) VALUES ('43QE2243', 'ANALYSE DES TISSUS ÉCONOMIQUES LOCAUX\n(DIAGNOSTIC DE TERRITOIRES)', 24, 0, 10, 0);
+INSERT INTO `sde`.`Enseignement` (`apogee`, `intitule`, `heureCM`, `heureTP`, `semestre`, `nbGroupes`) VALUES ('43QE2243', 'ANALYSE DES TISSUS ÉCONOMIQUES LOCAUX', 24, 0, 10, 0);
 INSERT INTO `sde`.`Enseignement` (`apogee`, `intitule`, `heureCM`, `heureTP`, `semestre`, `nbGroupes`) VALUES ('43QE2143', 'ANALYSE SECTORIELLE', 24, 0, 10, 0);
 INSERT INTO `sde`.`Enseignement` (`apogee`, `intitule`, `heureCM`, `heureTP`, `semestre`, `nbGroupes`) VALUES ('43QE24E1', 'ANALYSE DES EMPLOIS', 24, 0, 10, 0);
 INSERT INTO `sde`.`Enseignement` (`apogee`, `intitule`, `heureCM`, `heureTP`, `semestre`, `nbGroupes`) VALUES ('43QE25E1', 'CONDUITE DU CHANGT', 24, 0, 10, 0);
