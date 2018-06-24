@@ -14,7 +14,7 @@ source mep/.env
 printenv
 
 echo "Supprimer tous les changements pour être certain de pouvoir faire le pull"
-git checkout .
+git reset --hard HEAD
 echo "Obtenir les dernières sources de la branche master"
 git pull origin $branche
 
