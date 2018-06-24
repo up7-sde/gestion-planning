@@ -23,7 +23,7 @@ sed -i -e "s/mdpadmin/$ADMIN_MYSQL_PASSWD/g" "$DIR_BDD/creer_bdd.sql"
 sed -i -e "s/mdpenseignant/$ENSEIGNANT_MYSQL_PASSWD/g" "$DIR_BDD/creer_bdd.sql"
 
 echo "Changer l'adresse du serveur, par défaut sur localhost pour le dev"
-sed -i -e "s/\$server=\"localhost\"/$SERVER/g"
+sed -i -e "s/\$server=\"localhost\"/$SERVER/g" "web/controller/Controller.php"
 
 echo "Supprimer les suffixe /web des urls écrit en dure dans le code lors du dev"
 cd ~/sites/sde/web
