@@ -20,7 +20,7 @@ class EnseignantsGETController extends Controller {
         
         /*
         case
-        /cours?action=(show|add)
+        /cours?action=(show|add|download)
         */
         if (!$params && !!$extraParams && isset($extraParams['action'])){ 
             //echo "no prams!!";
@@ -28,10 +28,15 @@ class EnseignantsGETController extends Controller {
             switch ($extraParams['action']) {
                 case "show":
                     // Get sans argument : vue de la liste
-                    $this->title = 'Tous les Enseignants';
+                    $this->title = 'Enseignants';
                     $this->data = $this->db->findAll('VueListeEnseignant');
                     
-                    $titleButton = array('icon' => 'add', 'action' => '/web/enseignants?action=add');
+                    $titleButton = array(
+                        array('icon' => 'add', 'action' => '/web/enseignants?action=add'),
+                        array('icon' => 'download', 'action' => '/web/enseignants?action=download')
+                        
+                    );
+
                     $tableAction = '/web/enseignants';
                     //var_dump($_SESSION['message']);
                     include('view2/tables.php');
@@ -57,7 +62,12 @@ class EnseignantsGETController extends Controller {
 
                     include('view2/forms.php');
                     break;
-                
+
+                case "download":
+                    $data = $this->data = $this->db->findAll('VueListeEnseignant');
+                    $this->fileMaker->passToBrowser($data);
+                    break;
+
                 default:
                     throw new NotFoundException('Not Found');
                     break;
@@ -67,15 +77,17 @@ class EnseignantsGETController extends Controller {
         /cours/:id?action=(show|edit|delete)
         */
         } elseif (!!$params && !!$extraParams && isset($extraParams['action'])) { 
-            $this->pageName = 'Cours n°'.$params['id'];
-
+            
             switch ($extraParams['action']) {
                 
                 case "edit":
                     
-                    $this->title = 'Modification de l\'enseignant n°'.$params['id'];
+                    $this->title = 'Enseignant n°'.$params['id'];
 
-                    $titleButton = array('icon' => 'delete', 'action' => '/web/enseignants/'.$params['id'].'?action=delete');
+                    $titleButton = array(
+                        array('icon' => 'delete', 'action' => '/web/enseignants/'.$params['id'].'?action=delete')
+                    );
+
                     //(IN p_idEnseignant INT, IN p_nom VARCHAR(45), IN p_prenom VARCHAR(45), IN p_idStatut INT, IN p_depEco TINYINT)
                     $formInputs = array('nom' => null, 
                                         'prenom' => null, 

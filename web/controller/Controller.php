@@ -3,9 +3,8 @@
 include_once('services/Db.php');
 include_once('services/Auth.php');
 include_once('services/Messenger.php');
-include_once('services/ViewEngine.php');
-//pas de surcharge de classe
-//comme ça on peut forcer le render mais aussi y ajouter un param
+include_once('view2/ViewEngine.php');
+include_once('services/FileMaker.php');
 
 class Controller {
 
@@ -17,6 +16,7 @@ class Controller {
     protected $auth;
     protected $messenger;
     protected $viewEngine;
+    protected $fileMaker;
 
     public function __construct(){
         /*args de la db ici? => non*/
@@ -24,6 +24,7 @@ class Controller {
         $this->auth = new Auth($this->db);
         $this->messenger = new Messenger();
         $this->viewEngine = new ViewEngine();
+        $this->fileMaker = new FileMaker();
     }
 
     // Prends une liste d'arguments $args

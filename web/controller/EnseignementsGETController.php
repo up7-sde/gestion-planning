@@ -29,9 +29,15 @@ class EnseignementsGETController extends Controller {
                 case "show":
                     // Get sans argument : vue de la liste
                     $this->title = 'Tous les Enseignements';
-                    $this->data = $this->db->findChunk('VueListeEnseignement', 10, 0);
+                    //$this->data = $this->db->findChunk('VueListeEnseignement', 10, 0);
+                    $this->data = $this->db->findAll('VueListeEnseignement');
                     
-                    $titleButton = array('icon' => 'add', 'action' => '/web/enseignements?action=add');
+                    $titleButton = array(
+                        array('icon' => 'add', 'action' => '/web/enseignements?action=add'),
+                        array('icon' => 'download', 'action' => '/web/enseignements?action=download')
+                        
+                    );
+
                     $tableAction = '/web/enseignements';
                     //var_dump($_SESSION['message']);
                     include('view2/tables.php');
@@ -59,6 +65,11 @@ class EnseignementsGETController extends Controller {
                     include('view2/forms.php');
                     break;
                 
+                case "download":
+                    $data = $this->data = $this->db->findAll('VueListeEnseignement');
+                    $this->fileMaker->passToBrowser($data);
+                    break;
+                
                 default:
                     throw new NotFoundException('Not Found');
                     break;
@@ -73,9 +84,9 @@ class EnseignementsGETController extends Controller {
                 
                 case "edit":
                     
-                    $this->title = 'Modification de l\'Enseignement #'.$params['id'];
+                    $this->title = 'Enseignement #'.$params['id'];
 
-                    $titleButton = array('icon' => 'delete', 'action' => '/web/enseignements/'.$params['id'].'?action=delete');
+                    $titleButton = array(array('icon' => 'delete', 'action' => '/web/enseignements/'.$params['id'].'?action=delete'));
 
                     $formInputs = array('apogee2' => null, 
                                         'intitule' => null, 

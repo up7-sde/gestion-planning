@@ -35,7 +35,12 @@ class FormationsGETController extends Controller {
                     
                     $this->data = $this->db->findAll('VueListeFormation');
 
-                    $titleButton = array('icon' => 'add', 'action' => '/web/formations?action=add');
+                    $titleButton = array(
+                        array('icon' => 'add', 'action' => '/web/formations?action=add'),
+                        array('icon' => 'download', 'action' => '/web/formations?action=download')
+                        
+                    );
+
                     $tableAction = '/web/formations';
                     //var_dump($_SESSION['message']);
                     include('view2/tables.php');
@@ -58,6 +63,12 @@ class FormationsGETController extends Controller {
                     
                     include('view2/forms.php');
                     break;
+
+                case "download":
+                    $data = $this->data = $this->db->findAll('VueListeFormation');
+                    $this->fileMaker->passToBrowser($data);
+                    break;
+
                 
                 default:
                     throw new NotFoundException('Not Found');
@@ -77,7 +88,7 @@ class FormationsGETController extends Controller {
                 //(IN p_idFormation INT, IN p_nom VARCHAR(45), IN p_idDiplome INT)
                     $this->title = 'Modification de la formation n°'.$params['id'];
                     
-                    $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');
+                    $titleButton = array(array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete'));
 
                     $formInputs = array('intitule' => null, 'idDiplome' => $this->db->findAll('VueLabelDiplome'));
                     $formActions = array('form' => '/web/formations/'.$params['id'], 'back' => '/web/formations?action=show'); 

@@ -21,8 +21,6 @@
    
         <?=$this->viewEngine->generateNavbar($this->namespace, $user);?>
 
-        <h6 class="mt-5 font-weight-bold"><i class="fa fa-file-alt"></i> Formulaire</h6>
-
         <div class="card align-self-center mt-4 mb-2">
         <div class="card-body">
 
@@ -41,6 +39,7 @@
 </div>
     <!-- Optional JavaScript -->
     <!-- Optional JavaScript -->
+    <script src="/web/static/javascript/alerts.js"></script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -30,10 +30,15 @@ class CoursGETController extends Controller {
                 case "show":
                     // Get sans argument : vue de la liste
                    
-                    $this->title = 'Tous les Cours';
+                    $this->title = 'Cours';
                     $this->data = $this->db->findAll('VueListeService');
                     
-                    $titleButton = array('icon' => 'add', 'action' => '/web/cours?action=add');
+                    $titleButton = array(
+                        array('icon' => 'add', 'action' => '/web/cours?action=add'),
+                        array('icon' => 'download', 'action' => '/web/cours?action=download')
+                        
+                    );
+
                     $tableAction = '/web/cours';
                     //var_dump($_SESSION['message']);
                     include('view2/tables.php');
@@ -41,10 +46,11 @@ class CoursGETController extends Controller {
 
                 case "add":
                    
-                    $this->title = "Nouveau Cours";
-                    $titleButton = null;
+                    $this->title = "Nouveau cours";
                     
                     $this->data = null;
+
+                    $titleButton = null;
                     
                     $formInputs = array('idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
                                         'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
@@ -57,7 +63,12 @@ class CoursGETController extends Controller {
                     
                     include('view2/forms.php');
                     break;
-                
+
+                case "download":
+                    $data = $this->data = $this->db->findAll('VueListeService');
+                    $this->fileMaker->passToBrowser($data);
+                    break;
+
                 default:
                     throw new NotFoundException('Not Found');
                     break;
@@ -67,15 +78,14 @@ class CoursGETController extends Controller {
         /cours/:id?action=(show|edit|delete)
         */
         } elseif (!!$params && !!$extraParams && isset($extraParams['action'])) { 
-            $this->pageName = 'Cours n°'.$params['id'];
-
+            
             switch ($extraParams['action']) {
                 
                 case "edit":
                     
-                    $this->title = 'Modification du Cours n°'.$params['id'];
+                    $this->title = 'Cours n°'.$params['id'];
 
-                    $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');
+                    $titleButton = array(array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete'));
                     //(IN p_idService INT, IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT)
                     $formInputs = array('idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
                                         'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
@@ -94,11 +104,15 @@ class CoursGETController extends Controller {
                     break;
 
                 case "delete":
+
                     $id = $params['id'];
                     $res = $this->db->callProcedure("SupprimerService", array("idService" => $params['id']));
                     
                     if ($res) {
-                        $this->messenger->push(array('status'=>'success', 'message'=>'Success_Cours n°'.$params['id'].' supprimé'));
+                        $this->messenger->push(array(
+                            'status'=>'success', 
+                            'message'=>'Success_Cours n°'.$params['id'].' supprimé')
+                        );
                     } else {
                         $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la suppression'));                        
                     }

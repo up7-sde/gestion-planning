@@ -51,6 +51,29 @@ td {
     text-align: right;
 }
 
+.btn-outline-transparent {
+    background-color: transparent;
+    border-color: #ccc;
+    color:#6c757d;
+}
+
+.btn-outline-transparent:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color:white;
+}
+
+
+
+.btn-transparent {
+    background-color: transparent;
+    border:none;
+}
+
+.scrollbox {
+    height:200px;
+    overflow-x:scroll;
+  }
 /*TABLEAU*/
 /*faire un td txt et un td num*/
 /*voir quelles colonnes garder*/

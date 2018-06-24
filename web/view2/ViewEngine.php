@@ -41,7 +41,7 @@ class ViewEngine {
                     $table = $table . 
                     '<td>
                         <a class="btn btn-primary btn-xs" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i> Modifier</a>
-                        <a class="btn btn-danger btn-xs" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>
+                        <a id="deleteButton" class="btn btn-danger btn-xs" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>
                     </td>';
                     
                     $table = $table . '</tr>';
@@ -65,8 +65,7 @@ class ViewEngine {
                             Warning_Pas de données
                             </div>';
             } else {
-                $table = '<div class="table-responsive">
-                            <table class="table table-striped table-bordered table-sm" 
+                $table = '<table id="table" class="table table-striped table-bordered table-sm display w-100" 
                             style="font-size:0.8rem;
                             white-space: nowrap;">
                             <thead>
@@ -74,7 +73,7 @@ class ViewEngine {
 
                 foreach($data[0] as $key => $value){
                     if($key !== 'id' && $model[$key]['show']){
-                        $table = $table . '<th scope="col">'. $model[$key]['name'] . '<i class="fas fa-sort mr-auto"></i></th>';                        
+                        $table = $table . '<th scope="col">'. $model[$key]['name'] . '</th>';                        
                     }
                 }
 
@@ -112,7 +111,7 @@ class ViewEngine {
                             }
 
                             /**alignement */
-                            $model[$key]['type'] === 1? $align = "tdTxt table-danger" : $align = "tdNb table-warning";
+                            $model[$key]['type'] === 1? $align = "tdTxt" : $align = "tdTxt";
                             
                             if ($value == "0") {$innerHtml = "-";} else {$innerHtml = $value . ' ' . $gauge;}
                             /*création de la données ac align, valeur et eventuellement gauge*/
@@ -123,7 +122,7 @@ class ViewEngine {
                     $table = $table . 
                     '<td>
                         <a class="btn btn-primary btn-xs" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i> Modifier</a>
-                        <a class="btn btn-danger btn-xs" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>
+                        <a id="deleteButton" class="btn btn-danger btn-xs" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>
                     </td>';
                     
                     $table = $table . '</tr>';
@@ -131,8 +130,7 @@ class ViewEngine {
                 
                 $table = $table . 
                         '</tbody>
-                    </table>
-                </div>';
+                    </table>';
             }
             return $table;
         }
@@ -264,7 +262,7 @@ class ViewEngine {
             $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ok</button>
+                        <button id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ok</button>
                         <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
@@ -295,7 +293,7 @@ class ViewEngine {
 
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Fichiers
+                  Entités
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   
@@ -385,22 +383,29 @@ class ViewEngine {
             return "";
         }
 
-        public function generateTitle($str, $button = null){
+        public function generateTitle($str, $buttons = null){
 
-            if ($button['icon'] === 'delete') {
-                $btn = '<a class="btn btn-danger btn-sm" href="'. $button['action'] .'" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>';
-            } elseif ($button['icon'] === 'add') {
-                $btn = '<a class="btn btn-success btn-sm" href="'. $button['action'] .'" role="button"><i class="fas fa-plus"></i>  Ajouter</a>';
-            } else {
-                $btn = "";
+            $btns = "";
+            if($buttons !== null){
+                foreach($buttons as $button){
+                    if ($button['icon'] === 'delete') {
+                        $btn = '<a id="deleteButton" class="btn btn-danger btn-sm" href="'. $button['action'] .'" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>';
+                    } elseif ($button['icon'] === 'add') {
+                        $btn = '<a class="btn btn-success btn-sm" href="'. $button['action'] .'" role="button"><i class="fas fa-plus"></i>  Ajouter</a>';
+                    } elseif ($button['icon'] === 'download') {
+                        $btn = '<a class="btn btn-warning btn-sm ml-2" href="'. $button['action'] .'" role="button"><i class="fas fa-download"></i>  Télécharger</a>';
+                    } else {
+                        $btn = "";
+                    }
+                    $btns = $btns . $btn;
+                }
             }
 
             return 
                 '<div class="btn-toolbar justify-content-between">
-                    <h5 class="font-weight-light" style="padding:0;margin:0;">' . $str . '</h5>
-                    '.$btn.'
-                </div>
-                <hr/>';
+                    <h5 class="card-title" style="padding:0;margin:0;">' . $str . '</h5>
+                    <div>'.$btns.'</div>
+                </div><hr/>';
     
         }
 }
