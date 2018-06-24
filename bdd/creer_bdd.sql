@@ -743,7 +743,7 @@ USE `sde`;
 CREATE  OR REPLACE VIEW `VueListeDiplome` AS
 SELECT
     `sde`.`Diplome`.`idDiplome` AS id,
-    `sde`.`Diplome`.`*`
+    `sde`.`Diplome`.`nom`
 FROM `sde`.`Diplome`;
 
 DROP VIEW IF EXISTS `sde`.`VueListeStatut` ;
@@ -751,7 +751,7 @@ USE `sde`;
 CREATE  OR REPLACE VIEW `VueListeStatut` AS
 SELECT
     `sde`.`Statut`.`idStatut` AS id,
-    `sde`.`Statut`.`*`
+    `sde`.`Statut`.`nom`
 FROM `sde`.`Statut`;
 
 DROP VIEW IF EXISTS `sde`.`VueListeType` ;
@@ -759,7 +759,7 @@ USE `sde`;
 CREATE  OR REPLACE VIEW `VueListeType` AS
 SELECT
     `sde`.`TypeService`.`idTypeService` AS id,
-    `sde`.`TypeService`.`*`
+    `sde`.`TypeService`.`nom`
 FROM `sde`.`TypeService`;
 
 -- -----------------------------------------------------
@@ -1080,6 +1080,41 @@ INSERT INTO `sde`.`EnseignementFormation` (`Formation_idFormation`, `Enseignemen
 
 COMMIT;
 
+
+
+-- -----------------------------------------------------
+-- Table TypeService
+-- -----------------------------------------------------
+insert into `sde`.`TypeService` (nom) values("CM");
+insert into `sde`.`TypeService` (nom) values("TD");
+
+-- -----------------------------------------------------
+-- Table Statut
+-- -----------------------------------------------------
+insert into `sde`.`Statut`  (nom, heureService, titulaire)
+values
+    ("PR", 192, 1),
+    ("MCF", 192, 1),
+    ("PRAG", 384, 1),
+    ("ATER", 96, 0),
+    ("MONITEUR", 384, 0),
+    ("EXTERIEUR", 0, 0);
+
+
+-- -----------------------------------------------------
+-- Table Enseignant
+-- -----------------------------------------------------
+insert into `sde`.`Enseignant`  (nom, prenom, depEco, statut_idStatut)
+values
+    ("DARMANGEAT", "CHRISTOPHE", 1, 3),
+    ("GROUIEZ", "PASCALE", 1, 2),
+    ("LAMARCHE", "THIERY", 1, 1),
+    ("DOSQUET", "YVON", 1, 4),
+    ("DUPONT EXTERIEUR", "JEAN", 0, 5),
+    ("LERY", "JEAN-MICHEL", 0, 6);
+
+
+COMMIT;
 
 -- Donner les droits sur les vues aux comptes enseignant et admin
 GRANT SELECT ON `sde`.* TO 'enseignant';
