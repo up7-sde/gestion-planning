@@ -25,5 +25,9 @@ sed -i -e "s/mdpenseignant/$ENSEIGNANT_MYSQL_PASSWD/g" "$DIR_BDD/creer_bdd.sql"
 echo "Changer l'adresse du serveur, par défaut sur localhost pour le dev"
 sed -i -e "s/\$server=\"localhost\"/$SERVER/g"
 
+echo "Supprimer les suffixe /web des urls écrit en dure dans le code lors du dev"
+cd ~/sites/sde/web
+grep -rli '/web' * | xargs -i@ sed -i 's/\/web//g' @
+
 echo "Installer la base de données"
 cat "$DIR_BDD/creer_bdd.sql"| $MYSQL -u $ROOT_MYSQL_LOGIN -p$ROOT_MYSQL_PASSWD

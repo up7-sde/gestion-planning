@@ -12,7 +12,7 @@ class Controller {
     protected $namespace;
     protected $title;
     protected $data;
-    protected $server="localhost";
+    protected $server="localhost/web";
 
     protected $db;
     protected $auth;
@@ -63,7 +63,8 @@ class Controller {
     }
 
     public function redirect($path = '/home'){
-        header("Location: http://$this->server/web$path");
+        $toto = "Location: http://" . $this->server . $path;
+        header($toto);
         die();
     }
 
