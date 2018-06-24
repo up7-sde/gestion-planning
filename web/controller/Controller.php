@@ -12,6 +12,7 @@ class Controller {
     protected $namespace;
     protected $title;
     protected $data;
+    protected $server="localhost";
 
     protected $db;
     protected $auth;
@@ -35,7 +36,7 @@ class Controller {
     public function isUserAuthenticated(){
         return isset($_SESSION) && isset($_SESSION['passport']);
     }
-    
+
     public function isUserAdmin(){
         return isset($_SESSION) && isset($_SESSION['passport']) && $_SESSION['passport']['level'] === 1;
     }
@@ -62,7 +63,7 @@ class Controller {
     }
 
     public function redirect($path = '/home'){
-        header("Location: http://localhost/web$path");
+        header("Location: http://$this->server/web$path");
         die();
     }
 
@@ -85,7 +86,7 @@ class Controller {
     }
 
     public function getLastUrl(){
-        return isset($_SESSION["history"][count($_SESSION["history"])-2])? 
+        return isset($_SESSION["history"][count($_SESSION["history"])-2])?
             $_SESSION["history"][count($_SESSION["history"])-2] : '/';
     }
 

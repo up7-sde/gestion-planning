@@ -220,8 +220,7 @@ BEGIN
     INSERT INTO `sde`.`EnseignementFormation` (Formation_idFormation, Enseignement_apogee)
     VALUES (p_idFormation, p_apogee);
 END;$$
-
-DELIMITER;
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- procedure InsererService
@@ -270,7 +269,7 @@ USE `sde`$$
 CREATE PROCEDURE `ModifierEnseignant` (IN p_idEnseignant INT, IN p_nom VARCHAR(45), IN p_prenom VARCHAR(45), IN p_idStatut INT, IN p_depEco TINYINT)
 BEGIN
 	UPDATE `sde`.`Enseignant`
-    SET 
+    SET
 		nom = UPPER(p_nom),
         prenom = UPPER(p_prenom),
         Statut_idStatut = p_idStatut,
@@ -294,7 +293,7 @@ CREATE PROCEDURE `ModifierService` (IN p_idService INT, IN p_idEnseignant INT, I
 BEGIN
     -- Effectuer la modification
     UPDATE `sde`.`Service`
-	SET 
+	SET
 		Enseignant_idEnseignant = p_idEnseignant,
 		TypeService_idTypeService = p_idTypeService,
 		annee = p_annee,
@@ -319,8 +318,8 @@ CREATE PROCEDURE `ModifierEnseignement` (IN p_apogeeOri VARCHAR(45), IN p_apogee
 BEGIN
 
 	-- Mettre à jour l'Enseignement
-	UPDATE `sde`.`Enseignement` 
-    SET 
+	UPDATE `sde`.`Enseignement`
+    SET
 		apogee = UPPER(p_apogee),
         intitule = UPPER(p_intitule),
         heureCM = p_heureCM,
@@ -329,9 +328,9 @@ BEGIN
         nbGroupes = p_nbGroupes
 	WHERE
 		apogee = p_apogeeOri;
-        
+
 	-- Mettre à jour la table de liaison EnseignementsFormations
-    UPDATE `sde`.`EnseignementFormation` 
+    UPDATE `sde`.`EnseignementFormation`
     SET
 		Formation_idFormation = p_idFormation,
 		Enseignement_apogee = p_apogee
@@ -768,7 +767,7 @@ FROM `sde`.`TypeService`;
 DROP VIEW IF EXISTS `sde`.`VueLabelEnseignant` ;
 USE `sde`;
 CREATE  OR REPLACE VIEW `VueLabelEnseignant` AS
-SELECT 
+SELECT
 	`sde`.`Enseignant`.`idEnseignant` AS id,
 	CONCAT(`sde`.`Enseignant`.`nom`, " ", `sde`.`Enseignant`.`prenom`) AS nom
 FROM
@@ -780,7 +779,7 @@ FROM
 DROP VIEW IF EXISTS `sde`.`VueLabelEnseignement` ;
 USE `sde`;
 CREATE  OR REPLACE VIEW `VueLabelEnseignement` AS
-SELECT 
+SELECT
 	`sde`.`Enseignement`.`apogee` as id,
 	`sde`.`Enseignement`.`intitule`as nom
 FROM
@@ -792,7 +791,7 @@ FROM
 DROP VIEW IF EXISTS `sde`.`VueLabelFormation` ;
 USE `sde`;
 CREATE  OR REPLACE VIEW `VueLabelFormation` AS
-SELECT 
+SELECT
 	`sde`.`Formation`.`idFormation` as id,
 	`sde`.`Formation`.`nom` as nom
 FROM
@@ -804,7 +803,7 @@ FROM
 DROP VIEW IF EXISTS `sde`.`VueLabelDiplome` ;
 USE `sde`;
 CREATE  OR REPLACE VIEW `VueLabelDiplome` AS
-SELECT 
+SELECT
 	`sde`.`Diplome`.`idDiplome` as id,
 	`sde`.`Diplome`.`nom` as nom
 FROM
@@ -816,7 +815,7 @@ FROM
 DROP VIEW IF EXISTS `sde`.`VueLabelStatut` ;
 USE `sde`;
 CREATE  OR REPLACE VIEW `VueLabelStatut` AS
-SELECT 
+SELECT
 	`sde`.`Statut`.`idStatut` as id,
 	`sde`.`Statut`.`nom`
 FROM
@@ -828,7 +827,7 @@ FROM
 DROP VIEW IF EXISTS `sde`.`VueLabelTypeService` ;
 USE `sde`;
 CREATE  OR REPLACE VIEW `VueLabelTypeService` AS
-SELECT 
+SELECT
 	`sde`.`TypeService`.`idTypeService` as id,
 	`sde`.`TypeService`.`nom`
 FROM
@@ -1077,5 +1076,35 @@ INSERT INTO `sde`.`EnseignementFormation` (`Formation_idFormation`, `Enseignemen
 INSERT INTO `sde`.`EnseignementFormation` (`Formation_idFormation`, `Enseignement_apogee`) VALUES (6, '43IF5044');
 INSERT INTO `sde`.`EnseignementFormation` (`Formation_idFormation`, `Enseignement_apogee`) VALUES (6, '43IF5073');
 INSERT INTO `sde`.`EnseignementFormation` (`Formation_idFormation`, `Enseignement_apogee`) VALUES (6, '43IF5084');
+
+COMMIT;
+
+
+-- Donner les droits sur les vues aux comptes enseignant et admin
+GRANT SELECT ON `sde`.* TO 'enseignant';
+GRANT SELECT ON `sde`.* TO 'admin';
+
+-- Donner les droits d'exécution sur les procédures à l'admin
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererEnseignement` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierEnseignement` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerEnseignement` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererFormation` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierFormation` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerFormation` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererEnseignant` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierEnseignant` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerEnseignant` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererDiplome` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierDiplome` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerDiplome` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererTypeService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierTypeService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerTypeService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererStatut` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierStatut` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerStatut` TO 'admin';
 
 COMMIT;
