@@ -220,10 +220,7 @@ BEGIN
     INSERT INTO `sde`.`EnseignementFormation` (Formation_idFormation, Enseignement_apogee)
     VALUES (p_idFormation, p_apogee);
 END;$$
-<<<<<<< HEAD
-=======
 
->>>>>>> fc9aa7c6ef450532fa630cf768e009b6ee72d7da
 DELIMITER ;
 
 -- -----------------------------------------------------
