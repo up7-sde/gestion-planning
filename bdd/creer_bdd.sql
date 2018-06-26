@@ -231,6 +231,20 @@ END;$$
 DELIMITER ;
 
 /******************************************************/
+-- procedure SupprimerUtilisateur
+/******************************************************/
+
+DROP procedure IF EXISTS `sde`.`SupprimerUtilisateur`;
+
+DELIMITER $$
+
+CREATE PROCEDURE `SupprimerUtilisateur` (IN p_idUtilisateur INT)
+BEGIN
+    DELETE FROM `sde`.`Utilisateur` WHERE idUtilisateur = p_idUtilisateur;
+END;$$
+DELIMITER ;
+
+/******************************************************/
 -- procedure ModifierUtilisateur
 -- A utiliser par le compte enseignant pour modifier ses infos (mais pas son authLevel)
 /******************************************************/
