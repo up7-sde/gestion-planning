@@ -66,6 +66,7 @@ DROP TABLE IF EXISTS `sde`.`TypeService` ;
 CREATE TABLE `sde`.`TypeService` (
   `idTypeService` INT NOT NULL AUTO_INCREMENT,
   `nom` VARCHAR(45) NOT NULL,
+  `poids` FLOAT NOT NULL DEFAULT 1.0,
   PRIMARY KEY (`idTypeService`))
 ENGINE = InnoDB;
 
@@ -103,6 +104,7 @@ CREATE TABLE `sde`.`Service` (
   `TypeService_idTypeService` INT NOT NULL,
   `annee` INT NOT NULL,
   `Enseignement_apogee` VARCHAR(45) NULL,
+  `commentaire` VARCHAR(100) NULL,
   `nbHeures` INT NOT NULL,
   PRIMARY KEY (`idService`),
   CONSTRAINT `fk_Service_Enseignant`
@@ -295,11 +297,11 @@ DROP procedure IF EXISTS `sde`.`InsererService`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `InsererService` (IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT)
+CREATE PROCEDURE `InsererService` (IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT, IN p_commentaire VARCHAR(100))
 BEGIN
     -- Insérer le nouveau service
-	INSERT INTO `sde`.`Service` (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures)
-	VALUES (p_idEnseignant, p_idTypeService, p_annee, UPPER(p_apogee), p_nbHeures);
+	INSERT INTO `sde`.`Service` (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire)
+	VALUES (p_idEnseignant, p_idTypeService, p_annee, UPPER(p_apogee), p_nbHeures, p_commentaire);
 END;$$
 
 DELIMITER ;
@@ -351,7 +353,7 @@ DROP procedure IF EXISTS `sde`.`ModifierService`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `ModifierService` (IN p_idService INT, IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT)
+CREATE PROCEDURE `ModifierService` (IN p_idService INT, IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT, IN p_commentaire VARCHAR(100))
 BEGIN
     -- Effectuer la modification
     UPDATE `sde`.`Service`
@@ -360,7 +362,8 @@ BEGIN
 		TypeService_idTypeService = p_idTypeService,
 		annee = p_annee,
 		Enseignement_apogee = p_apogee,
-		nbHeures = p_nbHeures
+		nbHeures = p_nbHeures,
+        commentaire = p_commentaire
 	WHERE
 		idService = p_idService;
 END;$$
@@ -553,9 +556,9 @@ DROP procedure IF EXISTS `sde`.`InsererTypeService`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `InsererTypeService` (IN p_nom VARCHAR(45))
+CREATE PROCEDURE `InsererTypeService` (IN p_nom VARCHAR(45), IN p_poids FLOAT)
 BEGIN
-	INSERT INTO `sde`.`TypeService` (nom) VALUES (UPPER(p_nom));
+	INSERT INTO `sde`.`TypeService` (nom, poids) VALUES (UPPER(p_nom), p_poids);
 END$$
 
 DELIMITER ;
@@ -568,13 +571,10 @@ DROP procedure IF EXISTS `sde`.`ModifierTypeService`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `ModifierTypeService` (IN p_idTypeService INT, IN p_nom VARCHAR(45))
+CREATE PROCEDURE `ModifierTypeService` (IN p_idTypeService INT, IN p_nom VARCHAR(45), IN p_poids FLOAT)
 BEGIN
 	-- Vérifier qu'on ne touche pas au 2 premiers types (CM et TP)
-	IF (p_idTypeService > 2)
-    THEN
-		UPDATE `sde`.`TypeService` SET nom = UPPER(p_nom) WHERE idTypeService = p_idTypeService;
-	END IF;
+    UPDATE `sde`.`TypeService` SET nom = UPPER(p_nom), poids = p_poids WHERE idTypeService = p_idTypeService;
 END$$
 
 DELIMITER ;
@@ -676,6 +676,9 @@ DELIMITER ;
 
 /******************************************************/
 -- View `sde`.`VueListeEnseignant`
+-- L'instruction COALESCE(SUM(`sde`.`TypeService`.`poids` * `sde`.`Service`.`nbHeures`), 0)
+-- permet d'afficher l'enseignant même s'il n'a pas encore de service affecté (dans ce cas on 0 pour HeuresAffectees)
+-- permet également de calculer le nombre d'heures affectées en fonction du poids d'un service (1.5 pour CM, 1 pour un TD, etc)
 /******************************************************/
 DROP VIEW IF EXISTS `sde`.`VueListeEnseignant` ;
 CREATE VIEW VueListeEnseignant AS
@@ -683,15 +686,17 @@ SELECT
     `sde`.`Enseignant`.`idEnseignant` AS id,
     `sde`.`Enseignant`.`nom`,
     `sde`.`Enseignant`.`prenom`,
-    if(`sde`.`Enseignant`.`depEco`, "SDE", "Hors SDE") AS Departement,
-    if(`sde`.`Statut`.`titulaire`, "Titulaire", "Non-Titulaire") AS Tituaire,
+    IF(`sde`.`Enseignant`.`depEco`, "SDE", "Hors SDE") AS Departement,
+    IF(`sde`.`Statut`.`titulaire`, "Titulaire", "Non-Titulaire") AS Tituaire,
     `sde`.`Statut`.`nom` AS Categorie,
     `sde`.`Statut`.`heureService` AS HeuresDues,
-    COALESCE(SUM(`sde`.`Service`.`nbHeures`), 0) AS HeuresAffectees
+    COALESCE(SUM(`sde`.`TypeService`.`poids` * `sde`.`Service`.`nbHeures`), 0) AS HeuresAffectees
 FROM
     `sde`.`Enseignant`
 LEFT JOIN
     `sde`.`Service` ON `sde`.`Service`.`Enseignant_idEnseignant` = `sde`.`Enseignant`.`idEnseignant`
+LEFT JOIN
+    `sde`.`TypeService`ON `sde`.`TypeService`.`idTypeService` = `sde`.`Service`.`TypeService_idTypeService`
 INNER JOIN
 	`sde`.`Statut` ON `sde`.`Statut`.`idStatut` = `sde`.`Enseignant`.`Statut_idStatut`
 GROUP BY
@@ -705,7 +710,7 @@ DROP VIEW IF EXISTS `sde`.`VueListeEnseignement` ;
 CREATE VIEW VueListeEnseignement AS
 SELECT
     `sde`.`Enseignement`.`apogee` AS id,
-    `sde`.`Enseignement`.`apogee` AS apogee2,
+    `sde`.`Enseignement`.`apogee` AS apogee,
     `sde`.`Enseignement`.`intitule`,
     `sde`.`Enseignement`.`heureCM` AS heureCM,
     -- Calculer le nombre d'heure de service correspondant à l'enseignenment et au type CM
@@ -748,7 +753,8 @@ SELECT
     `sde`.`Enseignant`.`nom`,
     `sde`.`Enseignant`.`prenom`,
 	`sde`.`Formation`.`nom` AS formation,
-    `sde`.`Diplome`.`nom` AS diplome
+    `sde`.`Diplome`.`nom` AS diplome,
+    `sde`.`Service`.`commentaire`
 FROM
     `sde`.`Service`
 LEFT JOIN
@@ -880,6 +886,42 @@ GRANT USAGE ON *.* TO enseignant;
  DROP USER enseignant;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE USER 'enseignant' IDENTIFIED BY 'mdpenseignant';
+
+/******************************************************/
+/****************** AJOUT DES DROITS ******************/
+/******************************************************/
+
+-- Donner les droits sur les vues aux comptes enseignant et admin
+GRANT SELECT ON `sde`.* TO 'enseignant';
+GRANT SELECT ON `sde`.* TO 'admin';
+
+-- Donner les droits d'exécution sur les procédures à l'admin
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierUtilisateur` TO 'enseignant';
+
+-- Donner les droits d'exécution sur les procédures à l'admin
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererEnseignement` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierEnseignement` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerEnseignement` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererFormation` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierFormation` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerFormation` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererEnseignant` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierEnseignant` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerEnseignant` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererDiplome` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierDiplome` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerDiplome` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererTypeService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierTypeService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerTypeService` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererStatut` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierStatut` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerStatut` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`InsererUtilisateur` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerUtilisateur` TO 'admin';
 
 /******************************************************/
 /****************** REMPLIR LES TABLES ****************/
@@ -1106,8 +1148,9 @@ VALUES
 /******************************************************/
 -- Table TypeService
 /******************************************************/
-INSERT INTO `sde`.`TypeService` (nom) VALUES("CM");
-INSERT INTO `sde`.`TypeService` (nom) VALUES("TD");
+INSERT INTO `sde`.`TypeService` (nom, poids) VALUES("CM", 1.5);
+INSERT INTO `sde`.`TypeService` (nom, poids) VALUES("TD", 1);
+INSERT INTO `sde`.`TypeService` (nom, poids) VALUES("SPECIAL", 1);
 
 /******************************************************/
 -- Table Statut
@@ -1137,11 +1180,14 @@ VALUES
 /******************************************************/
 -- Table Service (debug : services fictifs à modifier !)
 /******************************************************/
-INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures )
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire)
 VALUES
-    (1, 2, 2018, "54AEE2EC", 18),
-    (2, 2, 2018, "54AEE2EC", 18),
-    (3, 1, 2018, "54AEE2EC", 10);
+    (1, 2, 2018, "54AEE2EC", 18, NULL),
+    (2, 2, 2018, "54AEE2EC", 18, NULL),
+    (2, 1, 2018, "54AEE2EC", 3, NULL),
+    (3, 1, 2018, "54AEE2EC", 10, "Attention ce cours la est particuliers"),
+    -- Service de type spécial (3), ne correspondant pas à un cours (apogee = null)
+    (2, 3, 2018, null, 10, "Heures syndicales");
 
 
 /******************************************************/
@@ -1153,42 +1199,6 @@ VALUES
     ("CHRISTOPHE", "CRICRI@MAIL.COM", 1, "monmotdepasshashéde60CHAR", "yellow", "blue"),
     ("JEAN-LOUIS", "JEAN-LOUIS@MAIL.COM", 0, "monmotdepasshashéde60CHAR", "yellow", "blue"),
     ("FRED", "FRED@MAIL.COM", 0, "monmotdepasshashéde60CHAR", "yellow", "blue");
-
-
-/******************************************************/
-/****************** AJOUT DES DROITS ******************/
-/******************************************************/
-
--- Donner les droits sur les vues aux comptes enseignant et admin
-GRANT SELECT ON `sde`.* TO 'enseignant';
-GRANT SELECT ON `sde`.* TO 'admin';
-
--- Donner les droits d'exécution sur les procédures à l'admin
-GRANT EXECUTE ON PROCEDURE `sde`.`ModifierUtilisateur` TO 'enseignant';
-
--- Donner les droits d'exécution sur les procédures à l'admin
-GRANT EXECUTE ON PROCEDURE `sde`.`InsererEnseignement` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`ModifierEnseignement` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerEnseignement` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`InsererFormation` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`ModifierFormation` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerFormation` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`InsererEnseignant` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`ModifierEnseignant` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerEnseignant` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`InsererService` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`ModifierService` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerService` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`InsererDiplome` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`ModifierDiplome` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerDiplome` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`InsererTypeService` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`ModifierTypeService` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerTypeService` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`InsererStatut` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`ModifierStatut` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerStatut` TO 'admin';
-GRANT EXECUTE ON PROCEDURE `sde`.`InsererUtilisateur` TO 'admin';
 
 -- Debug : mysql en mode autocommit par défaut à supprimer
 COMMIT;

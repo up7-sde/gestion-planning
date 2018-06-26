@@ -2,6 +2,15 @@
 
 > Présente l'écritue de la BDD
 
+## En cours
+
+- ajout d'un champ commentaire dans la table service, implicant modif sur :
+    - les procedures : InsererService et ModifierService
+    - la vue         : VueListeService
+- afin de permettre calcule des heures affecté dans VueListeEnseignant, ajout d'un champ poids dans TypeService implicant modif sur :
+    - les procedures : InsererTypeService et ModifierTypeService
+    - pas de changement sur la vue VueListeEnseignant
+
 ## Workflow
 
 Ecrire le MCD sur JMerise. Ensuite reporter le MLD sur MysqlWorkbench pour :
