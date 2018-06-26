@@ -65,7 +65,7 @@ class ViewEngine {
                             Warning_Pas de données
                             </div>';
             } else {
-                $table = '<table id="table" class="table table-striped table-bordered table-sm display w-100" 
+                $table = '<table id="table" class="invisible table table-striped table-bordered table-sm display w-100" 
                             style="font-size:0.8rem;
                             white-space: nowrap;">
                             <thead>
@@ -366,14 +366,14 @@ class ViewEngine {
         public function generateMessage($message){
             if ($message){
                 if ($message['status'] == 'success'){
-                    return '<div class="alert alert-success alert-dismissible fade show" role="alert">'
+                    return '<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle fa-lg"></i> '
                     .$message['message'].
                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                     </div>';
                 }
-                return '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+                return '<div class="alert alert-danger alert-dismissible fade show" role="alert"><i class="fas fa-exclamation-circle fa-lg"></i> '
                         .$message['message'].
                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
