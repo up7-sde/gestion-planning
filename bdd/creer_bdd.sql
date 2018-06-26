@@ -710,7 +710,7 @@ DROP VIEW IF EXISTS `sde`.`VueListeEnseignement` ;
 CREATE VIEW VueListeEnseignement AS
 SELECT
     `sde`.`Enseignement`.`apogee` AS id,
-    `sde`.`Enseignement`.`apogee` AS apogee,
+    `sde`.`Enseignement`.`apogee` AS apogee2,
     `sde`.`Enseignement`.`intitule`,
     `sde`.`Enseignement`.`heureCM` AS heureCM,
     -- Calculer le nombre d'heure de service correspondant à l'enseignenment et au type CM
@@ -773,6 +773,9 @@ INNER JOIN
 
 /******************************************************/
 -- View `sde`.`VueListeFormation`
+-- COALESCE permet d'afficher 0 si
+-- - aucun service n'est affecté à une formation (pour heureCMAffectee et heureTPAffectee)
+-- - il existe une formation avec 0 heure de TP ou 0 heure de CM (pour heureCM et heureTP)
 /******************************************************/
 DROP VIEW IF EXISTS `sde`.`VueListeFormation` ;
 CREATE VIEW `VueListeFormation` AS
@@ -780,10 +783,10 @@ SELECT
     `sde`.`VueListeEnseignement`.`idFormation` AS id,
     `sde`.`VueListeEnseignement`.`diplome`,
 	`sde`.`VueListeEnseignement`.`formation`,
-	SUM(heureCM) AS heureCM,
-    SUM(heureCMAffectee) AS heureCMAffectee,
-	SUM(hTPtotal) AS heureTP,
-    SUM(heureTPAffectee) AS heureTPAffectee
+    COALESCE(SUM(heureCM), 0) AS heureCM,
+    COALESCE(SUM(heureCMAffectee),0) AS heureCMAffectee,
+	COALESCE(SUM(hTPtotal),0) AS heureTP,
+    COALESCE(SUM(heureTPAffectee),0) AS heureTPAffectee
 -- Basé sur la vue des enseignements
 FROM `sde`.`VueListeEnseignement`
 GROUP BY `sde`.`VueListeEnseignement`.`idFormation`;
