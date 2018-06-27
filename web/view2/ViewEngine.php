@@ -279,6 +279,30 @@ class ViewEngine {
                             </div>
                         </div>';
                         break;
+                    
+                    case 'password':
+                        
+                        $inputValue = null;
+                        
+                        if ($data !== null){
+                            if (isset($data[0][$attributes['name']])){
+                                $inputValue = $data[0][$attributes['name']];
+                            } else {
+                                $inputValue = $data[0][$key];
+                            }
+                        }
+
+                        $placeholder = $attributes['default'] ;
+                        
+                        $form = $form . 
+                        '<div class="form-group row">
+                        <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
+                        '</label>
+                            <div class="col-sm-10">
+                                <input name="' . $key . '" type="password" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                            </div>
+                        </div>';
+                        break;
 
                     case 'text': default: 
 
@@ -369,7 +393,7 @@ class ViewEngine {
                     Routines
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Nouvelle Année</a>      
+                    <a href="/web/routines/nvelleannee" class="dropdown-item">Nouvelle année</a>      
                 </div>
                 </li>
                 <li class="nav-item">

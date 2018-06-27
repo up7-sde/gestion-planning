@@ -221,7 +221,7 @@ class Model {
             'name' => 'mdp',
             'alias' => 'Mot de passe',
             'type' => PDO::PARAM_STR,
-            'inputType' => 'text',
+            'inputType' => 'password',
             'default' => 'Mot de passe'
         ),
         'bckColor' =>
@@ -247,6 +247,22 @@ class Model {
             'type' => PDO::PARAM_INT,
             'inputType' => 'radio',
             'default' => 'Heures de service'
+        ),
+        'annee1' =>
+        array(
+            'name' => 'annee1',
+            'alias' => 'Année cible',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'number',
+            'default' => 'YYYY'
+        ),
+        'annee2' =>
+        array(
+            'name' => 'annee2',
+            'alias' => 'Année de destination',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'number',
+            'default' => 'YYYY'
         )
     );
 
