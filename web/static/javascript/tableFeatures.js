@@ -53,6 +53,5 @@ $(document).ready(function() {
   </div>`);
   $('input[type="search"]').css('margin-left', '0');
   $('input[type="search"]').attr('placeholder', 'Rechercher');
-  $('.pagination').addClass('pagination-sm');
 
 });

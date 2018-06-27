@@ -41,7 +41,7 @@ class ProfilGETController extends Controller {
                             'email' => $user['email'],
                             'mdp' => '123azerty',
                             'bckColor' => 0,
-                            'headerColor' => 'bleu',
+                            'headerColor' => '#000000',
                             'authLevel' => $user['level']
                         ));                  
 

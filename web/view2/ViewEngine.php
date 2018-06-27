@@ -275,7 +275,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input name="' . $key . '" type="color" class="form-control" id="'. $key . '" placeholder="" value="">
+                                <input name="' . $key . '" type="color" class="form-control" id="'. $key . '" placeholder="" value="'. $inputValue .'">
                             </div>
                         </div>';
                         break;
@@ -347,7 +347,7 @@ class ViewEngine {
         public function generateNavbar($active, $user){
 
             $nav =     
-            '<nav class="navbar fixed-top navbar-expand-lg navbar-dark '.$user['color'].' shadow">
+            '<nav class="navbar fixed-top navbar-expand-lg navbar-dark shadow" style="background-color:black">
             <div class="container-fluid">
             <a class="navbar-brand" style="font-family: \'Fugaz One\', cursive;" href="/web/accueil">
             <i class="fas fa-lg fa-cube"></i>
