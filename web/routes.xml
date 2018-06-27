@@ -164,6 +164,12 @@
         <path>/reglages</path>
         <controller>ReglagesGETController</controller>
     </route>
+
+    <route>
+        <method>GET</method>
+        <path>/utilisateurs</path>
+        <controller>UtilisateursGETController</controller>
+    </route>
     
     <redirect>
         <from>/</from>

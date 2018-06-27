@@ -347,7 +347,9 @@ class ViewEngine {
                     <a class="dropdown-item" href="#">Nouvelle Année</a>      
                 </div>
                 </li>
-    
+                <li class="nav-item">
+                <a class="nav-link" href="/web/utilisateurs?action=show">Utilisateurs</a>
+                </li>
                 </ul>
               
                 <ul class="navbar-nav ml-auto">

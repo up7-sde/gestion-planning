@@ -46,7 +46,9 @@ class StatutsGETController extends Controller {
                     
                     $this->data = null;
 
-                    $formInputs = array('intitule' => null);
+                    $formInputs = array('intitule' => null, 
+                                        'heureService' => null,
+                                        'titulaire' => array(array('id' => 1, 'nom' => 'OUI'), array('id' => 0, 'nom' => 'NON')));
                     
                     $formActions = array('form' => '/web/referentiels/statuts', 'back' => '/web/referentiels/statuts?action=show'); 
                     $hiddenInput = null;
@@ -85,15 +87,14 @@ class StatutsGETController extends Controller {
                     break;
 
                 case "delete":
-                    var_dump($params['id']);
-                    $id = $params['id'];
-                    $res = $this->db->callProcedure("SupprimerFormation", array("idFormation" => $params['id']));
+                    
+                    $res = $this->db->callProcedure("SupprimerStatut", array("idStatut" => $params['id']));
                     if ($res) {
-                        $this->messenger->push(array('status'=>'success', 'message'=>'Success_Formation modifiée'));
+                        $this->messenger->push(array('status'=>'success', 'message'=>'Success_Statut enseignant supprimé'));
                     } else {
-                        $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+                        $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la suppression du statut'));                        
                     }
-                    $this->redirect('/formations?action=show');
+                    $this->redirect('/referentiels/statuts?action=show');
                     break;
                 
                 default:

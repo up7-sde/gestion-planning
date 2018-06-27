@@ -816,6 +816,18 @@ SELECT
     `sde`.`TypeService`.`poids`
 FROM `sde`.`TypeService`;
 
+DROP VIEW IF EXISTS `sde`.`VueListeUtilisateur` ;
+CREATE VIEW `VueListeUtilisateur` AS
+SELECT
+    `sde`.`Utilisateur`.`idUtilisateur` AS id,
+    `sde`.`Utilisateur`.`nom`,
+    `sde`.`Utilisateur`.`email`,
+    `sde`.`Utilisateur`.`mdp`,
+    `sde`.`Utilisateur`.`bckColor`,
+    `sde`.`Utilisateur`.`headerColor`,
+    `sde`.`Utilisateur`.`authLevel`
+FROM `sde`.`Utilisateur`;
+
 /******************************************************/
 -- View `sde`.`VueLabelEnseignant`
 /******************************************************/

@@ -172,6 +172,22 @@ class Model {
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
             'default' => 'Poids (ex : 1)'
+        ),
+        'titulaire' =>
+        array(
+            'name' => 'titulaire',
+            'alias' => 'Est titulaire?',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'radio',
+            'default' => 'Poids (ex : 1)'
+        ),
+        'heureService' =>
+        array(
+            'name' => 'heureService',
+            'alias' => 'Heures de service',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'number',
+            'default' => 'Heures de service'
         )
     );
 
@@ -498,11 +514,53 @@ class Model {
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             )
+            ),
+               /*table utilisateurs*/
+        'Utilisateurs' => array( //la table dans la base
+            'nom' => array( //nom dans la bdd
+                'name' => 'Login', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            ),
+            'email' => array( //nom dans la bdd
+                'name' => 'Email', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            ),
+            'mdp' => array( //nom dans la bdd
+                'name' => 'Mot de passe', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            ),
+            
+            'bckColor' => array( //nom dans la bdd
+                'name' => 'Thème', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            ),
+            'headerColor' => array( //nom dans la bdd
+                'name' => 'Couleur', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            ),
+            'authLevel' => array( //nom dans la bdd
+                'name' => 'Est administrateur?', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            )
         )
-
-
-
-    
         /*fonctionnement pour les tableaux */
     );
 }
