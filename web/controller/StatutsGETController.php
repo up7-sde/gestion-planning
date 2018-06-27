@@ -33,24 +33,22 @@ class StatutsGETController extends Controller {
                     $this->title = 'Tous les Statuts Enseignant';
                     
                     $this->data = $this->db->findAll('VueListeStatut');
-                    $titleButton = array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=add');
+                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=add'));
                     $tableAction = '/web/referentiels/statuts';
                     //var_dump($_SESSION['message']);
                     include('view2/tables.php');
                     break;
 
                 case "add":
-                    $this->pageName = 'Nouvelle Formation';
-                    $this->title = 'Nouvelle Formation';
+                    $this->pageName = 'Nouveau statut enseignant';
+                    $this->title = 'Nouveau statut enseignant';
                     $titleButton = null;
                     
                     $this->data = null;
 
-                    //(IN p_nom VARCHAR(45), IN p_idDiplome INT)
-                    $formInputs = array('intitule' => null, 
-                                        'idDiplome' => $this->db->findAll('VueLabelDiplome'));
+                    $formInputs = array('intitule' => null);
                     
-                    $formActions = array('form' => '/web/formations', 'back' => '/web/formations?action=show'); 
+                    $formActions = array('form' => '/web/referentiels/statuts', 'back' => '/web/referentiels/statuts?action=show'); 
                     $hiddenInput = null;
                     
                     include('view2/forms.php');

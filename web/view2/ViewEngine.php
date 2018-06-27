@@ -65,7 +65,7 @@ class ViewEngine {
                             Warning_Pas de données
                             </div>';
             } else {
-                $table = '<table id="table" class="invisible table table-striped table-bordered table-sm display w-100" 
+                $table = '<table id="table" class="invisible table table-bordered table-sm display w-100" 
                             style="font-size:0.8rem;
                             white-space: nowrap;">
                             <thead>
@@ -111,7 +111,7 @@ class ViewEngine {
                             }
 
                             /**alignement */
-                            $model[$key]['type'] === 1? $align = "tdTxt" : $align = "tdTxt";
+                            $model[$key]['type'] === 1? $align = "tdTxt" : $align = "tdNb";
                             
                             if ($value == "0") {$innerHtml = "-";} else {$innerHtml = $value . ' ' . $gauge;}
                             /*création de la données ac align, valeur et eventuellement gauge*/
@@ -162,7 +162,7 @@ class ViewEngine {
                         $form = $form . 
                         '<div class="form-group row">
                             <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . '</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 ">
                                 <input name="' . $key . '" type="text" class="form-control" id="'
                                 . $key . '" placeholder="'.$placeholder.'" value="'.$inputValue.'">
                             </div>
@@ -170,7 +170,6 @@ class ViewEngine {
                         break;
                     
                     case 'radio':
-
                         $checked0 = "";
                         $checked1 = "";
 
@@ -234,6 +233,28 @@ class ViewEngine {
                         </div>';     
                         break;
                     
+                    case 'area' : 
+                        $inputValue = null;
+                        
+                        if ($data !== null){
+                            if (isset($data[0][$attributes['name']])){
+                                $inputValue = $data[0][$attributes['name']];
+                            } else {
+                                $inputValue = $data[0][$key];
+                            }
+                        }
+
+                        $placeholder = $attributes['default'] ;
+                        
+                        $form = $form . 
+                        '<div class="form-group row">
+                        <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
+                        '</label>
+                            <div class="col-sm-10">
+                                <textarea name="' . $key . '" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'">'. $inputValue .'</textarea>
+                            </div>
+                        </div>'; 
+                        break;
                     case 'text': default: 
 
                         $inputValue = null;
@@ -246,7 +267,7 @@ class ViewEngine {
                             }
                         }
 
-                        $placeholder = $attributes['alias'] ;
+                        $placeholder = $attributes['default'] ;
                         
                         $form = $form . 
                         '<div class="form-group row">
@@ -366,7 +387,7 @@ class ViewEngine {
         public function generateMessage($message){
             if ($message){
                 if ($message['status'] == 'success'){
-                    return '<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle fa-lg"></i> '
+                    return '<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="far fa-check-circle fa-lg"></i> '
                     .$message['message'].
                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

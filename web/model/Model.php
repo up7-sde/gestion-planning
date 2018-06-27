@@ -39,10 +39,10 @@ class Model {
         'apogee' =>
         array(
             'name' => 'Enseignement_apogee',
-            'alias' => 'Référence Apogée',
+            'alias' => 'Enseignement',
             'type' => PDO::PARAM_STR,
             'inputType' => 'options',
-            'default' => null
+            'default' => 'Enseignement'
         ),
 
         'nbHeures' =>
@@ -104,7 +104,7 @@ class Model {
         array(
             'name' => 'Diplome_idDiplome',
             'alias' => 'Diplôme',
-            'type' => PDO::PARAM_STR,
+            'type' => PDO::PARAM_INT,
             'inputType' => 'radio',
             'default' => 'Diplôme'
         ),
@@ -153,9 +153,25 @@ class Model {
         array(
             'name' => 'nom',
             'alias' => 'Code Apogée',
-            'type' => PDO::PARAM_INT,
+            'type' => PDO::PARAM_STR,
             'inputType' => 'text',
             'default' => 'Code Apogée'
+        ),
+        'commentaire' =>
+        array(
+            'name' => 'nom',
+            'alias' => 'Commentaire',
+            'type' => PDO::PARAM_STR,
+            'inputType' => 'area',
+            'default' => 'Ajoutez un commentaire ici'
+        ),
+        'poids' =>
+        array(
+            'name' => 'poids',
+            'alias' => 'Poids',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'number',
+            'default' => 'Poids (ex : 1)'
         )
     );
 
@@ -374,6 +390,13 @@ class Model {
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'commentaire' => array( //nom dans la bdd
+                'name' => 'Commentaire', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             )
         ),
         
@@ -421,7 +444,51 @@ class Model {
                 'gauge' => 'heureTP', //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             )
+        ),
+
+        /*table diplomes*/
+        'Diplômes' => array( //la table dans la base
+            'nom' => array( //nom dans la bdd
+                'name' => 'Nom', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            )
+        ),
+
+        /*table diplomes*/
+        'Types de cours' => array( //la table dans la base
+            'nom' => array( //nom dans la bdd
+                'name' => 'Nom', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            ),
+            'poids' => array( //nom dans la bdd
+                'name' => 'Poids', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            )
+            ),
+
+            /*table diplomes*/
+        'Statuts Enseignant' => array( //la table dans la base
+            'nom' => array( //nom dans la bdd
+                'name' => 'Nom', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            )
         )
+
+
+
+    
         /*fonctionnement pour les tableaux */
     );
 }

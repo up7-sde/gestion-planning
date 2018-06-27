@@ -96,6 +96,7 @@
         <path>/cours/:id</path>
         <controller>CoursPOSTController</controller>
     </route>
+    
     <route>
         <method>GET</method>
         <path>/referentiels/diplomes</path>
@@ -113,11 +114,60 @@
     </route>
     <route>
         <method>GET</method>
+        <path>/referentiels/diplomes/:id</path>
+        <controller>DiplomesGETController</controller>
+    </route>
+    <route>
+        <method>GET</method>
+        <path>/referentiels/statuts/:id</path>
+        <controller>StatutsGETController</controller>
+    </route>
+    <route>
+        <method>GET</method>
+        <path>/referentiels/types/:id</path>
+        <controller>TypesGETController</controller>
+    </route>
+    
+    <route>
+        <method>POST</method>
+        <path>/referentiels/diplomes</path>
+        <controller>DiplomesPOSTController</controller>
+    </route>
+    <route>
+        <method>POST</method>
+        <path>/referentiels/statuts</path>
+        <controller>StatutsPOSTController</controller>
+    </route>
+    <route>
+        <method>POST</method>
+        <path>/referentiels/types</path>
+        <controller>TypesPOSTController</controller>
+    </route>
+    <route>
+        <method>POST</method>
+        <path>/referentiels/diplomes/:id</path>
+        <controller>DiplomesPOSTController</controller>
+    </route>
+    <route>
+        <method>POST</method>
+        <path>/referentiels/statuts/:id</path>
+        <controller>StatutsPOSTController</controller>
+    </route>
+    <route>
+        <method>POST</method>
+        <path>/referentiels/types/:id</path>
+        <controller>TypesPOSTController</controller>
+    </route>
+
+    <route>
+        <method>GET</method>
         <path>/reglages</path>
         <controller>ReglagesGETController</controller>
     </route>
+    
     <redirect>
         <from>/</from>
         <to>/accueil</to>
     </redirect>
+
 </routes>

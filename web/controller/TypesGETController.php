@@ -33,24 +33,24 @@ class TypesGETController extends Controller {
                     $this->title = 'Tous les Types de Cours';
                     
                     $this->data = $this->db->findAll('VueListeType');
-                    $titleButton = array('icon' => 'add', 'action' => '/web/referentiels/types?action=add');
+                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/types?action=add'));
                     $tableAction = '/web/referentiels/types';
                     
                     include('view2/tables.php');
                     break;
 
                 case "add":
-                    $this->pageName = 'Nouvelle Formation';
-                    $this->title = 'Nouvelle Formation';
+                    $this->pageName = 'Nouveau type de cours';
+                    $this->title = 'Nouveau type de cours';
                     $titleButton = null;
                     
                     $this->data = null;
 
                     //(IN p_nom VARCHAR(45), IN p_idDiplome INT)
-                    $formInputs = array('intitule' => null, 
-                                        'idDiplome' => $this->db->findAll('VueLabelDiplome'));
+                    $formInputs = array('intitule' => null,
+                                        'poids' => null);
                     
-                    $formActions = array('form' => '/web/formations', 'back' => '/web/formations?action=show'); 
+                    $formActions = array('form' => '/web/referentiels/types', 'back' => '/web/referentiels/types?action=show'); 
                     $hiddenInput = null;
                     
                     include('view2/forms.php');
@@ -87,15 +87,15 @@ class TypesGETController extends Controller {
                     break;
 
                 case "delete":
-                    var_dump($params['id']);
-                    $id = $params['id'];
-                    $res = $this->db->callProcedure("SupprimerFormation", array("idFormation" => $params['id']));
+                    //var_dump($params['id']);
+                    
+                    $res = $this->db->callProcedure("SupprimerTypeService", array("idTypeService" => $params['id']));
                     if ($res) {
-                        $this->messenger->push(array('status'=>'success', 'message'=>'Success_Formation modifiée'));
+                        $this->messenger->push(array('status'=>'success', 'message'=>'Success_Type de cours supprimé'));
                     } else {
                         $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
                     }
-                    $this->redirect('/formations?action=show');
+                    $this->redirect('/referentiels/types?action=show');
                     break;
                 
                 default:

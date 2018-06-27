@@ -56,7 +56,8 @@ class CoursGETController extends Controller {
                                         'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
                                         'annee' => null, 
                                         'apogee' => $this->db->findAll('VueLabelEnseignement'),
-                                        'nbHeures' => null);
+                                        'nbHeures' => null,
+                                        'commentaire' => null);
                     
                     $formActions = array('form' => '/web/cours', 'back' => '/web/cours?action=show'); 
                     $hiddenInput = null;
@@ -91,7 +92,8 @@ class CoursGETController extends Controller {
                                         'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
                                         'annee' => null,
                                         'apogee' => $this->db->findAll('VueLabelEnseignement'), 
-                                        'nbHeures' => null);
+                                        'nbHeures' => null,
+                                        'commentaire' => null);
                     
                     $hiddenInput = 'idService';
 

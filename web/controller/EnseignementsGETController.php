@@ -51,7 +51,7 @@ class EnseignementsGETController extends Controller {
                     $this->data = null;
                     
                     //(IN p_apogee VARCHAR(45), IN p_intitule VARCHAR(45), IN p_heureCM INT, IN p_heureTP 0000000INT, IN p_semestre INT, IN p_nbGroupes INT, IN p_idFormation INT)
-                    $formInputs = array('apogee' => $this->db->findAll('VueLabelEnseignement'), 
+                    $formInputs = array('apogee2' => $this->db->findAll('VueLabelEnseignement'), 
                                         'intitule' => null, 
                                         'hCM' => null, 
                                         'hTP' => null, 
