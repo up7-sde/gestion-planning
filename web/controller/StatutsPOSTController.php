@@ -5,7 +5,7 @@ include_once('Controller.php');
 /*
  * Modifier un service existant et rediriger vers la liste des services avec un message
  */
-class CoursPOSTController extends Controller {
+class StatutsPOSTController extends Controller {
     public function render($args=null){
         
         /*verifier auth*/
@@ -21,13 +21,13 @@ class CoursPOSTController extends Controller {
         */
         if (!$params){
             var_dump($_POST);
-            $res = $this->db->callProcedure('InsererService', $_POST);
+            $res = $this->db->callProcedure('InsererStatut', $_POST);
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Cours ajouté'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Statut enseignant ajouté'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de l\'ajout d\'un statut enseignant'));                        
             }                 
-            $this->redirect('/cours?action=show');
+            $this->redirect('/referentiels/statuts?action=show');
         /*
         case
         /cours/:id => modifie la ressource :id

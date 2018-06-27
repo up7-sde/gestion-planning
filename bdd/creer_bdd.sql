@@ -803,7 +803,9 @@ DROP VIEW IF EXISTS `sde`.`VueListeStatut` ;
 CREATE VIEW `VueListeStatut` AS
 SELECT
     `sde`.`Statut`.`idStatut` AS id,
-    `sde`.`Statut`.`nom`
+    `sde`.`Statut`.`nom`,
+    `sde`.`Statut`.`heureService`,
+    `sde`.`Statut`.`titulaire`
 FROM `sde`.`Statut`;
 
 DROP VIEW IF EXISTS `sde`.`VueListeType` ;

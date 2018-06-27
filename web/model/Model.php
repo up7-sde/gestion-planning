@@ -483,6 +483,20 @@ class Model {
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
+            ),
+            'heureService' => array( //nom dans la bdd
+                'name' => 'Heures de service', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
+            ),
+            'titulaire' => array( //nom dans la bdd
+                'name' => 'Titulaire', //nom à afficher
+                'type' => 1, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE
             )
         )
 
