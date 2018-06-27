@@ -170,6 +170,12 @@
         <path>/utilisateurs</path>
         <controller>UtilisateursGETController</controller>
     </route>
+
+    <route>
+        <method>GET</method>
+        <path>/profil</path>
+        <controller>ProfilGETController</controller>
+    </route>
     
     <redirect>
         <from>/</from>

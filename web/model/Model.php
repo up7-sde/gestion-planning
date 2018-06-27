@@ -188,6 +188,65 @@ class Model {
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
             'default' => 'Heures de service'
+        ),
+
+
+
+        'idUtilisateur' =>
+        array(
+            'name' => 'idUtilisateur',
+            'alias' => 'id',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'number',
+            'default' => 'id Utilisateur'
+        ),
+        'login' =>
+        array(
+            'name' => 'nom',
+            'alias' => 'Nom',
+            'type' => PDO::PARAM_STR,
+            'inputType' => 'text',
+            'default' => 'Login'
+        ),
+        'email' =>
+        array(
+            'name' => 'email',
+            'alias' => 'Email',
+            'type' => PDO::PARAM_STR,
+            'inputType' => 'text',
+            'default' => 'Email'
+        ),
+        'mdp' =>
+        array(
+            'name' => 'mdp',
+            'alias' => 'Mot de passe',
+            'type' => PDO::PARAM_STR,
+            'inputType' => 'text',
+            'default' => 'Mot de passe'
+        ),
+        'bckColor' =>
+        array(
+            'name' => 'bckColor',
+            'alias' => 'Thème',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'radio',
+            'default' => 'Thème'
+        ),
+        'headerColor' =>
+        array(
+            'name' => 'headerColor',
+            'alias' => 'Couleur',
+            'type' => PDO::PARAM_STR,
+            'inputType' => 'color',
+            'default' => 'Couleur'
+        ),
+        'authLevel' =>
+        array(
+            'name' => 'authLevel',
+            'alias' => 'Est administrateur?',
+            'type' => PDO::PARAM_INT,
+            'inputType' => 'radio',
+            'default' => 'Heures de service'
         )
     );
 

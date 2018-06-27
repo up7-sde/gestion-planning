@@ -255,6 +255,31 @@ class ViewEngine {
                             </div>
                         </div>'; 
                         break;
+
+                    case 'color':
+                        
+                        $inputValue = null;
+                        
+                        if ($data !== null){
+                            if (isset($data[0][$attributes['name']])){
+                                $inputValue = $data[0][$attributes['name']];
+                            } else {
+                                $inputValue = $data[0][$key];
+                            }
+                        }
+
+                        $placeholder = $attributes['default'] ;
+                        
+                        $form = $form . 
+                        '<div class="form-group row">
+                        <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
+                        '</label>
+                            <div class="col-sm-10">
+                                <input name="' . $key . '" type="color" class="form-control" id="'. $key . '" placeholder="" value="">
+                            </div>
+                        </div>';
+                        break;
+
                     case 'text': default: 
 
                         $inputValue = null;
@@ -348,7 +373,7 @@ class ViewEngine {
                 </div>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="/web/utilisateurs?action=show">Utilisateurs</a>
+                <a href="/web/utilisateurs?action=show" class="nav-link">Utilisateurs</a>
                 </li>
                 </ul>
               
@@ -358,7 +383,7 @@ class ViewEngine {
                     <i class="fa fa-user"></i> '. $user['email'] .'
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="#">Modifier</a>
+                      <a href="/web/profil" class="dropdown-item">Mon profil</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/web/auth?action=quit"><i class="fas fa-power-off"></i> Déconnexion</a>
                       </div>

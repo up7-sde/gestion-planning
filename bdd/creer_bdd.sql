@@ -248,7 +248,7 @@ DELIMITER ;
 
 /******************************************************/
 -- procedure ModifierUtilisateur
--- A utiliser par le compte enseignant pour modifier ses infos (mais pas son authLevel)
+-- A utiliser par l'utilsateur pour modifier ses infos (mais pas son authLevel)
 /******************************************************/
 
 DROP procedure IF EXISTS `sde`.`ModifierUtilisateur`;
