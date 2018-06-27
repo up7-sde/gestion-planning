@@ -71,13 +71,15 @@ class ViewEngine {
                             <thead>
                                 <tr>';
 
+                $table = $table . '<th scope="col">Actions</th>';
+                
                 foreach($data[0] as $key => $value){
                     if($key !== 'id' && $model[$key]['show']){
                         $table = $table . '<th scope="col">'. $model[$key]['name'] . '</th>';                        
                     }
                 }
 
-                $table = $table . '<th scope="col">Actions</th>';
+                
                 $table = $table . '</tr></thead>';
 
                 $table = $table . '<tbody>';
@@ -86,6 +88,12 @@ class ViewEngine {
 
                     $table = $table . '<tr>';
                     
+                    $table = $table . 
+                    '<td>
+                        <a class="btn btn-primary btn-xs" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i></a>
+                        <a id="deleteButton" class="btn btn-danger btn-xs" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i></a>
+                    </td>';
+
                     foreach($obs as $key => $value){
                         if($key !== 'id' && $model[$key]['show']){
 
@@ -119,11 +127,7 @@ class ViewEngine {
                         }
                     }
                     
-                    $table = $table . 
-                    '<td>
-                        <a class="btn btn-primary btn-xs" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i> Modifier</a>
-                        <a id="deleteButton" class="btn btn-danger btn-xs" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>
-                    </td>';
+                    
                     
                     $table = $table . '</tr>';
                 }
@@ -412,19 +416,7 @@ class ViewEngine {
                       <a class="dropdown-item" href="/web/auth?action=quit"><i class="fas fa-power-off"></i> Déconnexion</a>
                       </div>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-cog"></i> Réglages
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <div class="dropdown-header">Thème</div>
-                      <a class="dropdown-item" href="/web/reglages?color=bg-info"><div class="ColorDiv bg-info"></div> Blue</a>
-                      <a class="dropdown-item" href="/web/reglages?color=bg-danger"><div class="ColorDiv bg-danger"></div> Red</a>
-                      <a class="dropdown-item" href="/web/reglages?color=bg-success"><div class="ColorDiv bg-success"></div> Green</a>
-                      <a class="dropdown-item" href="/web/reglages?color=bg-warning"><div class="ColorDiv bg-warning"></div> Orange</a>
-                      <a class="dropdown-item" href="/web/reglages?color=bg-dark"><div class="ColorDiv bg-dark"></div> Black</a>
-                    </div>
-                  </li>
+                  
                 </ul>
             </div>
           </div>

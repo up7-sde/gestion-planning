@@ -518,7 +518,14 @@ class Model {
                 'name' => 'Heures CM afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
-                'gauge' => 'heureCM', //avec quelle colonne de la table on fait le pourcentage
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'pctCM' => array( //nom dans la bdd
+                'name' => 'Pct hCM affectées', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureTP' => array( //nom dans la bdd
@@ -532,7 +539,14 @@ class Model {
                 'name' => 'Heures TP afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
-                'gauge' => 'heureTP', //avec quelle colonne de la table on fait le pourcentage
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'pctTP' => array( //nom dans la bdd
+                'name' => 'Pct. hTP afféctées', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             )
         ),

@@ -785,8 +785,10 @@ SELECT
 	`sde`.`VueListeEnseignement`.`formation`,
     COALESCE(SUM(heureCM), 0) AS heureCM,
     COALESCE(SUM(heureCMAffectee),0) AS heureCMAffectee,
+    COALESCE(SUM(heureCMAffectee),0) * 100 / COALESCE(SUM(heureCM), 0) AS pctCM,
 	COALESCE(SUM(hTPtotal),0) AS heureTP,
-    COALESCE(SUM(heureTPAffectee),0) AS heureTPAffectee
+    COALESCE(SUM(heureTPAffectee),0) AS heureTPAffectee,
+    COALESCE(SUM(heureTPAffectee),0) * 100 / COALESCE(SUM(hTPtotal),0) AS pctTP
 -- Basé sur la vue des enseignements
 FROM `sde`.`VueListeEnseignement`
 GROUP BY `sde`.`VueListeEnseignement`.`idFormation`;

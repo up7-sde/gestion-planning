@@ -1,7 +1,8 @@
 $(document).ready(function() {
     $('#table').DataTable({
+        "order": [[ 1, "desc" ]],
         columnDefs: [
-            { targets: [-1], orderable: false}
+            { targets: [0], orderable: false}
         ],
         scrollX: true,
         language: {
@@ -35,8 +36,9 @@ $(document).ready(function() {
         
         initComplete: function(){
             $("div.toolbar")
-               .html(`<div class="ml-4"><a class="btn btn-success btn-sm" href="#" role="button"><i class="fas fa-plus"></i>  Ajouter</a>
-                <a class="btn btn-warning btn-sm" href="#" role="button"><i class="fas fa-download"></i>  Télécharger</a>
+               .html(`<div class="ml-4">
+                <a class="btn btn-success btn-sm" href="#" role="button"><i class="fas fa-plus"></i>  Ajouter</a>
+                <a class="btn btn-warning btn-sm ml-1" href="#" role="button"><i class="fas fa-download"></i>  Télécharger</a>
                </div>`); 
          }  
     });
