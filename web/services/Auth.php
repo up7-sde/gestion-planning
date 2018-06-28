@@ -31,7 +31,7 @@ class Auth {
                 $_SESSION["passport"]["email"] = $user["email"];
                 $_SESSION["passport"]["level"] = intval($user["authLevel"]);
                 $_SESSION["passport"]["color"] = $user["bckColor"];
-                    $this->messenger->push(array('status'=>'success', 'message'=>'Heureux de vous revoir'));
+                    $this->messenger->push(array('status'=>'success', 'message'=>"Content de vous retrouvez " . $user["nom"]));
                 return TRUE;
             }
             else {
