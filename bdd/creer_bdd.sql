@@ -785,18 +785,15 @@ SELECT
 	`sde`.`VueListeEnseignement`.`formation`,
     COALESCE(SUM(heureCM), 0) AS heureCM,
     COALESCE(SUM(heureCMAffectee),0) AS heureCMAffectee,
-    COALESCE(SUM(heureCMAffectee),0) * 100 / COALESCE(SUM(heureCM), 0) AS pctCM,
+    COALESCE(SUM(heureCMAffectee),0) * 100 / COALESCE(SUM(heureCM), 1) AS pctCM,
 	COALESCE(SUM(hTPtotal),0) AS heureTP,
     COALESCE(SUM(heureTPAffectee),0) AS heureTPAffectee,
-    COALESCE(SUM(heureTPAffectee),0) * 100 / COALESCE(SUM(hTPtotal),0) AS pctTP
+    COALESCE(SUM(heureTPAffectee),0) * 100 / COALESCE(SUM(hTPtotal), 1) AS pctTP
 -- Basé sur la vue des enseignements
 FROM `sde`.`VueListeEnseignement`
-INNER JOIN
-    `sde`.`Formation` ON `sde`.`Formation`.`idFormation` = id
 GROUP BY `sde`.`VueListeEnseignement`.`idFormation`;
 
 DROP VIEW IF EXISTS `sde`.`VueListeDiplome` ;
-
 CREATE VIEW `VueListeDiplome` AS
 SELECT
     `sde`.`Diplome`.`idDiplome` AS id,
