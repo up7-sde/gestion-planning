@@ -10,24 +10,25 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <title>View | Table</title>
-    <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
 
   </head>
 
   <body class="bg-light container-fluid d-flex justify-content-center" style="min-height:100%;">
       <!--logo-->
-      
+
       <div class="col-md-4 col-sm-5 align-self-center mt-5">
-      
+
       <h1 style="text-align:center;"><i class="fas fa-2x fa-cube align-self-center"></i></h1>
       <h1 style="font-family: 'Fugaz One', cursive; text-align:center;" class="align-self-center">Admin-Sde</h1>
 
-    
+
       <div class="card align-self-center mb-2 mt-5">
         <div class="card-body">
 
       <h4>Connexion</h4>
 
+      <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
       <hr/>
 
       <form method="post" action="/web/auth">
@@ -53,26 +54,26 @@
       </div>
       </div>
 
-      
+
         <button type="submit" class="btn btn-primary btn-block" class="align-self-center"><i class="fas fa-chevron-right"></i> Se connecter</button>
 
       </form>
-      
+
       </div>
       </div>
 
-     
+
     <div class="mb-5 small">
     <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
   </div>
 
-    
+
       </div>
     </div>
   </div>
 
-   
-    
+
+
     <!-- Optional JavaScript -->
     <!-- Optional JavaScript -->
 

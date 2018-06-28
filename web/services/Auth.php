@@ -18,40 +18,28 @@ class Auth {
     //a voir
     public function login(){
 
-        // Debug , pour l'instant on doit configurer l'env pour que le service db fonctionne
-        $_SESSION["passport"]["level"] = 1;
+        // Looks for a user by name
+        $user = $this->db->getUser(strtoupper($_POST["name"]));
 
-        // Trouver l'utilistateur par son nom
-        $user = $this->db->findOne('Utilisateur', strtoupper($_POST["name"]), "nom", true);
-
-        // Debug, nettoyer les modifs apportées pour le serivce db
-        unset($_SESSION["passport"]["level"]);
-        $this->db->kill();
-
-
-        echo "USER : <br>";
-        var_dump($user);
-
-        // Si on a un user avec ce nom et que le mdp et correspond au hash on remplit le passport
-        if (!empty($user))
+        // Creates a passport if user exists and passwd is valid
+        if ($user)
         {
-            $hash = $user[0]["mdp"];
-            if (password_verify($_POST["password"], $hash))
+            if (password_verify($_POST["password"], $user["mdp"]))
             {
-                $_SESSION["passport"]["id"] = $user[0]["id"];
-                $_SESSION["passport"]["name"] =  $user[0]["nom"];
-                $_SESSION["passport"]["email"] =  $user[0]["email"];
-                $_SESSION["passport"]["level"] =  intval($user[0]["authLevel"]);
-                $_SESSION["passport"]["color"] =  $user[0]["bckColor"];
-                //     $this->messenger->push(array('status'=>'success', 'message'=>'Heureux de vous revoir'));
+                $_SESSION["passport"]["id"] = $user["id"];
+                $_SESSION["passport"]["name"] = $user["nom"];
+                $_SESSION["passport"]["email"] = $user["email"];
+                $_SESSION["passport"]["level"] = intval($user["authLevel"]);
+                $_SESSION["passport"]["color"] = $user["bckColor"];
+                    $this->messenger->push(array('status'=>'success', 'message'=>'Heureux de vous revoir'));
                 return TRUE;
             }
             else {
-                //     $this->messenger->push(array('status'=>'fail', 'message'=>'Mot de passe invalide...'));
+                    $this->messenger->push(array('status'=>'fail', 'message'=>'Mot de passe invalide...'));
             }
         }
         else {
-            //     $this->messenger->push(array('status'=>'fail', 'message'=>'Login invalide...'));
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Login invalide...'));
         }
         return FALSE;
     }

@@ -29,11 +29,19 @@ class Db{
         }
         throw new Exception('problem with session');
     }
-
-    public function getUser($name) {
-        $_SESSION["passeport"]["level"] = 1; // Enables connection before any user is logged
+    // Return a user or false if not found
+    public function getUser($name) {
+        // Pretend to have a connection before any user is logged
+        $_SESSION["passport"]["level"] = 1;
         $this->connect();
-        $this->db->findOne('Utilisateur', strtoupper($name), "nom", true);
+        $user = $this->findOne('Utilisateur', strtoupper($name), "nom", true);
+        // Remove marks of the fake connection
+        unset($_SESSION["passport"]["level"]);
+        $this->kill();
+        if (empty($user))
+            return false;
+        else
+            return $user[0];
     }
 
     public function connect(){

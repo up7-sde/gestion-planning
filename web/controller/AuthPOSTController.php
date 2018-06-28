@@ -8,14 +8,13 @@ class AuthPostController extends Controller  {
 
     public function render($args=null){
         $pageTitle = 'SDE | Login';
-        var_dump('in');
 
         if ($this->auth->login()){
             $to = '/';
         } else {
             $to = '/auth?action=process';
         }
-        
+
         $this->redirect($to);
     }
 }
