@@ -1,15 +1,14 @@
 <?php
 
 class Auth {
-    
+
     //private $sessionStore;
     private $db;
 
-    public function __construct($db){
+    public function __construct($db, $messenger){
         //$this->sessionStore = $sessionStore;7
-        
         $this->db = $db;
-        
+        $this->messenger = $messenger;
     }
 
     /*!!!!!!!*/
@@ -18,27 +17,45 @@ class Auth {
 
     //a voir
     public function login(){
-    
-        //voir en base de données si il y a correspondance
-        //requete attendue => une requette qui renvoie -1 ou la pk de la table 
-        if ($_POST["name"] === "adnls" && $_POST["password"] === "123azerty") {
-            //explicits
-            //mettre la clé de la table users dans les sessions => serialize
-            //c'est tout le delire de passport
-            $_SESSION["passport"]["id"] = 1;
-            $_SESSION["passport"]["name"] = "adnls";
-            $_SESSION["passport"]["email"] = "david.ayache90@gmail.com";
-            $_SESSION["passport"]["level"] = 1;
-            $_SESSION["passport"]["color"] = ' bg-info ';
-            
-            //on met la pk de l'user en db dans les var de session pour pouvoir les retrouver facilement
-            //var_dump($this->router->getRefferer());
-            return TRUE;
-        }
 
+        // Debug , pour l'instant on doit configurer l'env pour que le service db fonctionne
+        $_SESSION["passport"]["level"] = 1;
+
+        // Trouver l'utilistateur par son nom
+        $user = $this->db->findOne('Utilisateur', strtoupper($_POST["name"]), "nom", true);
+
+        // Debug, nettoyer les modifs apportées pour le serivce db
+        unset($_SESSION["passport"]["level"]);
+        $this->db->kill();
+
+
+        echo "USER : <br>";
+        var_dump($user);
+
+        // Si on a un user avec ce nom et que le mdp et correspond au hash on remplit le passport
+        if (!empty($user))
+        {
+            $hash = $user[0]["mdp"];
+            if (password_verify($_POST["password"], $hash))
+            {
+                $_SESSION["passport"]["id"] = $user[0]["id"];
+                $_SESSION["passport"]["name"] =  $user[0]["nom"];
+                $_SESSION["passport"]["email"] =  $user[0]["email"];
+                $_SESSION["passport"]["level"] =  intval($user[0]["authLevel"]);
+                $_SESSION["passport"]["color"] =  $user[0]["bckColor"];
+                //     $this->messenger->push(array('status'=>'success', 'message'=>'Heureux de vous revoir'));
+                return TRUE;
+            }
+            else {
+                //     $this->messenger->push(array('status'=>'fail', 'message'=>'Mot de passe invalide...'));
+            }
+        }
+        else {
+            //     $this->messenger->push(array('status'=>'fail', 'message'=>'Login invalide...'));
+        }
         return FALSE;
     }
-    
+
     public function logout(){
         if (isset($_SESSION)) session_destroy();
     }

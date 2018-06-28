@@ -15,7 +15,7 @@ class Db{
     public function __construct(){
         $this->attributes = Model::$attributes;
     }
-    
+
     private function connectionExists(){
         //check if exists
         return $this->connection != null;
@@ -30,8 +30,13 @@ class Db{
         throw new Exception('problem with session');
     }
 
-    public function connect(){
+    public function getUser($name) {
+        $_SESSION["passeport"]["level"] = 1; // Enables connection before any user is logged
+        $this->connect();
+        $this->db->findOne('Utilisateur', strtoupper($name), "nom", true);
+    }
 
+    public function connect(){
         $this->dbname = getenv('BDD_NOM');
 
         if ($this->getAuthLevel() === 1){
@@ -82,8 +87,8 @@ class Db{
 
         $this->connect();
         /*prepare-execute?*/
-        $res = $this->connection->query("SELECT * FROM " . $entity . 
-                                        " LIMIT " .$limit ." OFFSET ". $offset . 
+        $res = $this->connection->query("SELECT * FROM " . $entity .
+                                        " LIMIT " .$limit ." OFFSET ". $offset .
                                         " ORDER BY " . $orderBy . " " . $asc);
 
         return $res->fetchAll(PDO::FETCH_ASSOC);
@@ -114,15 +119,15 @@ class Db{
         if (!$autocommit) $this->connection->beginTransaction();
 
         //tout se joue sur la pos des args!!!
-        $sql = "CALL $name(";        
-        
+        $sql = "CALL $name(";
+
         /*on créé la str à partir des args*/
         foreach($args as $key => $value){
           $sql = $sql.':'.$key.',';
         }
         $sql = trim($sql, ',');
         $sql = $sql.')';
-        
+
         $statement = $this->connection->prepare($sql);
 
         /*remplacer par un while ;)*/
@@ -135,20 +140,20 @@ class Db{
 
         try{
             $res = $statement->execute();
-            
+
             if ($statement->rowCount()){
                 /*en attendant l'autocommit*/
                 if (!$autocommit) $this->connection->commit();
                 return TRUE;
             };
             /*en attendant l'autocommit*/
-            if (!$autocommit) $this->connection->rollBack();        
+            if (!$autocommit) $this->connection->rollBack();
             return FALSE;
-        
+
         } catch (Exception $e) {
             return FALSE;
         }
-        
+
     }
 
     public function kill(){

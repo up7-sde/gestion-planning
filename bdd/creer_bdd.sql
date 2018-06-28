@@ -203,7 +203,7 @@ DROP TABLE IF EXISTS `sde`.`Utilisateur` ;
 
 CREATE TABLE `sde`.`Utilisateur`(
   `idUtilisateur` INT NOT NULL AUTO_INCREMENT,
-  `nom` VARCHAR(45) NOT NULL,
+  `nom` VARCHAR(45) NOT NULL UNIQUE,
   `email` VARCHAR(45) NOT NULL,
   `mdp` VARCHAR(60) NOT NULL,
   `bckColor` VARCHAR(45) NOT NULL,
@@ -791,6 +791,8 @@ SELECT
     COALESCE(SUM(heureTPAffectee),0) * 100 / COALESCE(SUM(hTPtotal),0) AS pctTP
 -- Basé sur la vue des enseignements
 FROM `sde`.`VueListeEnseignement`
+INNER JOIN
+    `sde`.`Formation` ON `sde`.`Formation`.`idFormation` = id
 GROUP BY `sde`.`VueListeEnseignement`.`idFormation`;
 
 DROP VIEW IF EXISTS `sde`.`VueListeDiplome` ;
@@ -896,15 +898,17 @@ SELECT
 FROM
 	`sde`.`TypeService`;
 SET SQL_MODE = '';
-GRANT USAGE ON *.* TO admin;
- DROP USER admin;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+
+
+/******************************************************/
+-- Création des USER
+/******************************************************/
+
+DROP USER admin;
 CREATE USER 'admin' IDENTIFIED BY 'mdpadmin';
 
-SET SQL_MODE = '';
-GRANT USAGE ON *.* TO enseignant;
- DROP USER enseignant;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+DROP USER enseignant;
 CREATE USER 'enseignant' IDENTIFIED BY 'mdpenseignant';
 
 /******************************************************/
@@ -1216,9 +1220,9 @@ VALUES
 /******************************************************/
 INSERT INTO `sde`.`Utilisateur` (nom, email, authLevel, mdp, bckColor, headerColor)
 VALUES
-    ("CHRISTOPHE", "CRICRI@MAIL.COM", 1, "monmotdepasshashéde60CHAR", "yellow", "blue"),
-    ("JEAN-LOUIS", "JEAN-LOUIS@MAIL.COM", 0, "monmotdepasshashéde60CHAR", "yellow", "blue"),
-    ("FRED", "FRED@MAIL.COM", 0, "monmotdepasshashéde60CHAR", "yellow", "blue");
+    ("CHRISTOPHE", "CRICRI@MAIL.COM", 1, "$2y$11$guNGGhQxFld2bZRn6XxWRONmTP3bSKB/ZKzAO.0x5UOT7cvLXjBxW", " bg-info ", " bg-info "),
+    ("JEAN-LOUIS", "JEAN-LOUIS@MAIL.COM", 0, "$2y$11$guNGGhQxFld2bZRn6XxWRONmTP3bSKB/ZKzAO.0x5UOT7cvLXjBxW", " bg-info ", " bg-info "),
+    ("FRED", "FRED@MAIL.COM", 0, "$2y$11$guNGGhQxFld2bZRn6XxWRONmTP3bSKB/ZKzAO.0x5UOT7cvLXjBxW", " bg-info ", " bg-info ");
 
 -- Debug : mysql en mode autocommit par défaut à supprimer
 COMMIT;
