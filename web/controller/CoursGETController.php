@@ -34,8 +34,8 @@ class CoursGETController extends Controller {
                     $this->data = $this->db->findAll('VueListeService');
                     
                     $titleButton = array(
-                        array('icon' => 'add', 'action' => '/web/cours?action=add'),
-                        array('icon' => 'download', 'action' => '/web/cours?action=download')
+                        array('icon' => 'add', 'action' => '/web/cours?action=add', 'enabled'=> $this->isUserAdmin()),
+                        array('icon' => 'download', 'action' => '/web/cours?action=download', 'enabled'=> $this->isUserAdmin())
                         
                     );
 

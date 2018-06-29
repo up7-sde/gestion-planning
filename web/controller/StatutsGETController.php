@@ -33,8 +33,8 @@ class StatutsGETController extends Controller {
                     $this->title = 'Tous les Statuts Enseignant';
                     
                     $this->data = $this->db->findAll('VueListeStatut');
-                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=add'),
-                                         array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=download'));
+                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=add', 'enabled'=> $this->isUserAdmin()),
+                                         array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=download', 'enabled'=> $this->isUserAdmin()));
                     
                     $tableAction = '/web/referentiels/statuts';
                     //var_dump($_SESSION['message']);

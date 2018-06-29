@@ -36,7 +36,7 @@ $(document).ready(()=> {
         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 mt-2'p>>",
         
         initComplete: function(){
-            console.log();
+            
             if (data[0]["enabled"]){
                 $("div.toolbar")
                 .html(`<div class="ml-2">

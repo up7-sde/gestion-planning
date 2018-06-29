@@ -22,7 +22,7 @@ class UtilisateursPOSTController extends Controller {
         if (!$params){
 
             if(isset($_POST['mdp'])) $_POST['mdp'] = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
-
+            
             $res = $this->db->callProcedure('InsererUtilisateur', $_POST);
 
             if ($res) {

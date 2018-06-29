@@ -33,8 +33,8 @@ class TypesGETController extends Controller {
                     $this->title = 'Tous les Types de Cours';
                     
                     $this->data = $this->db->findAll('VueListeType');
-                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/types?action=add'),
-                                        array('icon' => 'download', 'action' => '/web/referentiels/diplomes?action=download'));
+                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/types?action=add', 'enabled'=> $this->isUserAdmin()),
+                                        array('icon' => 'download', 'action' => '/web/referentiels/diplomes?action=download', 'enabled'=> $this->isUserAdmin()));
                     $tableAction = '/web/referentiels/types';
                     
                     include('view2/tables.php');

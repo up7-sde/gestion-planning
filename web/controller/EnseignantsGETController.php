@@ -32,8 +32,8 @@ class EnseignantsGETController extends Controller {
                     $this->data = $this->db->findAll('VueListeEnseignant');
                     
                     $titleButton = array(
-                        array('icon' => 'add', 'action' => '/web/enseignants?action=add'),
-                        array('icon' => 'download', 'action' => '/web/enseignants?action=download')
+                        array('icon' => 'add', 'action' => '/web/enseignants?action=add', 'enabled'=> $this->isUserAdmin()),
+                        array('icon' => 'download', 'action' => '/web/enseignants?action=download','enabled'=> $this->isUserAdmin())
                         
                     );
 

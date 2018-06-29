@@ -129,8 +129,11 @@ class ViewEngine {
             return $table;
         }
 
-        public function generateForm($inputs, $actions = array('form'=>'/web', 'back' => '/web'), $data=null, $hiddenInput = null){        
+        public function generateForm($inputs = null , $actions = null, $data = null, $hiddenInput = null, $admin = FALSE){        
             //var_dump($data);   
+
+            (!$admin)? $status = "disabled": $status = null;
+
             $form = null;
             $form = $form . '<form method="POST" action="'. $actions['form'] .'">';
             
@@ -158,7 +161,7 @@ class ViewEngine {
                             <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . '</label>
                             <div class="col-sm-10 ">
                                 <input name="' . $key . '" type="text" class="form-control" id="'
-                                . $key . '" placeholder="'.$placeholder.'" value="'.$inputValue.'">
+                                . $key . '" placeholder="'.$placeholder.'" value="'.$inputValue.'" '. $status.'>
                             </div>
                         </div>'; 
                         break;
@@ -183,13 +186,13 @@ class ViewEngine {
                                 <legend class="col-form-label col-sm-2 pt-0">' .$attributes['alias']. '</legend>
                                 <div class="col-sm-10">
                                     <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'1" value="'.$value[0]['id'].'" '.$checked0.'>
+                                        <input class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'1" value="'.$value[0]['id'].'" '.$checked0.' '.$status.'>
                                         <label class="custom-control-label" for="'.$key.'1">
                                             '.$value[0]['nom'].'
                                         </label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'2" value="'.$value[1]['id'].'" '.$checked1.'>
+                                        <input class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'2" value="'.$value[1]['id'].'" '.$checked1.' '.$status.'>
                                         <label class="custom-control-label" for="'.$key.'2">
                                         '.$value[1]['nom'].'
                                         </label>
@@ -220,7 +223,7 @@ class ViewEngine {
                         '<div class="form-group row">
                             <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . '</label>
                             <div class="col-sm-10">
-                                <select class="form-control custom-select" name="'.$key.'">' .
+                                <select class="form-control custom-select" name="'.$key.'" '.$status.'>' .
                                     $inputOptions .
                                 '</select>
                             </div>
@@ -245,7 +248,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <textarea name="' . $key . '" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'">'. $inputValue .'</textarea>
+                                <textarea '.$status.' name="' . $key . '" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'">'. $inputValue .'</textarea>
                             </div>
                         </div>'; 
                         break;
@@ -269,7 +272,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input name="' . $key . '" type="color" class="form-control" id="'. $key . '" placeholder="" value="'. $inputValue .'">
+                                <input '.$status.' name="' . $key . '" type="color" class="form-control" id="'. $key . '" placeholder="" value="'. $inputValue .'">
                             </div>
                         </div>';
                         break;
@@ -293,7 +296,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input name="' . $key . '" type="password" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                                <input '.$status.' name="' . $key . '" type="password" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
                             </div>
                         </div>';
                         break;
@@ -317,7 +320,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input name="' . $key . '" type="text" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                                <input '. $status .' name="' . $key . '" type="text" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
                             </div>
                         </div>'; 
                         break;
@@ -329,7 +332,7 @@ class ViewEngine {
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ajouter</button>
+                        <button ' .$status. ' id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ok</button>
                         <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
@@ -338,8 +341,8 @@ class ViewEngine {
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Modifier</button>
-                        <a href="'. $actions['delete'] . '" role="button" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Supprimer</a>                        
+                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ok</button>
+                        <a href="'. $actions['delete'] . '" role="button" class="btn btn-danger btn-sm '. $status .'"><i class="far fa-trash-alt"></i> Supprimer</a>                        
                         <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
                         </div>
                     </div>
@@ -348,7 +351,7 @@ class ViewEngine {
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Modifier</button>
+                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ok</button>
                         <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
@@ -365,6 +368,9 @@ class ViewEngine {
 
         public function generateNavbar($active, $user){
             
+            $user['level'] === 1? $status = null: $status = "disabled";
+            $status === null? $href = "/web/utilisateurs?action=show" : $href = "#";
+
             $nav =     
             '<nav class="navbar fixed-top navbar-expand-lg navbar-dark shadow" style="background-color:'. $user['color'] . '">
             <div class="container-fluid">
@@ -408,7 +414,7 @@ class ViewEngine {
                 </li>
     
                 <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle '.$status.'" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Routines
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -416,7 +422,7 @@ class ViewEngine {
                 </div>
                 </li>
                 <li class="nav-item">
-                <a href="/web/utilisateurs?action=show" class="nav-link">Utilisateurs</a>
+                <a href="'.$href.'" class="nav-link '. $status .'">Utilisateurs</a>
                 </li>
                 </ul>
               

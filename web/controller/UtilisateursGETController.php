@@ -34,8 +34,8 @@ class UtilisateursGETController extends Controller {
                     $this->data = $this->db->findAll('VueListeUtilisateur');
                     
                     $titleButton = array(
-                        array('icon' => 'add', 'action' => '/web/utilisateurs?action=add'),
-                        array('icon' => 'download', 'action' => '/web/utilisateurs?action=download')
+                        array('icon' => 'add', 'action' => '/web/utilisateurs?action=add', 'enabled'=> $this->isUserAdmin()),
+                        array('icon' => 'download', 'action' => '/web/utilisateurs?action=download', 'enabled'=> $this->isUserAdmin())
                         
                     );
 
@@ -56,7 +56,6 @@ class UtilisateursGETController extends Controller {
                         'login' => null,
                         'email' => null,
                         'mdp' => null,
-                        'bckColor' => array(array('id'=> 'clair', 'nom'=>'Clair'), array('id'=> 'foncé', 'nom'=>'Foncé')),
                         'headerColor' => null,
                         'authLevel' => array(array('id'=> 0, 'nom'=>'NON'), array('id'=> 1, 'nom'=>'OUI')),
                     );

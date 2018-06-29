@@ -33,8 +33,8 @@ class EnseignementsGETController extends Controller {
                     $this->data = $this->db->findAll('VueListeEnseignement');
                     
                     $titleButton = array(
-                        array('icon' => 'add', 'action' => '/web/enseignements?action=add'),
-                        array('icon' => 'download', 'action' => '/web/enseignements?action=download')
+                        array('icon' => 'add', 'action' => '/web/enseignements?action=add', 'enabled'=> $this->isUserAdmin()),
+                        array('icon' => 'download', 'action' => '/web/enseignements?action=download', 'enabled'=> $this->isUserAdmin())
                         
                     );
 

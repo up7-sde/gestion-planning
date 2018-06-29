@@ -225,10 +225,10 @@ DROP procedure IF EXISTS `sde`.`InsererUtilisateur`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `InsererUtilisateur` (IN p_nom VARCHAR(45),IN p_email VARCHAR(45), IN p_mdp VARCHAR(60), IN p_bckColor VARCHAR(45), IN p_headerColor VARCHAR(45), IN p_authLevel TINYINT)
+CREATE PROCEDURE `InsererUtilisateur` (IN p_nom VARCHAR(45),IN p_email VARCHAR(45), IN p_mdp VARCHAR(60), IN p_headerColor VARCHAR(45), IN p_authLevel TINYINT)
 BEGIN
-	INSERT INTO `sde`.`Utilisateur` (nom, email, authLevel, mdp, bckColor, headerColor)
-    VALUES (UPPER(p_nom), p_email, p_authLevel, p_mdp, p_bckColor, p_headerColor);
+	INSERT INTO `sde`.`Utilisateur` (nom, email, authLevel, mdp, headerColor)
+    VALUES (UPPER(p_nom), p_email, p_authLevel, p_mdp, p_headerColor);
 END;$$
 DELIMITER ;
 
@@ -827,7 +827,6 @@ SELECT
     `sde`.`Utilisateur`.`nom`,
     `sde`.`Utilisateur`.`email`,
     `sde`.`Utilisateur`.`mdp`,
-    `sde`.`Utilisateur`.`bckColor`,
     `sde`.`Utilisateur`.`headerColor`,
     `sde`.`Utilisateur`.`authLevel`
 FROM `sde`.`Utilisateur`;
