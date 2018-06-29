@@ -22,8 +22,8 @@ class Controller {
     public function __construct(){
         /*args de la db ici? => non*/
         $this->db = new Db("localhost",  "root", "123azerty", "sakila");
-        $this->auth = new Auth($this->db);
         $this->messenger = new Messenger();
+        $this->auth = new Auth($this->db, $this->messenger);
         $this->viewEngine = new ViewEngine();
         $this->fileMaker = new FileMaker();
     }
@@ -37,7 +37,7 @@ class Controller {
     public function isUserAuthenticated(){
         return isset($_SESSION) && isset($_SESSION['passport']);
     }
-    
+
     public function isUserAdmin(){
         return isset($_SESSION) && isset($_SESSION['passport']) && $_SESSION['passport']['level'] === 1;
     }
@@ -87,7 +87,7 @@ class Controller {
     }
 
     public function getLastUrl(){
-        return isset($_SESSION["history"][count($_SESSION["history"])-2])? 
+        return isset($_SESSION["history"][count($_SESSION["history"])-2])?
             $_SESSION["history"][count($_SESSION["history"])-2] : '/';
     }
 

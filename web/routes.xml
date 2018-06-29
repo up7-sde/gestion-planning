@@ -9,12 +9,12 @@
     <route>
         <method>GET</method>
         <path>/auth</path>
-        <controller>AuthGetController</controller>
+        <controller>AuthGETController</controller>
     </route>
     <route>
         <method>POST</method>
         <path>/auth</path>
-        <controller>AuthPostController</controller>
+        <controller>AuthPOSTController</controller>
     </route>
     <route>
         <method>GET</method>
@@ -96,7 +96,7 @@
         <path>/cours/:id</path>
         <controller>CoursPOSTController</controller>
     </route>
-    
+
     <route>
         <method>GET</method>
         <path>/referentiels/diplomes</path>
@@ -127,7 +127,7 @@
         <path>/referentiels/types/:id</path>
         <controller>TypesGETController</controller>
     </route>
-    
+
     <route>
         <method>POST</method>
         <path>/referentiels/diplomes</path>
@@ -187,7 +187,7 @@
         <path>/routines/nvelleannee</path>
         <controller>RoutinesGETController</controller>
     </route>
-    
+
     <redirect>
         <from>/</from>
         <to>/accueil</to>

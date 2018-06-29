@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,32 +9,46 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
     <link href="/web/static/css/style.css" rel="stylesheet"/>
 
     <title><?=$this->title?></title>
   </head>
   <body style="padding-top:56px;" class="bg-light">
   <div class="container">
+<<<<<<< HEAD
   
   
+=======
+
+  <h4 class="mt-5 font-weight-bold"><i class="fa fa-home"></i> Accueil</h4>
+
+>>>>>>> 6b4863e7ad97bd3a635093945f2a5e1369b35200
   <div class="card align-self-center mt-4 mb-2">
         <div class="card-body">
 
-        
+
         <?=$this->viewEngine->generateNavbar($this->namespace, $user);?>
-       
+
         <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
+<<<<<<< HEAD
        
         <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
 
         <div class="d-flex flex-row justify-content-center my-5">
             <div id="donut" data-donut="75"></div> 
+=======
+
+        <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
+
+        <div class="d-flex flex-row justify-content-center my-5">
+            <div id="donut" data-donut="42"></div>
+>>>>>>> 6b4863e7ad97bd3a635093945f2a5e1369b35200
         </div>
 
 
 
-        
+
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="https://d3js.org/d3.v3.min.js"></script>
         <script src="/web/static/javascript/pie.js"></script>
@@ -42,8 +56,8 @@
       </div>
     </div>
 
-   
-      
+
+
       <!--card avec un donut chiffre clé-->
 
       <div class="mb-5 small">

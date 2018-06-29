@@ -15,7 +15,7 @@ class Db{
     public function __construct(){
         $this->attributes = Model::$attributes;
     }
-    
+
     private function connectionExists(){
         //check if exists
         return $this->connection != null;
@@ -29,9 +29,22 @@ class Db{
         }
         return FALSE;
     }
+    // Return a user or false if not found
+    public function getUser($name) {
+        // Pretend to have a connection before any user is logged
+        $_SESSION["passport"]["level"] = 1;
+        $this->connect();
+        $user = $this->findOne('Utilisateur', strtoupper($name), "nom", true);
+        // Remove marks of the fake connection
+        unset($_SESSION["passport"]["level"]);
+        $this->kill();
+        if (empty($user))
+            return false;
+        else
+            return $user[0];
+    }
 
     public function connect(){
-
         $this->dbname = getenv('BDD_NOM');
 
         if ($this->getAuthLevel() === 1){
@@ -70,7 +83,28 @@ class Db{
     /*
     pour la pagination des tableaux
     */
+<<<<<<< HEAD
     
+=======
+
+    public function findChunk($entity, $limit, $offset){
+        $this->connect();
+        /*prepare-execute?*/
+        $res = $this->connection->query("SELECT * FROM " . $entity . " LIMIT " .$limit ." OFFSET ". $offset);
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function findChunkAndOrder($entity, $limit, $offset, $orderBy, $asc = ""){
+
+        $this->connect();
+        /*prepare-execute?*/
+        $res = $this->connection->query("SELECT * FROM " . $entity .
+                                        " LIMIT " .$limit ." OFFSET ". $offset .
+                                        " ORDER BY " . $orderBy . " " . $asc);
+
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
+>>>>>>> 6b4863e7ad97bd3a635093945f2a5e1369b35200
     /*
      * Obtenir un enregistrement d'un item (Formation, enseignant, etc.)
      */
@@ -107,15 +141,15 @@ class Db{
         if (!$autocommit) $this->connection->beginTransaction();
 
         //tout se joue sur la pos des args!!!
-        $sql = "CALL $name(";        
-        
+        $sql = "CALL $name(";
+
         /*on créé la str à partir des args*/
         foreach($args as $key => $value){
           $sql = $sql.':'.$key.',';
         }
         $sql = trim($sql, ',');
         $sql = $sql.')';
-        
+
         $statement = $this->connection->prepare($sql);
 
         /*remplacer par un while ;)*/
@@ -131,20 +165,20 @@ class Db{
         
         try{
             $res = $statement->execute();
-            
+
             if ($statement->rowCount()){
                 /*en attendant l'autocommit*/
                 if (!$autocommit) $this->connection->commit();
                 return TRUE;
             };
             /*en attendant l'autocommit*/
-            if (!$autocommit) $this->connection->rollBack();        
+            if (!$autocommit) $this->connection->rollBack();
             return FALSE;
-        
+
         } catch (Exception $e) {
             return FALSE;
         }
-        
+
     }
 
     public function kill(){
