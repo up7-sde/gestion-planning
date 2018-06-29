@@ -17,7 +17,6 @@ class Auth {
 
     //a voir
     public function login(){
-<<<<<<< HEAD
         
     $user = $this->db->findOneUser($_POST["email"]);
         
@@ -40,8 +39,6 @@ class Auth {
             //var_dump($this->router->getRefferer());
             return TRUE;
         }
-=======
->>>>>>> 6b4863e7ad97bd3a635093945f2a5e1369b35200
 
         // Looks for a user by name
         $user = $this->db->getUser(strtoupper($_POST["name"]));
