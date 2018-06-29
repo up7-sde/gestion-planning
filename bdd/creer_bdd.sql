@@ -894,18 +894,15 @@ SELECT
 	`sde`.`TypeService`.`nom`
 FROM
 	`sde`.`TypeService`;
-SET SQL_MODE = '';
-
-
 
 /******************************************************/
 -- Création des USER
 /******************************************************/
 
-DROP USER admin;
+DROP USER IF EXISTS admin;
 CREATE USER 'admin' IDENTIFIED BY 'mdpadmin';
 
-DROP USER enseignant;
+DROP USER IF EXISTS enseignant;
 CREATE USER 'enseignant' IDENTIFIED BY 'mdpenseignant';
 
 /******************************************************/
@@ -916,7 +913,7 @@ CREATE USER 'enseignant' IDENTIFIED BY 'mdpenseignant';
 GRANT SELECT ON `sde`.* TO 'enseignant';
 GRANT SELECT ON `sde`.* TO 'admin';
 
--- Donner les droits d'exécution sur les procédures à l'admin
+-- Donner les droits d'exécution sur les procédures à l'enseignant
 GRANT EXECUTE ON PROCEDURE `sde`.`ModifierUtilisateur` TO 'enseignant';
 
 -- Donner les droits d'exécution sur les procédures à l'admin
