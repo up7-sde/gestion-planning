@@ -7,10 +7,6 @@ include_once('Controller.php');
 class AuthPostController extends Controller  {
 
     public function render($args=null){
-<<<<<<< HEAD
-=======
-        $pageTitle = 'SDE | Login';
->>>>>>> 6b4863e7ad97bd3a635093945f2a5e1369b35200
 
         if ($this->auth->login()){
             $user = $this->getUserInfos();

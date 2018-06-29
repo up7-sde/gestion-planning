@@ -29,11 +29,6 @@
       <h4>Connexion</h4>
 
       <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
-<<<<<<< HEAD
-
-=======
-      <hr/>
->>>>>>> 6b4863e7ad97bd3a635093945f2a5e1369b35200
 
       <form method="post" action="/web/auth">
 

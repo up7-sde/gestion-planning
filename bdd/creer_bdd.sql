@@ -203,13 +203,8 @@ DROP TABLE IF EXISTS `sde`.`Utilisateur` ;
 
 CREATE TABLE `sde`.`Utilisateur`(
   `idUtilisateur` INT NOT NULL AUTO_INCREMENT,
-<<<<<<< HEAD
   `nom` VARCHAR(45) NOT NULL ,
   `email` VARCHAR(45) NOT NULL UNIQUE,
-=======
-  `nom` VARCHAR(45) NOT NULL UNIQUE,
-  `email` VARCHAR(45) NOT NULL,
->>>>>>> 6b4863e7ad97bd3a635093945f2a5e1369b35200
   `mdp` VARCHAR(60) NOT NULL,
   `bckColor` VARCHAR(45) NOT NULL,
   `headerColor` VARCHAR(45) NOT NULL,
@@ -793,17 +788,10 @@ SELECT
 	`sde`.`VueListeEnseignement`.`formation`,
     COALESCE(SUM(heureCM), 0) AS heureCM,
     COALESCE(SUM(heureCMAffectee),0) AS heureCMAffectee,
-<<<<<<< HEAD
     CONCAT(ROUND(COALESCE(SUM(heureCMAffectee),0) * 100 / COALESCE(SUM(heureCM), 1),0), "%") AS pctCM,
 	COALESCE(SUM(hTPtotal),0) AS heureTP,
     COALESCE(SUM(heureTPAffectee),0) AS heureTPAffectee,
     CONCAT(ROUND(COALESCE(SUM(heureTPAffectee),0) * 100 / COALESCE(SUM(hTPtotal), 1),0), "%") AS pctTP
-=======
-    COALESCE(SUM(heureCMAffectee),0) * 100 / COALESCE(SUM(heureCM), 1) AS pctCM,
-	COALESCE(SUM(hTPtotal),0) AS heureTP,
-    COALESCE(SUM(heureTPAffectee),0) AS heureTPAffectee,
-    COALESCE(SUM(heureTPAffectee),0) * 100 / COALESCE(SUM(hTPtotal), 1) AS pctTP
->>>>>>> 6b4863e7ad97bd3a635093945f2a5e1369b35200
 -- Basé sur la vue des enseignements
 FROM `sde`.`VueListeEnseignement`
 GROUP BY `sde`.`VueListeEnseignement`.`idFormation`;
@@ -909,28 +897,18 @@ SELECT
 	`sde`.`TypeService`.`nom`
 FROM
 	`sde`.`TypeService`;
-<<<<<<< HEAD
 SET SQL_MODE = '';
 
 
-=======
->>>>>>> 6b4863e7ad97bd3a635093945f2a5e1369b35200
 
 /******************************************************/
 -- Création des USER
 /******************************************************/
 
-<<<<<<< HEAD
 DROP USER admin;
 CREATE USER 'admin' IDENTIFIED BY 'mdpadmin';
 
 DROP USER enseignant;
-=======
-DROP USER IF EXISTS admin;
-CREATE USER 'admin' IDENTIFIED BY 'mdpadmin';
-
-DROP USER IF EXISTS enseignant;
->>>>>>> 6b4863e7ad97bd3a635093945f2a5e1369b35200
 CREATE USER 'enseignant' IDENTIFIED BY 'mdpenseignant';
 
 /******************************************************/
@@ -1242,15 +1220,9 @@ VALUES
 /******************************************************/
 INSERT INTO `sde`.`Utilisateur` (nom, email, authLevel, mdp, bckColor, headerColor)
 VALUES
-<<<<<<< HEAD
     ("David", "david.ayache90@gmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000"),
     ("Rémi", "remidlnn@gmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000"),
     ("Prof", "prof@gmail.com", 0, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000");
-=======
-    ("CHRISTOPHE", "CRICRI@MAIL.COM", 1, "$2y$11$guNGGhQxFld2bZRn6XxWRONmTP3bSKB/ZKzAO.0x5UOT7cvLXjBxW", " bg-info ", " bg-info "),
-    ("JEAN-LOUIS", "JEAN-LOUIS@MAIL.COM", 0, "$2y$11$guNGGhQxFld2bZRn6XxWRONmTP3bSKB/ZKzAO.0x5UOT7cvLXjBxW", " bg-info ", " bg-info "),
-    ("FRED", "FRED@MAIL.COM", 0, "$2y$11$guNGGhQxFld2bZRn6XxWRONmTP3bSKB/ZKzAO.0x5UOT7cvLXjBxW", " bg-info ", " bg-info ");
->>>>>>> 6b4863e7ad97bd3a635093945f2a5e1369b35200
 
 -- Debug : mysql en mode autocommit par défaut à supprimer
 COMMIT;
