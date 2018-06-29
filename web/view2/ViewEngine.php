@@ -111,7 +111,7 @@ class ViewEngine {
                             /**alignement */
                             $model[$key]['type'] === 1? $align = "tdTxt" : $align = "tdNb";
                             
-                            if ($value == "0" || $value == "0%" || $value === null) {$innerHtml = "-";} else {$innerHtml = $value;}
+                            if (($value == "0" || $value == "0%" || $value === null) && $model[$key]['type']===0) {$innerHtml = "-";} else {$innerHtml = $value;}
                             /*création de la données ac align, valeur et eventuellement gauge*/
                             $table = $table . '<td class="'. $align .'">'. $innerHtml .'</td>';
                         }
@@ -129,10 +129,10 @@ class ViewEngine {
             return $table;
         }
 
-        public function generateForm($inputs = null , $actions = null, $data = null, $hiddenInput = null, $admin = FALSE){        
+        public function generateForm($inputs = null , $actions = null, $data = null, $hiddenInput = null, $admin = FALSE, $pageType = null){        
             //var_dump($data);   
 
-            (!$admin)? $status = "disabled": $status = null;
+            !$admin && $pageType !== 'Profil'? $status = "disabled": $status = null;
 
             $form = null;
             $form = $form . '<form method="POST" action="'. $actions['form'] .'">';
@@ -475,8 +475,8 @@ class ViewEngine {
         }
 
         public function generateTitle($str){
-
-            return '<h4 class="mb-4">' . $str . '</h4>';
+            
+            return '<h4 class="mb-4"> ' . $str . '</h4>';
                     
         }
 }

@@ -31,6 +31,7 @@ class FormationsGETController extends Controller {
             switch ($extraParams['action']) {
                 case "show":
                     // Get sans argument : vue de la liste
+                    $this->pageType = 'Table';
                     $this->title = 'Toutes les Formations';
                     
                     $this->data = $this->db->findAll('VueListeFormation');
@@ -47,7 +48,7 @@ class FormationsGETController extends Controller {
                     break;
 
                 case "add":
-                    $this->pageName = 'Nouvelle Formation';
+                    $this->pageType = 'New';
                     $this->title = 'Nouvelle Formation';
                    
                     $titleButton = null;
@@ -84,7 +85,7 @@ class FormationsGETController extends Controller {
             switch ($extraParams['action']) {
                 
                 case "edit":
-                    
+                    $this->pageType = 'Edit';
                     $this->title = 'Modification de la formation n°'.$params['id'];
                     
                     $formInputs = array('intitule' => null, 'idDiplome' => $this->db->findAll('VueLabelDiplome'));

@@ -24,7 +24,7 @@
 
         <?=$this->viewEngine->generateNavbar($this->namespace, $user);?>
 
-        <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
+        <?=$this->viewEngine->generateTitle($this->title);?>
        
         <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
 

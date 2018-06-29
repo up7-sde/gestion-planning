@@ -30,6 +30,7 @@ class StatutsGETController extends Controller {
             switch ($extraParams['action']) {
                 case "show":
                     // Get sans argument : vue de la liste
+                    $this->pageType = 'Table';
                     $this->title = 'Tous les Statuts Enseignant';
                     
                     $this->data = $this->db->findAll('VueListeStatut');
@@ -42,7 +43,7 @@ class StatutsGETController extends Controller {
                     break;
 
                 case "add":
-                    $this->pageName = 'Nouveau statut enseignant';
+                    $this->pageType = 'New';
                     $this->title = 'Nouveau statut enseignant';
                     $titleButton = null;
                     
@@ -73,7 +74,7 @@ class StatutsGETController extends Controller {
                 
                 case "edit":
                     
-                //(IN p_idFormation INT, IN p_nom VARCHAR(45), IN p_idDiplome INT)
+                    $this->pageType = 'Edit';
                     $this->title = 'Modification de la formation n°'.$params['id'];
 
                     $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');

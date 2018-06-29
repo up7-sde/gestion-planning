@@ -29,8 +29,8 @@ class UtilisateursGETController extends Controller {
             switch ($extraParams['action']) {
                 case "show":
                     // Get sans argument : vue de la liste
-                   
-                    $this->title = 'Utilisateurs';
+                    $this->pageType = 'Table';
+                    $this->title = 'Tous les utilisateurs';
                     $this->data = $this->db->findAll('VueListeUtilisateur');
                     
                     $titleButton = array(
@@ -45,7 +45,8 @@ class UtilisateursGETController extends Controller {
                     break;
 
                 case "add":
-                   
+
+                    $this->pageType = 'New';
                     $this->title = "Nouvel utilisateur";
                     
                     $this->data = null;
@@ -57,7 +58,7 @@ class UtilisateursGETController extends Controller {
                         'email' => null,
                         'mdp' => null,
                         'headerColor' => null,
-                        'authLevel' => array(array('id'=> 0, 'nom'=>'NON'), array('id'=> 1, 'nom'=>'OUI')),
+                        'authLevel' => array(array('id'=> 1, 'nom'=>'Oui'), array('id'=> 0, 'nom'=>'Non')),
                     );
             
                     
@@ -84,9 +85,10 @@ class UtilisateursGETController extends Controller {
             
             switch ($extraParams['action']) {
                 
-                /*case "edit":
-                    
-                    $this->title = 'Cours n°'.$params['id'];
+                case "edit":
+
+                    $this->pageType = 'User';
+                    $this->title = 'Utilisateur n°'.$params['id'];
 
                     $titleButton = array(array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete'));
                     //(IN p_idService INT, IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT)
@@ -105,7 +107,7 @@ class UtilisateursGETController extends Controller {
     
                     include('view2/forms.php');
                     
-                    break;*/
+                    break;
 
                 case "delete":
 

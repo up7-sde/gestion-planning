@@ -29,8 +29,8 @@ class CoursGETController extends Controller {
             switch ($extraParams['action']) {
                 case "show":
                     // Get sans argument : vue de la liste
-                   
-                    $this->title = 'Cours';
+                    $this->pageType = 'Table';
+                    $this->title = 'Tous les cours';
                     $this->data = $this->db->findAll('VueListeService');
                     
                     $titleButton = array(
@@ -45,7 +45,8 @@ class CoursGETController extends Controller {
                     break;
 
                 case "add":
-                   
+
+                    $this->pageType = 'New';
                     $this->title = "Nouveau cours";
                     
                     $this->data = null;
@@ -83,7 +84,8 @@ class CoursGETController extends Controller {
             switch ($extraParams['action']) {
                 
                 case "edit":
-                    
+
+                    $this->pageType = 'Edit';
                     $this->title = 'Cours n°'.$params['id'];
 
                     $titleButton = array(array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete'));

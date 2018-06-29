@@ -65,8 +65,4 @@ $(document).ready(()=> {
              $('input[type="search"]').attr('placeholder', 'Rechercher');
          }  
     });
-
-    
-   
-
 });

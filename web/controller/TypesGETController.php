@@ -30,6 +30,7 @@ class TypesGETController extends Controller {
             switch ($extraParams['action']) {
                 case "show":
                     // Get sans argument : vue de la liste
+                    $this->pageType = 'Table';
                     $this->title = 'Tous les Types de Cours';
                     
                     $this->data = $this->db->findAll('VueListeType');
@@ -41,7 +42,8 @@ class TypesGETController extends Controller {
                     break;
 
                 case "add":
-                    $this->pageName = 'Nouveau type de cours';
+                    $this->pageType = 'New';
+                    
                     $this->title = 'Nouveau type de cours';
                     $titleButton = null;
                     
@@ -72,7 +74,7 @@ class TypesGETController extends Controller {
                 
                 case "edit":
                     
-                //(IN p_idFormation INT, IN p_nom VARCHAR(45), IN p_idDiplome INT)
+                    $this->pageType = 'Edit';
                     $this->title = 'Modification de la formation n°'.$params['id'];
 
                     $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');

@@ -19,7 +19,7 @@ class ProfilGETController extends Controller {
         /*on récupère tous les types de params*/
         /*var_dump($user);
         die();*/
-       
+        $this->pageType = 'Profil';
         $this->title = 'Mon profil';
         
         $titleButton = null;
@@ -28,7 +28,6 @@ class ProfilGETController extends Controller {
             'login' => null,
             'email' => null,
             'mdp' => null,
-            'bckColor' => array(array('id'=> 0, 'nom'=>'Clair'), array('id'=> 1, 'nom'=>'Foncé')),
             'headerColor' => null
         );
 
@@ -40,7 +39,6 @@ class ProfilGETController extends Controller {
                             'nom' => 'adnls',
                             'email' => $user['email'],
                             'mdp' => '123azerty',
-                            'bckColor' => 0,
                             'headerColor' => '#000000',
                             'authLevel' => $user['level']
                         ));                  

@@ -28,6 +28,7 @@ class EnseignementsGETController extends Controller {
             switch ($extraParams['action']) {
                 case "show":
                     // Get sans argument : vue de la liste
+                    $this->pageType = 'Table';
                     $this->title = 'Tous les Enseignements';
                     //$this->data = $this->db->findChunk('VueListeEnseignement', 10, 0);
                     $this->data = $this->db->findAll('VueListeEnseignement');
@@ -44,7 +45,7 @@ class EnseignementsGETController extends Controller {
                     break;
 
                 case "add":
-                    $this->pageName = 'Nouvel Enseignement';
+                    $this->pageType = 'New';
                     $this->title = 'Nouvel Enseignement';
                     $titleButton = null;
                     
@@ -83,7 +84,7 @@ class EnseignementsGETController extends Controller {
             switch ($extraParams['action']) {
                 
                 case "edit":
-                    
+                    $this->pageType = 'Edit';
                     $this->title = 'Enseignement #'.$params['id'];
 
                     $titleButton = array(array('icon' => 'delete', 'action' => '/web/enseignements/'.$params['id'].'?action=delete'));

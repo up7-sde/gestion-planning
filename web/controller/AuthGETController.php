@@ -9,6 +9,8 @@ class AuthGETController extends Controller {
     public function render($args=null){
         
         $this->namespace = 'Auth';
+        $this->title = 'Auth';
+        $this->pageType = 'Auth';
 
         /*on recupère l'action process ou quit*/
         $params = $this->getExtraParams();

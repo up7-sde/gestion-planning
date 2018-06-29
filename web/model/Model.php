@@ -24,7 +24,7 @@ class Model {
             'name' => 'TypeService_idTypeService',
             'alias' => 'Type de Cours',
             'type' => PDO::PARAM_INT,
-            'inputType' => 'radio',
+            'inputType' => 'options',
             'default' => null
         ),
         'annee' =>
@@ -105,7 +105,7 @@ class Model {
             'name' => 'Diplome_idDiplome',
             'alias' => 'Diplôme',
             'type' => PDO::PARAM_INT,
-            'inputType' => 'radio',
+            'inputType' => 'options',
             'default' => 'Diplôme'
         ),
 
@@ -496,7 +496,7 @@ class Model {
             ),
             'diplome' => array( //nom dans la bdd
                 'name' => 'Diplôme', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
