@@ -203,8 +203,8 @@ DROP TABLE IF EXISTS `sde`.`Utilisateur` ;
 
 CREATE TABLE `sde`.`Utilisateur`(
   `idUtilisateur` INT NOT NULL AUTO_INCREMENT,
-  `nom` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
+  `nom` VARCHAR(45) NOT NULL ,
+  `email` VARCHAR(45) NOT NULL UNIQUE,
   `mdp` VARCHAR(60) NOT NULL,
   `bckColor` VARCHAR(45) NOT NULL,
   `headerColor` VARCHAR(45) NOT NULL,
@@ -228,7 +228,7 @@ DELIMITER $$
 CREATE PROCEDURE `InsererUtilisateur` (IN p_nom VARCHAR(45),IN p_email VARCHAR(45), IN p_mdp VARCHAR(60), IN p_bckColor VARCHAR(45), IN p_headerColor VARCHAR(45), IN p_authLevel TINYINT)
 BEGIN
 	INSERT INTO `sde`.`Utilisateur` (nom, email, authLevel, mdp, bckColor, headerColor)
-    VALUES (UPPER(p_nom), UPPER(p_email), p_authLevel, p_mdp, p_bckColor, p_headerColor);
+    VALUES (UPPER(p_nom), p_email, p_authLevel, p_mdp, p_bckColor, p_headerColor);
 END;$$
 DELIMITER ;
 
@@ -690,7 +690,8 @@ SELECT
     IF(`sde`.`Statut`.`titulaire`, "Titulaire", "Non-Titulaire") AS Tituaire,
     `sde`.`Statut`.`nom` AS Categorie,
     `sde`.`Statut`.`heureService` AS HeuresDues,
-    COALESCE(SUM(`sde`.`TypeService`.`poids` * `sde`.`Service`.`nbHeures`), 0) AS HeuresAffectees
+    COALESCE(SUM(`sde`.`TypeService`.`poids` * `sde`.`Service`.`nbHeures`), 0) AS HeuresAffectees,
+    CONCAT(ROUND(COALESCE(SUM(`sde`.`TypeService`.`poids` * `sde`.`Service`.`nbHeures`), 0) * 100 / `sde`.`Statut`.`heureService`, 0), "%") AS pctH
 FROM
     `sde`.`Enseignant`
 LEFT JOIN
@@ -715,11 +716,13 @@ SELECT
     `sde`.`Enseignement`.`heureCM` AS heureCM,
     -- Calculer le nombre d'heure de service correspondant à l'enseignenment et au type CM
     SUM(IF(`sde`.`Service`.`TypeService_idTypeService` = 1,`sde`.`Service`.`nbHeures`, 0)) AS heureCMAffectee,
+    CONCAT(ROUND(SUM(IF(`sde`.`Service`.`TypeService_idTypeService` = 1,`sde`.`Service`.`nbHeures`, 0)) * 100 / `sde`.`Enseignement`.`heureCM`, 0), "%") AS pctCM,
     `sde`.`Enseignement`.`heureTP` AS hTPparGroupe,
 	`sde`.`Enseignement`.`nbGroupes` AS nbGroupe,
 	`sde`.`Enseignement`.`heureTP` * `sde`.`Enseignement`.`nbGroupes` AS hTPtotal,
     -- Calculer le nombre d'heure de service correspondant à l'enseignenment et au type TD
 	SUM(IF(`sde`.`Service`.`TypeService_idTypeService` = 2,`sde`.`Service`.`nbHeures`, 0)) AS heureTPAffectee,
+    CONCAT(ROUND(SUM(IF(`sde`.`Service`.`TypeService_idTypeService` = 2,`sde`.`Service`.`nbHeures`, 0)) * 100 / (`sde`.`Enseignement`.`heureTP` * `sde`.`Enseignement`.`nbGroupes`), 0), "%") AS pctTP,
     `sde`.`Enseignement`.`semestre`,
     `sde`.`Formation`.`nom` AS formation,
     `sde`.`Formation`.`idFormation` as idFormation,
@@ -785,16 +788,15 @@ SELECT
 	`sde`.`VueListeEnseignement`.`formation`,
     COALESCE(SUM(heureCM), 0) AS heureCM,
     COALESCE(SUM(heureCMAffectee),0) AS heureCMAffectee,
-    COALESCE(SUM(heureCMAffectee),0) * 100 / COALESCE(SUM(heureCM), 0) AS pctCM,
+    CONCAT(ROUND(COALESCE(SUM(heureCMAffectee),0) * 100 / COALESCE(SUM(heureCM), 1),0), "%") AS pctCM,
 	COALESCE(SUM(hTPtotal),0) AS heureTP,
     COALESCE(SUM(heureTPAffectee),0) AS heureTPAffectee,
-    COALESCE(SUM(heureTPAffectee),0) * 100 / COALESCE(SUM(hTPtotal),0) AS pctTP
+    CONCAT(ROUND(COALESCE(SUM(heureTPAffectee),0) * 100 / COALESCE(SUM(hTPtotal), 1),0), "%") AS pctTP
 -- Basé sur la vue des enseignements
 FROM `sde`.`VueListeEnseignement`
 GROUP BY `sde`.`VueListeEnseignement`.`idFormation`;
 
 DROP VIEW IF EXISTS `sde`.`VueListeDiplome` ;
-
 CREATE VIEW `VueListeDiplome` AS
 SELECT
     `sde`.`Diplome`.`idDiplome` AS id,
@@ -896,15 +898,17 @@ SELECT
 FROM
 	`sde`.`TypeService`;
 SET SQL_MODE = '';
-GRANT USAGE ON *.* TO admin;
- DROP USER admin;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+
+
+/******************************************************/
+-- Création des USER
+/******************************************************/
+
+DROP USER admin;
 CREATE USER 'admin' IDENTIFIED BY 'mdpadmin';
 
-SET SQL_MODE = '';
-GRANT USAGE ON *.* TO enseignant;
- DROP USER enseignant;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+DROP USER enseignant;
 CREATE USER 'enseignant' IDENTIFIED BY 'mdpenseignant';
 
 /******************************************************/
@@ -1216,9 +1220,9 @@ VALUES
 /******************************************************/
 INSERT INTO `sde`.`Utilisateur` (nom, email, authLevel, mdp, bckColor, headerColor)
 VALUES
-    ("CHRISTOPHE", "CRICRI@MAIL.COM", 1, "monmotdepasshashéde60CHAR", "yellow", "blue"),
-    ("JEAN-LOUIS", "JEAN-LOUIS@MAIL.COM", 0, "monmotdepasshashéde60CHAR", "yellow", "blue"),
-    ("FRED", "FRED@MAIL.COM", 0, "monmotdepasshashéde60CHAR", "yellow", "blue");
+    ("David", "david.ayache90@gmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000"),
+    ("Rémi", "remidlnn@gmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000"),
+    ("Prof", "prof@gmail.com", 0, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000");
 
 -- Debug : mysql en mode autocommit par défaut à supprimer
 COMMIT;

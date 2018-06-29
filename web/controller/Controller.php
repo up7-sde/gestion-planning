@@ -10,6 +10,7 @@ class Controller {
 
     protected $namespace;
     protected $title;
+    protected $pageType;
     protected $data;
 
     protected $db;

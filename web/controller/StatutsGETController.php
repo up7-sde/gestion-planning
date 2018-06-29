@@ -33,7 +33,9 @@ class StatutsGETController extends Controller {
                     $this->title = 'Tous les Statuts Enseignant';
                     
                     $this->data = $this->db->findAll('VueListeStatut');
-                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=add'));
+                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=add'),
+                                         array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=download'));
+                    
                     $tableAction = '/web/referentiels/statuts';
                     //var_dump($_SESSION['message']);
                     include('view2/tables.php');

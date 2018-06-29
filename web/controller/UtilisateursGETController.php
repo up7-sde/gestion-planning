@@ -46,27 +46,30 @@ class UtilisateursGETController extends Controller {
 
                 case "add":
                    
-                    $this->title = "Nouveau cours";
+                    $this->title = "Nouvel utilisateur";
                     
                     $this->data = null;
 
                     $titleButton = null;
                     
-                    $formInputs = array('idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
-                                        'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
-                                        'annee' => null, 
-                                        'apogee' => $this->db->findAll('VueLabelEnseignement'),
-                                        'nbHeures' => null,
-                                        'commentaire' => null);
+                    $formInputs = array(
+                        'login' => null,
+                        'email' => null,
+                        'mdp' => null,
+                        'bckColor' => array(array('id'=> 'clair', 'nom'=>'Clair'), array('id'=> 'foncé', 'nom'=>'Foncé')),
+                        'headerColor' => null,
+                        'authLevel' => array(array('id'=> 0, 'nom'=>'NON'), array('id'=> 1, 'nom'=>'OUI')),
+                    );
+            
                     
-                    $formActions = array('form' => '/web/cours', 'back' => '/web/cours?action=show'); 
+                    $formActions = array('form' => '/web/utilisateurs', 'back' => '/web/utilisateurs?action=show'); 
                     $hiddenInput = null;
                     
                     include('view2/forms.php');
                     break;
 
                 case "download":
-                    $data = $this->data = $this->db->findAll('VueListeService');
+                    $data = $this->data = $this->db->findAll('VueListeUtilisateur');
                     $this->fileMaker->passToBrowser($data);
                     break;
 
@@ -82,7 +85,7 @@ class UtilisateursGETController extends Controller {
             
             switch ($extraParams['action']) {
                 
-                case "edit":
+                /*case "edit":
                     
                     $this->title = 'Cours n°'.$params['id'];
 
@@ -103,23 +106,23 @@ class UtilisateursGETController extends Controller {
     
                     include('view2/forms.php');
                     
-                    break;
+                    break;*/
 
                 case "delete":
 
-                    $id = $params['id'];
-                    $res = $this->db->callProcedure("SupprimerService", array("idService" => $params['id']));
+                    
+                    $res = $this->db->callProcedure("SupprimerUtilisateur", array("idService" => $params['id']));
                     
                     if ($res) {
                         $this->messenger->push(array(
                             'status'=>'success', 
-                            'message'=>'Success_Cours n°'.$params['id'].' supprimé')
+                            'message'=>'Success_Utilisateur n°'.$params['id'].' supprimé')
                         );
                     } else {
                         $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la suppression'));                        
                     }
 
-                    $this->redirect('/cours?action=show');
+                    $this->redirect('/utilisateurs?action=show');
                     break;
                 
                 default:

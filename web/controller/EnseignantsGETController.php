@@ -94,7 +94,10 @@ class EnseignantsGETController extends Controller {
                                         'idStatut' => $this->db->findAll('VueLabelStatut'), 
                                         'depEco' => array(array('id' => 1, 'nom' => 'SDE'), array('id' => 0, 'nom' => 'hors-SDE')));
 
-                    $formActions = array('form' => '/web/enseignants/'.$params['id'], 'back' => '/web/enseignants?action=show'); 
+                    $formActions = array('form' => '/web/enseignants/'.$params['id'], 
+                                            'back' => '/web/enseignants?action=show',
+                                            'delete' => '/web/enseignants/'.$params['id'].'?action=delete');
+                                            
                     $hiddenInput = 'idEnseignant';
                     
                     $this->data = $this->db->findOne('Enseignant', $params['id']);                    

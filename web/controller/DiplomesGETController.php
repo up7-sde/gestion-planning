@@ -33,7 +33,9 @@ class DiplomesGETController extends Controller {
                     $this->title = 'Tous les Diplômes';
                     
                     $this->data = $this->db->findAll('VueListeDiplome');
-                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/diplomes?action=add'));
+                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/diplomes?action=add'),
+                                    array('icon' => 'download', 'action' => '/web/referentiels/diplomes?action=download'));
+                                    
                     $tableAction = '/web/referentiels/diplomes';
                     //var_dump($_SESSION['message']);
                     include('view2/tables.php');

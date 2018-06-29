@@ -55,7 +55,7 @@ class ViewEngine {
             return $table;
         }
 
-        public function generateTable2($name, $data, $path){
+        public function generateTable2($name, $data, $path, $admin){
             
             $table = "";
             $model = $this->tables[$name];
@@ -88,40 +88,30 @@ class ViewEngine {
 
                     $table = $table . '<tr>';
                     
-                    $table = $table . 
-                    '<td>
-                        <a class="btn btn-primary btn-xs" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i></a>
-                        <a id="deleteButton" class="btn btn-danger btn-xs" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i></a>
-                    </td>';
+                    if ($admin) {
+                        $table = $table . 
+                        '<td>
+                            <a class="btn btn-primary btn-xs" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i></a>
+                            <a id="deleteButton" class="btn btn-danger btn-xs" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i></a>
+                        </td>';
+                    } else {
+                        $table = $table . 
+                        '<td>
+                            <a class="btn btn-primary btn-xs" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i></a>
+                            <a id="deleteButton" class="btn btn-danger btn-xs disabled" href="#" role="button"><i class="far fa-trash-alt"></i></a>
+                        </td>';
+                    }
+                    
 
                     foreach($obs as $key => $value){
                         if($key !== 'id' && $model[$key]['show']){
 
-                            /*gauge */
-                            $gauge = null;
-
-                            if($model[$key]['gauge']){
                             
-                                /*évite division par zéro*/
-                                $obs[$model[$key]['gauge']] > 0 ? 
-                                    $gaugeValue =  ($value * 100) / $obs[$model[$key]['gauge']]
-                                    :
-                                    $gaugeValue = 0;
-                                
-                                if($gaugeValue < 20){
-                                    $gauge = '<span class="badge badge-danger">'. (int) $gaugeValue.'%</span>';
-                                } elseif ($gaugeValue > 21 && $gaugeValue < 100){
-                                    $gauge = '<span class="badge badge-pill badge-warning">'. (int) $gaugeValue.'%</span>';                                
-                                } else {
-
-                                    $gauge = '<span class="badge badge-pill badge-success">'. (int) $gaugeValue.'%</span>';                                
-                                }
-                            }
 
                             /**alignement */
                             $model[$key]['type'] === 1? $align = "tdTxt" : $align = "tdNb";
                             
-                            if ($value == "0") {$innerHtml = "-";} else {$innerHtml = $value . ' ' . $gauge;}
+                            if ($value == "0" || $value == "0%" || $value === null) {$innerHtml = "-";} else {$innerHtml = $value;}
                             /*création de la données ac align, valeur et eventuellement gauge*/
                             $table = $table . '<td class="'. $align .'">'. $innerHtml .'</td>';
                         }
@@ -333,14 +323,39 @@ class ViewEngine {
                         break;
                 }      
             }
-            $form = $form . 
+
+            /*if data delete button*/
+            if ($data === null){
+                $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ok</button>
+                        <button id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ajouter</button>
                         <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
             </form>';
+            } elseif ($data !== null && isset($actions['delete'])) {
+                $form = $form . 
+                '<div class="form-group row">
+                    <div class="col-sm-10">
+                        <button id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Modifier</button>
+                        <a href="'. $actions['delete'] . '" role="button" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Supprimer</a>                        
+                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
+                        </div>
+                    </div>
+                </form>';
+            } else {
+                $form = $form . 
+                '<div class="form-group row">
+                    <div class="col-sm-10">
+                        <button id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Modifier</button>
+                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
+                    </div>
+                </div>
+            </form>';
+            }
+
+            
 
             $form = $form . '</form>';
             return $form;
@@ -349,9 +364,9 @@ class ViewEngine {
         }
 
         public function generateNavbar($active, $user){
-
+            
             $nav =     
-            '<nav class="navbar fixed-top navbar-expand-lg navbar-dark shadow" style="background-color:black">
+            '<nav class="navbar fixed-top navbar-expand-lg navbar-dark shadow" style="background-color:'. $user['color'] . '">
             <div class="container-fluid">
             <a class="navbar-brand" style="font-family: \'Fugaz One\', cursive;" href="/web/accueil">
             <i class="fas fa-lg fa-cube"></i>
@@ -427,6 +442,12 @@ class ViewEngine {
         
         }
 
+        public function generateScript($data){
+            echo '<script>';
+            echo 'var data = ' . json_encode($data) . ';';
+            echo '</script>';
+        }
+
         public function generateMessage($message){
             if ($message){
                 if ($message['status'] == 'success'){
@@ -447,30 +468,10 @@ class ViewEngine {
             return "";
         }
 
-        public function generateTitle($str, $buttons = null){
+        public function generateTitle($str){
 
-            $btns = "";
-            if($buttons !== null){
-                foreach($buttons as $button){
-                    if ($button['icon'] === 'delete') {
-                        $btn = '<a id="deleteButton" class="btn btn-danger btn-sm" href="'. $button['action'] .'" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>';
-                    } elseif ($button['icon'] === 'add') {
-                        $btn = '<a class="btn btn-success btn-sm" href="'. $button['action'] .'" role="button"><i class="fas fa-plus"></i>  Ajouter</a>';
-                    } elseif ($button['icon'] === 'download') {
-                        $btn = '<a class="btn btn-warning btn-sm ml-2" href="'. $button['action'] .'" role="button"><i class="fas fa-download"></i>  Télécharger</a>';
-                    } else {
-                        $btn = "";
-                    }
-                    $btns = $btns . $btn;
-                }
-            }
-
-            return 
-                '<div class="btn-toolbar justify-content-between">
-                    <h5 class="card-title" style="padding:0;margin:0;">' . $str . '</h5>
-                    <div>'.$btns.'</div>
-                </div><hr/>';
-    
+            return '<h4 class="mb-4">' . $str . '</h4>';
+                    
         }
 }
 ?>

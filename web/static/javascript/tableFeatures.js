@@ -1,28 +1,29 @@
-$(document).ready(function() {
-    $('#table').DataTable({
+$(document).ready(()=> {
+    //console.log(data[0]["action"]);
+    $("#table").DataTable({
         "order": [[ 1, "desc" ]],
         columnDefs: [
             { targets: [0], orderable: false}
         ],
         scrollX: true,
         language: {
-            "decimal":        "",
-            "emptyTable":     "No data available in table",
-            "info":           "Showing _START_ to _END_ of _TOTAL_ entries",
-            "infoEmpty":      "Showing 0 to 0 of 0 entries",
-            "infoFiltered":   "(filtered from _MAX_ total entries)",
+            "decimal": ",",
+            "emptyTable":     "Pas de données",
+            "info":           "_START_ à _END_ sur _TOTAL_",
+            "infoEmpty":      "0 à 0 sur 0",
+            "infoFiltered":   "",
             "infoPostFix":    "",
             "thousands":      ",",
-            "lengthMenu":     "Show _MENU_ entries",
-            "loadingRecords": "Loading...",
-            "processing":     "Processing...",
+            "lengthMenu":     "Voir _MENU_ observations",
+            "loadingRecords": "Chargement...",
+            "processing":     "Chargement...",
             "search":         "",
-            "zeroRecords":    "No matching records found",
+            "zeroRecords":    "Aucun résultat trouvé",
             "paginate": {
-                "first":      "First",
-                "last":       "Last",
-                "next":       "Next",
-                "previous":   "Previous"
+                "first":      "Première",
+                "last":       "Dernière",
+                "next":       "Suivante",
+                "previous":   "Précédente"
             },
             "aria": {
                 "sortAscending":  ": activate to sort column ascending",
@@ -30,30 +31,42 @@ $(document).ready(function() {
             }
         },
         
-        dom:"<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6 d-flex justify-content-end'f<'toolbar'>>>" +
+        dom:"<'row mt-2'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6 d-flex justify-content-end'f<'toolbar'>>>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 mt-2'p>>",
         
         initComplete: function(){
-            $("div.toolbar")
-               .html(`<div class="ml-4">
-                <a class="btn btn-success btn-sm" href="#" role="button"><i class="fas fa-plus"></i>  Ajouter</a>
-                <a class="btn btn-warning btn-sm ml-1" href="#" role="button"><i class="fas fa-download"></i>  Télécharger</a>
-               </div>`); 
+            console.log();
+            if (data[0]["enabled"]){
+                $("div.toolbar")
+                .html(`<div class="ml-2">
+                 <a class="btn btn-success btn-sm" href="` + data[0]["action"] + `" role="button"><i class="fas fa-plus"></i> Ajouter</a>
+                 <a class="btn btn-warning btn-sm" href="` + data[1]["action"] + `" role="button"><i class="fas fa-download"></i> Télécharger</a>
+                </div>`);
+            } else {
+                $("div.toolbar")
+                .html(`<div class="ml-2">
+                 <a class="btn btn-success btn-sm disabled" href="#" role="button"><i class="fas fa-plus"></i> Ajouter</a>
+                 <a class="btn btn-warning btn-sm disabled" href="#" role="button"><i class="fas fa-download"></i> Télécharger</a>
+                </div>`);
+            }
+
+            
+               $('.table').removeClass('invisible');
+               $('#table').removeClass('invisible');
+               $('input[type="search"]').unwrap();
+               $('input[type="search"]').wrap(() => {
+                                   return `<div id="customSearch" class="input-group input-group-sm"></div>`;
+                               });
+               $('#customSearch').append(`<div class="input-group-append">
+               <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+             </div>`);
+             $('input[type="search"]').css('margin-left', '0');
+             $('input[type="search"]').attr('placeholder', 'Rechercher');
          }  
     });
 
     
-    $('.table').removeClass('invisible');
-    $('#table').removeClass('invisible');
-    $('input[type="search"]').unwrap();
-    $('input[type="search"]').wrap(() => {
-                        return `<div id="customSearch" class="input-group input-group-sm"></div>`;
-                    });
-    $('#customSearch').append(`<div class="input-group-append">
-    <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-  </div>`);
-  $('input[type="search"]').css('margin-left', '0');
-  $('input[type="search"]').attr('placeholder', 'Rechercher');
+   
 
 });

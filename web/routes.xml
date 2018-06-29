@@ -164,6 +164,17 @@
         <path>/utilisateurs</path>
         <controller>UtilisateursGETController</controller>
     </route>
+   <route>
+        <method>GET</method>
+        <path>/utilisateurs/:id</path>
+        <controller>UtilisateursGETController</controller>
+    </route>
+
+    <route>
+        <method>POST</method>
+        <path>/utilisateurs</path>
+        <controller>UtilisateursPOSTController</controller>
+    </route>
 
     <route>
         <method>GET</method>

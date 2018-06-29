@@ -190,8 +190,6 @@ class Model {
             'default' => 'Heures de service'
         ),
 
-
-
         'idUtilisateur' =>
         array(
             'name' => 'idUtilisateur',
@@ -203,7 +201,7 @@ class Model {
         'login' =>
         array(
             'name' => 'nom',
-            'alias' => 'Nom',
+            'alias' => 'Nom d\'utilisateur',
             'type' => PDO::PARAM_STR,
             'inputType' => 'text',
             'default' => 'Login'
@@ -228,7 +226,7 @@ class Model {
         array(
             'name' => 'bckColor',
             'alias' => 'Thème',
-            'type' => PDO::PARAM_INT,
+            'type' => PDO::PARAM_STR,
             'inputType' => 'radio',
             'default' => 'Thème'
         ),
@@ -246,7 +244,7 @@ class Model {
             'alias' => 'Est administrateur?',
             'type' => PDO::PARAM_INT,
             'inputType' => 'radio',
-            'default' => 'Heures de service'
+            'default' => null
         ),
         'annee1' =>
         array(
@@ -320,6 +318,13 @@ class Model {
                 'gauge' => 'HeuresDues', //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
+            'pctH' => array( //nom dans la bdd
+                'name' => 'Pct. d\'heures afféctées', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            )
         ),
 
         /**table enseignements */
@@ -353,6 +358,13 @@ class Model {
                 'gauge' => 'heureCM', //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
+            'pctCM' => array( //nom dans la bdd
+                'name' => 'Pct. hCM afféctées', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
             'hTPparGroupe' => array( //nom dans la bdd
                 'name' => 'Heures TP par groupe', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite 
@@ -379,6 +391,13 @@ class Model {
                 'type' => 0, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => 'hTPtotal', //avec quelle colonne de la table on fait le pourcentage
+                'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
+            ),
+            'pctTP' => array( //nom dans la bdd
+                'name' => 'Pct. hTP afféctées', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite 
+                'show' => TRUE, //on le montre ou pas
+                'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'semestre' => array( //nom dans la bdd

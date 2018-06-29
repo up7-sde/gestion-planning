@@ -97,8 +97,10 @@ class CoursGETController extends Controller {
                     
                     $hiddenInput = 'idService';
 
-                    $formActions = array('form' => '/web/cours/'.$params['id'], 'back' => '/web/cours/?action=show'); 
-                    
+                    $formActions = array('form' => '/web/cours/'.$params['id'], 
+                                        'back' => '/web/cours/?action=show',
+                                        'delete' => '/web/cours/'.$params['id'].'?action=delete'); 
+                                        
                     $this->data = $this->db->findOne('Service', $params['id']);                    
     
                     include('view2/forms.php');

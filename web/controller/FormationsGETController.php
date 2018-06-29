@@ -36,8 +36,8 @@ class FormationsGETController extends Controller {
                     $this->data = $this->db->findAll('VueListeFormation');
 
                     $titleButton = array(
-                        array('icon' => 'add', 'action' => '/web/formations?action=add'),
-                        array('icon' => 'download', 'action' => '/web/formations?action=download')
+                        array('icon' => 'add', 'action' => '/web/formations?action=add', 'enabled'=> $this->isUserAdmin()),
+                        array('icon' => 'download', 'action' => '/web/formations?action=download', 'enabled'=> $this->isUserAdmin())
                         
                     );
 
@@ -85,13 +85,14 @@ class FormationsGETController extends Controller {
                 
                 case "edit":
                     
-                //(IN p_idFormation INT, IN p_nom VARCHAR(45), IN p_idDiplome INT)
                     $this->title = 'Modification de la formation n°'.$params['id'];
                     
-                    $titleButton = array(array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete'));
-
                     $formInputs = array('intitule' => null, 'idDiplome' => $this->db->findAll('VueLabelDiplome'));
-                    $formActions = array('form' => '/web/formations/'.$params['id'], 'back' => '/web/formations?action=show'); 
+                    
+                    $formActions = array('form' => '/web/formations/'.$params['id'], 
+                                        'back' => '/web/formations?action=show',
+                                        'delete' => '/web/formations/'.$params['id'].'?action=delete');
+                                        
                     $hiddenInput = 'idFormation';
                     
                     $this->data = $this->db->findOne('Formation', $params['id']);                    

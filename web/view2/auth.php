@@ -28,17 +28,18 @@
 
       <h4>Connexion</h4>
 
-      <hr/>
+      <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
+
 
       <form method="post" action="/web/auth">
 
       <div class="form-group">
-      <label for="inlineFormInputGroupUsername1">Login</label>
+      <label for="inlineFormInputGroupUsername1">Email</label>
       <div class="input-group mb-2 mr-sm-2">
         <div class="input-group-prepend">
-          <div class="input-group-text"><i class="fas fa-user"></i></div>
+          <div class="input-group-text"><i class="fas fa-at"></i></div>
         </div>
-        <input name='name' type="text" class="form-control" id="inlineFormInputGroupUsername1" placeholder="Login">
+        <input name='email' type="email" class="form-control" id="inlineFormInputGroupUsername1" placeholder="Email">
       </div>
       </div>
 

@@ -95,8 +95,10 @@ class EnseignementsGETController extends Controller {
                                         'semestre' => null,
                                         'nbGroupes' => null,
                                         'idFormation' => $this->db->findAll('VueLabelFormation'));
-                    
-                    $formActions = array('form' => '/web/enseignements/'.$params['id'], 'back' => '/web/enseignements?action=show'); 
+                
+                    $formActions = array('form' => '/web/enseignements/'.$params['id'], 
+                                        'back' => '/web/enseignements?action=show',
+                                        'delete' => '/web/enseignements/'.$params['id'].'?action=delete'); 
                     $hiddenInput = 'id';
                     
                     $this->data = $this->db->findOne('VueListeEnseignement', $params['id'], 'apogee2', TRUE);                    

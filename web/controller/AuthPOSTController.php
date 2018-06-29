@@ -7,12 +7,13 @@ include_once('Controller.php');
 class AuthPostController extends Controller  {
 
     public function render($args=null){
-        $pageTitle = 'SDE | Login';
-        var_dump('in');
 
         if ($this->auth->login()){
+            $user = $this->getUserInfos();
+            $this->messenger->push(array('status'=>'success', 'message'=>'Connection OK_Bienvenue '. $user['name'] . '!'));            
             $to = '/';
         } else {
+            $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Email ou mot de passe invalide'));                                    
             $to = '/auth?action=process';
         }
         

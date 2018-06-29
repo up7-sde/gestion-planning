@@ -27,7 +27,7 @@ class Db{
             //echo "Auth ok<br/>";
             return $_SESSION["passport"]["level"];
         }
-        throw new Exception('problem with session');
+        return FALSE;
     }
 
     public function connect(){
@@ -70,24 +70,7 @@ class Db{
     /*
     pour la pagination des tableaux
     */
-
-    public function findChunk($entity, $limit, $offset){
-        $this->connect();
-        /*prepare-execute?*/
-        $res = $this->connection->query("SELECT * FROM " . $entity . " LIMIT " .$limit ." OFFSET ". $offset);
-        return $res->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function findChunkAndOrder($entity, $limit, $offset, $orderBy, $asc = ""){
-
-        $this->connect();
-        /*prepare-execute?*/
-        $res = $this->connection->query("SELECT * FROM " . $entity . 
-                                        " LIMIT " .$limit ." OFFSET ". $offset . 
-                                        " ORDER BY " . $orderBy . " " . $asc);
-
-        return $res->fetchAll(PDO::FETCH_ASSOC);
-    }
+    
     /*
      * Obtenir un enregistrement d'un item (Formation, enseignant, etc.)
      */
@@ -102,7 +85,17 @@ class Db{
        $res = $this->connection->query("SELECT * FROM $entity WHERE $idColumn = " . $id);
        $data = $res->fetchAll(PDO::FETCH_ASSOC);
        // debug : vérifier le retour de la requête avant de poursuivre (id valide...)
-       return $data;
+       return isset($data) && $data !== null && count($data) > 0? $data : FALSE;
+    }
+
+    public function findOneUser($email){
+        $this->connect();
+        /*prepare-execute?*/
+ 
+        $res = $this->connection->query('SELECT * FROM utilisateur WHERE email = "' . $email . '"' );
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+        // debug : vérifier le retour de la requête avant de poursuivre (id valide...)
+        return $data;
     }
 
     public function callProcedure($name, $args){
@@ -133,6 +126,9 @@ class Db{
               $statement->bindParam($param, $args[$key], $this->attributes[$key]['type']);
         }
 
+        /*var_dump($statement);
+        die();*/
+        
         try{
             $res = $statement->execute();
             

@@ -17,7 +17,6 @@
   <body style="padding-top:56px;" class="bg-light">
   <div class="container">
   
-  <h4 class="mt-5 font-weight-bold"><i class="fa fa-home"></i> Accueil</h4>
   
   <div class="card align-self-center mt-4 mb-2">
         <div class="card-body">
@@ -27,9 +26,10 @@
        
         <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
        
+        <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
 
         <div class="d-flex flex-row justify-content-center my-5">
-            <div id="donut" data-donut="42"></div> 
+            <div id="donut" data-donut="75"></div> 
         </div>
 
 
