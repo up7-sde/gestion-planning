@@ -50,9 +50,9 @@ class Model {
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
             'help' => null,
-            'min' => null,
+            'min' => 1900,
             'max' => null,
-            'step' => null
+            'step' => 1
         ),
 
         'apogee' =>
@@ -78,10 +78,10 @@ class Model {
             'required' => 'required',
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
-            'help' => null,
-            'min' => null,
+            'help' => 'Min 0 max INF step 1',
+            'min' => 0,
             'max' => null,
-            'step' => null
+            'step' => 1
         ),
 
         'nom' =>
@@ -177,9 +177,9 @@ class Model {
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
             'help' => null,
-            'min' => null,
+            'min' => 0,
             'max' => null,
-            'step' => null
+            'step' => 1
         ),
         'hTP' =>
         array(
@@ -192,9 +192,9 @@ class Model {
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
             'help' => null,
-            'min' => null,
+            'min' => 0,
             'max' => null,
-            'step' => null
+            'step' => 1
         ),
         'semestre' =>
         array(
@@ -218,10 +218,10 @@ class Model {
             'required' => 'required',
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
-            'help' => null,
-            'min' => null,
-            'max' => null,
-            'step' => null
+            'help' => 'Entre 1 et 100 avec un pas de 1',
+            'min' => 0,
+            'max' => 100,
+            'step' => 1
         ),
         'idFormation' =>
         array(
@@ -270,7 +270,7 @@ class Model {
             'required' => 'required',
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
-            'help' => null,
+            'help' => 'Pas de 0,5 (vous devez mettre un point pour les décimales, ex: 1.5)',
             'min' => 0,
             'max' => null,
             'step' => 0.5
@@ -285,10 +285,7 @@ class Model {
             'required' => 'required',
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
-            'help' => null,
-            'min' => null,
-            'max' => null,
-            'step' => null
+            'help' => null
         ),
         'heureService' =>
         array(
@@ -301,7 +298,7 @@ class Model {
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
             'help' => null,
-            'min' => null,
+            'min' => 0,
             'max' => null,
             'step' => null
         ),
@@ -344,7 +341,8 @@ class Model {
             'required' => 'required',
             'invalid' => 'Vous devez entrer un email valide!',
             'valid' => 'Ok! Email valide',
-            'help' => null
+            'help' => null,
+            'pattern' => null
         ),
         'mdp' =>
         array(
@@ -356,8 +354,8 @@ class Model {
             'required' => 'required',
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
-            'help' => 'Votre mot de passe retera top secret!',
-            'pattern' => null
+            'help' => '1Maj - 1min - 1Num - 1SpecialChar[!@#$%^&*_=+-] - {Min8Char Max32Char}',
+            'pattern' => '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,32}$'
         ),
         'mdp2' =>
         array(
@@ -370,7 +368,7 @@ class Model {
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
             'help' => 'Les deux mots de passe doivent correspondre',
-            'pattern' => null
+            'pattern' => '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,32}$'
         ),
         'bckColor' =>
         array(
@@ -418,8 +416,8 @@ class Model {
             'required' => 'required',
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
-            'help' => null,
-            'min' => null,
+            'help' => 'Minimum 1900',
+            'min' => 1900,
             'max' => null,
             'step' => null
         ),
@@ -433,8 +431,8 @@ class Model {
             'required' => 'required',
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
-            'help' => null,
-            'min' => null,
+            'help' => 'Minimum 1900 (remplacer par un select?)',
+            'min' => 1900,
             'max' => null,
             'step' => null
         )

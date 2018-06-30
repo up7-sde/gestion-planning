@@ -123,9 +123,9 @@ class ViewEngine {
                         
                         $form = $form . 
                         '<div class="form-group row">
-                            <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . '</label>
+                            <label for="' . $key . '" class="col-sm-2 col-form-label">' . $attributes['alias'] . '</label>
                             <div class="col-sm-10 ">
-                                <input '.$attributes['required'].' name="' . $key . '" type="number" class="form-control" id="'
+                                <input maxlength="256" step="'.$attributes['step'].'" min="'.$attributes['min'].'" max="'.$attributes['max'].'" '.$attributes['required'].' name="' . $key . '" type="number" class="form-control" id="'
                                 . $key . '" placeholder="'.$placeholder.'" value="'.$inputValue.'" '. $status.'>
                                 '.$help. $valid . $invalid .'
                             </div>
@@ -151,15 +151,15 @@ class ViewEngine {
                             <div class="row">
                                 <legend class="col-form-label col-sm-2 pt-0">' .$attributes['alias']. '</legend>
                                 <div class="col-sm-10">
-                                    <div class="custom-control custom-radio">
-                                        <input '.$attributes['required'].' class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'1" value="'.$value[0]['id'].'" '.$checked0.' '.$status.'>
-                                        <label class="custom-control-label" for="'.$key.'1">
+                                    <div class="form-check">
+                                        <input '.$attributes['required'].' class="form-check-input" type="radio" name="'.$key.'" id="'.$key.'1" value="'.$value[0]['id'].'" '.$checked0.' '.$status.'>
+                                        <label class="form-check-label" for="'.$key.'1">
                                             '.$value[0]['nom'].'
                                         </label>
                                     </div>
-                                    <div class="custom-control custom-radio">
-                                        <input '.$attributes['required'].' class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'2" value="'.$value[1]['id'].'" '.$checked1.' '.$status.'>
-                                        <label class="custom-control-label" for="'.$key.'2">
+                                    <div class="form-check">
+                                        <input '.$attributes['required'].' class="form-check-input" type="radio" name="'.$key.'" id="'.$key.'2" value="'.$value[1]['id'].'" '.$checked1.' '.$status.'>
+                                        <label class="form-check-label" for="'.$key.'2">
                                         '.$value[1]['nom'].'
                                         </label>
                                         '.$help. $valid . $invalid .'
@@ -190,7 +190,7 @@ class ViewEngine {
                         '<div class="form-group row">
                             <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . '</label>
                             <div class="col-sm-10">
-                                <select '.$attributes['required'].' class="form-control custom-select" name="'.$key.'" '.$status.'>' .
+                                <select '.$attributes['required'].' class="form-control" name="'.$key.'" '.$status.'>' .
                                     $inputOptions .
                                 '</select>
                                 '.$help. $valid . $invalid .'
@@ -216,7 +216,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <textarea '.$attributes['required'].' '.$status.' name="' . $key . '" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'">'. $inputValue .'</textarea>
+                                <textarea maxlength="256" '.$attributes['required'].' '.$status.' name="' . $key . '" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'">'. $inputValue .'</textarea>
                             '.$help. $valid . $invalid .'</div>
                             
                         </div>'; 
@@ -266,7 +266,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input '.$attributes['required'].' '.$status.' name="' . $key . '" type="password" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                                <input pattern="'.$attributes['pattern'].'" maxlength="256" '.$attributes['required'].' '.$status.' name="' . $key . '" type="password" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
                             '.$help. $valid . $invalid .'</div>
                         </div>';
                         break;
@@ -290,7 +290,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input '.$attributes['required'].' '. $status .' name="' . $key . '" type="email" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                                <input pattern="'.$attributes['pattern'].'" maxlength="256" '.$attributes['required'].' '. $status .' name="' . $key . '" type="email" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
                             '.$help. $valid . $invalid .'</div>
                             
                         </div>'; 
@@ -314,7 +314,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input '.$attributes['required'].' '. $status .' name="' . $key . '" type="text" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                                <input pattern="'.$attributes['pattern'].'" maxlength="256" '.$attributes['required'].' '. $status .' name="' . $key . '" type="text" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
                             '.$help. $valid . $invalid .'</div>
                             
                         </div>'; 
@@ -327,8 +327,8 @@ class ViewEngine {
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button ' .$status. ' id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ok</button>
-                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
+                        <button ' .$status. ' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ok</button>
+                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
             </form>';
@@ -336,9 +336,9 @@ class ViewEngine {
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ok</button>
-                        <a href="'. $actions['delete'] . '" role="button" class="btn btn-danger btn-sm '. $status .'"><i class="far fa-trash-alt"></i> Supprimer</a>                        
-                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
+                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ok</button>
+                        <a href="'. $actions['delete'] . '" role="button" class="btn btn-danger'. $status .'"><i class="far fa-trash-alt"></i> Supprimer</a>                        
+                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
                         </div>
                     </div>
                 </form>';
@@ -346,8 +346,8 @@ class ViewEngine {
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ok</button>
-                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
+                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ok</button>
+                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
             </form>';
