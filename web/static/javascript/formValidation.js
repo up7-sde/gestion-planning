@@ -1,4 +1,4 @@
-(function() {
+(() => {
     'use strict';
     window.addEventListener('load', function() {
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -15,3 +15,18 @@
       });
     }, false);
   })();
+
+var password = document.querySelector("#mdp")
+, confirm_password = document.querySelector("#mdp2");
+
+function validatePassword(){
+    
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("No match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;

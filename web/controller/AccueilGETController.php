@@ -9,7 +9,7 @@ class AccueilGETController extends Controller {
     public function render($args=null){
         
         $this->namespace = 'Accueil';
-        $this->title = 'Admin-Sde';
+        $this->title = 'Avancement du projet';
         $this->pageType = 'Home';
 
         $user = $this->getUserInfos();

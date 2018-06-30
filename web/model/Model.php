@@ -339,11 +339,11 @@ class Model {
             'name' => 'email',
             'alias' => 'Email',
             'type' => PDO::PARAM_STR,
-            'inputType' => 'text',
+            'inputType' => 'email',
             'default' => 'Email',
             'required' => 'required',
-            'invalid' => 'Non-valide',
-            'valid' => 'Valide',
+            'invalid' => 'Vous devez entrer un email valide!',
+            'valid' => 'Ok! Email valide',
             'help' => null
         ),
         'mdp' =>
@@ -356,7 +356,20 @@ class Model {
             'required' => 'required',
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
-            'help' => null,
+            'help' => 'Votre mot de passe retera top secret!',
+            'pattern' => null
+        ),
+        'mdp2' =>
+        array(
+            'name' => 'mdp',
+            'alias' => 'Confirmation',
+            'type' => PDO::PARAM_STR,
+            'inputType' => 'password',
+            'default' => 'Mot de passe',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => 'Les deux mots de passe doivent correspondre',
             'pattern' => null
         ),
         'bckColor' =>

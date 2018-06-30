@@ -26,7 +26,7 @@ class RoutinesGETController extends Controller {
             'annee2' => null
         );
 
-        $formActions = array('form' => '/web/routines/nvelleannnee', 'back' => '/web' . $this->getLastUrl()); 
+        $formActions = array('form' => '/web/routines/nvelleannnee', 'back' => '/web' . $this->getLastDifferentUrl()); 
         
         $hiddenInput = null;          
 

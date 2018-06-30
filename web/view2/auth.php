@@ -38,7 +38,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text"><i class="fas fa-at"></i></div>
         </div>
-        <input name='email' type="email" class="form-control" id="inlineFormInputGroupUsername1" placeholder="Email">
+        <input name='email' type="text" class="form-control" id="inlineFormInputGroupUsername1" placeholder="Email">
       </div>
       </div>
 

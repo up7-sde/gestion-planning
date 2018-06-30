@@ -271,6 +271,30 @@ class ViewEngine {
                         </div>';
                         break;
 
+                    
+                    case 'email':
+                        $inputValue = null;
+                        
+                        if ($data !== null){
+                            if (isset($data[0][$attributes['name']])){
+                                $inputValue = $data[0][$attributes['name']];
+                            } else {
+                                $inputValue = $data[0][$key];
+                            }
+                        }
+
+                        $placeholder = $attributes['default'] ;
+                        
+                        $form = $form . 
+                        '<div class="form-group row">
+                        <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
+                        '</label>
+                            <div class="col-sm-10">
+                                <input '.$attributes['required'].' '. $status .' name="' . $key . '" type="email" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                            '.$help. $valid . $invalid .'</div>
+                            
+                        </div>'; 
+                        break;
                     case 'text': default: 
 
                         $inputValue = null;

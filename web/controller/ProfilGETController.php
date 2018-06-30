@@ -28,10 +28,11 @@ class ProfilGETController extends Controller {
             'login' => null,
             'email' => null,
             'mdp' => null,
+            'mdp2' => null,
             'headerColor' => null
         );
 
-        $formActions = array('form' => '/web/profil', 'back' => '/web' . $this->getLastUrl()); 
+        $formActions = array('form' => '/web/profil', 'back' => '/web' . $this->getLastDifferentUrl()); 
         
         $hiddenInput = 'idUtilisateur';
         

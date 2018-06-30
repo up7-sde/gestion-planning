@@ -70,10 +70,10 @@ class Controller {
 
     public function getReferrer(){
 
-        //refactor avec regex !!!!!!!!! /auth/*
         for ($i = count($_SESSION["history"])-1; $i>=0; $i--){
-            if ($_SESSION["history"][$i] !== '/auth/login' && $_SESSION["history"][$i] !== '/auth/logout')
-            return $_SESSION["history"][$i];
+            if (!preg_match('/auth/', $_SESSION["history"][$i])){
+                return $_SESSION["history"][$i];
+            }
         }
         return '/';
     }
@@ -89,6 +89,16 @@ class Controller {
     public function getLastUrl(){
         return isset($_SESSION["history"][count($_SESSION["history"])-2])?
             $_SESSION["history"][count($_SESSION["history"])-2] : '/';
+    }
+
+    public function getLastDifferentURL(){
+        
+        for ($i = count($_SESSION["history"])-1; $i>=0; $i--){
+            if ($_SESSION["history"][$i]!==$this->getCurrentUrl()){
+            return $_SESSION["history"][$i];
+            }
+        }
+        return '/';
     }
 
     public function force400(){
