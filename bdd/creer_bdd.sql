@@ -228,7 +228,7 @@ DELIMITER $$
 CREATE PROCEDURE `InsererUtilisateur` (IN p_nom VARCHAR(45),IN p_email VARCHAR(45), IN p_mdp VARCHAR(60), IN p_headerColor VARCHAR(45), IN p_authLevel TINYINT)
 BEGIN
 	INSERT INTO `sde`.`Utilisateur` (nom, email, authLevel, mdp, headerColor)
-    VALUES (UPPER(p_nom), p_email, p_authLevel, p_mdp, p_headerColor);
+    VALUES (p_nom, p_email, p_authLevel, p_mdp, p_headerColor);
 END;$$
 DELIMITER ;
 
@@ -686,8 +686,8 @@ SELECT
     `sde`.`Enseignant`.`idEnseignant` AS id,
     `sde`.`Enseignant`.`nom`,
     `sde`.`Enseignant`.`prenom`,
-    IF(`sde`.`Enseignant`.`depEco`, "SDE", "Hors SDE") AS Departement,
-    IF(`sde`.`Statut`.`titulaire`, "Titulaire", "Non-Titulaire") AS Tituaire,
+    IF(`sde`.`Enseignant`.`depEco`, "SDE", "Hors-SDE") AS Departement,
+    IF(`sde`.`Statut`.`titulaire`, "Oui", "Non") AS Titulaire,
     `sde`.`Statut`.`nom` AS Categorie,
     `sde`.`Statut`.`heureService` AS HeuresDues,
     COALESCE(SUM(`sde`.`TypeService`.`poids` * `sde`.`Service`.`nbHeures`), 0) AS HeuresAffectees,
@@ -828,7 +828,7 @@ SELECT
     `sde`.`Utilisateur`.`email`,
     `sde`.`Utilisateur`.`mdp`,
     `sde`.`Utilisateur`.`headerColor`,
-    `sde`.`Utilisateur`.`authLevel`
+    IF(`sde`.`Utilisateur`.`authLevel`, "Oui", "Non") As authLevel
 FROM `sde`.`Utilisateur`;
 
 /******************************************************/
@@ -1219,9 +1219,8 @@ VALUES
 /******************************************************/
 INSERT INTO `sde`.`Utilisateur` (nom, email, authLevel, mdp, bckColor, headerColor)
 VALUES
-    ("David", "david.ayache90@gmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000"),
-    ("Rémi", "remidlnn@gmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000"),
-    ("Prof", "prof@gmail.com", 0, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000");
+    ("DAVID", "david.ayache90@gmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000"),
+    ("PROF", "prof@gmail.com", 0, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000");
 
 -- Debug : mysql en mode autocommit par défaut à supprimer
 COMMIT;

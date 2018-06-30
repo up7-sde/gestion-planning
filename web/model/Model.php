@@ -290,8 +290,8 @@ class Model {
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
-            'Tituaire' => array( //nom dans la bdd
-                'name' => 'Titulaire', //nom à afficher
+            'Titulaire' => array( //nom dans la bdd
+                'name' => 'Est titulaire?', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -626,7 +626,7 @@ class Model {
                /*table utilisateurs*/
         'Utilisateurs' => array( //la table dans la base
             'nom' => array( //nom dans la bdd
-                'name' => 'Login', //nom à afficher
+                'name' => 'Nom utilisateur', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -642,7 +642,7 @@ class Model {
             'mdp' => array( //nom dans la bdd
                 'name' => 'Mot de passe', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite 
-                'show' => TRUE, //on le montre ou pas
+                'show' => FALSE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
@@ -650,14 +650,14 @@ class Model {
             'bckColor' => array( //nom dans la bdd
                 'name' => 'Thème', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite 
-                'show' => TRUE, //on le montre ou pas
+                'show' => FALSE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'headerColor' => array( //nom dans la bdd
                 'name' => 'Couleur', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite 
-                'show' => TRUE, //on le montre ou pas
+                'show' => FALSE ,//on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
