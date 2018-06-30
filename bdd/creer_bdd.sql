@@ -1219,8 +1219,8 @@ VALUES
 /******************************************************/
 INSERT INTO `sde`.`Utilisateur` (nom, email, authLevel, mdp, bckColor, headerColor)
 VALUES
-    ("DAVID", "david.ayache90@gmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000"),
-    ("PROF", "prof@gmail.com", 0, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000");
+    ("David", "david.ayache90@gmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000"),
+    ("Prof", "prof@gmail.com", 0, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", " bg-info ", "#000000");
 
 -- Debug : mysql en mode autocommit par défaut à supprimer
 COMMIT;

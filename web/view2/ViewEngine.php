@@ -1,58 +1,8 @@
 <?php
 class ViewEngine {
         public function __construct(){
-            $this->attributes = Model::$attributes;
+            $this->attributes = Model::$inputs;
             $this->tables = Model::$tables;
-        }
-
-        public function generateTable($data, $path){
-            
-            $table = "";
-
-            if (!isset($data) || !$data || count($data) == 0){
-                $table = '<div class="alert alert-warning" role="alert">
-                            Warning_Pas de données
-                            </div>';
-            } else {
-                $table = '<div class="table-responsive">
-                            <table class="table table-striped table-bordered table-sm" 
-                            style="font-size:0.8rem;
-                            white-space: nowrap;">
-                            <thead>
-                                <tr>';
-
-                foreach($data[0] as $key => $value){
-                    $table = $table . '<th scope="col">'. $key . '</th>';
-                }
-
-                $table = $table . '<th scope="col">Actions</th>';
-                $table = $table . '</tr></thead>';
-
-                $table = $table . '<tbody>';
-                
-                foreach($data as $key => $obs){
-
-                    $table = $table . '<tr>';
-                    
-                    foreach($obs as $key => $value){
-                        $table = $table . '<td><span class="badge badge-pill badge-success">32%</span> '. $value .'</td>';
-                    }
-                    
-                    $table = $table . 
-                    '<td>
-                        <a class="btn btn-primary btn-xs" href="'.$path.'/'.$obs['id'].'?action=edit" role="button"><i class="far fa-edit"></i> Modifier</a>
-                        <a id="deleteButton" class="btn btn-danger btn-xs" href="'.$path.'/'.$obs['id'].'?action=delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>
-                    </td>';
-                    
-                    $table = $table . '</tr>';
-                }
-                
-                $table = $table . 
-                        '</tbody>
-                    </table>
-                </div>';
-            }
-            return $table;
         }
 
         public function generateTable2($name, $data, $path, $admin){
@@ -135,14 +85,29 @@ class ViewEngine {
             !$admin && $pageType !== 'Profil'? $status = "disabled": $status = null;
 
             $form = null;
-            $form = $form . '<form method="POST" action="'. $actions['form'] .'">';
+            $form = $form . '<form class="needs-validation" novalidate method="POST" action="'. $actions['form'] .'">';
             
             if($hiddenInput!==null){
                 $form = $form . '<input type="hidden" name="'.$hiddenInput.'" value="'.$data[0][$hiddenInput].'">';
             }
 
             foreach($inputs as $key => $value){
+                
                 $attributes = $this->attributes[$key];
+                $attributes['help'] !== null? $help = '<small id="emailHelp" class="form-text text-muted">' . $attributes['help'] . '</small>'
+                                            : $help = null;
+                
+                if ($attributes['valid'] !== null) {
+                    $valid = ' <div class="valid-feedback">
+                                    '.$attributes['valid'].'
+                                </div>';
+                } else { $valid = null;}
+
+                if ($attributes['invalid'] !== null) {
+                    $invalid = ' <div class="invalid-feedback">
+                                    '.$attributes['invalid'].'
+                                </div>';
+                } else { $invalid = null;}
 
                 switch($attributes['inputType']){
                     case 'number':
@@ -160,8 +125,9 @@ class ViewEngine {
                         '<div class="form-group row">
                             <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . '</label>
                             <div class="col-sm-10 ">
-                                <input name="' . $key . '" type="text" class="form-control" id="'
+                                <input '.$attributes['required'].' name="' . $key . '" type="number" class="form-control" id="'
                                 . $key . '" placeholder="'.$placeholder.'" value="'.$inputValue.'" '. $status.'>
+                                '.$help. $valid . $invalid .'
                             </div>
                         </div>'; 
                         break;
@@ -186,16 +152,17 @@ class ViewEngine {
                                 <legend class="col-form-label col-sm-2 pt-0">' .$attributes['alias']. '</legend>
                                 <div class="col-sm-10">
                                     <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'1" value="'.$value[0]['id'].'" '.$checked0.' '.$status.'>
+                                        <input '.$attributes['required'].' class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'1" value="'.$value[0]['id'].'" '.$checked0.' '.$status.'>
                                         <label class="custom-control-label" for="'.$key.'1">
                                             '.$value[0]['nom'].'
                                         </label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'2" value="'.$value[1]['id'].'" '.$checked1.' '.$status.'>
+                                        <input '.$attributes['required'].' class="custom-control-input" type="radio" name="'.$key.'" id="'.$key.'2" value="'.$value[1]['id'].'" '.$checked1.' '.$status.'>
                                         <label class="custom-control-label" for="'.$key.'2">
                                         '.$value[1]['nom'].'
                                         </label>
+                                        '.$help. $valid . $invalid .'
                                     </div>
                                 </div>
                             </div>
@@ -208,10 +175,10 @@ class ViewEngine {
 
                         foreach ($value as $opt){
                             
-                            if ($data !== null && $opt['id'] === $data[0][$attributes['name']]){
+                            if ($data !== null && $opt['id'] == $data[0][$attributes['name']]){
                                 $inputOptions = $inputOptions . '<option value="' .$opt['id']. '"' . ' selected>' . $opt['nom'] . '</option>';
                                 
-                            } elseif ($data !== null && isset($data[0][$key]) && $opt['id'] === $data[0][$key]){
+                            } elseif ($data !== null && isset($data[0][$key]) && $opt['id'] == $data[0][$key]){
                                 $inputOptions = $inputOptions . '<option value="' .$opt['id']. '"' . ' selected>' . $opt['nom'] . '</option>';
                                 
                             } else {
@@ -223,9 +190,10 @@ class ViewEngine {
                         '<div class="form-group row">
                             <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . '</label>
                             <div class="col-sm-10">
-                                <select class="form-control custom-select" name="'.$key.'" '.$status.'>' .
+                                <select '.$attributes['required'].' class="form-control custom-select" name="'.$key.'" '.$status.'>' .
                                     $inputOptions .
                                 '</select>
+                                '.$help. $valid . $invalid .'
                             </div>
                         </div>';     
                         break;
@@ -248,8 +216,9 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <textarea '.$status.' name="' . $key . '" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'">'. $inputValue .'</textarea>
-                            </div>
+                                <textarea '.$attributes['required'].' '.$status.' name="' . $key . '" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'">'. $inputValue .'</textarea>
+                            '.$help. $valid . $invalid .'</div>
+                            
                         </div>'; 
                         break;
 
@@ -272,8 +241,9 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input '.$status.' name="' . $key . '" type="color" class="form-control" id="'. $key . '" placeholder="" value="'. $inputValue .'">
-                            </div>
+                                <input '.$attributes['required'].' '.$status.' name="' . $key . '" type="color" class="form-control" id="'. $key . '" placeholder="" value="'. $inputValue .'">
+                                '.$help. $valid . $invalid .'
+                                </div>
                         </div>';
                         break;
                     
@@ -296,8 +266,8 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input '.$status.' name="' . $key . '" type="password" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
-                            </div>
+                                <input '.$attributes['required'].' '.$status.' name="' . $key . '" type="password" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                            '.$help. $valid . $invalid .'</div>
                         </div>';
                         break;
 
@@ -320,8 +290,9 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input '. $status .' name="' . $key . '" type="text" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
-                            </div>
+                                <input '.$attributes['required'].' '. $status .' name="' . $key . '" type="text" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                            '.$help. $valid . $invalid .'</div>
+                            
                         </div>'; 
                         break;
                 }      
@@ -357,8 +328,6 @@ class ViewEngine {
                 </div>
             </form>';
             }
-
-            
 
             $form = $form . '</form>';
             return $form;

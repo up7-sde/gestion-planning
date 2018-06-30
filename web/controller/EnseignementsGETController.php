@@ -56,7 +56,18 @@ class EnseignementsGETController extends Controller {
                                         'intitule' => null, 
                                         'hCM' => null, 
                                         'hTP' => null, 
-                                        'semestre' => null,
+                                        'semestre' => array(
+                                            array('id' => 1, 'nom' => 1),
+                                            array('id' => 2, 'nom' => 2),
+                                            array('id' => 3, 'nom' => 3),
+                                            array('id' => 4, 'nom' => 4),
+                                            array('id' => 5, 'nom' => 5),
+                                            array('id' => 6, 'nom' => 6),
+                                            array('id' => 7, 'nom' => 7),
+                                            array('id' => 8, 'nom' => 8),
+                                            array('id' => 9, 'nom' => 9),
+                                            array('id' => 10, 'nom' => 10),
+                                        ),
                                         'nbGroupes' => null,
                                         'idFormation' => $this->db->findAll('VueLabelFormation'));
                     
@@ -93,7 +104,18 @@ class EnseignementsGETController extends Controller {
                                         'intitule' => null, 
                                         'hCM' => null, 
                                         'hTP' => null, 
-                                        'semestre' => null,
+                                        'semestre' => array(
+                                            array('id' => 1, 'nom' => 1),
+                                            array('id' => 2, 'nom' => 2),
+                                            array('id' => 3, 'nom' => 3),
+                                            array('id' => 4, 'nom' => 4),
+                                            array('id' => 5, 'nom' => 5),
+                                            array('id' => 6, 'nom' => 6),
+                                            array('id' => 7, 'nom' => 7),
+                                            array('id' => 8, 'nom' => 8),
+                                            array('id' => 9, 'nom' => 9),
+                                            array('id' => 10, 'nom' => 10),
+                                        ),
                                         'nbGroupes' => null,
                                         'idFormation' => $this->db->findAll('VueLabelFormation'));
                 

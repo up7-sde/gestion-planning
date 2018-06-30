@@ -2,14 +2,18 @@
 /*refactor avec une liste par form*/
 /*faire la même chose avec les tables*/
 class Model {
-    public static $attributes = array(
+    public static $inputs = array(
         'idService' =>
         array(
             'name' => 'idService',
             'alias' => 'Cours',
             'type' => PDO::PARAM_INT,
             'inputType' => 'hidden',
-            'default' => null
+            'default' => null,
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
         ),
         'idEnseignant' =>
         array(
@@ -17,7 +21,11 @@ class Model {
             'alias' => 'Enseignant',
             'type' => PDO::PARAM_INT,
             'inputType' => 'options',
-            'default' => null
+            'default' => null,
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null
         ),
         'idTypeService' =>
         array(
@@ -25,7 +33,11 @@ class Model {
             'alias' => 'Type de Cours',
             'type' => PDO::PARAM_INT,
             'inputType' => 'options',
-            'default' => null
+            'default' => null,
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null
         ),
         'annee' =>
         array(
@@ -33,7 +45,14 @@ class Model {
             'alias' => 'Année',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 2018
+            'default' => 2018,
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'min' => null,
+            'max' => null,
+            'step' => null
         ),
 
         'apogee' =>
@@ -42,7 +61,11 @@ class Model {
             'alias' => 'Enseignement',
             'type' => PDO::PARAM_STR,
             'inputType' => 'options',
-            'default' => 'Enseignement'
+            'default' => 'Enseignement',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null
         ),
 
         'nbHeures' =>
@@ -51,7 +74,14 @@ class Model {
             'alias' => 'Nombre d\'heures',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 4
+            'default' => 4,
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'min' => null,
+            'max' => null,
+            'step' => null
         ),
 
         'nom' =>
@@ -60,7 +90,12 @@ class Model {
             'alias' => 'Nom',
             'type' => PDO::PARAM_STR,
             'inputType' => 'text',
-            'default' => 'Nom'
+            'default' => 'Nom',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'pattern' => null
         ),
 
         'prenom' =>
@@ -69,7 +104,12 @@ class Model {
             'alias' => 'Prénom',
             'type' => PDO::PARAM_STR,
             'inputType' => 'text',
-            'default' => 'Prénom'
+            'default' => 'Prénom',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'pattern' => null
         ),
        
         'idStatut' =>
@@ -78,7 +118,11 @@ class Model {
             'alias' => 'Statut',
             'type' => PDO::PARAM_INT,
             'inputType' => 'options',
-            'default' => 'Statut'
+            'default' => 'Statut',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null
         ),
 
         'depEco' =>
@@ -87,7 +131,11 @@ class Model {
             'alias' => 'Département',
             'type' => PDO::PARAM_INT,
             'inputType' => 'radio',
-            'default' => 'Département'
+            'default' => 'Département',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null
         ),
 
         'intitule' =>
@@ -96,7 +144,12 @@ class Model {
             'alias' => 'Intitulé',
             'type' => PDO::PARAM_STR,
             'inputType' => 'text',
-            'default' => 'Intitulé'
+            'default' => 'Intitulé',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'pattern' => null
         ),
 
         'idDiplome' =>
@@ -106,7 +159,11 @@ class Model {
             'alias' => 'Diplôme',
             'type' => PDO::PARAM_INT,
             'inputType' => 'options',
-            'default' => 'Diplôme'
+            'default' => 'Diplôme',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null
         ),
 
         'hCM' =>
@@ -115,7 +172,14 @@ class Model {
             'alias' => 'Heures de CM',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 0
+            'default' => 0,
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'min' => null,
+            'max' => null,
+            'step' => null
         ),
         'hTP' =>
         array(
@@ -123,15 +187,26 @@ class Model {
             'alias' => 'Heures de TP',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 0
+            'default' => 0,
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'min' => null,
+            'max' => null,
+            'step' => null
         ),
         'semestre' =>
         array(
             'name' => 'semestre',
             'alias' => 'Semestre',
             'type' => PDO::PARAM_INT,
-            'inputType' => 'number',
-            'default' => 0
+            'inputType' => 'options',
+            'default' => 0,
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => 'De 1 à 6 pour la Licence, de 7 à 10 pour le Master'
         ),
         'nbGroupes' =>
         array(
@@ -139,7 +214,14 @@ class Model {
             'alias' => 'Nombre de groupes',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 0
+            'default' => 0,
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'min' => null,
+            'max' => null,
+            'step' => null
         ),
         'idFormation' =>
         array(
@@ -147,7 +229,11 @@ class Model {
             'alias' => 'Formation',
             'type' => PDO::PARAM_INT,
             'inputType' => 'options',
-            'default' => 'Formation'
+            'default' => 'Formation',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null
         ),
         'apogee2' =>
         array(
@@ -155,7 +241,12 @@ class Model {
             'alias' => 'Code Apogée',
             'type' => PDO::PARAM_STR,
             'inputType' => 'text',
-            'default' => 'Code Apogée'
+            'default' => 'Code Apogée',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'pattern' => null
         ),
         'commentaire' =>
         array(
@@ -163,7 +254,11 @@ class Model {
             'alias' => 'Commentaire',
             'type' => PDO::PARAM_STR,
             'inputType' => 'area',
-            'default' => 'Ajoutez un commentaire ici'
+            'default' => 'Ajoutez un commentaire ici',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => 'Commentaire pour les cours spéciaux',
         ),
         'poids' =>
         array(
@@ -171,7 +266,14 @@ class Model {
             'alias' => 'Poids',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 'Poids (ex : 1)'
+            'default' => 'Poids (ex : 1)',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'min' => 0,
+            'max' => null,
+            'step' => 0.5
         ),
         'titulaire' =>
         array(
@@ -179,7 +281,14 @@ class Model {
             'alias' => 'Est titulaire?',
             'type' => PDO::PARAM_INT,
             'inputType' => 'radio',
-            'default' => 'Poids (ex : 1)'
+            'default' => 'Poids (ex : 1)',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'min' => null,
+            'max' => null,
+            'step' => null
         ),
         'heureService' =>
         array(
@@ -187,7 +296,14 @@ class Model {
             'alias' => 'Heures de service',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 'Heures de service'
+            'default' => 'Heures de service',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'min' => null,
+            'max' => null,
+            'step' => null
         ),
 
         'idUtilisateur' =>
@@ -196,7 +312,14 @@ class Model {
             'alias' => 'id',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 'id Utilisateur'
+            'default' => 'id Utilisateur',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'min' => null,
+            'max' => null,
+            'step' => null
         ),
         'login' =>
         array(
@@ -204,7 +327,12 @@ class Model {
             'alias' => 'Nom d\'utilisateur',
             'type' => PDO::PARAM_STR,
             'inputType' => 'text',
-            'default' => 'Login'
+            'default' => 'Login',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'pattern' => null
         ),
         'email' =>
         array(
@@ -212,7 +340,11 @@ class Model {
             'alias' => 'Email',
             'type' => PDO::PARAM_STR,
             'inputType' => 'text',
-            'default' => 'Email'
+            'default' => 'Email',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null
         ),
         'mdp' =>
         array(
@@ -220,7 +352,12 @@ class Model {
             'alias' => 'Mot de passe',
             'type' => PDO::PARAM_STR,
             'inputType' => 'password',
-            'default' => 'Mot de passe'
+            'default' => 'Mot de passe',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'pattern' => null
         ),
         'bckColor' =>
         array(
@@ -228,7 +365,11 @@ class Model {
             'alias' => 'Thème',
             'type' => PDO::PARAM_STR,
             'inputType' => 'radio',
-            'default' => 'Thème'
+            'default' => 'Thème',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null
         ),
         'headerColor' =>
         array(
@@ -236,7 +377,11 @@ class Model {
             'alias' => 'Couleur',
             'type' => PDO::PARAM_STR,
             'inputType' => 'color',
-            'default' => 'Couleur'
+            'default' => 'Couleur',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => 'Une couleur pour la barre de navigation'
         ),
         'authLevel' =>
         array(
@@ -244,7 +389,11 @@ class Model {
             'alias' => 'Est administrateur?',
             'type' => PDO::PARAM_INT,
             'inputType' => 'radio',
-            'default' => null
+            'default' => null,
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null
         ),
         'annee1' =>
         array(
@@ -252,7 +401,14 @@ class Model {
             'alias' => 'Année cible',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 'YYYY'
+            'default' => 'YYYY',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'min' => null,
+            'max' => null,
+            'step' => null
         ),
         'annee2' =>
         array(
@@ -260,11 +416,17 @@ class Model {
             'alias' => 'Année de destination',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 'YYYY'
+            'default' => 'YYYY',
+            'required' => 'required',
+            'invalid' => 'Non-valide',
+            'valid' => 'Valide',
+            'help' => null,
+            'min' => null,
+            'max' => null,
+            'step' => null
         )
     );
 
-    
     public static $tables = array(
 
         /*table enseignants */

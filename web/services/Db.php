@@ -13,7 +13,7 @@ class Db{
     private $attributes;
 
     public function __construct(){
-        $this->attributes = Model::$attributes;
+        $this->attributes = Model::$inputs;
     }
 
     private function connectionExists(){
