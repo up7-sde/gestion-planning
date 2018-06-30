@@ -411,10 +411,10 @@ class Model {
         'annee1' =>
         array(
             'name' => 'annee1',
-            'alias' => 'Année cible',
+            'alias' => 'Reconduire l\'année',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 'YYYY',
+            'default' => 'yyyy',
             'required' => 'required',
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
@@ -426,10 +426,10 @@ class Model {
         'annee2' =>
         array(
             'name' => 'annee2',
-            'alias' => 'Année de destination',
+            'alias' => 'Pour',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
-            'default' => 'YYYY',
+            'default' => 'yyyy',
             'required' => 'required',
             'invalid' => 'Non-valide',
             'valid' => 'Valide',
@@ -777,21 +777,21 @@ class Model {
             /*table diplomes*/
         'Statuts Enseignant' => array( //la table dans la base
             'nom' => array( //nom dans la bdd
-                'name' => 'Nom', //nom à afficher
+                'name' => 'Intitulé', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'heureService' => array( //nom dans la bdd
-                'name' => 'Heures de service', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'name' => 'Heures de service dûes', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite Libbéllé
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'titulaire' => array( //nom dans la bdd
-                'name' => 'Titulaire', //nom à afficher
+                'name' => 'Est titulaire?', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite 
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage

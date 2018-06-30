@@ -9,8 +9,8 @@ $(document).ready(()=> {
         language: {
             "decimal": ",",
             "emptyTable":     "Pas de données",
-            "info":           "_START_ à _END_ sur _TOTAL_",
-            "infoEmpty":      "0 à 0 sur 0",
+            "info":           "Observations _START_ à _END_ sur _TOTAL_",
+            "infoEmpty":      "Observations 0 à 0 sur 0",
             "infoFiltered":   "",
             "infoPostFix":    "",
             "thousands":      ",",

@@ -28,7 +28,9 @@ class RoutinesGETController extends Controller {
 
         $formActions = array('form' => '/web/routines/nvelleannnee', 'back' => '/web' . $this->getLastDifferentUrl()); 
         
-        $hiddenInput = null;          
+        $hiddenInput = null;  
+        
+        $this->data = array(array('annee1' => date("Y"), 'annee2' => intval(date("Y"))+1));
 
         include('view2/forms.php'); 
     }

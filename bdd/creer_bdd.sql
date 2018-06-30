@@ -809,7 +809,7 @@ SELECT
     `sde`.`Statut`.`idStatut` AS id,
     `sde`.`Statut`.`nom`,
     `sde`.`Statut`.`heureService`,
-    `sde`.`Statut`.`titulaire`
+    IF(`sde`.`Statut`.`titulaire`, "Oui", "Non") AS titulaire
 FROM `sde`.`Statut`;
 
 DROP VIEW IF EXISTS `sde`.`VueListeType` ;
