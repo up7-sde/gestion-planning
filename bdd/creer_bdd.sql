@@ -945,6 +945,7 @@ GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerStatut` TO 'admin';
 GRANT EXECUTE ON PROCEDURE `sde`.`InsererUtilisateur` TO 'admin';
 GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerUtilisateur` TO 'admin';
 GRANT EXECUTE ON PROCEDURE `sde`.`ModifierUtilisateur` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`DuppliquerService` TO 'admin';
 
 /******************************************************/
 /****************** REMPLIR LES TABLES ****************/

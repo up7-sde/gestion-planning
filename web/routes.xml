@@ -194,6 +194,12 @@
         <controller>RoutinesGETController</controller>
     </route>
 
+    <route>
+        <method>POST</method>
+        <path>/routines/nvelleannee</path>
+        <controller>RoutinesPOSTController</controller>
+    </route>
+
     <redirect>
         <from>/</from>
         <to>/accueil</to>
