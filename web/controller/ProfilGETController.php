@@ -36,11 +36,11 @@ class ProfilGETController extends Controller {
         
         $hiddenInput = 'idUtilisateur';
         
-        $this->data =  array(array('idUtilisateur' => 1,
-                            'nom' => 'adnls',
+        $this->data =  array(array('idUtilisateur' => $user['id'],
+                            'login' => $user['name'],
                             'email' => $user['email'],
-                            'mdp' => '123azerty',
-                            'headerColor' => '#000000',
+                            'mdp' => '',
+                            'headerColor' => $user['color'],
                             'authLevel' => $user['level']
                         ));                  
 

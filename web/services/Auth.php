@@ -45,6 +45,14 @@ class Auth {
         if (isset($_SESSION)) session_destroy();
     }
 
+    public function refreshCredentials($data){
+        
+        $_SESSION["passport"]["id"] = $data["idUtilisateur"];
+        $_SESSION["passport"]["name"] = $data["login"];
+        $_SESSION["passport"]["email"] = $data["email"];
+        $_SESSION["passport"]["level"] = $_SESSION["passport"]["level"];
+        $_SESSION["passport"]["color"] = $data["headerColor"];
+    }
     /**sign in sign out*/
 }
 

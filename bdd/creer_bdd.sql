@@ -255,14 +255,13 @@ DROP procedure IF EXISTS `sde`.`ModifierUtilisateur`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `ModifierUtilisateur` (IN p_idUtilisateur INT, IN p_nom VARCHAR(45),IN p_email VARCHAR(45), IN p_mdp VARCHAR(60), IN p_bckColor VARCHAR(45), IN p_headerColor VARCHAR(45))
+CREATE PROCEDURE `ModifierUtilisateur` (IN p_idUtilisateur INT, IN p_nom VARCHAR(45),IN p_email VARCHAR(45), IN p_mdp VARCHAR(60), IN p_headerColor VARCHAR(45))
 BEGIN
 	UPDATE `sde`.`Utilisateur`
     SET
-		nom = UPPER(p_nom),
-        email = UPPER(p_email),
+		nom = p_nom,
+        email = p_email,
         mdp = p_mdp,
-        bckColor = p_bckColor,
         headerColor = p_headerColor
 	WHERE
 		idUtilisateur = p_idUtilisateur;
@@ -945,6 +944,7 @@ GRANT EXECUTE ON PROCEDURE `sde`.`ModifierStatut` TO 'admin';
 GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerStatut` TO 'admin';
 GRANT EXECUTE ON PROCEDURE `sde`.`InsererUtilisateur` TO 'admin';
 GRANT EXECUTE ON PROCEDURE `sde`.`SupprimerUtilisateur` TO 'admin';
+GRANT EXECUTE ON PROCEDURE `sde`.`ModifierUtilisateur` TO 'admin';
 
 /******************************************************/
 /****************** REMPLIR LES TABLES ****************/

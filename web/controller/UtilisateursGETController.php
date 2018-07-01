@@ -57,6 +57,7 @@ class UtilisateursGETController extends Controller {
                         'login' => null,
                         'email' => null,
                         'mdp' => null,
+                        'mdp2' => null,
                         'headerColor' => null,
                         'authLevel' => array(array('id'=> 1, 'nom'=>'Oui'), array('id'=> 0, 'nom'=>'Non')),
                     );
@@ -101,7 +102,7 @@ class UtilisateursGETController extends Controller {
                     
                     $hiddenInput = 'idService';
 
-                    $formActions = array('form' => '/web/cours/'.$params['id'], 'back' => '/web/cours/?action=show'); 
+                    $formActions = array('form' => '#', 'back' => '/web/cours/?action=show'); 
                     
                     $this->data = $this->db->findOne('Service', $params['id']);                    
     

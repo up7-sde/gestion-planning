@@ -183,6 +183,12 @@
     </route>
 
     <route>
+        <method>POST</method>
+        <path>/profil</path>
+        <controller>ProfilPOSTController</controller>
+    </route>
+
+    <route>
         <method>GET</method>
         <path>/routines/nvelleannee</path>
         <controller>RoutinesGETController</controller>

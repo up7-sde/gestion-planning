@@ -290,7 +290,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input pattern="'.$attributes['pattern'].'" maxlength="256" '.$attributes['required'].' '. $status .' name="' . $key . '" type="email" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                                <input maxlength="256" '.$attributes['required'].' '. $status .' name="' . $key . '" type="email" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
                             '.$help. $valid . $invalid .'</div>
                             
                         </div>'; 
@@ -314,7 +314,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input pattern="'.$attributes['pattern'].'" maxlength="256" '.$attributes['required'].' '. $status .' name="' . $key . '" type="text" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                                <input maxlength="256" '.$attributes['required'].' '. $status .' name="' . $key . '" type="text" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
                             '.$help. $valid . $invalid .'</div>
                             
                         </div>'; 
@@ -322,12 +322,13 @@ class ViewEngine {
                 }      
             }
 
+            /*les bouttons*/
             /*if data delete button*/
             if ($data === null){
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button ' .$status. ' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ok</button>
+                        <button ' .$status. ' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ajouter</button>
                         <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
@@ -336,8 +337,8 @@ class ViewEngine {
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ok</button>
-                        <a href="'. $actions['delete'] . '" role="button" class="btn btn-danger'. $status .'"><i class="far fa-trash-alt"></i> Supprimer</a>                        
+                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Modifier</button>
+                        <a href="'. $actions['delete'] . '" role="button" class="btn btn-danger '. $status .'"><i class="far fa-trash-alt"></i> Supprimer</a>                        
                         <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
                         </div>
                     </div>
@@ -346,7 +347,7 @@ class ViewEngine {
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ok</button>
+                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Modifier</button>
                         <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
@@ -355,8 +356,6 @@ class ViewEngine {
 
             $form = $form . '</form>';
             return $form;
-
-            
         }
 
         public function generateNavbar($active, $user){
