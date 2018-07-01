@@ -902,10 +902,10 @@ SET SQL_MODE = '';
 -- Création des USER
 /******************************************************/
 
-DROP USER IF EXISTS admin;
+DROP USER admin;
 CREATE USER 'admin' IDENTIFIED BY 'mdpadmin';
 
-DROP USER IF EXISTS enseignant;
+DROP USER enseignant;
 CREATE USER 'enseignant' IDENTIFIED BY 'mdpenseignant';
 
 /******************************************************/
