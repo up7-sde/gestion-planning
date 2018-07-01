@@ -3,6 +3,7 @@
 /*faire la même chose avec les tables*/
 class Model {
     public static $inputs = array(
+        
         'idService' =>
         array(
             'name' => 'idService',
@@ -153,7 +154,6 @@ class Model {
         ),
 
         'idDiplome' =>
-        
         array(
             'name' => 'Diplome_idDiplome',
             'alias' => 'Diplôme',

@@ -29,7 +29,7 @@
         <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
 
         <div class="d-flex flex-row justify-content-center my-5">
-            <div id="donut" data-donut="75"></div> 
+            <div id="donut" data-donut="80"></div> 
         </div>
 
 
@@ -46,7 +46,7 @@
 
       <!--card avec un donut chiffre clé-->
 
-      <div class="mb-5 small">
+      <div class="mb-5">
         <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
     </div>
 

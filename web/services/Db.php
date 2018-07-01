@@ -136,28 +136,33 @@ class Db{
         /*on cherche le type du param dans la liste des params puis on le bind*/
         foreach($args as $key => $value){
               $param = ':'.$key;
+              
               $statement->bindParam($param, $args[$key], $this->attributes[$key]['type']);
+              //var_dump($args[$key]);
+              //var_dump($this->attributes[$key]['type']);
         }
-
+        
         /*var_dump($statement);
         die();*/
         
         try{
-            $res = $statement->execute();
+            $res = $statement->execute() or die(print_r($req->errorInfo(), TRUE));
 
             if ($statement->rowCount()){
                 /*en attendant l'autocommit*/
                 if (!$autocommit) $this->connection->commit();
                 return TRUE;
-            };
+            }
+            /*var_dump($statement);
+        die();*/
             /*en attendant l'autocommit*/
             if (!$autocommit) $this->connection->rollBack();
             return FALSE;
 
         } catch (Exception $e) {
+            
             return FALSE;
         }
-
     }
 
     public function kill(){

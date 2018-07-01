@@ -122,7 +122,7 @@ class EnseignementsGETController extends Controller {
                     $formActions = array('form' => '/web/enseignements/'.$params['id'], 
                                         'back' => '/web/enseignements?action=show',
                                         'delete' => '/web/enseignements/'.$params['id'].'?action=delete'); 
-                    $hiddenInput = 'id';
+                    $hiddenInput = 'apogee2';
                     
                     $this->data = $this->db->findOne('VueListeEnseignement', $params['id'], 'apogee2', TRUE);                    
     
