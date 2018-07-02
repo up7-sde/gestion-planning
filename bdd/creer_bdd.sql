@@ -1,7 +1,7 @@
 /******************************************************/
 -- Contenu du script :
 -- Creation de la base et des tables
--- Création des utilisateur (admin et enseingant)
+-- Création des applicatifs (admin et enseingant)
 -- Création des Vue
 -- Création des Procédures
 -- Attribution des droits
@@ -79,13 +79,13 @@ CREATE UNIQUE INDEX `nom_UNIQUE` ON `sde`.`TypeService` (`nom` ASC);
 DROP TABLE IF EXISTS `sde`.`Enseignement` ;
 
 CREATE TABLE `sde`.`Enseignement` (
-  `apogee` VARCHAR(45) NOT NULL,
-  `intitule` VARCHAR(45) NOT NULL,
-  `heureCM` INT NOT NULL,
-  `heureTP` INT NOT NULL,
-  `semestre` INT NOT NULL,
-  `nbGroupes` INT NOT NULL,
-  PRIMARY KEY (`apogee`))
+    `apogee` VARCHAR(45) NOT NULL,
+    `intitule` VARCHAR(45) NOT NULL,
+    `heureCM` INT NOT NULL,
+    `heureTP` INT NOT NULL,
+    `semestre` INT NOT NULL,
+    `nbGroupes` INT NOT NULL,
+    PRIMARY KEY (`apogee`))
 ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `apogee_UNIQUE` ON `sde`.`Enseignement` (`apogee` ASC);
@@ -110,13 +110,13 @@ CREATE TABLE `sde`.`Service` (
   CONSTRAINT `fk_Service_Enseignant`
     FOREIGN KEY (`Enseignant_idEnseignant`)
     REFERENCES `sde`.`Enseignant` (`idEnseignant`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Service_TypeService`
     FOREIGN KEY (`TypeService_idTypeService`)
     REFERENCES `sde`.`TypeService` (`idTypeService`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Service_Enseignement`
     FOREIGN KEY (`Enseignement_apogee`)
     REFERENCES `sde`.`Enseignement` (`apogee`)
@@ -125,9 +125,7 @@ CREATE TABLE `sde`.`Service` (
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_Service_Enseignant_id` ON `sde`.`Service` (`Enseignant_idEnseignant` ASC);
-
 CREATE INDEX `fk_Service_TypeService_id` ON `sde`.`Service` (`TypeService_idTypeService` ASC);
-
 CREATE INDEX `fk_Service_Enseignement_id` ON `sde`.`Service` (`Enseignement_apogee` ASC);
 
 
@@ -158,12 +156,11 @@ CREATE TABLE `sde`.`Formation` (
   CONSTRAINT `fk_Formation_Diplome`
     FOREIGN KEY (`Diplome_idDiplome`)
     REFERENCES `sde`.`Diplome` (`idDiplome`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_Formation_Diplomes_id` ON `sde`.`Formation` (`Diplome_idDiplome` ASC);
-
 CREATE UNIQUE INDEX `nom_UNIQUE` ON `sde`.`Formation` (`nom` ASC);
 
 
@@ -179,19 +176,18 @@ CREATE TABLE `sde`.`EnseignementFormation` (
   CONSTRAINT `fk_EnseignementFormation_Formation`
     FOREIGN KEY (`Formation_idFormation`)
     REFERENCES `sde`.`Formation` (`idFormation`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_EnseignementFormation_Enseignement`
     FOREIGN KEY (`Enseignement_apogee`)
     REFERENCES `sde`.`Enseignement` (`apogee`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_EnseignementFormation_Formation_id` ON `sde`.`EnseignementFormation` (`Formation_idFormation` ASC);
 
 CREATE INDEX `fk_EnseignementFormation_Enseignement_id` ON `sde`.`EnseignementFormation` (`Enseignement_apogee` ASC);
-
 
 /******************************************************/
 -- Table `sde`.`Utilisateur`
@@ -463,10 +459,35 @@ DELIMITER $$
 
 CREATE PROCEDURE `SupprimerFormation` (IN p_idFormation INT)
 BEGIN
+    -- Suprimer l'entrée dans la table de liaison EnseignementFormation
+    -- ce qui lancera le trigger triggerSuppFormation
+    DELETE FROM `sde`.`EnseignementFormation` WHERE `Formation_idFormation` = p_idFormation;
+    -- Suprimer l'entrée dans la tabl Formation
 	DELETE FROM `sde`.`Formation` WHERE idFormation = p_idFormation;
 END;$$
 
 DELIMITER ;
+
+
+/******************************************************/
+-- trigger qui va supprimer les enseignements contenu dans une formation avant sa suppression.
+-- Ce trigger est nécessaire car il n'y a pas de lien direct entre la table Formation
+-- et la table Enseignement (on passe par une table d'association EnseignementFormation)
+/******************************************************/
+
+DROP TRIGGER IF EXISTS triggerSuppFormation;
+
+DELIMITER $$
+
+CREATE TRIGGER triggerSuppFormation
+BEFORE DELETE
+   ON EnseignementFormation FOR EACH ROW
+BEGIN
+    DELETE FROM `sde`.`Enseignement` WHERE apogee = old.Enseignement_apogee;
+END;$$
+
+DELIMITER ;
+
 
 /******************************************************/
 -- procedure SupprimerEnseignement
@@ -478,10 +499,8 @@ DELIMITER $$
 
 CREATE PROCEDURE `SupprimerEnseignement` (IN p_apogee VARCHAR(45))
 BEGIN
-	-- Supprimer l'enseignement
-    DELETE FROM `sde`.`EnseignementFormation` WHERE `Enseignement_apogee` = p_apogee;
+    -- Supprimer l'enseignement
 	DELETE FROM `sde`.`Enseignement` WHERE `apogee` = p_apogee;
-    -- Suprimer l'entrée dans la table de liaison EnseignementFormation
 END$$
 
 DELIMITER ;
@@ -574,7 +593,6 @@ BEGIN
 	-- Vérifier qu'on ne touche pas au 2 premiers types (CM et TP)
     UPDATE `sde`.`TypeService` SET nom = UPPER(p_nom), poids = p_poids WHERE idTypeService = p_idTypeService;
 END$$
-
 DELIMITER ;
 
 /******************************************************/
@@ -662,8 +680,7 @@ BEGIN
     INSERT INTO `sde`.`Service` (annee, Enseignant_idEnseignant, TypeService_idTypeService, Enseignement_apogee, nbHeures)
     	SELECT p_anneeDest, Enseignant_idEnseignant, TypeService_idTypeService, Enseignement_apogee, nbHeures
 		FROM `sde`.`Service`
-		WHERE annee = p_anneeCible
-	;
+		WHERE annee = p_anneeCible;
 END$$
 
 DELIMITER ;
@@ -894,9 +911,6 @@ SELECT
 	`sde`.`TypeService`.`nom`
 FROM
 	`sde`.`TypeService`;
-SET SQL_MODE = '';
-
-
 
 /******************************************************/
 -- Création des USER
@@ -1223,8 +1237,6 @@ VALUES
     ("David", "david.ayache90@gmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", "#000000"),
     ("Prof", "prof@gmail.com", 0, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", "#000000");
 
--- Debug : mysql en mode autocommit par défaut à supprimer
-COMMIT;
 
 -- Important car les procédures ne respectent pas un standard qui est activé d'office sur le serveur de prod
 SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
