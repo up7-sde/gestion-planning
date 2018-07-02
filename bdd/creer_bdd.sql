@@ -479,9 +479,9 @@ DELIMITER $$
 CREATE PROCEDURE `SupprimerEnseignement` (IN p_apogee VARCHAR(45))
 BEGIN
 	-- Supprimer l'enseignement
+    DELETE FROM `sde`.`EnseignementFormation` WHERE `Enseignement_apogee` = p_apogee;
 	DELETE FROM `sde`.`Enseignement` WHERE `apogee` = p_apogee;
     -- Suprimer l'entrée dans la table de liaison EnseignementFormation
-    DELETE FROM `sde`.`EnseignementFormation` WHERE `Enseignement_apogee` = p_apogee;
 END$$
 
 DELIMITER ;
