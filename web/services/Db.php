@@ -105,7 +105,7 @@ class Db{
         $this->connect();
         /*prepare-execute?*/
  
-        $res = $this->connection->query('SELECT * FROM utilisateur WHERE email = "' . $email . '"' );
+        $res = $this->connection->query('SELECT * FROM Utilisateur WHERE email = "' . $email . '"' );
         $data = $res->fetchAll(PDO::FETCH_ASSOC);
         // debug : vérifier le retour de la requête avant de poursuivre (id valide...)
         return $data;
