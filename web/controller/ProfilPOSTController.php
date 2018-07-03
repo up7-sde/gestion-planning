@@ -23,11 +23,11 @@ class ProfilPOSTController extends Controller {
             $res = $this->db->callProcedure('ModifierUtilisateur', $_POST);
 
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Profil modifié'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Profil modifié'));
                 /*pour rafraishir les credentials*/
                 $this->auth->refreshCredentials($_POST);
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la modification du profil'));                        
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la modification du profil'));                        
             }
 
             $this->redirect('/');

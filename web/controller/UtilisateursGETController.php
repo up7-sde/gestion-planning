@@ -118,10 +118,10 @@ class UtilisateursGETController extends Controller {
                     if ($res) {
                         $this->messenger->push(array(
                             'status'=>'success', 
-                            'message'=>'Success_Utilisateur n°'.$params['id'].' supprimé')
+                            'message'=>'Utilisateur n°'.$params['id'].' supprimé')
                         );
                     } else {
-                        $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la suppression'));                        
+                        $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la suppression'));                        
                     }
 
                     $this->redirect('/utilisateurs?action=show');

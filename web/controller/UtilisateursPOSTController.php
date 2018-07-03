@@ -27,9 +27,9 @@ class UtilisateursPOSTController extends Controller {
             $res = $this->db->callProcedure('InsererUtilisateur', $_POST);
 
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Utilisateur ajouté'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Utilisateur ajouté'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de l\'ajout d\'un utilisateur'));                        
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de l\'ajout d\'un utilisateur'));                        
             }                 
             $this->redirect('/utilisateurs?action=show');
         /*
@@ -41,9 +41,9 @@ class UtilisateursPOSTController extends Controller {
             $res = $this->db->callProcedure('ModifierService', $_POST);
             
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Cours modifié'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Cours modifié'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));                        
             }
             $this->redirect('/cours?action=show');
         }

@@ -7,14 +7,14 @@ include_once('Controller.php');
  */
 class CoursPOSTController extends Controller {
     public function render($args=null){
-        
+
         /*verifier auth*/
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth/login');
-        
+
         /*on récupère tous les params*/
         $params = $this->getParams();
-        
+
         /*
         case
         /cours => ajoute une nouvelle ressource
@@ -23,10 +23,10 @@ class CoursPOSTController extends Controller {
             var_dump($_POST);
             $res = $this->db->callProcedure('InsererService', $_POST);
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Cours ajouté'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Le cours à été ajouté.'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
-            }                 
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
+            }
             $this->redirect('/cours?action=show');
         /*
         case
@@ -35,11 +35,11 @@ class CoursPOSTController extends Controller {
         } else {
 
             $res = $this->db->callProcedure('ModifierService', $_POST);
-            
+
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Cours modifié'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Le cours a été modifié'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
             }
             $this->redirect('/cours?action=show');
         }

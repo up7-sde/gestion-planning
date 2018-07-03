@@ -7,18 +7,18 @@ include_once('Controller.php');
  */
 class RoutinesPOSTController extends Controller {
     public function render($args=null){
-        
+
         /*verifier auth*/
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth/login');
-        
+
         $res = $this->db->callProcedure('DuppliquerService', $_POST);
 
         if ($res) {
-            $this->messenger->push(array('status'=>'success', 'message'=>'Success_Services copiés'));
-            
+            $this->messenger->push(array('status'=>'success', 'message'=>'Services copiés'));
+
         } else {
-            $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la procédure'));                        
+            $this->messenger->push(array('status'=>'fail', 'message'=>'Impossible de copier les services'));                        
         }
 
         $this->redirect('/');

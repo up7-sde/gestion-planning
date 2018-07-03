@@ -3,7 +3,7 @@
 /*faire la même chose avec les tables*/
 class Model {
     public static $inputs = array(
-        
+
         'idService' =>
         array(
             'name' => 'idService',
@@ -12,7 +12,7 @@ class Model {
             'inputType' => 'hidden',
             'default' => null,
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null,
         ),
@@ -24,7 +24,7 @@ class Model {
             'inputType' => 'options',
             'default' => null,
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null
         ),
@@ -36,7 +36,7 @@ class Model {
             'inputType' => 'options',
             'default' => null,
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null
         ),
@@ -48,7 +48,7 @@ class Model {
             'inputType' => 'number',
             'default' => 2018,
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null,
             'min' => 1900,
@@ -64,7 +64,7 @@ class Model {
             'inputType' => 'options',
             'default' => 'Enseignement',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null
         ),
@@ -77,7 +77,7 @@ class Model {
             'inputType' => 'number',
             'default' => 4,
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => 'Min 0 max INF step 1',
             'min' => 0,
@@ -93,7 +93,7 @@ class Model {
             'inputType' => 'text',
             'default' => 'Nom',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null,
             'pattern' => null
@@ -107,12 +107,12 @@ class Model {
             'inputType' => 'text',
             'default' => 'Prénom',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null,
             'pattern' => null
         ),
-       
+
         'idStatut' =>
         array(
             'name' => 'Statut_idStatut',
@@ -121,7 +121,7 @@ class Model {
             'inputType' => 'options',
             'default' => 'Statut',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null
         ),
@@ -134,7 +134,7 @@ class Model {
             'inputType' => 'radio',
             'default' => 'Département',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null
         ),
@@ -147,7 +147,7 @@ class Model {
             'inputType' => 'text',
             'default' => 'Intitulé',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null,
             'pattern' => null
@@ -161,7 +161,7 @@ class Model {
             'inputType' => 'options',
             'default' => 'Diplôme',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null
         ),
@@ -174,7 +174,7 @@ class Model {
             'inputType' => 'number',
             'default' => 0,
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null,
             'min' => 0,
@@ -189,7 +189,7 @@ class Model {
             'inputType' => 'number',
             'default' => 0,
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null,
             'min' => 0,
@@ -204,7 +204,7 @@ class Model {
             'inputType' => 'options',
             'default' => 0,
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => 'De 1 à 6 pour la Licence, de 7 à 10 pour le Master'
         ),
@@ -216,11 +216,11 @@ class Model {
             'inputType' => 'number',
             'default' => 0,
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => 'Entre 1 et 100 avec un pas de 1',
             'min' => 0,
-            'max' => 100,
+            'max' => 20,
             'step' => 1
         ),
         'idFormation' =>
@@ -231,7 +231,7 @@ class Model {
             'inputType' => 'options',
             'default' => 'Formation',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null
         ),
@@ -243,7 +243,7 @@ class Model {
             'inputType' => 'text',
             'default' => 'Code Apogée',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null,
             'pattern' => null
@@ -255,8 +255,8 @@ class Model {
             'type' => PDO::PARAM_STR,
             'inputType' => 'area',
             'default' => 'Ajoutez un commentaire ici',
-            'required' => 'required',
-            'invalid' => 'Non-valide',
+            'required' => '',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => 'Commentaire pour les cours spéciaux',
         ),
@@ -264,11 +264,11 @@ class Model {
         array(
             'name' => 'poids',
             'alias' => 'Poids',
-            'type' => PDO::PARAM_INT,
+            'type' => PDO::PARAM_STR,
             'inputType' => 'number',
             'default' => 'Poids (ex : 1)',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => 'Pas de 0,5 (vous devez mettre un point pour les décimales, ex: 1.5)',
             'min' => 0,
@@ -283,7 +283,7 @@ class Model {
             'inputType' => 'radio',
             'default' => 'Poids (ex : 1)',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null
         ),
@@ -295,7 +295,7 @@ class Model {
             'inputType' => 'number',
             'default' => 'Heures de service',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null,
             'min' => 0,
@@ -311,7 +311,7 @@ class Model {
             'inputType' => 'number',
             'default' => 'id Utilisateur',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null,
             'min' => null,
@@ -326,7 +326,7 @@ class Model {
             'inputType' => 'text',
             'default' => 'Login',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null,
             'pattern' => null
@@ -339,7 +339,7 @@ class Model {
             'inputType' => 'email',
             'default' => 'Email',
             'required' => 'required',
-            'invalid' => 'Vous devez entrer un email valide!',
+            'invalid' => 'Vous devez entrer un email valide !',
             'valid' => 'Ok! Email valide',
             'help' => null,
             'pattern' => null
@@ -352,11 +352,12 @@ class Model {
             'inputType' => 'password',
             'default' => 'Mot de passe',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
-            'help' => '1Maj - 1min - 1Num - 1SpecialChar[!@#$%^&*_=+-] - {Min8Char Max32Char}',
+            'help' => '8 à 32 caractères contenant au moins : une minuscule, une majuscule, un caractère spécial (!@#$%^&*_=+-)',
             'pattern' => '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,32}$'
         ),
+        //
         'mdp2' =>
         array(
             'name' => 'mdp',
@@ -365,7 +366,7 @@ class Model {
             'inputType' => 'password',
             'default' => 'Mot de passe',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => 'Les deux mots de passe doivent correspondre',
             'pattern' => '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,32}$'
@@ -378,7 +379,7 @@ class Model {
             'inputType' => 'radio',
             'default' => 'Thème',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null
         ),
@@ -390,7 +391,7 @@ class Model {
             'inputType' => 'color',
             'default' => 'Couleur',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => 'Une couleur pour la barre de navigation'
         ),
@@ -402,7 +403,7 @@ class Model {
             'inputType' => 'radio',
             'default' => null,
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => null
         ),
@@ -414,7 +415,7 @@ class Model {
             'inputType' => 'number',
             'default' => 'yyyy',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
             'help' => 'Minimum 1900',
             'min' => 1900,
@@ -429,11 +430,11 @@ class Model {
             'inputType' => 'number',
             'default' => 'yyyy',
             'required' => 'required',
-            'invalid' => 'Non-valide',
+            'invalid' => 'Non valide',
             'valid' => 'Valide',
-            'help' => 'Minimum 1900 (remplacer par un select?)',
-            'min' => 1900,
-            'max' => null,
+            'help' => 'Entrer une année valide',
+            'min' => 2000,
+            'max' => 2050,
             'step' => null
         )
     );
@@ -444,56 +445,56 @@ class Model {
         'Enseignants' => array( //la table dans la base
             'nom' => array( //nom dans la bdd
                 'name' => 'Nom', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'prenom' => array( //nom dans la bdd
                 'name' => 'Prénom', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'Departement' => array( //nom dans la bdd
                 'name' => 'Département', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'Titulaire' => array( //nom dans la bdd
                 'name' => 'Est titulaire?', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'Categorie' => array( //nom dans la bdd
                 'name' => 'Catégorie', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'HeuresDues' => array( //nom dans la bdd
                 'name' => 'Heures dues', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'HeuresAffectees' => array( //nom dans la bdd
                 'name' => 'Heures afféctées', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => 'HeuresDues', //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctH' => array( //nom dans la bdd
                 'name' => 'Pct. d\'heures afféctées', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
@@ -504,21 +505,21 @@ class Model {
         'Enseignements' => array( //la table dans la base
             'apogee2' => array( //nom dans la bdd
                 'name' => 'Référence Apogée', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'intitule' => array( //nom dans la bdd
                 'name' => 'Intitulé', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureCM' => array( //nom dans la bdd
                 'name' => 'Heures CM', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
@@ -526,77 +527,77 @@ class Model {
 
             'heureCMAffectee' => array( //nom dans la bdd
                 'name' => 'Heures CM afféctées', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => 'heureCM', //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctCM' => array( //nom dans la bdd
                 'name' => 'Pct. hCM afféctées', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'hTPparGroupe' => array( //nom dans la bdd
                 'name' => 'Heures TP par groupe', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'nbGroupe' => array( //nom dans la bdd
                 'name' => 'Nombre de groupes', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'hTPtotal' => array( //nom dans la bdd
                 'name' => 'Heures TP total', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureTPAffectee' => array( //nom dans la bdd
                 'name' => 'Heures TP afféctées', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => 'hTPtotal', //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctTP' => array( //nom dans la bdd
                 'name' => 'Pct. hTP afféctées', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'semestre' => array( //nom dans la bdd
                 'name' => 'Semestre', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'formation' => array( //nom dans la bdd
                 'name' => 'Formation', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'idFormation' => array( //nom dans la bdd
                 'name' => 'Id formation', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => FALSE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'diplome' => array( //nom dans la bdd
                 'name' => 'Diplôme', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
@@ -606,137 +607,137 @@ class Model {
         'Cours' => array( //la table dans la base
             'apogee' => array( //nom dans la bdd
                 'name' => 'Code Apogée', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'intitule' => array( //nom dans la bdd
                 'name' => 'Intitulé', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'type' => array( //nom dans la bdd
                 'name' => 'Type', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heure' => array( //nom dans la bdd
                 'name' => 'Nombre d\'heures', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'annee' => array( //nom dans la bdd
                 'name' => 'Année', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'idEnseignant' => array( //nom dans la bdd
                 'name' => '', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => FALSE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'nom' => array( //nom dans la bdd
                 'name' => 'Nom enseignant', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'prenom' => array( //nom dans la bdd
                 'name' => 'Prénom enseignant', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'formation' => array( //nom dans la bdd
                 'name' => 'Formation', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'diplome' => array( //nom dans la bdd
                 'name' => 'Diplôme', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'commentaire' => array( //nom dans la bdd
                 'name' => 'Commentaire', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             )
         ),
-        
+
         /**Table des forrmations */
         'Formations' => array( //la table dans la base
             'diplome' => array( //nom dans la bdd
                 'name' => 'Diplôme', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'formation' => array( //nom dans la bdd
                 'name' => 'Formation', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureCM' => array( //nom dans la bdd
                 'name' => 'Heures CM', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureCMAffectee' => array( //nom dans la bdd
                 'name' => 'Heures CM afféctées', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctCM' => array( //nom dans la bdd
                 'name' => 'Pct hCM affectées', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureTP' => array( //nom dans la bdd
                 'name' => 'Heures TP', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureTPAffectee' => array( //nom dans la bdd
                 'name' => 'Heures TP afféctées', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctTP' => array( //nom dans la bdd
                 'name' => 'Pct. hTP afféctées', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
@@ -747,7 +748,7 @@ class Model {
         'Diplômes' => array( //la table dans la base
             'nom' => array( //nom dans la bdd
                 'name' => 'Nom', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
@@ -758,14 +759,14 @@ class Model {
         'Types de cours' => array( //la table dans la base
             'nom' => array( //nom dans la bdd
                 'name' => 'Nom', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'poids' => array( //nom dans la bdd
                 'name' => 'Poids', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
@@ -776,7 +777,7 @@ class Model {
         'Statuts Enseignant' => array( //la table dans la base
             'nom' => array( //nom dans la bdd
                 'name' => 'Intitulé', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
@@ -790,7 +791,7 @@ class Model {
             ),
             'titulaire' => array( //nom dans la bdd
                 'name' => 'Est titulaire?', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
@@ -800,43 +801,43 @@ class Model {
         'Utilisateurs' => array( //la table dans la base
             'nom' => array( //nom dans la bdd
                 'name' => 'Nom utilisateur', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'email' => array( //nom dans la bdd
                 'name' => 'Email', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'mdp' => array( //nom dans la bdd
                 'name' => 'Mot de passe', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => FALSE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
-            
+
             'bckColor' => array( //nom dans la bdd
                 'name' => 'Thème', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => FALSE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'headerColor' => array( //nom dans la bdd
                 'name' => 'Couleur', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite 
+                'type' => 1, //type pr alignement gauche droite
                 'show' => FALSE ,//on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'authLevel' => array( //nom dans la bdd
-                'name' => 'Est administrateur?', //nom à afficher
-                'type' => 0, //type pr alignement gauche droite 
+                'name' => 'Admin', //nom à afficher
+                'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE

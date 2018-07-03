@@ -7,14 +7,14 @@ include_once('Controller.php');
  */
 class TypesPOSTController extends Controller {
     public function render($args=null){
-        
+
         /*verifier auth*/
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth/login');
-        
+
         /*on récupère tous les params*/
         $params = $this->getParams();
-        
+
         /*
         case
         /cours => ajoute une nouvelle ressource
@@ -24,10 +24,10 @@ class TypesPOSTController extends Controller {
             die();*/
             $res = $this->db->callProcedure('InsererTypeService', $_POST);
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Type de service ajouté'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Type de service ajouté'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de l\'ajout d\'un type de service'));                        
-            }                 
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));                        
+            }
             $this->redirect('/referentiels/types?action=show');
         /*
         case
@@ -36,11 +36,11 @@ class TypesPOSTController extends Controller {
         } else {
 
             $res = $this->db->callProcedure('ModifierService', $_POST);
-            
+
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Cours modifié'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Cours modifié'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
             }
             $this->redirect('/cours?action=show');
         }

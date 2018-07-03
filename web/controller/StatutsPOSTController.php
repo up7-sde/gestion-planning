@@ -23,9 +23,9 @@ class StatutsPOSTController extends Controller {
             var_dump($_POST);
             $res = $this->db->callProcedure('InsererStatut', $_POST);
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Statut enseignant ajouté'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Statut enseignant ajouté'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de l\'ajout d\'un statut enseignant'));                        
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de l\'ajout d\'un statut enseignant'));                        
             }                 
             $this->redirect('/referentiels/statuts?action=show');
         /*
@@ -37,9 +37,9 @@ class StatutsPOSTController extends Controller {
             $res = $this->db->callProcedure('ModifierService', $_POST);
             
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Cours modifié'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Cours modifié'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));                        
             }
             $this->redirect('/cours?action=show');
         }

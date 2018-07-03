@@ -24,9 +24,9 @@ class DiplomesPOSTController extends Controller {
             die();*/
             $res = $this->db->callProcedure('InsererDiplome', $_POST);
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Diplôme ajouté'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Diplôme ajouté.'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
             }
             $this->redirect('/referentiels/diplomes?action=show');
         /*
@@ -38,9 +38,9 @@ class DiplomesPOSTController extends Controller {
             $res = $this->db->callProcedure('ModifierService', $_POST);
 
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Cours modifié'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Diplôme modifié'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
             }
             $this->redirect('/cours?action=show');
         }

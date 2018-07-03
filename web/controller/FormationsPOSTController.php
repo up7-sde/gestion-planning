@@ -24,9 +24,9 @@ class FormationsPOSTController extends Controller {
             $res = $this->db->callProcedure('InsererFormation', $_POST);
             
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Formation ajoutée'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Formation ajoutée'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));                        
             }
             //$_SESSION["message"] = $res;                    
             $this->redirect('/formations?action=show');
@@ -39,9 +39,9 @@ class FormationsPOSTController extends Controller {
             $res = $this->db->callProcedure('ModifierFormation', $_POST);
 
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Success_Formation modifiée'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Formation modifiée'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la requête'));                        
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));                        
             }
             
             $this->redirect('/formations?action=show');

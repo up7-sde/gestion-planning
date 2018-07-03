@@ -6,23 +6,23 @@ include_once('Controller.php');
  * Modifier un service existant et rediriger vers la liste des services avec un message
  */
 class EnseignementsGETController extends Controller {
-    
+
     public function render($args=null){
-   
+
         $this->namespace = 'Enseignements';
         /*verifier auth*/
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth?action=process');
-        
+
         /*on récupère tous les types de params*/
         $params = $this->getParams();
         $extraParams = $this->getExtraParams();
-        
+
         /*
         case
         /cours?action=(show|add)
         */
-        if (!$params && !!$extraParams && isset($extraParams['action'])){ 
+        if (!$params && !!$extraParams && isset($extraParams['action'])){
             //echo "no prams!!";
 
             switch ($extraParams['action']) {
@@ -32,11 +32,11 @@ class EnseignementsGETController extends Controller {
                     $this->title = 'Tous les Enseignements';
                     //$this->data = $this->db->findChunk('VueListeEnseignement', 10, 0);
                     $this->data = $this->db->findAll('VueListeEnseignement');
-                    
+
                     $titleButton = array(
                         array('icon' => 'add', 'action' => '/web/enseignements?action=add', 'enabled'=> $this->isUserAdmin()),
                         array('icon' => 'download', 'action' => '/web/enseignements?action=download', 'enabled'=> $this->isUserAdmin())
-                        
+
                     );
 
                     $tableAction = '/web/enseignements';
@@ -48,14 +48,14 @@ class EnseignementsGETController extends Controller {
                     $this->pageType = 'New';
                     $this->title = 'Nouvel Enseignement';
                     $titleButton = null;
-                    
+
                     $this->data = null;
-                    
+
                     //(IN p_apogee VARCHAR(45), IN p_intitule VARCHAR(45), IN p_heureCM INT, IN p_heureTP 0000000INT, IN p_semestre INT, IN p_nbGroupes INT, IN p_idFormation INT)
-                    $formInputs = array('apogee2' => $this->db->findAll('VueLabelEnseignement'), 
-                                        'intitule' => null, 
-                                        'hCM' => null, 
-                                        'hTP' => null, 
+                    $formInputs = array('apogee2' => $this->db->findAll('VueLabelEnseignement'),
+                                        'intitule' => null,
+                                        'hCM' => null,
+                                        'hTP' => null,
                                         'semestre' => array(
                                             array('id' => 1, 'nom' => 1),
                                             array('id' => 2, 'nom' => 2),
@@ -70,18 +70,18 @@ class EnseignementsGETController extends Controller {
                                         ),
                                         'nbGroupes' => null,
                                         'idFormation' => $this->db->findAll('VueLabelFormation'));
-                    
-                    $formActions = array('form' => '/web/enseignements', 'back' => '/web/enseignements?action=show'); 
+
+                    $formActions = array('form' => '/web/enseignements', 'back' => '/web/enseignements?action=show');
                     $hiddenInput = null;
-                    
+
                     include('view2/forms.php');
                     break;
-                
+
                 case "download":
                     $data = $this->data = $this->db->findAll('VueListeEnseignement');
                     $this->fileMaker->passToBrowser($data);
                     break;
-                
+
                 default:
                     throw new NotFoundException('Not Found');
                     break;
@@ -90,20 +90,20 @@ class EnseignementsGETController extends Controller {
         case
         /cours/:id?action=(show|edit|delete)
         */
-        } elseif (!!$params && !!$extraParams && isset($extraParams['action'])) { 
-            
+        } elseif (!!$params && !!$extraParams && isset($extraParams['action'])) {
+
             switch ($extraParams['action']) {
-                
+
                 case "edit":
                     $this->pageType = 'Edit';
                     $this->title = 'Enseignement #'.$params['id'];
 
                     $titleButton = array(array('icon' => 'delete', 'action' => '/web/enseignements/'.$params['id'].'?action=delete'));
 
-                    $formInputs = array('apogee2' => null, 
-                                        'intitule' => null, 
-                                        'hCM' => null, 
-                                        'hTP' => null, 
+                    $formInputs = array('apogee2' => null,
+                                        'intitule' => null,
+                                        'hCM' => null,
+                                        'hTP' => null,
                                         'semestre' => array(
                                             array('id' => 1, 'nom' => 1),
                                             array('id' => 2, 'nom' => 2),
@@ -118,31 +118,31 @@ class EnseignementsGETController extends Controller {
                                         ),
                                         'nbGroupes' => null,
                                         'idFormation' => $this->db->findAll('VueLabelFormation'));
-                
-                    $formActions = array('form' => '/web/enseignements/'.$params['id'], 
+
+                    $formActions = array('form' => '/web/enseignements/'.$params['id'],
                                         'back' => '/web/enseignements?action=show',
-                                        'delete' => '/web/enseignements/'.$params['id'].'?action=delete'); 
+                                        'delete' => '/web/enseignements/'.$params['id'].'?action=delete');
                     $hiddenInput = 'apogee2';
-                    
-                    $this->data = $this->db->findOne('VueListeEnseignement', $params['id'], 'apogee2', TRUE);                    
-    
+
+                    $this->data = $this->db->findOne('VueListeEnseignement', $params['id'], 'apogee2', TRUE);
+
                     include('view2/forms.php');
-                    
+
                     break;
 
                 case "delete":
                     $id = $params['id'];
                     $res = $this->db->callProcedure("SupprimerEnseignement", array("apogee" => $params['id']));
-                    
+
                     if ($res) {
-                        $this->messenger->push(array('status'=>'success', 'message'=>'Success_Enseignement n°'.$params['id'].' supprimé'));
+                        $this->messenger->push(array('status'=>'success', 'message'=>'Enseignement supprimé'));
                     } else {
-                        $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la suppression'));                        
+                        $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la suppression'));                        
                     }
 
                     $this->redirect('/enseignements?action=show');
                     break;
-                
+
                 default:
                     throw new NotFoundException('Not Found');
                     break;

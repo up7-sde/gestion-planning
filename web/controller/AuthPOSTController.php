@@ -10,10 +10,10 @@ class AuthPostController extends Controller  {
 
         if ($this->auth->login()){
             $user = $this->getUserInfos();
-            $this->messenger->push(array('status'=>'success', 'message'=>'Connection OK_Bienvenue '. $user['name'] . '!'));            
+            $this->messenger->push(array('status'=>'success', 'message'=>'Content de vous revoir '. $user['name'] . '!'));
             $to = '/';
         } else {
-            $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Email ou mot de passe invalide'));                                    
+            $this->messenger->push(array('status'=>'fail', 'message'=>'Identifiants invalides'));
             $to = '/auth?action=process';
         }
 

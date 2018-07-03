@@ -93,9 +93,9 @@ class StatutsGETController extends Controller {
                     
                     $res = $this->db->callProcedure("SupprimerStatut", array("idStatut" => $params['id']));
                     if ($res) {
-                        $this->messenger->push(array('status'=>'success', 'message'=>'Success_Statut enseignant supprimé'));
+                        $this->messenger->push(array('status'=>'success', 'message'=>'Statut enseignant supprimé'));
                     } else {
-                        $this->messenger->push(array('status'=>'fail', 'message'=>'Fail_Echec de la suppression du statut'));                        
+                        $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la suppression du statut'));                        
                     }
                     $this->redirect('/referentiels/statuts?action=show');
                     break;
