@@ -80,12 +80,13 @@ class ViewEngine {
         }
 
         public function generateForm($inputs, $actions, $data, $hiddenInput, $admin, $pageType, $token){        
-            //var_dump($data);   
+            //var_dump($data);    
 
             !$admin && $pageType !== 'Profil'? $status = "disabled": $status = null;
+            ($pageType === 'Edit' || $pageType === 'Profil' ||  $pageType === 'Routine')? $alert = 'with-alert': $alert = '';
 
             $form = null;
-            $form = $form . '<form class="needs-validation" novalidate method="POST" action="'. $actions['form'] .'">';
+            $form = $form . '<form class="needs-validation '.$alert.'" novalidate method="POST" action="'. $actions['form'] .'">';
             
             /*csrf*/
             if($token!==null){
