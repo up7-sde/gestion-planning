@@ -21,7 +21,11 @@ class TypesPOSTController extends Controller {
         */
         if (!$params){
             
-            $res = $this->db->callProcedure('InsererTypeService', $this->sanitizer->filter($_POST));
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+
+            $this->sanitizer->filter();
+
+            $res = $this->db->callProcedure('InsererTypeService', $_POST);
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Type de service ajouté'));
             } else {
@@ -34,7 +38,12 @@ class TypesPOSTController extends Controller {
         */
         } else {
             
-            $res = $this->db->callProcedure('ModifierTypeService', $this->sanitizer->filter($_POST));
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter();            
+            
+            $res = $this->db->callProcedure('ModifierTypeService', $_POST);
+
 
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Type de service modifié'));

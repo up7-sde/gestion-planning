@@ -79,13 +79,18 @@ class ViewEngine {
             return $table;
         }
 
-        public function generateForm($inputs = null , $actions = null, $data = null, $hiddenInput = null, $admin = FALSE, $pageType = null){        
+        public function generateForm($inputs, $actions, $data, $hiddenInput, $admin, $pageType, $token){        
             //var_dump($data);   
 
             !$admin && $pageType !== 'Profil'? $status = "disabled": $status = null;
 
             $form = null;
             $form = $form . '<form class="needs-validation" novalidate method="POST" action="'. $actions['form'] .'">';
+            
+            /*csrf*/
+            if($token!==null){
+                $form = $form . '<input type="hidden" name="csrf" value="'.$token.'">';
+            }
             
             if($hiddenInput!==null){
                 $form = $form . '<input type="hidden" name="'.$hiddenInput.'" value="'.$data[0][$hiddenInput].'">';

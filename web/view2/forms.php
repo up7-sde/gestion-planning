@@ -25,7 +25,7 @@
         <div class="card-body">
 
         <?=$this->viewEngine->generateTitle($this->title);?>
-        <?=$this->viewEngine->generateForm($formInputs, $formActions, $this->data, $hiddenInput, $this->isUserAdmin(), $this->pageType);?>
+        <?=$this->viewEngine->generateForm($formInputs, $formActions, $this->data, $hiddenInput, $this->isUserAdmin(), $this->pageType, $this->csrf->generateToken());?>
       
       </div>
     </div>

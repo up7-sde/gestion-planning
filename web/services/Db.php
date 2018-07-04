@@ -10,6 +10,7 @@ class Db{
     private $user;
     private $password;
     private $dbname;
+    
 
     private function connectionExists(){
         //check if exists

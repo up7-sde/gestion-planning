@@ -6,6 +6,7 @@ include_once('services/Messenger.php');
 include_once('view2/ViewEngine.php');
 include_once('services/FileMaker.php');
 include_once('services/Sanitizer.php');
+include_once('services/CSRF.php');
 
 class Controller {
 
@@ -20,15 +21,17 @@ class Controller {
     protected $viewEngine;
     protected $fileMaker;
     protected $sanitizer;
-
+    protected $csrf;
+    
     public function __construct(){
         /*args de la db ici? => non*/
         $this->db = new Db();
         $this->messenger = new Messenger();
-        $this->auth = new Auth($this->db);
+        $this->sanitizer = new Sanitizer();
+        $this->auth = new Auth($this->db, $this->sanitizer);
         $this->viewEngine = new ViewEngine();
         $this->fileMaker = new FileMaker();
-        $this->sanitizer = new Sanitizer();
+        $this->csrf = new CSRF();    
     }
 
     // Prends une liste d'arguments $args
