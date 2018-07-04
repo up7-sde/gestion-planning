@@ -5,7 +5,7 @@ class Auth {
     //private $sessionStore;
     private $db;
 
-    public function __construct($db, $messenger){
+    public function __construct($db){
         //$this->sessionStore = $sessionStore;7
         $this->db = $db;
     }

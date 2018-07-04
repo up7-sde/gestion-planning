@@ -95,13 +95,14 @@ class TypesGETController extends Controller {
 
                 case "delete":
                     //var_dump($params['id']);
-                    
+
                     $res = $this->db->callProcedure("SupprimerTypeService", array("idTypeService" => $params['id']));
                     if ($res) {
                         $this->messenger->push(array('status'=>'success', 'message'=>'Type de cours supprimé'));
                     } else {
                         $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));                        
                     }
+                    
                     $this->redirect('/referentiels/types?action=show');
                     break;
                 

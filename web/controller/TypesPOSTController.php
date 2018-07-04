@@ -10,7 +10,7 @@ class TypesPOSTController extends Controller {
 
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth/login');
+        if (!$user || !$this->isUserAdmin()) $this->redirect('/auth/login');
 
         /*on récupère tous les params*/
         $params = $this->getParams();
@@ -20,9 +20,8 @@ class TypesPOSTController extends Controller {
         /cours => ajoute une nouvelle ressource
         */
         if (!$params){
-            /*var_dump($_POST);
-            die();*/
-            $res = $this->db->callProcedure('InsererTypeService', $_POST);
+            
+            $res = $this->db->callProcedure('InsererTypeService', $this->sanitizer->filter($_POST));
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Type de service ajouté'));
             } else {
@@ -34,9 +33,8 @@ class TypesPOSTController extends Controller {
         /cours/:id => modifie la ressource :id
         */
         } else {
-            /*var_dump($_POST);
-            die();*/
-            $res = $this->db->callProcedure('ModifierTypeService', $_POST);
+            
+            $res = $this->db->callProcedure('ModifierTypeService', $this->sanitizer->filter($_POST));
 
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Type de service modifié'));

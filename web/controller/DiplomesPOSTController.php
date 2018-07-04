@@ -20,8 +20,10 @@ class DiplomesPOSTController extends Controller {
         /cours => ajoute une nouvelle ressource
         */
         if (!$params && $this->isUserAdmin()){
-            /*var_dump($_POST);
+            
+            /*var_dump($this->sanitizer->filter($_POST));
             die();*/
+
             $res = $this->db->callProcedure('InsererDiplome', $_POST);
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Diplôme ajouté.'));

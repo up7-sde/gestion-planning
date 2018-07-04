@@ -10,11 +10,6 @@ class Db{
     private $user;
     private $password;
     private $dbname;
-    private $attributes;
-
-    public function __construct(){
-        $this->attributes = Model::$inputs;
-    }
 
     private function connectionExists(){
         //check if exists
@@ -119,7 +114,6 @@ class Db{
         /*pas obligé si on est en autocommit et qu'on fait que des procs*/
         if (!$autocommit) $this->connection->beginTransaction();
 
-        //tout se joue sur la pos des args!!!
         $sql = "CALL $name(";
 
         /*on créé la str à partir des args*/
@@ -137,7 +131,7 @@ class Db{
         foreach($args as $key => $value){
               $param = ':'.$key;
               
-              $statement->bindParam($param, $args[$key], $this->attributes[$key]['type']);
+              $statement->bindParam($param, $args[$key], Model::$inputs[$key]['type']);
               //var_dump($args[$key]);
               //var_dump($this->attributes[$key]['type']);
         }
