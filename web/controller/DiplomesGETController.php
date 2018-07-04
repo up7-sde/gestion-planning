@@ -95,7 +95,7 @@ class DiplomesGETController extends Controller {
                     $id = $params['id'];
                     $res = $this->db->callProcedure("SupprimerDiplome", array("idDiplome" => $id));
                     if ($res) {
-                        $this->messenger->push(array('status'=>'success', 'message'=>'Dipôme supprimé.'));
+                        $this->messenger->push(array('status'=>'success', 'message'=>'Diplôme supprimé.'));
                     } else {
                         $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
                     }

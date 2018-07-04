@@ -127,9 +127,13 @@ Le site est hebergé sur un serveur de [digitalocean](https://www.digitalocean.c
     service apache2 reload
 
 
-## Installation en local
+## Installation de l'application en local sur un Xampp
 
-Lancer le script de création de la base de données `bdd/creer_bdd.sql`.
+Lancer le script de création de la base de données `bdd/creer_bdd.sql` avec le compte root
+
+```
+/opt/lampp/bin/mysql -u root -p < chemin/vers/bdd/creer_bdd.sql
+```
 
 Afin de permettre l'utilisation de la fonction php getenv(), il faut ajouter les variables d'environnement dans le fichier de configuration pour qu'au lancement Apache est ces variables configurées. Ajouter à la fin du fichier `/opt/lampp/apache2/conf/httpd.conf` :
 
@@ -140,6 +144,13 @@ SetEnv ADMIN_MYSQL_LOGIN admin
 SetEnv ENSEIGNANT_MYSQL_LOGIN enseignant
 SetEnv ENSEIGNANT_MYSQL_PASSWD mdpenseignant
 
+```
+
+Enfin il faut ajouter le lien vers le projet :
+
+```
+cd /opt/lampp/htdocs
+sudo ln -s /chemin/vers/projet/web/ web
 ```
 
 ## Test non regression
