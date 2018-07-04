@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>SCENARIO-SDE-UP7-PROD</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Connexion</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://sde-up7.tk/auth?action=process<datalist><option>http://sde-up7.tk/auth?action=process</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=inlineFormInputGroupUsername1<datalist><option>id=inlineFormInputGroupUsername1</option><option>name=email</option><option>//input[@id='inlineFormInputGroupUsername1']</option><option>//input</option><option>css=#inlineFormInputGroupUsername1</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=inlineFormInputGroupUsername1<datalist><option>id=inlineFormInputGroupUsername1</option><option>name=email</option><option>//input[@id='inlineFormInputGroupUsername1']</option><option>//input</option><option>css=#inlineFormInputGroupUsername1</option></datalist></td><td>remidelannoy@hotmail.com</td>
+</tr>
+<tr><td>type</td><td>id=inlineFormInputGroupUsername2<datalist><option>id=inlineFormInputGroupUsername2</option><option>name=password</option><option>//input[@id='inlineFormInputGroupUsername2']</option><option>//div[2]/div/input</option><option>css=#inlineFormInputGroupUsername2</option></datalist></td><td>123azerty</td>
+</tr>
+<tr><td>sendKeys</td><td>id=inlineFormInputGroupUsername2<datalist><option>id=inlineFormInputGroupUsername2</option><option>name=password</option><option>//input[@id='inlineFormInputGroupUsername2']</option><option>//div[2]/div/input</option><option>css=#inlineFormInputGroupUsername2</option></datalist></td><td>${KEY_ENTER}</td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Content de vous revoir Rémi! ×</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Formation</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://sde-up7.tk/accueil<datalist><option>http://sde-up7.tk/accueil</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Formations<datalist><option>link=Formations</option><option>//a[contains(text(),'Formations')]</option><option>//div[@id='navbarNavDropdown']/ul/li/div/a</option><option>//a[contains(@href, '/web/formations?action=show')]</option><option>//li/div/a</option><option>css=a.dropdown-item</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Ajouter<datalist><option>link=Ajouter</option><option>//a[contains(text(),'Ajouter')]</option><option>//div[@id='table_wrapper']/div/div[2]/div[2]/div/a</option><option>//a[contains(@href, '/web/formations?action=add')]</option><option>//div[2]/div/a</option><option>css=a.btn.btn-success.btn-sm</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=intitule<datalist><option>id=intitule</option><option>name=intitule</option><option>//input[@id='intitule']</option><option>//input</option><option>css=#intitule</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=intitule<datalist><option>id=intitule</option><option>name=intitule</option><option>//input[@id='intitule']</option><option>//input</option><option>css=#intitule</option></datalist></td><td>TOTO</td>
+</tr>
+<tr><td>click</td><td>name=idDiplome<datalist><option>name=idDiplome</option><option>//select[@name='idDiplome']</option><option>//select</option><option>css=select[name="idDiplome"]</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>name=idDiplome<datalist><option>name=idDiplome</option><option>//select[@name='idDiplome']</option><option>//select</option><option>css=select[name="idDiplome"]</option></datalist></td><td>label=LICENCE</td>
+</tr>
+<tr><td>click</td><td>//option[@value='1']<datalist><option>//option[@value='1']</option><option>//option[2]</option><option>css=option[value="1"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[3]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Formation ajoutée ×</td>
+</tr>
+<tr><td>click</td><td>//table[@id='table']/tbody/tr/td/a/i<datalist><option>//table[@id='table']/tbody/tr/td/a/i</option><option>//td/a/i</option><option>css=i.far.fa-edit</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=intitule<datalist><option>id=intitule</option><option>name=intitule</option><option>//input[@id='intitule']</option><option>//div/input</option><option>css=#intitule</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=intitule<datalist><option>id=intitule</option><option>name=intitule</option><option>//input[@id='intitule']</option><option>//div/input</option><option>css=#intitule</option></datalist></td><td>MIASH2</td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[3]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Formation modifiée ×</td>
+</tr>
+<tr><td>click</td><td>xpath=(//a[@id='deleteButton']/i)[2]<datalist><option>xpath=(//a[@id='deleteButton']/i)[2]</option><option>//tr[2]/td/a[2]/i</option><option>css=tr.even &gt; td &gt; #deleteButton &gt; i.far.fa-trash-alt</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Formation supprimée ×</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Enseignants</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://sde-up7.tk/enseignants?action=show<datalist><option>http://sde-up7.tk/enseignants?action=show</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Ajouter<datalist><option>link=Ajouter</option><option>//a[contains(text(),'Ajouter')]</option><option>//div[@id='table_wrapper']/div/div[2]/div[2]/div/a</option><option>//a[contains(@href, '/web/enseignants?action=add')]</option><option>//div[2]/div/a</option><option>css=a.btn.btn-success.btn-sm</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=nom<datalist><option>id=nom</option><option>name=nom</option><option>//input[@id='nom']</option><option>//input</option><option>css=#nom</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=nom<datalist><option>id=nom</option><option>name=nom</option><option>//input[@id='nom']</option><option>//input</option><option>css=#nom</option></datalist></td><td>TOTO</td>
+</tr>
+<tr><td>type</td><td>id=prenom<datalist><option>id=prenom</option><option>name=prenom</option><option>//input[@id='prenom']</option><option>//div[2]/div/input</option><option>css=#prenom</option></datalist></td><td>Jean-Louis</td>
+</tr>
+<tr><td>click</td><td>name=idStatut<datalist><option>name=idStatut</option><option>//select[@name='idStatut']</option><option>//select</option><option>css=select[name="idStatut"]</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>name=idStatut<datalist><option>name=idStatut</option><option>//select[@name='idStatut']</option><option>//select</option><option>css=select[name="idStatut"]</option></datalist></td><td>label=ATER</td>
+</tr>
+<tr><td>click</td><td>//option[@value='4']<datalist><option>//option[@value='4']</option><option>//option[2]</option><option>css=option[value="4"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=depEco1<datalist><option>id=depEco1</option><option>name=depEco</option><option>//input[@id='depEco1']</option><option>//div/div/div/input</option><option>css=#depEco1</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[4]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Enseignant ajouté ×</td>
+</tr>
+<tr><td>click</td><td>//table[@id='table']/tbody/tr/td/a<datalist><option>//table[@id='table']/tbody/tr/td/a</option><option>//a[contains(@href, '/web/enseignants/7?action=edit')]</option><option>//td/a</option><option>css=a.btn.btn-primary.btn-xs</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=nom<datalist><option>id=nom</option><option>name=nom</option><option>//input[@id='nom']</option><option>//div/input</option><option>css=#nom</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=nom<datalist><option>id=nom</option><option>name=nom</option><option>//input[@id='nom']</option><option>//div/input</option><option>css=#nom</option></datalist></td><td></td>
+</tr>
+<tr><td>doubleClick</td><td>id=nom<datalist><option>id=nom</option><option>name=nom</option><option>//input[@id='nom']</option><option>//div/input</option><option>css=#nom</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=nom<datalist><option>id=nom</option><option>name=nom</option><option>//input[@id='nom']</option><option>//div/input</option><option>css=#nom</option></datalist></td><td>TATA</td>
+</tr>
+<tr><td>click</td><td>id=depEco2<datalist><option>id=depEco2</option><option>//input[@id='depEco2']</option><option>//div[2]/input</option><option>css=#depEco2</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[4]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Enseignant modifié ×</td>
+</tr>
+<tr><td>click</td><td>id=deleteButton<datalist><option>id=deleteButton</option><option>//a[@id='deleteButton']</option><option>//table[@id='table']/tbody/tr/td/a[2]</option><option>//a[contains(@href, '/web/enseignants/7?action=delete')]</option><option>//td/a[2]</option><option>css=#deleteButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Enseignant supprimé. ×</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Enseignement</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://sde-up7.tk/enseignants?action=show<datalist><option>http://sde-up7.tk/enseignants?action=show</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=navbarDropdownMenuLink<datalist><option>id=navbarDropdownMenuLink</option><option>link=Entités</option><option>//a[contains(text(),'Entités')]</option><option>//a[@id='navbarDropdownMenuLink']</option><option>//div[@id='navbarNavDropdown']/ul/li/a</option><option>//a[contains(@href, '#')]</option><option>//li/a</option><option>css=#navbarDropdownMenuLink</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Enseignements<datalist><option>link=Enseignements</option><option>//a[contains(text(),'Enseignements')]</option><option>//div[@id='navbarNavDropdown']/ul/li/div/a[3]</option><option>//a[contains(@href, '/web/enseignements?action=show')]</option><option>//a[3]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Ajouter<datalist><option>link=Ajouter</option><option>//a[contains(text(),'Ajouter')]</option><option>//div[@id='table_wrapper']/div/div[2]/div[2]/div/a</option><option>//a[contains(@href, '/web/enseignements?action=add')]</option><option>//div[2]/div/a</option><option>css=a.btn.btn-success.btn-sm</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=apogee2<datalist><option>id=apogee2</option><option>name=apogee2</option><option>//input[@id='apogee2']</option><option>//input</option><option>css=#apogee2</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=apogee2<datalist><option>id=apogee2</option><option>name=apogee2</option><option>//input[@id='apogee2']</option><option>//input</option><option>css=#apogee2</option></datalist></td><td>123234134</td>
+</tr>
+<tr><td>type</td><td>id=intitule<datalist><option>id=intitule</option><option>name=intitule</option><option>//input[@id='intitule']</option><option>//div[2]/div/input</option><option>css=#intitule</option></datalist></td><td>Mon super cours</td>
+</tr>
+<tr><td>type</td><td>id=hCM<datalist><option>id=hCM</option><option>name=hCM</option><option>//input[@id='hCM']</option><option>//div[3]/div/input</option><option>css=#hCM</option></datalist></td><td>14</td>
+</tr>
+<tr><td>click</td><td>id=hTP<datalist><option>id=hTP</option><option>name=hTP</option><option>//input[@id='hTP']</option><option>//div[4]/div/input</option><option>css=#hTP</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=hTP<datalist><option>id=hTP</option><option>name=hTP</option><option>//input[@id='hTP']</option><option>//div[4]/div/input</option><option>css=#hTP</option></datalist></td><td>12</td>
+</tr>
+<tr><td>click</td><td>name=semestre<datalist><option>name=semestre</option><option>//select[@name='semestre']</option><option>//select</option><option>css=select[name="semestre"]</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>name=semestre<datalist><option>name=semestre</option><option>//select[@name='semestre']</option><option>//select</option><option>css=select[name="semestre"]</option></datalist></td><td>label=2</td>
+</tr>
+<tr><td>click</td><td>//option[@value='2']<datalist><option>//option[@value='2']</option><option>//option[3]</option><option>css=option[value="2"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=nbGroupes<datalist><option>id=nbGroupes</option><option>name=nbGroupes</option><option>//input[@id='nbGroupes']</option><option>//div[6]/div/input</option><option>css=#nbGroupes</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=nbGroupes<datalist><option>id=nbGroupes</option><option>name=nbGroupes</option><option>//input[@id='nbGroupes']</option><option>//div[6]/div/input</option><option>css=#nbGroupes</option></datalist></td><td>5</td>
+</tr>
+<tr><td>click</td><td>name=idFormation<datalist><option>name=idFormation</option><option>//select[@name='idFormation']</option><option>//div[7]/div/select</option><option>css=select[name="idFormation"]</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>name=idFormation<datalist><option>name=idFormation</option><option>//select[@name='idFormation']</option><option>//div[7]/div/select</option><option>css=select[name="idFormation"]</option></datalist></td><td>label=MIASH2</td>
+</tr>
+<tr><td>click</td><td>xpath=(//option[@value='2'])[2]<datalist><option>xpath=(//option[@value='2'])[2]</option><option>//div[7]/div/select/option[8]</option><option>css=select[name="idFormation"] &gt; option[value="2"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[8]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Enseignement ajouté ×</td>
+</tr>
+<tr><td>click</td><td>//input[@type='search']<datalist><option>//input[@type='search']</option><option>//div[@id='customSearch']/input</option><option>//input</option><option>css=input.form-control.form-control-sm</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>//input[@type='search']<datalist><option>//input[@type='search']</option><option>//div[@id='customSearch']/input</option><option>//input</option><option>css=input.form-control.form-control-sm</option></datalist></td><td>super</td>
+</tr>
+<tr><td>verifyText</td><td>//table[@id='table']/tbody/tr/td[3]<datalist><option>//table[@id='table']/tbody/tr/td[3]</option><option>//td[3]</option></datalist></td><td>MON SUPER COURS</td>
+</tr>
+<tr><td>click</td><td>id=deleteButton<datalist><option>id=deleteButton</option><option>//a[@id='deleteButton']</option><option>//table[@id='table']/tbody/tr/td/a[2]</option><option>//a[contains(@href, '/web/enseignements/123234134?action=delete')]</option><option>//td/a[2]</option><option>css=#deleteButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Enseignement supprimé ×</td>
+</tr>
+<tr><td>click</td><td>//table[@id='table']/tbody/tr/td/a<datalist><option>//table[@id='table']/tbody/tr/td/a</option><option>//a[contains(@href, '/web/enseignements/55BEE5EC?action=edit')]</option><option>//td/a</option><option>css=a.btn.btn-primary.btn-xs</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Cours</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://sde-up7.tk/cours?action=show<datalist><option>http://sde-up7.tk/cours?action=show</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=navbarDropdownMenuLink<datalist><option>id=navbarDropdownMenuLink</option><option>link=Entités</option><option>//a[contains(text(),'Entités')]</option><option>//a[@id='navbarDropdownMenuLink']</option><option>//div[@id='navbarNavDropdown']/ul/li/a</option><option>//a[contains(@href, '#')]</option><option>//li/a</option><option>css=#navbarDropdownMenuLink</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Cours<datalist><option>link=Cours</option><option>//a[contains(text(),'Cours')]</option><option>//div[@id='navbarNavDropdown']/ul/li/div/a[4]</option><option>//a[contains(@href, '/web/cours?action=show')]</option><option>//a[4]</option><option>css=a.dropdown-item.active</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Ajouter<datalist><option>link=Ajouter</option><option>//a[contains(text(),'Ajouter')]</option><option>//div[@id='table_wrapper']/div/div[2]/div[2]/div/a</option><option>//a[contains(@href, '/web/cours?action=add')]</option><option>//div[2]/div/a</option><option>css=a.btn.btn-success.btn-sm</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>name=idEnseignant<datalist><option>name=idEnseignant</option><option>//select[@name='idEnseignant']</option><option>//select</option><option>css=select[name="idEnseignant"]</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>name=idEnseignant<datalist><option>name=idEnseignant</option><option>//select[@name='idEnseignant']</option><option>//select</option><option>css=select[name="idEnseignant"]</option></datalist></td><td>label=DARMANGEAT CHRISTOPHE</td>
+</tr>
+<tr><td>click</td><td>//option[@value='1']<datalist><option>//option[@value='1']</option><option>//option[2]</option><option>css=option[value="1"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>name=idTypeService<datalist><option>name=idTypeService</option><option>//select[@name='idTypeService']</option><option>//div[2]/div/select</option><option>css=select[name="idTypeService"]</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>name=idTypeService<datalist><option>name=idTypeService</option><option>//select[@name='idTypeService']</option><option>//div[2]/div/select</option><option>css=select[name="idTypeService"]</option></datalist></td><td>label=CM</td>
+</tr>
+<tr><td>click</td><td>xpath=(//option[@value='1'])[2]<datalist><option>xpath=(//option[@value='1'])[2]</option><option>//div[2]/div/select/option[2]</option><option>css=select[name="idTypeService"] &gt; option[value="1"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=annee<datalist><option>id=annee</option><option>name=annee</option><option>//input[@id='annee']</option><option>//input</option><option>css=#annee</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=annee<datalist><option>id=annee</option><option>name=annee</option><option>//input[@id='annee']</option><option>//input</option><option>css=#annee</option></datalist></td><td>2018</td>
+</tr>
+<tr><td>click</td><td>name=apogee<datalist><option>name=apogee</option><option>//select[@name='apogee']</option><option>//div[4]/div/select</option><option>css=select[name="apogee"]</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>name=apogee<datalist><option>name=apogee</option><option>//select[@name='apogee']</option><option>//div[4]/div/select</option><option>css=select[name="apogee"]</option></datalist></td><td>label=SOCIO. DES SERVICES</td>
+</tr>
+<tr><td>click</td><td>//option[@value='43GU01ES']<datalist><option>//option[@value='43GU01ES']</option><option>//div[4]/div/select/option[2]</option><option>css=option[value="43GU01ES"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=nbHeures<datalist><option>id=nbHeures</option><option>name=nbHeures</option><option>//input[@id='nbHeures']</option><option>//div[5]/div/input</option><option>css=#nbHeures</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=nbHeures<datalist><option>id=nbHeures</option><option>name=nbHeures</option><option>//input[@id='nbHeures']</option><option>//div[5]/div/input</option><option>css=#nbHeures</option></datalist></td><td>8</td>
+</tr>
+<tr><td>click</td><td>id=commentaire<datalist><option>id=commentaire</option><option>name=commentaire</option><option>//textarea[@id='commentaire']</option><option>//textarea</option><option>css=#commentaire</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=commentaire<datalist><option>id=commentaire</option><option>name=commentaire</option><option>//textarea[@id='commentaire']</option><option>//textarea</option><option>css=#commentaire</option></datalist></td><td>Mon super com</td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[7]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Le cours à été ajouté. ×</td>
+</tr>
+<tr><td>verifyText</td><td>//table[@id='table']/tbody/tr[5]/td[2]<datalist><option>//table[@id='table']/tbody/tr[5]/td[2]</option><option>//tr[5]/td[2]</option></datalist></td><td>43GU01ES</td>
+</tr>
+<tr><td>click</td><td>//table[@id='table']/tbody/tr[5]/td/a<datalist><option>//table[@id='table']/tbody/tr[5]/td/a</option><option>//a[contains(@href, '/web/cours/6?action=edit')]</option><option>//tr[5]/td/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>name=idTypeService<datalist><option>name=idTypeService</option><option>//select[@name='idTypeService']</option><option>//div[2]/div/select</option><option>css=select[name="idTypeService"]</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>name=idTypeService<datalist><option>name=idTypeService</option><option>//select[@name='idTypeService']</option><option>//div[2]/div/select</option><option>css=select[name="idTypeService"]</option></datalist></td><td>label=SPECIAL</td>
+</tr>
+<tr><td>click</td><td>xpath=(//option[@value='3'])[2]<datalist><option>xpath=(//option[@value='3'])[2]</option><option>//div[2]/div/select/option[3]</option><option>css=select[name="idTypeService"] &gt; option[value="3"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=commentaire<datalist><option>id=commentaire</option><option>name=commentaire</option><option>//textarea[@id='commentaire']</option><option>//textarea</option><option>css=#commentaire</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=commentaire<datalist><option>id=commentaire</option><option>name=commentaire</option><option>//textarea[@id='commentaire']</option><option>//textarea</option><option>css=#commentaire</option></datalist></td><td>Mon super com modifié</td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[7]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Le cours a été modifié ×</td>
+</tr>
+<tr><td>click</td><td>xpath=(//a[@id='deleteButton'])[5]<datalist><option>xpath=(//a[@id='deleteButton'])[5]</option><option>//table[@id='table']/tbody/tr[5]/td/a[2]</option><option>//a[contains(@href, '/web/cours/6?action=delete')]</option><option>//tr[5]/td/a[2]</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Cours n°6 supprimé ×</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Diplome</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://sde-up7.tk/referentiels/types?action=show<datalist><option>http://sde-up7.tk/referentiels/types?action=show</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Référentiels<datalist><option>link=Référentiels</option><option>//a[contains(text(),'Référentiels')]</option><option>xpath=(//a[@id='navbarDropdownMenuLink'])[2]</option><option>//div[@id='navbarNavDropdown']/ul/li[2]/a</option><option>xpath=(//a[contains(@href, '#')])[2]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Diplômes<datalist><option>link=Diplômes</option><option>//a[contains(text(),'Diplômes')]</option><option>//div[@id='navbarNavDropdown']/ul/li[2]/div/a</option><option>//a[contains(@href, '/web/referentiels/diplomes?action=show')]</option><option>//li[2]/div/a</option><option>css=div.dropdown-menu.show &gt; a.dropdown-item</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Ajouter<datalist><option>link=Ajouter</option><option>//a[contains(text(),'Ajouter')]</option><option>//div[@id='table_wrapper']/div/div[2]/div[2]/div/a</option><option>//a[contains(@href, '/web/referentiels/diplomes?action=add')]</option><option>//div[2]/div/a</option><option>css=a.btn.btn-success.btn-sm</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=intitule<datalist><option>id=intitule</option><option>name=intitule</option><option>//input[@id='intitule']</option><option>//input</option><option>css=#intitule</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=intitule<datalist><option>id=intitule</option><option>name=intitule</option><option>//input[@id='intitule']</option><option>//input</option><option>css=#intitule</option></datalist></td><td>TOTO</td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[2]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//a[@id='deleteButton']/i<datalist><option>//a[@id='deleteButton']/i</option><option>//td/a[2]/i</option><option>css=i.far.fa-trash-alt</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Dipôme supprimé. ×</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Types Cours</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://sde-up7.tk/referentiels/diplomes/2?action=edit<datalist><option>http://sde-up7.tk/referentiels/diplomes/2?action=edit</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Référentiels<datalist><option>link=Référentiels</option><option>//a[contains(text(),'Référentiels')]</option><option>xpath=(//a[@id='navbarDropdownMenuLink'])[2]</option><option>//div[@id='navbarNavDropdown']/ul/li[2]/a</option><option>xpath=(//a[contains(@href, '#')])[2]</option><option>//li[2]/a</option><option>css=li.nav-item.dropdown.show &gt; #navbarDropdownMenuLink</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Référentiels<datalist><option>link=Référentiels</option><option>//a[contains(text(),'Référentiels')]</option><option>xpath=(//a[@id='navbarDropdownMenuLink'])[2]</option><option>//div[@id='navbarNavDropdown']/ul/li[2]/a</option><option>xpath=(//a[contains(@href, '#')])[2]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Types de cours<datalist><option>link=Types de cours</option><option>//a[contains(text(),'Types de cours')]</option><option>//div[@id='navbarNavDropdown']/ul/li[2]/div/a[2]</option><option>//a[contains(@href, '/web/referentiels/types?action=show')]</option><option>//li[2]/div/a[2]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Ajouter<datalist><option>link=Ajouter</option><option>//a[contains(text(),'Ajouter')]</option><option>//div[@id='table_wrapper']/div/div[2]/div[2]/div/a</option><option>//a[contains(@href, '/web/referentiels/types?action=add')]</option><option>//div[2]/div/a</option><option>css=a.btn.btn-success.btn-sm</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=intitule<datalist><option>id=intitule</option><option>name=intitule</option><option>//input[@id='intitule']</option><option>//input</option><option>css=#intitule</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=intitule<datalist><option>id=intitule</option><option>name=intitule</option><option>//input[@id='intitule']</option><option>//input</option><option>css=#intitule</option></datalist></td><td>TOTO</td>
+</tr>
+<tr><td>type</td><td>id=poids<datalist><option>id=poids</option><option>name=poids</option><option>//input[@id='poids']</option><option>//div[2]/div/input</option><option>css=#poids</option></datalist></td><td>1.5</td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[3]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Type de service ajouté ×</td>
+</tr>
+<tr><td>click</td><td>//a[@id='deleteButton']/i<datalist><option>//a[@id='deleteButton']/i</option><option>//td/a[2]/i</option><option>css=i.far.fa-trash-alt</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Type de cours supprimé ×</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Status Enseignant</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://sde-up7.tk/referentiels/diplomes?action=show<datalist><option>http://sde-up7.tk/referentiels/diplomes?action=show</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Référentiels<datalist><option>link=Référentiels</option><option>//a[contains(text(),'Référentiels')]</option><option>xpath=(//a[@id='navbarDropdownMenuLink'])[2]</option><option>//div[@id='navbarNavDropdown']/ul/li[2]/a</option><option>xpath=(//a[contains(@href, '#')])[2]</option><option>//li[2]/a</option><option>css=li.nav-item.dropdown.show &gt; #navbarDropdownMenuLink</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Référentiels<datalist><option>link=Référentiels</option><option>//a[contains(text(),'Référentiels')]</option><option>xpath=(//a[@id='navbarDropdownMenuLink'])[2]</option><option>//div[@id='navbarNavDropdown']/ul/li[2]/a</option><option>xpath=(//a[contains(@href, '#')])[2]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Statuts Enseignant<datalist><option>link=Statuts Enseignant</option><option>//a[contains(text(),'Statuts Enseignant')]</option><option>//div[@id='navbarNavDropdown']/ul/li[2]/div/a[3]</option><option>//a[contains(@href, '/web/referentiels/statuts?action=show')]</option><option>//li[2]/div/a[3]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Ajouter<datalist><option>link=Ajouter</option><option>//a[contains(text(),'Ajouter')]</option><option>//div[@id='table_wrapper']/div/div[2]/div[2]/div/a</option><option>//a[contains(@href, '/web/referentiels/statuts?action=add')]</option><option>//div[2]/div/a</option><option>css=a.btn.btn-success.btn-sm</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=intitule<datalist><option>id=intitule</option><option>name=intitule</option><option>//input[@id='intitule']</option><option>//input</option><option>css=#intitule</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=intitule<datalist><option>id=intitule</option><option>name=intitule</option><option>//input[@id='intitule']</option><option>//input</option><option>css=#intitule</option></datalist></td><td>Tagalala</td>
+</tr>
+<tr><td>click</td><td>id=heureService<datalist><option>id=heureService</option><option>name=heureService</option><option>//input[@id='heureService']</option><option>//div[2]/div/input</option><option>css=#heureService</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=heureService<datalist><option>id=heureService</option><option>name=heureService</option><option>//input[@id='heureService']</option><option>//div[2]/div/input</option><option>css=#heureService</option></datalist></td><td>4</td>
+</tr>
+<tr><td>click</td><td>id=titulaire1<datalist><option>id=titulaire1</option><option>name=titulaire</option><option>//input[@id='titulaire1']</option><option>//div/div/div/input</option><option>css=#titulaire1</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[3]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Statut enseignant ajouté ×</td>
+</tr>
+<tr><td>verifyText</td><td>//table[@id='table']/tbody/tr/td[2]<datalist><option>//table[@id='table']/tbody/tr/td[2]</option><option>//td[2]</option><option>css=td.tdTxt.sorting_1</option></datalist></td><td>TAGALALA</td>
+</tr>
+<tr><td>click</td><td>id=deleteButton<datalist><option>id=deleteButton</option><option>//a[@id='deleteButton']</option><option>//table[@id='table']/tbody/tr/td/a[2]</option><option>//a[contains(@href, '/web/referentiels/statuts/7?action=delete')]</option><option>//td/a[2]</option><option>css=#deleteButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Statut enseignant supprimé ×</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Routine</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://sde-up7.tk/referentiels/statuts?action=show<datalist><option>http://sde-up7.tk/referentiels/statuts?action=show</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Routines<datalist><option>link=Routines</option><option>//a[contains(text(),'Routines')]</option><option>xpath=(//a[@id='navbarDropdownMenuLink'])[3]</option><option>//div[@id='navbarNavDropdown']/ul/li[3]/a</option><option>xpath=(//a[contains(@href, '#')])[3]</option><option>//li[3]/a</option><option>css=li.nav-item.dropdown.show &gt; #navbarDropdownMenuLink</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Routines<datalist><option>link=Routines</option><option>//a[contains(text(),'Routines')]</option><option>xpath=(//a[@id='navbarDropdownMenuLink'])[3]</option><option>//div[@id='navbarNavDropdown']/ul/li[3]/a</option><option>xpath=(//a[contains(@href, '#')])[3]</option><option>//li[3]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>doubleClick</td><td>link=Routines<datalist><option>link=Routines</option><option>//a[contains(text(),'Routines')]</option><option>xpath=(//a[@id='navbarDropdownMenuLink'])[3]</option><option>//div[@id='navbarNavDropdown']/ul/li[3]/a</option><option>xpath=(//a[contains(@href, '#')])[3]</option><option>//li[3]/a</option><option>css=li.nav-item.dropdown.show &gt; #navbarDropdownMenuLink</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Nouvelle année<datalist><option>link=Nouvelle année</option><option>//a[contains(text(),'Nouvelle année')]</option><option>//div[@id='navbarNavDropdown']/ul/li[3]/div/a</option><option>//a[contains(@href, '/web/routines/nvelleannee')]</option><option>//li[3]/div/a</option><option>css=div.dropdown-menu.show &gt; a.dropdown-item</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[3]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Services copiés ×</td>
+</tr>
+<tr><td>click</td><td>id=navbarDropdownMenuLink<datalist><option>id=navbarDropdownMenuLink</option><option>link=Entités</option><option>//a[contains(text(),'Entités')]</option><option>//a[@id='navbarDropdownMenuLink']</option><option>//div[@id='navbarNavDropdown']/ul/li/a</option><option>//a[contains(@href, '#')]</option><option>//li/a</option><option>css=#navbarDropdownMenuLink</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Cours<datalist><option>link=Cours</option><option>//a[contains(text(),'Cours')]</option><option>//div[@id='navbarNavDropdown']/ul/li/div/a[4]</option><option>//a[contains(@href, '/web/cours?action=show')]</option><option>//a[4]</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//table[@id='table']/tbody/tr[3]/td[6]<datalist><option>//table[@id='table']/tbody/tr[2]/td[6]</option><option>//tr[2]/td[6]</option><option>//table[@id='table']/tbody/tr[3]/td[6]</option></datalist></td><td>2019</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">User</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://sde-up7.tk/utilisateurs?action=add<datalist><option>http://sde-up7.tk/utilisateurs?action=add</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Utilisateurs<datalist><option>link=Utilisateurs</option><option>//a[contains(text(),'Utilisateurs')]</option><option>//div[@id='navbarNavDropdown']/ul/li[4]/a</option><option>//a[contains(@href, '/web/utilisateurs?action=show')]</option><option>//li[4]/a</option><option>css=a.nav-link.active</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Ajouter<datalist><option>link=Ajouter</option><option>//a[contains(text(),'Ajouter')]</option><option>//div[@id='table_wrapper']/div/div[2]/div[2]/div/a</option><option>//a[contains(@href, '/web/utilisateurs?action=add')]</option><option>//div[2]/div/a</option><option>css=a.btn.btn-success.btn-sm</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=login<datalist><option>id=login</option><option>name=login</option><option>//input[@id='login']</option><option>//input</option><option>css=#login</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=login<datalist><option>id=login</option><option>name=login</option><option>//input[@id='login']</option><option>//input</option><option>css=#login</option></datalist></td><td>toto</td>
+</tr>
+<tr><td>type</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>//input[@id='email']</option><option>//div[2]/div/input</option><option>css=#email</option></datalist></td><td>toto@gmail.com</td>
+</tr>
+<tr><td>type</td><td>id=mdp<datalist><option>id=mdp</option><option>name=mdp</option><option>//input[@id='mdp']</option><option>//div[3]/div/input</option><option>css=#mdp</option></datalist></td><td>123azertY!</td>
+</tr>
+<tr><td>type</td><td>id=mdp2<datalist><option>id=mdp2</option><option>name=mdp2</option><option>//input[@id='mdp2']</option><option>//div[4]/div/input</option><option>css=#mdp2</option></datalist></td><td>123azertY!</td>
+</tr>
+<tr><td>click</td><td>id=authLevel1<datalist><option>id=authLevel1</option><option>name=authLevel</option><option>//input[@id='authLevel1']</option><option>//div/div/div/input</option><option>css=#authLevel1</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=modifyButton<datalist><option>id=modifyButton</option><option>//button[@id='modifyButton']</option><option>//div[6]/div/button</option><option>css=#modifyButton</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Utilisateur ajouté ×</td>
+</tr>
+<tr><td>verifyText</td><td>//table[@id='table']/tbody/tr/td[2]<datalist><option>//table[@id='table']/tbody/tr/td[2]</option><option>//td[2]</option><option>css=td.tdTxt.sorting_1</option></datalist></td><td>toto</td>
+</tr>
+<tr><td>click</td><td>//a[@id='deleteButton']/i<datalist><option>//a[@id='deleteButton']/i</option><option>//td/a[2]/i</option><option>css=i.far.fa-trash-alt</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//div/div/div/div<datalist><option>//div/div/div/div</option><option>css=div.alert.alert-success.alert-dismissible.fade.show</option></datalist></td><td>Utilisateur n°4 supprimé ×</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Deconnexion</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://sde-up7.tk/utilisateurs?action=show<datalist><option>http://sde-up7.tk/utilisateurs?action=show</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Rémi<datalist><option>link=Rémi</option><option>xpath=(//a[@id='navbarDropdownMenuLink'])[4]</option><option>//div[@id='navbarNavDropdown']/ul[2]/li/a</option><option>xpath=(//a[contains(@href, '#')])[4]</option><option>//ul[2]/li/a</option><option>css=ul.navbar-nav.ml-auto &gt; li.nav-item.dropdown &gt; #navbarDropdownMenuLink</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Déconnexion<datalist><option>link=Déconnexion</option><option>//a[contains(text(),'Déconnexion')]</option><option>//div[@id='navbarNavDropdown']/ul[2]/li/div/a[2]</option><option>//a[contains(@href, '/web/auth?action=quit')]</option><option>//ul[2]/li/div/a[2]</option></datalist></td><td></td>
+</tr>
+<tr><td>verifyText</td><td>//h1[2]<datalist><option>//h1[2]</option><option>css=h1.align-self-center</option></datalist></td><td>Admin-Sde</td>
+</tr>
+</tbody></table>
+</body>
+</html>

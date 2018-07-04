@@ -799,8 +799,8 @@ DROP VIEW IF EXISTS `sde`.`VueListeFormation` ;
 CREATE VIEW `VueListeFormation` AS
 SELECT
     `sde`.`VueListeEnseignement`.`idFormation` AS id,
-    `sde`.`VueListeEnseignement`.`diplome`,
-	`sde`.`VueListeEnseignement`.`formation`,
+    `sde`.`Diplome`.`nom` as diplome,
+	`sde`.`Formation`.`nom` as formation,
     COALESCE(SUM(heureCM), 0) AS heureCM,
     COALESCE(SUM(heureCMAffectee),0) AS heureCMAffectee,
     CONCAT(ROUND(COALESCE(SUM(heureCMAffectee),0) * 100 / COALESCE(SUM(heureCM), 1),0), "%") AS pctCM,
@@ -809,7 +809,9 @@ SELECT
     CONCAT(ROUND(COALESCE(SUM(heureTPAffectee),0) * 100 / COALESCE(SUM(hTPtotal), 1),0), "%") AS pctTP
 -- Basé sur la vue des enseignements
 FROM `sde`.`VueListeEnseignement`
-GROUP BY `sde`.`VueListeEnseignement`.`idFormation`;
+RIGHT JOIN `sde`.`Formation` ON `Formation`.`idFormation` = `VueListeEnseignement`.`idFormation`
+INNER JOIN `sde`.`Diplome` ON `Diplome`.`idDiplome` = `Formation`.`Diplome_idDiplome`
+GROUP BY `sde`.`Formation`.`idFormation`;
 
 DROP VIEW IF EXISTS `sde`.`VueListeDiplome` ;
 CREATE VIEW `VueListeDiplome` AS
