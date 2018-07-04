@@ -76,15 +76,17 @@ class DiplomesGETController extends Controller {
                 case "edit":
 
                     $this->pageType = 'Edit';
-                    $this->title = 'Modification de la formation n°'.$params['id'];
+                    $this->title = 'Modification du diplôme n°'.$params['id'];
 
-                    $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');
+                    $formInputs = array('intitule' => null);
+                    
+                    $formActions = array('form' => '/web/referentiels/diplomes/'.$params['id'],
+                                        'back' => '/web/referentiels/diplomes?action=show',
+                                        'delete' => '/web/referentiels/diplomes/'.$params['id'].'?action=delete');
 
-                    $formInputs = array('intitule' => null, 'idDiplome' => $this->db->findAll('VueLabelDiplome'));
-                    $formActions = array('form' => '/web/formations/'.$params['id'], 'back' => '/web/formations?action=show');
-                    $hiddenInput = 'idFormation';
+                    $hiddenInput = 'idDiplome';
 
-                    $this->data = $this->db->findOne('Formation', $params['id']);
+                    $this->data = $this->db->findOne('Diplome', $params['id']);
 
                     include('view2/forms.php');
 

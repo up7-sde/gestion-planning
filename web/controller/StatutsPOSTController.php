@@ -20,7 +20,7 @@ class StatutsPOSTController extends Controller {
         /cours => ajoute une nouvelle ressource
         */
         if (!$params){
-            var_dump($_POST);
+            //var_dump($_POST);
             $res = $this->db->callProcedure('InsererStatut', $_POST);
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Statut enseignant ajouté'));
@@ -34,14 +34,14 @@ class StatutsPOSTController extends Controller {
         */
         } else {
 
-            $res = $this->db->callProcedure('ModifierService', $_POST);
+            $res = $this->db->callProcedure('ModifierStatut', $_POST);
             
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Cours modifié'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Statut enseignant modifié'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));                        
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la modification du statut enseignant'));                        
             }
-            $this->redirect('/cours?action=show');
+            $this->redirect('/referentiels/statuts?action=show');
         }
     }
 }

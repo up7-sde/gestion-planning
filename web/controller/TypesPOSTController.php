@@ -34,15 +34,16 @@ class TypesPOSTController extends Controller {
         /cours/:id => modifie la ressource :id
         */
         } else {
-
-            $res = $this->db->callProcedure('ModifierService', $_POST);
+            /*var_dump($_POST);
+            die();*/
+            $res = $this->db->callProcedure('ModifierTypeService', $_POST);
 
             if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Cours modifié'));
+                $this->messenger->push(array('status'=>'success', 'message'=>'Type de service modifié'));
             } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
+                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la modification du type de service'));
             }
-            $this->redirect('/cours?action=show');
+            $this->redirect('/referentiels/types?action=show');
         }
     }
 }

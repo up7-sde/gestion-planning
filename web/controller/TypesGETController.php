@@ -75,15 +75,19 @@ class TypesGETController extends Controller {
                 case "edit":
                     
                     $this->pageType = 'Edit';
-                    $this->title = 'Modification de la formation n°'.$params['id'];
+                    $this->title = 'Modification du type de service n°'.$params['id'];
 
-                    $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');
+                    $formInputs = array('intitule' => null,
+                                        'poids' => null
+                                    );
 
-                    $formInputs = array('intitule' => null, 'idDiplome' => $this->db->findAll('VueLabelDiplome'));
-                    $formActions = array('form' => '/web/formations/'.$params['id'], 'back' => '/web/formations?action=show'); 
-                    $hiddenInput = 'idFormation';
+                    $formActions = array('form' => '/web/referentiels/types/'.$params['id'],
+                                        'back' => '/web/referentiels/types?action=show',
+                                        'delete' => '/web/referentiels/types/'.$params['id'].'?action=delete');
                     
-                    $this->data = $this->db->findOne('Formation', $params['id']);                    
+                    $hiddenInput = 'idTypeService';
+                    
+                    $this->data = $this->db->findOne('TypeService', $params['id']);                    
     
                     include('view2/forms.php');
                     

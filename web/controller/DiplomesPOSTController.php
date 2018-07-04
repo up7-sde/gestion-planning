@@ -35,14 +35,14 @@ class DiplomesPOSTController extends Controller {
         */
         } else {
 
-            $res = $this->db->callProcedure('ModifierService', $_POST);
+            $res = $this->db->callProcedure('ModifierDiplome', $_POST);
 
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Diplôme modifié'));
             } else {
                 $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
             }
-            $this->redirect('/cours?action=show');
+            $this->redirect('/referentiels/diplomes?action=show');
         }
     }
 }

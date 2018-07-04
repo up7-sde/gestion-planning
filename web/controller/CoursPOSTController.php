@@ -20,7 +20,8 @@ class CoursPOSTController extends Controller {
         /cours => ajoute une nouvelle ressource
         */
         if (!$params){
-            var_dump($_POST);
+            /*var_dump($_POST);
+            die();*/
             $res = $this->db->callProcedure('InsererService', $_POST);
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Le cours à été ajouté.'));

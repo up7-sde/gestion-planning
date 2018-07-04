@@ -75,15 +75,23 @@ class StatutsGETController extends Controller {
                 case "edit":
                     
                     $this->pageType = 'Edit';
-                    $this->title = 'Modification de la formation n°'.$params['id'];
+                    $this->title = 'Modification du statut enseignant n°'.$params['id'];
 
-                    $titleButton = array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete');
+                    $formInputs = array('intitule' => null, 
+                                        'heureService' => null,
+                                        'titulaire' => array(
+                                                            array('id' => 1, 'nom' => 'OUI'), 
+                                                            array('id' => 0, 'nom' => 'NON')
+                                                            )
+                                                        );
 
-                    $formInputs = array('intitule' => null, 'idDiplome' => $this->db->findAll('VueLabelDiplome'));
-                    $formActions = array('form' => '/web/formations/'.$params['id'], 'back' => '/web/formations?action=show'); 
-                    $hiddenInput = 'idFormation';
+                    $formActions = array('form' => '/web/referentiels/statuts/'.$params['id'],
+                                        'back' => '/web/referentiels/statuts?action=show',
+                                        'delete' => '/web/referentiels/statuts/'.$params['id'].'?action=delete');
+
+                    $hiddenInput = 'idStatut';
                     
-                    $this->data = $this->db->findOne('Formation', $params['id']);                    
+                    $this->data = $this->db->findOne('Statut', $params['id']);                    
     
                     include('view2/forms.php');
                     
