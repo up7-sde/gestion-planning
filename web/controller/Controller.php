@@ -28,7 +28,7 @@ class Controller {
         $this->db = new Db();
         $this->messenger = new Messenger();
         $this->sanitizer = new Sanitizer();
-        $this->auth = new Auth($this->db, $this->sanitizer);
+        $this->auth = new Auth($this->db);
         $this->viewEngine = new ViewEngine();
         $this->fileMaker = new FileMaker();
         $this->csrf = new CSRF();    

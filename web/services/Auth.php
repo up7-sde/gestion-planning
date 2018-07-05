@@ -4,19 +4,13 @@ class Auth {
 
     //private $sessionStore;
     private $db;
-    private $sanitizer;
 
-    public function __construct($db, $sanitizer){
+    public function __construct($db){
         //$this->sessionStore = $sessionStore;
         $this->db = $db;
-        $this->sanitizer = $sanitizer;
     }
 
-    /*!!!!!!!*/
-    //pb requete en base à chaque get user => c php vaut mieux les mettre dans session
-    /*créer classe strategy*/
 
-    //a voir
     public function login(){
 
     

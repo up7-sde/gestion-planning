@@ -20,7 +20,6 @@ class AuthPostController extends Controller  {
             $this->messenger->push(array('status'=>'fail', 'message'=>'Identifiants invalides'));
             $to = '/auth?action=process';
         }
-
         $this->redirect($to);
     }
 }
