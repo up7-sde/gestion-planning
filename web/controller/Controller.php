@@ -107,35 +107,33 @@ class Controller {
         return '/';
     }
 
-    public function force400(){
-        $title = '400 Bad request';
-        $message = 'Votre requête est malformée... Que voulez vous faire?';
-        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title, TRUE, 400);
-        include('view2/notFound.php');
-        die();
-    }
-
-    public function force401(){
-        $title = '401 Unauthorized';
-        $message = 'Vous n\'avez pas les droits nécessaires pour soumettre cette requête...';
-        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title, TRUE, 401);
-        include('view2/notFound.php');
-        die();
-    }
-
-    public function force404(){
-        $title = '404 Not Found';
-        $message = 'Ouch... L\'URL demandée n\'existe pas!';
-        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title, TRUE, 404);
-        include('view2/notFound.php');
-        die();
-    }
-
-    public function force500(){
-        $title = '500 Internal Server Error';
-        $message = 'Une erreur est survenue, veuillez nous en excuser.';
-        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title , TRUE, 500);
-        include('view2/notFound.php');
+    public function force($status){
+        
+        switch($status){
+        
+            case '400': 
+                $title = '400 Bad request';
+                $message = 'Votre requête est malformée... Que voulez vous faire?';
+                break;
+            
+            case '401': 
+                $title = '401 Unauthorized';
+                $message = 'Vous n\'avez pas les droits nécessaires pour soumettre cette requête...';
+                break;
+            
+            case '404':
+            
+                $title = '404 Not Found';
+                $message = 'Ouch... L\'URL demandée n\'existe pas!';
+                break;
+            
+            case '500': default:
+                $title = '500 Internal Server Error';
+                $message = 'Une erreur est survenue, veuillez nous en excuser.';
+                break;
+        }
+        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title, TRUE, intval($status));
+        include('view2/error.php');
         die();
     }
 }
