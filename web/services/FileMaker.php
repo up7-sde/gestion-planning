@@ -2,13 +2,17 @@
 class FileMaker{
     private function loadFile($data, $delimiter=","){
         
-        $file = fopen('php://memory', 'w'); 
+        $file = fopen('php://temp', 'w'); 
         
         /*les headers*/
+        fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+
+        /*les colonnes*/
         fputcsv($file, array_keys($data[0]));
-        // loop over the input array
+
+        // les data
         foreach ($data as $obs) { 
-            // generate csv lines from the inner arrays
+            
             fputcsv($file, $obs, $delimiter); 
         }
         
@@ -29,4 +33,3 @@ class FileMaker{
     }
 }
 ?>
-

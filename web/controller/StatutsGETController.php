@@ -59,6 +59,10 @@ class StatutsGETController extends Controller {
                     include('view2/forms.php');
                     break;
                 
+                case "download":
+                    $data = $this->data = $this->db->findAll('VueListeStatut');
+                    $this->fileMaker->passToBrowser($data);
+                    break;
                 default:
                     throw new NotFoundException('Not Found');
                     break;
