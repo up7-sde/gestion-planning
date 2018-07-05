@@ -1,44 +1,34 @@
 <?php
-
-
-/*todo*/
-//revoir db
-//fusionner route et router
-//revoir completement organisation des controlleurs avec bonnes methodes
-//refactor errors => integrer dans app
-//passer au webdesign vmnt
+/*le router*/
+require('Router.php');
 
 $GLOBALS["DEBUG"] = "START DEBUG >";
 
 if (!isset($_SESSION)) session_start();
-/*les exceptions*/
-require('exceptions.php');
-
-/*le router*/
-require('Router.php');
-$router = new Router();
-
-/* le controller de base */
-require('controller/Controller.php');
 
 try {
     //on essaye d'executer le callback associé à la route
-    $router->listen();
+    (new Router())->listen();
 
 //pas de redirect! on veut un code 401 pas un code redirect!
 //on redir vers login que quand on logout sans erreur
 
-} catch (NotFoundException $e) { // Si la route n'existe pas
-    (new Controller)->force404();
+} catch (Exception $e) {
 
-} catch (PassportException $e) {
-    (new Controller)->redirect('/auth/login');
-
-} catch (RouterException $e) {
-    (new Controller)->force400();
-
-} catch (PDOException $e) {
-    (new Controller)->force400();
+    switch($e->getMessage()){
+        case '400': 
+            (new Controller())->force400();
+            break;
+        case '401': 
+            (new Controller())->force401();
+            break;
+        case '404':
+            (new Controller())->force404();
+            break;
+        case '500': default:
+            (new Controller())->force500();
+            break;
+    }
 }
 
 ?>

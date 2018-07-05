@@ -14,7 +14,7 @@ class AccueilGETController extends Controller {
 
         $user = $this->getUserInfos();
         
-        if (!$user) $this->redirect('/auth?action=process');
+        if (!$user) throw new Exception('401');
 
         $titleButton = null;
         

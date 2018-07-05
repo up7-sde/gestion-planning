@@ -10,7 +10,7 @@ class StatutsPOSTController extends Controller {
         
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user || !$this->isUserAsmin()) $this->redirect('/auth?action=process');
+        if (!$user || !$this->isUserAsmin()) throw new Exception('401');
         
         /*on récupère tous les params*/
         $params = $this->getParams();

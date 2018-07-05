@@ -10,7 +10,7 @@ class ProfilPOSTController extends Controller {
         
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth?action=process');
+        if (!$user) throw new Exception('401');
         
             /*on hash le mot de passe*/
             $this->csrf->verifyToken();

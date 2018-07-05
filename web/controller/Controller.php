@@ -70,7 +70,7 @@ class Controller {
     }
 
     public function redirect($path = '/home'){
-        header("Location: http://localhost/web$path");
+        header("Location: http://localhost/web$path", TRUE);
         die();
     }
 
@@ -108,28 +108,33 @@ class Controller {
     }
 
     public function force400(){
-        header("HTTP/1.1 400 Bad request");
+        $title = '400 Bad request';
+        $message = 'Votre requête est malformée... Que voulez vous faire?';
+        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title, TRUE, 400);
+        include('view2/notFound.php');
         die();
     }
 
     public function force401(){
-        header("HTTP/1.1 401 Unauthorized");
-        die();
-    }
-
-    public function force403(){
-        /*$this->title = '403 | Forbidden';
-        $this->content = '<h1>403 Forbidden</h1>';
-        $this->style = '<link href="/web/static/css/style.css" rel="stylesheet"/>';
-        $this->script = null;
-
-        include('view/template.php');*/
-        header('HTTP/1.1 403 Forbidden');
+        $title = '401 Unauthorized';
+        $message = 'Vous n\'avez pas les droits nécessaires pour soumettre cette requête...';
+        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title, TRUE, 401);
+        include('view2/notFound.php');
         die();
     }
 
     public function force404(){
-        header('HTTP/1.1 404 Not Found');
+        $title = '404 Not Found';
+        $message = 'Ouch... L\'URL demandée n\'existe pas!';
+        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title, TRUE, 404);
+        include('view2/notFound.php');
+        die();
+    }
+
+    public function force500(){
+        $title = '500 Internal Server Error';
+        $message = 'Une erreur est survenue, veuillez nous en excuser.';
+        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title , TRUE, 500);
         include('view2/notFound.php');
         die();
     }

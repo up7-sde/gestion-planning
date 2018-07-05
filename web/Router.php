@@ -1,5 +1,5 @@
 <?php
-
+include_once('controller/Controller.php');
 require('Route.php');
 
 /*
@@ -68,7 +68,7 @@ class Router {
         /*enlever les callbacks pour stocker les routes en session*/
         public function listen(){
             if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])){
-                throw new RouterException('REQUEST_METHOD does not exist');
+                throw new Exception('500');
             }
 
             foreach($this->routes[$_SERVER['REQUEST_METHOD']] as $route){ //pour chaque item de la méthode demandée
@@ -77,6 +77,6 @@ class Router {
                     return $route->call(); //on call un render
                 }
             }
-            throw new NotFoundException('Not Found');
+            throw new Exception('404');
         }
     }

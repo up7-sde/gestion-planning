@@ -14,7 +14,7 @@ class ProfilGETController extends Controller {
         $this->namespace = 'Mon profil';
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth?action=process');
+        if (!$user) throw new Exception('401');
         
         /*on récupère tous les types de params*/
         /*var_dump($user);

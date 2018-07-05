@@ -17,24 +17,23 @@
   <body class="bg-light container-fluid d-flex justify-content-center" style="min-height:100%;">
       <!--logo-->
       
-    <div class="col-md-5 col-sm-5 align-self-center mt-5">
+    <div class="col-md-4 col-sm-12 align-self-center mt-5">
       
       <h1 style="text-align:center;"><i class="fas fa-2x fa-cube align-self-center"></i></h1>
       <h1 style="font-family: 'Fugaz One', cursive; text-align:center;" class="align-self-center">Admin-Sde</h1>
 
       <div class="card align-self-center mt-5 mb-2">
         <div class="card-body">
-            <h4>404 Not Found</h4>
+            <h4><?php echo $title;?></h4>
             
-            <hr/>
-            <p>Oups! La page demandée n'existe pas...</p>
-            <a class="btn btn-primary btn-block align-self-center mt-5" role="button" href="/web/accueil"><i class="fas fa-home"></i> Accueil</a>
+            <p><?php echo $message;?></p>
+            <a class="btn btn-primary btn-block btn-lg align-self-center mt-4" role="button" href="/web/accueil"><i class="fas fa-home"></i> Accueil</a>
 
         </div>
       </div>
 
 
-      <div class="mb-5 small">
+      <div class="mb-5">
     <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
   </div>
 

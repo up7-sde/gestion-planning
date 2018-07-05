@@ -13,7 +13,7 @@ class CoursGETController extends Controller {
 
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth?action=process');
+        if (!$user) throw new Exception('401');
 
         /*on récupère tous les types de params*/
         $params = $this->getParams();

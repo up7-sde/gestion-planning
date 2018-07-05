@@ -10,7 +10,7 @@ class EnseignantsPOSTController extends Controller {
 
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user || !$this->isUserAdmin()) $this->redirect('/auth/login');
+        if (!$user || !$this->isUserAdmin()) throw new Exception('401');
 
         /*on récupère tous les params*/
         $params = $this->getParams();
