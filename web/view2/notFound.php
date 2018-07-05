@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <title>View | Table</title>
+    <title>Up7-SDE | <?php echo $title;?></title>
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet"> 
 
   </head>
@@ -24,7 +24,7 @@
 
       <div class="card align-self-center mt-5 mb-2">
         <div class="card-body">
-            <h4><?php echo $title;?></h4>
+            <div class="card-title h4"><?php echo $title;?></div>
             
             <p><?php echo $message;?></p>
             <a class="btn btn-primary btn-block btn-lg align-self-center mt-4" role="button" href="/web/accueil"><i class="fas fa-home"></i> Accueil</a>
@@ -37,15 +37,12 @@
     <a href="http://www.github.com/up7-sde/gestion-planning" target="_blank">The Company© 2018</a>
   </div>
 
-
       </div>
     </div>
   </div>
-   
-    
+       
     <!-- Optional JavaScript -->
     <!-- Optional JavaScript -->
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
