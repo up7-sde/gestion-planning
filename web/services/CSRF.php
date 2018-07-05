@@ -4,19 +4,20 @@
 
         public function generateToken(){
 
-            $_SESSION['token'] = bin2hex(random_bytes(32));
-            return $_SESSION['token'];
-            
+            if(isset($_SESSION)){
+                $_SESSION['token'] = bin2hex(random_bytes(32));
+                return $_SESSION['token'];
+            }
+            throw new Exception('500');
         }
         
         public function verifyToken(){
 
-            if (hash_equals($_SESSION['token'], $_POST['csrf'])){
-                unset($_POST['csrf']);
-                return TRUE;
+            if (!hash_equals($_SESSION['token'], $_POST['csrf'])){
+                throw new Exception('400');                
             }
+
             unset($_POST['csrf']);
-            return FALSE;
         }
     }
 ?>

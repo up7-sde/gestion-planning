@@ -10,7 +10,7 @@ class StatutsPOSTController extends Controller {
         
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth/login');
+        if (!$user || !$this->isUserAsmin()) $this->redirect('/auth?action=process');
         
         /*on récupère tous les params*/
         $params = $this->getParams();
@@ -21,7 +21,7 @@ class StatutsPOSTController extends Controller {
         */
         if (!$params){
             //var_dump($_POST);
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter();
 
@@ -38,10 +38,10 @@ class StatutsPOSTController extends Controller {
         */
         } else {
 
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter();
-            
+
             $res = $this->db->callProcedure('ModifierStatut', $_POST);
             
             if ($res) {

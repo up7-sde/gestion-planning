@@ -10,13 +10,13 @@ class ProfilPOSTController extends Controller {
         
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth/login');
+        if (!$user) $this->redirect('/auth?action=process');
         
             /*on hash le mot de passe*/
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter();
-            
+
             if(isset($_POST['mdp'])) $_POST['mdp'] = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
             /*on enleve la confirmation*/
             if(isset($_POST['mdp2'])) unset($_POST['mdp2']);

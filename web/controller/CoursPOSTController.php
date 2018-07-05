@@ -10,7 +10,7 @@ class CoursPOSTController extends Controller {
 
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth/login');
+        if (!$user || !$this->isUserAdmin()) $this->redirect('/auth/login');
 
         /*on récupère tous les params*/
         $params = $this->getParams();
@@ -22,7 +22,7 @@ class CoursPOSTController extends Controller {
         if (!$params){
             /*var_dump($_POST);
             die();*/
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter(); 
 
@@ -39,7 +39,7 @@ class CoursPOSTController extends Controller {
         */
         } else {
 
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter(); 
 

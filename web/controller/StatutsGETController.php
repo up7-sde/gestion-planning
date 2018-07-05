@@ -64,7 +64,7 @@ class StatutsGETController extends Controller {
                     $this->fileMaker->passToBrowser($data);
                     break;
                 default:
-                    throw new NotFoundException('Not Found');
+                    throw new Exception('404');
                     break;
             }
         /*
@@ -113,11 +113,11 @@ class StatutsGETController extends Controller {
                     break;
                 
                 default:
-                    throw new NotFoundException('Not Found');
+                    throw new Exception('404');
                     break;
             }
         } else {
-            throw new NotFoundException('Not Found');
+            throw new Exception('404');
         }
     }
 }

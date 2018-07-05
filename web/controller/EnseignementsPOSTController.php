@@ -10,7 +10,7 @@ class EnseignementsPOSTController extends Controller {
 
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth/login');
+        if (!$user || !$this->isUserAdmin()) $this->redirect('/auth/login');
 
         /*on récupère tous les params*/
         $params = $this->getParams();
@@ -21,7 +21,7 @@ class EnseignementsPOSTController extends Controller {
         */
         if (!$params){
 
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter(); 
 
@@ -38,8 +38,7 @@ class EnseignementsPOSTController extends Controller {
         */
         } else {
             //var_dump($_POST);
-
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter(); 
 

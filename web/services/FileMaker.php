@@ -4,15 +4,14 @@ class FileMaker{
         
         $file = fopen('php://temp', 'w'); 
         
-        /*les headers*/
+        /*les headers pour l'encodage*/
         fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
 
-        /*les colonnes*/
+        /*les noms de colonne*/
         fputcsv($file, array_keys($data[0]));
 
         // les data
-        foreach ($data as $obs) { 
-            
+        foreach ($data as $obs) {     
             fputcsv($file, $obs, $delimiter); 
         }
         

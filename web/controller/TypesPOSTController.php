@@ -10,7 +10,7 @@ class TypesPOSTController extends Controller {
 
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user || !$this->isUserAdmin()) $this->redirect('/auth/login');
+        if (!$user || !$this->isUserAdmin()) $this->redirect('/auth?action=process');
 
         /*on récupère tous les params*/
         $params = $this->getParams();
@@ -21,7 +21,7 @@ class TypesPOSTController extends Controller {
         */
         if (!$params){
             
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
 
             $this->sanitizer->filter();
 
@@ -38,7 +38,7 @@ class TypesPOSTController extends Controller {
         */
         } else {
             
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter();            
             

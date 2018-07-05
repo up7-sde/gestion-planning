@@ -10,7 +10,7 @@ class DiplomesPOSTController extends Controller {
 
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth/login');
+        if (!$user || !$this->isUserAdmin()) $this->redirect('/auth?action=process');
 
         /*on récupère tous les params*/
         $params = $this->getParams();
@@ -23,7 +23,7 @@ class DiplomesPOSTController extends Controller {
             
             /*var_dump($this->sanitizer->filter($_POST));
             die();*/
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter(); 
 
@@ -40,10 +40,10 @@ class DiplomesPOSTController extends Controller {
         */
         } else {
 
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter(); 
-            
+
             $res = $this->db->callProcedure('ModifierDiplome', $_POST);
 
             if ($res) {

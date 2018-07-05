@@ -10,7 +10,7 @@ class EnseignantsPOSTController extends Controller {
 
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth/login');
+        if (!$user || !$this->isUserAdmin()) $this->redirect('/auth/login');
 
         /*on récupère tous les params*/
         $params = $this->getParams();
@@ -20,7 +20,7 @@ class EnseignantsPOSTController extends Controller {
         /cours => ajoute une nouvelle ressource
         */
         if (!$params){
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter(); 
 
@@ -38,10 +38,10 @@ class EnseignantsPOSTController extends Controller {
         /cours/:id => modifie la ressource :id
         */
         } else {
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter(); 
-            
+
             $res = $this->db->callProcedure('ModifierEnseignant', $_POST);
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Enseignant modifié'));

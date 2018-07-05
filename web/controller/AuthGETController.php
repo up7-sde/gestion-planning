@@ -27,7 +27,7 @@ class AuthGETController extends Controller {
         
         /*not found*/
         } else {
-            throw new NotFoundException('Not found');
+            throw new Exception('404');
         }
     }
 }

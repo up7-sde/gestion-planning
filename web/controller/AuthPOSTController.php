@@ -8,7 +8,7 @@ class AuthPostController extends Controller  {
 
     public function render($args=null){
 
-        if(!$this->csrf->verifyToken()) throw new NotFoundException();
+        $this->csrf->verifyToken();
         
         $this->sanitizer->filter(); 
     

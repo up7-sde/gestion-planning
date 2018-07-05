@@ -13,7 +13,7 @@ class UtilisateursGETController extends Controller {
 
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth?action=process');
+        if (!$user || !$this->isUserAdmin()) $this->redirect('/auth?action=process');
         
         /*on récupère tous les types de params*/
         $params = $this->getParams();
@@ -75,7 +75,7 @@ class UtilisateursGETController extends Controller {
                     break;
 
                 default:
-                    throw new NotFoundException('Not Found');
+                    throw new Exception('404');
                     break;
             }
         /*
@@ -128,11 +128,11 @@ class UtilisateursGETController extends Controller {
                     break;
                 
                 default:
-                    throw new NotFoundException('Not Found');
+                    throw new Exception('404');
                     break;
             }
         } else {
-            throw new NotFoundException('Not Found');
+            throw new Exception('404');
         }
     }
 }

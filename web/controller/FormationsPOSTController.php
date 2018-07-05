@@ -10,7 +10,7 @@ class FormationsPOSTController extends Controller {
         
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth/login');
+        if (!$user || !$this->isUserAdmin()) $this->redirect('/auth/login');
         
         /*on récupère les params => l'id de la ressource*/
         $params = $this->getParams();
@@ -20,7 +20,7 @@ class FormationsPOSTController extends Controller {
         /cours => ajoute une nouvelle ressource
         */
         if (!$params){
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter(); 
             
@@ -38,7 +38,7 @@ class FormationsPOSTController extends Controller {
         /cours/:id => modifie la ressource :id
         */
         } else {
-            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            $this->csrf->verifyToken();
             
             $this->sanitizer->filter(); 
             

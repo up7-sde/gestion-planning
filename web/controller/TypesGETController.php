@@ -65,7 +65,7 @@ class TypesGETController extends Controller {
                     break;
                 
                 default:
-                    throw new NotFoundException('Not Found');
+                    throw new Exception('404');
                     break;
             }
         /*
@@ -112,11 +112,11 @@ class TypesGETController extends Controller {
                     break;
                 
                 default:
-                    throw new NotFoundException('Not Found');
+                    throw new Exception('404');
                     break;
             }
         } else {
-            throw new NotFoundException('Not Found');
+            throw new Exception('404');
         }
     }
 }
