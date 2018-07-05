@@ -20,7 +20,10 @@ class EnseignantsPOSTController extends Controller {
         /cours => ajoute une nouvelle ressource
         */
         if (!$params){
-            var_dump($_POST);
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter(); 
+
             $res = $this->db->callProcedure('InsererEnseignant', $_POST);
 
             if ($res) {
@@ -35,7 +38,10 @@ class EnseignantsPOSTController extends Controller {
         /cours/:id => modifie la ressource :id
         */
         } else {
-
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter(); 
+            
             $res = $this->db->callProcedure('ModifierEnseignant', $_POST);
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Enseignant modifié'));

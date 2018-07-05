@@ -19,14 +19,14 @@ class Auth {
     //a voir
     public function login(){
 
-    $post = $this->sanitizer->filter($_POST);
-    $user = $this->db->findOneUser($post['email']);
+    
+    $user = $this->db->findOneUser($_POST['email']);
         
     /*var_dump(password_hash("123azerty", PASSWORD_BCRYPT));
     die();*/
         //voir en base de données si il y a correspondance
         //requete attendue => une requette qui renvoie -1 ou la pk de la table 
-        if (count($user) > 0 && password_verify($post['password'], $user[0]['mdp'])) {
+        if (count($user) > 0 && password_verify($_POST['password'], $user[0]['mdp'])) {
             
             //explicits
             //mettre la clé de la table users dans les sessions => serialize

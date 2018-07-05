@@ -13,12 +13,16 @@ class ProfilPOSTController extends Controller {
         if (!$user) $this->redirect('/auth/login');
         
             /*on hash le mot de passe*/
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter();
+            
             if(isset($_POST['mdp'])) $_POST['mdp'] = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
             /*on enleve la confirmation*/
             if(isset($_POST['mdp2'])) unset($_POST['mdp2']);
             
             /*var_dump($_POST);
-            die();*/
+            die();*/ 
             
             $res = $this->db->callProcedure('ModifierUtilisateur', $_POST);
 

@@ -30,8 +30,6 @@
 var password = document.querySelector("#mdp")
 , confirm_password = document.querySelector("#mdp2");
 
-
-
 if (password!==null){
   function validatePassword(){
     

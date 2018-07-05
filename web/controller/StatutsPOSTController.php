@@ -21,6 +21,10 @@ class StatutsPOSTController extends Controller {
         */
         if (!$params){
             //var_dump($_POST);
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter();
+
             $res = $this->db->callProcedure('InsererStatut', $_POST);
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Statut enseignant ajouté'));
@@ -34,6 +38,10 @@ class StatutsPOSTController extends Controller {
         */
         } else {
 
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter();
+            
             $res = $this->db->callProcedure('ModifierStatut', $_POST);
             
             if ($res) {

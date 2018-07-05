@@ -23,6 +23,9 @@ class DiplomesPOSTController extends Controller {
             
             /*var_dump($this->sanitizer->filter($_POST));
             die();*/
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter(); 
 
             $res = $this->db->callProcedure('InsererDiplome', $_POST);
             if ($res) {
@@ -37,6 +40,10 @@ class DiplomesPOSTController extends Controller {
         */
         } else {
 
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter(); 
+            
             $res = $this->db->callProcedure('ModifierDiplome', $_POST);
 
             if ($res) {

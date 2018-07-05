@@ -15,11 +15,11 @@ class UtilisateursPOSTController extends Controller {
         /*on récupère tous les params*/
         $params = $this->getParams();
         
-        /*
-        case
-        /cours => ajoute une nouvelle ressource
-        */
         if (!$params){
+            
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter();
 
             if(isset($_POST['mdp'])) $_POST['mdp'] = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
             if(isset($_POST['mdp2'])) unset($_POST['mdp2']);
@@ -32,20 +32,7 @@ class UtilisateursPOSTController extends Controller {
                 $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de l\'ajout d\'un utilisateur'));                        
             }                 
             $this->redirect('/utilisateurs?action=show');
-        /*
-        case
-        /cours/:id => modifie la ressource :id
-        */
-        } else {
-
-            $res = $this->db->callProcedure('ModifierService', $_POST);
-            
-            if ($res) {
-                $this->messenger->push(array('status'=>'success', 'message'=>'Cours modifié'));
-            } else {
-                $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));                        
-            }
-            $this->redirect('/cours?action=show');
+        
         }
     }
 }

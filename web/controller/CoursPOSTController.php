@@ -22,6 +22,10 @@ class CoursPOSTController extends Controller {
         if (!$params){
             /*var_dump($_POST);
             die();*/
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter(); 
+
             $res = $this->db->callProcedure('InsererService', $_POST);
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Le cours à été ajouté.'));
@@ -34,6 +38,10 @@ class CoursPOSTController extends Controller {
         /cours/:id => modifie la ressource :id
         */
         } else {
+
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter(); 
 
             $res = $this->db->callProcedure('ModifierService', $_POST);
 

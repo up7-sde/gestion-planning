@@ -31,7 +31,7 @@
       <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
 
       <form method="post" action="/web/auth">
-
+      <input type="hidden" name="csrf" value="<?php echo $this->csrf->generateToken(); ?>">
       <div class="form-group">
       <label for="inlineFormInputGroupUsername1">Email</label>
       <div class="input-group mb-2 mr-sm-2">

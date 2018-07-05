@@ -12,6 +12,10 @@ class RoutinesPOSTController extends Controller {
         $user = $this->getUserInfos();
         if (!$user) $this->redirect('/auth/login');
 
+        if(!$this->csrf->verifyToken()) throw new NotFoundException();
+        
+        $this->sanitizer->filter();
+
         $res = $this->db->callProcedure('DuppliquerService', $_POST);
 
         if ($res) {

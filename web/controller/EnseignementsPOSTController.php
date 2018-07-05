@@ -21,6 +21,10 @@ class EnseignementsPOSTController extends Controller {
         */
         if (!$params){
 
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter(); 
+
             $res = $this->db->callProcedure('InsererEnseignement', $_POST);
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Enseignement ajouté'));
@@ -35,14 +39,11 @@ class EnseignementsPOSTController extends Controller {
         } else {
             //var_dump($_POST);
 
-            $res = $this->db->callProcedure('ModifierEnseignement', array("id"=>"54EEE2EC",
-                                                                            "apogee2"=> "54EEE2EC" ,
-                                                                            "intitule"=>"THÉORIE DE LA MONN." ,
-                                                                            "hCM"=> "0",
-                                                                             "hTP"=> "72" ,
-                                                                            "semestre"=>"4" ,
-                                                                            "nbGroupes"=> "4",
-                                                                            "idFormation"=> "2" ));
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter(); 
+
+            $res = $this->db->callProcedure('ModifierEnseignement', $_POST);
 
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Enseignement modifié'));

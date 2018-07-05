@@ -20,6 +20,9 @@ class FormationsPOSTController extends Controller {
         /cours => ajoute une nouvelle ressource
         */
         if (!$params){
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter(); 
             
             $res = $this->db->callProcedure('InsererFormation', $_POST);
             
@@ -35,6 +38,9 @@ class FormationsPOSTController extends Controller {
         /cours/:id => modifie la ressource :id
         */
         } else {
+            if(!$this->csrf->verifyToken()) throw new NotFoundException();
+            
+            $this->sanitizer->filter(); 
             
             $res = $this->db->callProcedure('ModifierFormation', $_POST);
 
