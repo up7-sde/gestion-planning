@@ -9,7 +9,7 @@ class AuthGETController extends Controller {
     public function render($args=null){
         
         $this->namespace = 'Auth';
-        $this->title = 'Auth';
+        $this->title = 'Authentification';
         $this->pageType = 'Auth';
 
         /*on recupère l'action process ou quit*/
@@ -17,7 +17,7 @@ class AuthGETController extends Controller {
         
         /*/auth?action=process*/
         if (isset($params) && isset($params['action']) && !!$params['action'] && $params['action'] === 'process'){
-            $pageTitle = 'SDE | Login';
+            
             include('view2/auth.php'); // debug
         
         /*/auth?action=quit*/
