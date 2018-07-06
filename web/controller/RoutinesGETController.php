@@ -14,7 +14,9 @@ class RoutinesGETController extends Controller {
         $this->namespace = 'Nouvelle année';
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user || !$this->isUserAdmin()) throw new Exception('401');
+        
+        if (!$user) $this->redirect('/auth?action=process');
+        if (!$this->isUserAdmin()) throw new Exception('401');
         
         $this->pageType = 'Routine';
         $this->title = 'Nouvelle année';

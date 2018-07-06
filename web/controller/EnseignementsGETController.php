@@ -12,7 +12,7 @@ class EnseignementsGETController extends Controller {
         $this->namespace = 'Enseignements';
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user) throw new Exception('401');
+        if (!$user) $this->redirect('/auth?action=process');
 
         /*on récupère tous les types de params*/
         $params = $this->getParams();

@@ -13,7 +13,8 @@ class UtilisateursGETController extends Controller {
 
         /*verifier auth*/
         $user = $this->getUserInfos();
-        if (!$user || !$this->isUserAdmin()) throw new Exception('401');
+        if (!$user) $this->redirect('/auth?action=process');
+        if (!$this->isUserAdmin()) throw new Exception('401');
         
         /*on récupère tous les types de params*/
         $params = $this->getParams();
