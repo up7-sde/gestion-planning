@@ -7,6 +7,7 @@ include_once('view2/ViewEngine.php');
 include_once('services/FileMaker.php');
 include_once('services/Sanitizer.php');
 include_once('services/CSRF.php');
+include_once('services/Request.php');
 
 class Controller {
 
@@ -15,6 +16,7 @@ class Controller {
     protected $pageType;
     protected $data;
 
+    protected $request;
     protected $db;
     protected $auth;
     protected $messenger;
@@ -25,6 +27,7 @@ class Controller {
     
     public function __construct(){
         /*args de la db ici? => non*/
+        $this->request = new Request();
         $this->db = new Db();
         $this->messenger = new Messenger();
         $this->sanitizer = new Sanitizer();
