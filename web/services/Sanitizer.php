@@ -7,6 +7,11 @@ include_once('model/Model.php');
 
 class Sanitizer{
 
+    public function filterGET(){
+        $_GET['url'] = filter_var($_GET['url'], FILTER_SANITIZE_URL);
+    }
+
+    /*renommer en filterPOST*/
     public function filter(){
 
         foreach($_POST as $key => $value){

@@ -23,7 +23,7 @@
     
       <?=$this->viewEngine->generateNavbar($this->namespace, $user);?>
 
-      <div class="card align-self-center mt-4 mb-2">
+      <div class="card align-self-center mt-5 mb-1">
       <div class="card-body">
 
         <?=$this->viewEngine->generateTitle($this->title);?>

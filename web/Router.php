@@ -1,5 +1,7 @@
 <?php
+
 include_once('controller/Controller.php');
+include_once('services/Sanitizer.php');
 require('Route.php');
 
 /*
@@ -12,6 +14,7 @@ class Router {
         private $routes = []; // Contiendra la liste des routes
 
         public function __construct(){
+            (new Sanitizer())->filterGET();
             $this->url = $_GET['url'];
             $this->loadRoutes();
             $GLOBALS["DEBUG"] .= "construct router > "; // debug

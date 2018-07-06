@@ -51,6 +51,21 @@ class Auth {
         $_SESSION["passport"]["color"] = $data["headerColor"];
     }
     /**sign in sign out*/
+
+    public function isUserAuthenticated(){
+        return isset($_SESSION) && isset($_SESSION['passport']);
+    }
+
+    public function isUserAdmin(){
+        return isset($_SESSION) && isset($_SESSION['passport']) && $_SESSION['passport']['level'] === 1;
+    }
+
+    public function getUserInfos(){
+        if (isset($_SESSION) && isset($_SESSION['passport'])){
+            return $_SESSION['passport'];
+        }
+        return FALSE;
+    }
 }
 
 ?>
