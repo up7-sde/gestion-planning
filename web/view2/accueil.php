@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
     <link href="/web/static/css/style.css" rel="stylesheet"/>
   
-    <title><?=$this->title?></title>
+    <title>Up7-SDE | <?=$this->title?></title>
   </head>
   <body style="padding-top:56px;" class="bg-light">
   <div class="container">
