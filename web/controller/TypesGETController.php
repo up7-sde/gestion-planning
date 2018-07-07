@@ -81,6 +81,17 @@ class TypesGETController extends Controller {
                     
                     $this->pageType = 'Edit';
                     $this->title = 'Modification du type de service n°'.$params['id'];
+                    
+                    $this->data = $this->db->findOne('TypeService', $params['id']);                    
+                    if (!$this->data) throw new Exception('404');
+                    
+                    $titleButton = array(array('icon' => 'previous', 
+                                                'action' => '#', 
+                                                'enabled'=> TRUE),
+                                         array('icon' => 'next', 
+                                                'action' => '#', 
+                                                'enabled'=> TRUE
+                                        ));
 
                     $formInputs = array('intitule' => null,
                                         'poids' => null
@@ -92,8 +103,7 @@ class TypesGETController extends Controller {
                     
                     $hiddenInput = 'idTypeService';
                     
-                    $this->data = $this->db->findOne('TypeService', $params['id']);                    
-    
+                    
                     include('view2/forms.php');
                     
                     break;

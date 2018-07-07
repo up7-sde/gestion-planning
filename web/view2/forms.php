@@ -26,7 +26,7 @@
         <div class="card align-self-center mt-5 mb-1">
         <div class="card-body">
 
-        <?=$this->viewEngine->generateTitle($this->title);?>
+        <?=$this->viewEngine->generateTitle($this->title, $titleButton);?>
         <?=$this->viewEngine->generateForm($formInputs, $formActions, $this->data, $hiddenInput, $this->auth->isUserAdmin(), $this->pageType, $this->csrf->generateToken());?>
       
       </div>

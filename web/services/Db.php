@@ -91,10 +91,16 @@ class Db{
        if ($column!==null) $idColumn = $column;
        if ($isStr) $id = '"'.$id.'"';
 
-       $res = $this->connection->query("SELECT * FROM $entity WHERE $idColumn = " . $id);
-       $data = $res->fetchAll(PDO::FETCH_ASSOC);
-       // debug : vérifier le retour de la requête avant de poursuivre (id valide...)
-       return isset($data) && $data !== null && count($data) > 0? $data : FALSE;
+       try{
+        $res = $this->connection->query("SELECT * FROM $entity WHERE $idColumn = " . $id);
+        
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+        // debug : vérifier le retour de la requête avant de poursuivre (id valide...)
+        return isset($data) && $data !== null && count($data) > 0? $data : FALSE;
+        
+       } catch (Exception $e){
+           return FALSE;
+       }
     }
 
     public function findOneUser($email){

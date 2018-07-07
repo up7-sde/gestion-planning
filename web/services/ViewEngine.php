@@ -474,10 +474,37 @@ class ViewEngine {
             return "";
         }
 
-        public function generateTitle($str){
-            
-            return '<h4 class="mb-4"> ' . $str . '</h4>';
+        public function generateTitle($str, $buttons = null){
+            $btns = "";
+            if ($buttons){
+                foreach($buttons as $button){
                     
+                    $button['enabled']? $enabled = null : $enabled = 'disabled'; 
+                    
+                    switch($button['icon']){
+                        case 'add': 
+                            $btns = '<a class="btn btn-success btn-sm '.$enabled.'" href="'. $button['action'] .'" role="button"><i class="fa fa-plus"></i> Ajouter</a>';
+                            break;
+                        case 'download':
+                            $btns = $btns . '<a class="btn btn-warning btn-sm ml-2 '.$enabled.'" href="'. $button['action'] .'" role="button"><i class="fa fa-download"></i> Télécharger</a>';
+                            break;
+                        case 'previous':
+                            $btns = $btns . '<a class="btn btn-info btn-sm '.$enabled.'" href="'. $button['action'] .'" role="button"><i class="fas fa-arrow-left"></i> Précédent</a>';
+                            break;
+                        case 'next':
+                            $btns = $btns . '<a class="btn btn-info btn-sm ml-2 '.$enabled.'" href="'. $button['action'] .'" role="button">Suivant <i class="fas fa-arrow-right"></i></a>';
+                            break;
+                        default:
+                            break;
+                    }
+                }    
+            }
+            
+            return 
+                '<div class="d-flex justify-content-between mb-4">
+                    <div class="align-self-center card-title h4" style="padding:0;margin:0;">' . $str . '</div>
+                    <div>'.$btns.'</div>
+                </div>';
         }
 }
 ?>
