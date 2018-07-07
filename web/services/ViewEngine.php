@@ -479,7 +479,7 @@ class ViewEngine {
             if ($buttons){
                 foreach($buttons as $button){
                     
-                    $button['enabled']? $enabled = null : $enabled = 'disabled'; 
+                    $button['enabled'] === TRUE ? $enabled = null : $enabled = 'disabled'; 
                     
                     switch($button['icon']){
                         case 'add': 

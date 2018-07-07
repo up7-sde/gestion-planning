@@ -64,7 +64,7 @@ class Request{
             
             case '401': 
                 $title = '401 Unauthorized';
-                $message = 'Vous n\'avez pas les droits nécessaires pour soumettre cette requête...';
+                $message = 'Aye, Aye, Aye! Vous n\'avez pas les droits nécessaires pour voir cette page...';
                 break;
             
             case '404':
@@ -78,7 +78,7 @@ class Request{
                 $message = 'Une erreur est survenue, veuillez nous en excuser.';
                 break;
         }
-        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title, TRUE, intval($status) or 500);
+        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title, TRUE);
         include('view2/error.php');
         die();
     }

@@ -31,8 +31,9 @@
         
         <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
 
+        <div class="responsive-table">
         <?=$this->viewEngine->generateTable2($this->namespace, $this->data, $tableAction, $this->auth->isUserAdmin());?>
-                  
+        </div>
         
       </div>
 

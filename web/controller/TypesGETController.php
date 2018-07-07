@@ -80,7 +80,7 @@ class TypesGETController extends Controller {
                 case "edit":
                     
                     $this->pageType = 'Edit';
-                    $this->title = 'Modification du type de service n°'.$params['id'];
+                    $this->title = 'Type de service n°'.$params['id'];
                     
                     $this->data = $this->db->findOne('TypeService', $params['id']);                    
                     if (!$this->data) throw new Exception('404');

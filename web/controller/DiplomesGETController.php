@@ -81,7 +81,20 @@ class DiplomesGETController extends Controller {
                 case "edit":
 
                     $this->pageType = 'Edit';
-                    $this->title = 'Modification du diplôme n°'.$params['id'];
+                    $this->title = 'Diplôme n°'.$params['id'];
+
+                    $this->data = $this->db->findOne('Diplome', $params['id']);                    
+                    if (!$this->data) $this->request->force('404');
+
+                    $prevNext = $this->db->findPreviousNext($params['id'], 'Diplome');
+                    
+                    $titleButton = array(array('icon' => 'previous', 
+                                                'action' => $prevNext['prev']? '/web/referentiels/diplomes/'. $prevNext['prev'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['prev']? TRUE : FALSE),
+                                         array('icon' => 'next', 
+                                                'action' => $prevNext['next']? '/web/referentiels/diplomes/'. $prevNext['next'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['next']? TRUE : FALSE)
+                                            );
 
                     $formInputs = array('intitule' => null);
                     
@@ -90,8 +103,6 @@ class DiplomesGETController extends Controller {
                                         'delete' => '/web/referentiels/diplomes/'.$params['id'].'?action=delete');
 
                     $hiddenInput = 'idDiplome';
-
-                    $this->data = $this->db->findOne('Diplome', $params['id']);
 
                     include('view2/forms.php');
 

@@ -98,7 +98,18 @@ class EnseignementsGETController extends Controller {
                     $this->pageType = 'Edit';
                     $this->title = 'Enseignement #'.$params['id'];
 
-                    $titleButton = array(array('icon' => 'delete', 'action' => '/web/enseignements/'.$params['id'].'?action=delete'));
+                    $this->data = $this->db->findOne('VueListeEnseignement', $params['id'], 'apogee2', TRUE);                  
+                    if (!$this->data) $this->request->force('404');
+
+                    $prevNext = $this->db->findPreviousNext($params['id'], 'VueListeEnseignement', FALSE);
+                    
+                    $titleButton = array(array('icon' => 'previous', 
+                                                'action' => $prevNext['prev']? '/web/enseignements/'. $prevNext['prev'] . '?action=edit' : '#', 
+                                                'enabled'=> !!$prevNext['prev']? TRUE : FALSE),
+                                         array('icon' => 'next', 
+                                                'action' => $prevNext['next']? '/web/enseignements/'. $prevNext['next'] . '?action=edit' : '#', 
+                                                'enabled'=> !!$prevNext['next']? TRUE : FALSE)
+                                            );
 
                     $formInputs = array('apogee2' => null,
                                         'intitule' => null,
@@ -123,8 +134,6 @@ class EnseignementsGETController extends Controller {
                                         'back' => '/web/enseignements?action=show',
                                         'delete' => '/web/enseignements/'.$params['id'].'?action=delete');
                     $hiddenInput = 'apogee2';
-
-                    $this->data = $this->db->findOne('VueListeEnseignement', $params['id'], 'apogee2', TRUE);
 
                     include('view2/forms.php');
 

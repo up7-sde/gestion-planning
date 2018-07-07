@@ -92,18 +92,30 @@ class UtilisateursGETController extends Controller {
                     $this->pageType = 'User';
                     $this->title = 'Utilisateur n°'.$params['id'];
 
-                    $formInputs = array('idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'), 
-                                        'idTypeService' => $this->db->findAll('VueLabelTypeService'), 
-                                        'annee' => null,
-                                        'apogee' => $this->db->findAll('VueLabelEnseignement'), 
-                                        'nbHeures' => null,
-                                        'commentaire' => null);
-                    
-                    $hiddenInput = 'idService';
+                    $this->data = $this->db->findOne('TypeService', $params['id']);                    
+                    if (!$this->data) throw new Exception('404');
 
-                    $formActions = array('form' => '#', 'back' => '/web/cours/?action=show'); 
+                    $prevNext = $this->db->findPreviousNext($params['id'], 'Utilisateur');
                     
-                    $this->data = $this->db->findOne('Service', $params['id']);                    
+                    $titleButton = array(array('icon' => 'previous', 
+                                                'action' => $prevNext['prev']? '/web/utilisateurs/'. $prevNext['prev'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['prev']? TRUE : FALSE),
+                                         array('icon' => 'next', 
+                                                'action' => $prevNext['next']? '/web/utilisateurs/'. $prevNext['next'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['next']? TRUE : FALSE)
+                                            );
+
+                    $formInputs = array(
+                        'login' => null,
+                        'email' => null,
+                        'authLevel' => array(array('id'=> 1, 'nom'=>'Oui'), array('id'=> 0, 'nom'=>'Non')),
+                    );
+                    
+                    $hiddenInput = null;
+
+                    $formActions = array('form' => '#', 'back' => '/web/utilisateurs/?action=show'); 
+                    
+                    $this->data = $this->db->findOne('Utilisateur', $params['id']);                    
     
                     include('view2/forms.php');
                     

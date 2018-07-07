@@ -86,8 +86,19 @@ class CoursGETController extends Controller {
                     $this->pageType = 'Edit';
                     $this->title = 'Cours n°'.$params['id'];
 
-                    $titleButton = array(array('icon' => 'delete', 'action' => '/web/cours/'.$params['id'].'?action=delete'));
-                    //(IN p_idService INT, IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT)
+                    $this->data = $this->db->findOne('Service', $params['id']);                    
+                    if (!$this->data) $this->request->force('404');
+
+                    $prevNext = $this->db->findPreviousNext($params['id'], 'Service');
+                    
+                    $titleButton = array(array('icon' => 'previous', 
+                                                'action' => $prevNext['prev']? '/web/cours/'. $prevNext['prev'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['prev']? TRUE : FALSE),
+                                         array('icon' => 'next', 
+                                                'action' => $prevNext['next']? '/web/cours/'. $prevNext['next'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['next']? TRUE : FALSE)
+                                            );
+
                     $formInputs = array('idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'),
                                         'idTypeService' => $this->db->findAll('VueLabelTypeService'),
                                         'annee' => null,
@@ -100,8 +111,6 @@ class CoursGETController extends Controller {
                     $formActions = array('form' => '/web/cours/'.$params['id'],
                                         'back' => '/web/cours/?action=show',
                                         'delete' => '/web/cours/'.$params['id'].'?action=delete');
-
-                    $this->data = $this->db->findOne('Service', $params['id']);
 
                     include('view2/forms.php');
 

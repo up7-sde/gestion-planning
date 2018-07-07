@@ -86,9 +86,19 @@ class EnseignantsGETController extends Controller {
                     $this->pageType = 'Edit';
                     $this->title = 'Enseignant n°'.$params['id'];
 
-                    $titleButton = array(
-                        array('icon' => 'delete', 'action' => '/web/enseignants/'.$params['id'].'?action=delete')
-                    );
+                    $this->data = $this->db->findOne('Enseignant', $params['id']);                    
+                    if (!$this->data) $this->request->force('404');
+
+                    $prevNext = $this->db->findPreviousNext($params['id'], 'Enseignant');
+                    
+                    $titleButton = array(array('icon' => 'previous', 
+                                                'action' => $prevNext['prev']? '/web/enseignants/'. $prevNext['prev'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['prev']? TRUE : FALSE),
+                                         array('icon' => 'next', 
+                                                'action' => $prevNext['next']? '/web/enseignants/'. $prevNext['next'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['next']? TRUE : FALSE)
+                                            );
+
 
                     //(IN p_idEnseignant INT, IN p_nom VARCHAR(45), IN p_prenom VARCHAR(45), IN p_idStatut INT, IN p_depEco TINYINT)
                     $formInputs = array('nom' => null,
@@ -101,8 +111,6 @@ class EnseignantsGETController extends Controller {
                                             'delete' => '/web/enseignants/'.$params['id'].'?action=delete');
 
                     $hiddenInput = 'idEnseignant';
-
-                    $this->data = $this->db->findOne('Enseignant', $params['id']);
 
                     include('view2/forms.php');
 

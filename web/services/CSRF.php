@@ -16,7 +16,7 @@
             if (!hash_equals($_SESSION['token'], $_POST['csrf'])){
                 throw new Exception('400');                
             }
-
+            
             unset($_POST['csrf']);
         }
     }

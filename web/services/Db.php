@@ -103,13 +103,17 @@ class Db{
        }
     }
 
-    public function findPreviousNext($id, $entity, $char = FALSE){
+    public function findPreviousNext($id, $entity, $suffix = TRUE){
         $this->connect();
-        $data = $this->findAll($entity);
-        $pos = array_search($id, array_column($data, 'id' . $entity));
 
-        $prevNext = array('prev'=> isset($data[$pos - 1]) && isset($data[$pos - 1]['id'. $entity]) ?$data[$pos - 1]['id'. $entity]:FALSE,
-                         'next'=> isset($data[$pos + 1]) && isset($data[$pos + 1]['id'. $entity]) ?$data[$pos + 1]['id'. $entity]:FALSE);
+        $data = $this->findAll($entity);
+
+        $suffix? $concat = 'id' . $entity : $concat = 'id';
+
+        $pos = array_search($id, array_column($data, $concat));
+        
+        $prevNext = array('prev'=> isset($data[$pos - 1]) && isset($data[$pos - 1][$concat]) ?$data[$pos - 1][$concat]:FALSE,
+                         'next'=> isset($data[$pos + 1]) && isset($data[$pos + 1][$concat]) ?$data[$pos + 1][$concat]:FALSE);
         return $prevNext;
     }
 

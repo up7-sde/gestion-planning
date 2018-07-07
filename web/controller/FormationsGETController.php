@@ -87,6 +87,19 @@ class FormationsGETController extends Controller {
                     $this->pageType = 'Edit';
                     $this->title = 'Modification de la formation n°'.$params['id'];
 
+                    $this->data = $this->db->findOne('Formation', $params['id']);                    
+                    if (!$this->data) $this->request->force('404');
+
+                    $prevNext = $this->db->findPreviousNext($params['id'], 'Formation');
+                    
+                    $titleButton = array(array('icon' => 'previous', 
+                                                'action' => $prevNext['prev']? '/web/formations/'. $prevNext['prev'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['prev']? TRUE : FALSE),
+                                         array('icon' => 'next', 
+                                                'action' => $prevNext['next']? '/web/formations/'. $prevNext['next'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['next']? TRUE : FALSE)
+                                            );
+
                     $formInputs = array('intitule' => null, 'idDiplome' => $this->db->findAll('VueLabelDiplome'));
 
                     $formActions = array('form' => '/web/formations/'.$params['id'],
@@ -94,8 +107,6 @@ class FormationsGETController extends Controller {
                                         'delete' => '/web/formations/'.$params['id'].'?action=delete');
 
                     $hiddenInput = 'idFormation';
-
-                    $this->data = $this->db->findOne('Formation', $params['id']);
 
                     include('view2/forms.php');
 

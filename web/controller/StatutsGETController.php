@@ -35,7 +35,7 @@ class StatutsGETController extends Controller {
                     
                     $this->data = $this->db->findAll('VueListeStatut');
                     $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=add', 'enabled'=> $this->auth->isUserAdmin()),
-                                         array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=download', 'enabled'=> $this->auth->isUserAdmin()));
+                                         array('icon' => 'download', 'action' => '/web/referentiels/statuts?action=download', 'enabled'=> $this->auth->isUserAdmin()));
                     
                     $tableAction = '/web/referentiels/statuts';
                     //var_dump($_SESSION['message']);
@@ -81,6 +81,19 @@ class StatutsGETController extends Controller {
                     $this->pageType = 'Edit';
                     $this->title = 'Modification du statut enseignant n°'.$params['id'];
 
+                    $this->data = $this->db->findOne('Statut', $params['id']);                    
+                    if (!$this->data) $this->request->force('404');
+
+                    $prevNext = $this->db->findPreviousNext($params['id'], 'Statut');
+                    
+                    $titleButton = array(array('icon' => 'previous', 
+                                                'action' => $prevNext['prev']? '/web/referentiels/statuts/'. $prevNext['prev'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['prev']? TRUE : FALSE),
+                                         array('icon' => 'next', 
+                                                'action' => $prevNext['next']? '/web/referentiels/statuts/'. $prevNext['next'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['next']? TRUE : FALSE)
+                                            );
+
                     $formInputs = array('intitule' => null, 
                                         'heureService' => null,
                                         'titulaire' => array(
@@ -95,8 +108,6 @@ class StatutsGETController extends Controller {
 
                     $hiddenInput = 'idStatut';
                     
-                    $this->data = $this->db->findOne('Statut', $params['id']);                    
-    
                     include('view2/forms.php');
                     
                     break;
