@@ -97,10 +97,20 @@ class Db{
         $data = $res->fetchAll(PDO::FETCH_ASSOC);
         // debug : vérifier le retour de la requête avant de poursuivre (id valide...)
         return isset($data) && $data !== null && count($data) > 0? $data : FALSE;
-        
+
        } catch (Exception $e){
            return FALSE;
        }
+    }
+
+    public function findPreviousNext($id, $entity, $char = FALSE){
+        $this->connect();
+        $data = $this->findAll($entity);
+        $pos = array_search($id, array_column($data, 'id' . $entity));
+
+        $prevNext = array('prev'=> isset($data[$pos - 1]) && isset($data[$pos - 1]['id'. $entity]) ?$data[$pos - 1]['id'. $entity]:FALSE,
+                         'next'=> isset($data[$pos + 1]) && isset($data[$pos + 1]['id'. $entity]) ?$data[$pos + 1]['id'. $entity]:FALSE);
+        return $prevNext;
     }
 
     public function findOneUser($email){

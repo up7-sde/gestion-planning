@@ -84,14 +84,16 @@ class TypesGETController extends Controller {
                     
                     $this->data = $this->db->findOne('TypeService', $params['id']);                    
                     if (!$this->data) throw new Exception('404');
+
+                    $prevNext = $this->db->findPreviousNext($params['id'], 'TypeService');
                     
                     $titleButton = array(array('icon' => 'previous', 
-                                                'action' => '#', 
-                                                'enabled'=> TRUE),
+                                                'action' => $prevNext['prev']? '/web/referentiels/types/'. $prevNext['prev'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['prev']? TRUE : FALSE),
                                          array('icon' => 'next', 
-                                                'action' => '#', 
-                                                'enabled'=> TRUE
-                                        ));
+                                                'action' => $prevNext['next']? '/web/referentiels/types/'. $prevNext['next'] . '?action=edit' : '#', 
+                                                'enabled'=> $prevNext['next']? TRUE : FALSE)
+                                            );
 
                     $formInputs = array('intitule' => null,
                                         'poids' => null
