@@ -31,27 +31,12 @@ $(document).ready(()=> {
             }
         },
         
-        dom:"<'row mt-2'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6 d-flex justify-content-end'f<'toolbar'>>>" +
-        "<'row'<'col-sm-12'tr>>" +
-        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 mt-2'p>>",
-        
+        dom:"<'row'<'col-md-6'l><'col-md-6 d-flex justify-content-end'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 mt-2'p>>",
+            
         initComplete: function(){
-            
-            if (data[0]["enabled"]){
-                $("div.toolbar")
-                .html(`<div class="ml-2">
-                 <a class="btn btn-success btn-sm" href="` + data[0]["action"] + `" role="button"><i class="fas fa-plus"></i> Ajouter</a>
-                 <a class="btn btn-warning btn-sm" href="` + data[1]["action"] + `" role="button"><i class="fas fa-download"></i> Télécharger</a>
-                </div>`);
-            } else {
-                $("div.toolbar")
-                .html(`<div class="ml-2">
-                 <a class="btn btn-success btn-sm disabled" href="#" role="button"><i class="fas fa-plus"></i> Ajouter</a>
-                 <a class="btn btn-warning btn-sm disabled" href="#" role="button"><i class="fas fa-download"></i> Télécharger</a>
-                </div>`);
-            }
 
-            
                $('.table').removeClass('invisible');
                $('#table').removeClass('invisible');
                $('input[type="search"]').unwrap();
