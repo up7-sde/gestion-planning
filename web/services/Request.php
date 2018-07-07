@@ -46,7 +46,7 @@ class Request{
     public static function getLastDifferentURL(){
         
         for ($i = count($_SESSION["history"])-1; $i>=0; $i--){
-            if ($_SESSION["history"][$i]!==$this->getCurrentUrl()){
+            if ($_SESSION["history"][$i]!==$_SESSION["history"][count($_SESSION["history"])-1]){
             return $_SESSION["history"][$i];
             }
         }
