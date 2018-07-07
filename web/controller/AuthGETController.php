@@ -13,17 +13,16 @@ class AuthGETController extends Controller {
         $this->pageType = 'Auth';
 
         /*on recupère l'action process ou quit*/
-        $params = $this->getExtraParams();
+        $params = $this->request->getExtraParams();
         
         /*/auth?action=process*/
         if (isset($params) && isset($params['action']) && !!$params['action'] && $params['action'] === 'process'){
-            
             include('view2/auth.php'); // debug
         
         /*/auth?action=quit*/
         } elseif (isset($params) && isset($params['action']) && !!$params['action'] && $params['action'] === 'quit') {
             $this->auth->logout();
-            $this->redirect('/auth?action=process');
+            $this->request->redirect('/auth?action=process');
         
         /*not found*/
         } else {

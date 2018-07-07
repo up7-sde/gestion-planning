@@ -31,54 +31,7 @@
         
         <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
 
-          <!--
-          <div class="btn-toolbar mb-2" role="toolbar" aria-label="Toolbar with button groups">
-          
-          <div class="input-group input-group-sm mr-2">
-            <select name="display" class="custom-select custom-select-sm" id="inlineFormCustomSelect">
-              <option class="selected" value="all">Tout</option>
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="30">50</option>
-            </select>
-          </div>
-
-          
-          <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
-            <button id="previous" type="button" class="btn btn-outline-transparent"><i class="fas fa-chevron-left"></i></button>
-            <button id="next" type="button" class="btn btn-outline-transparent"><i class="fas fa-chevron-right"></i></button>
-          </div>
-
-          <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
-            <button id="zoomPlus" type="button" class="btn btn-outline-secondary"><i class="fas fa-search-plus"></i></button>
-            <button id="zoomMinus" type="button" class="btn btn-outline-secondary"><i class="fas fa-search-minus"></i></button>
-          </div>
-          
-          <div class="btn-group-sm mr-2" role="group" aria-label="Third group">
-          <a href="/web/enseignants?action=download" role="button" type="button" class="btn btn-warning"><i class="fas fa-download"></i> CSV</a>
-        </div>
-
-        <div class="btn-group-sm mr-2" role="group" aria-label="Third group">
-          <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Télécharger"><i class="fas fa-download"></i></button>
-        </div>
-
-        
-      
-      <div class="btn-group-sm mr-2" role="group" aria-label="Third group">
-          <button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Ajouter</button>
-        </div>
-
-        <div class="btn-group-sm mr-2" role="group" aria-label="Third group">
-          <button type="button" class="btn btn-warning"><i class="fas fa-download"></i> Télécharger</button>
-        </div>
-
-          <div class="btn-group-sm" role="group" aria-label="Third group">
-          <button type="button" class="btn btn-success"><i class="fas fa-plus"></i></button>
-        </div>
-            
-        </div> -->
-
-        <?=$this->viewEngine->generateTable2($this->namespace, $this->data, $tableAction, $this->isUserAdmin());?>
+        <?=$this->viewEngine->generateTable2($this->namespace, $this->data, $tableAction, $this->auth->isUserAdmin());?>
                   
         
       </div>

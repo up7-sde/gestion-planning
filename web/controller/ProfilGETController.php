@@ -13,8 +13,8 @@ class ProfilGETController extends Controller {
    
         $this->namespace = 'Mon profil';
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth?action=process');
+        $user = $this->auth->getUserInfos();
+        if (!$user) $this->request->redirect('/auth?action=process');
         
         /*on récupère tous les types de params*/
         /*var_dump($user);
@@ -32,7 +32,7 @@ class ProfilGETController extends Controller {
             'headerColor' => null
         );
 
-        $formActions = array('form' => '/web/profil', 'back' => '/web' . $this->getLastDifferentUrl()); 
+        $formActions = array('form' => '/web/profil', 'back' => '/web' . $this->request->getLastDifferentUrl()); 
         
         $hiddenInput = 'idUtilisateur';
         

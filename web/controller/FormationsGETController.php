@@ -14,12 +14,12 @@ class FormationsGETController extends Controller {
         $this->namespace = 'Formations';
 
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth?action=process');
+        $user = $this->auth->getUserInfos();
+        if (!$user) $this->request->redirect('/auth?action=process');
 
         /*on récupère tous les types de params*/
-        $params = $this->getParams();
-        $extraParams = $this->getExtraParams();
+        $params = $this->request->getParams();
+        $extraParams = $this->request->getExtraParams();
 
         /*
         case
@@ -37,9 +37,8 @@ class FormationsGETController extends Controller {
                     $this->data = $this->db->findAll('VueListeFormation');
 
                     $titleButton = array(
-                        array('icon' => 'add', 'action' => '/web/formations?action=add', 'enabled'=> $this->isUserAdmin()),
-                        array('icon' => 'download', 'action' => '/web/formations?action=download', 'enabled'=> $this->isUserAdmin())
-
+                        array('icon' => 'add', 'action' => '/web/formations?action=add', 'enabled'=> $this->auth->isUserAdmin()),
+                        array('icon' => 'download', 'action' => '/web/formations?action=download', 'enabled'=> $this->auth->isUserAdmin())
                     );
 
                     $tableAction = '/web/formations';
@@ -110,7 +109,7 @@ class FormationsGETController extends Controller {
                     } else {
                         $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
                     }
-                    $this->redirect('/formations?action=show');
+                    $this->request->redirect('/formations?action=show');
                     break;
 
                 default:

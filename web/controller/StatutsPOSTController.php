@@ -9,11 +9,11 @@ class StatutsPOSTController extends Controller {
     public function render($args=null){
         
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        if (!$user || !$this->isUserAsmin()) throw new Exception('401');
+        $user = $this->auth->getUserInfos();
+        if (!$user || !$this->auth->isUserAsmin()) throw new Exception('401');
         
         /*on récupère tous les params*/
-        $params = $this->getParams();
+        $params = $this->request->getParams();
         
         /*
         case
@@ -31,7 +31,7 @@ class StatutsPOSTController extends Controller {
             } else {
                 $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de l\'ajout d\'un statut enseignant'));                        
             }                 
-            $this->redirect('/referentiels/statuts?action=show');
+            $this->request->redirect('/referentiels/statuts?action=show');
         /*
         case
         /cours/:id => modifie la ressource :id
@@ -49,7 +49,7 @@ class StatutsPOSTController extends Controller {
             } else {
                 $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la modification du statut enseignant'));                        
             }
-            $this->redirect('/referentiels/statuts?action=show');
+            $this->request->redirect('/referentiels/statuts?action=show');
         }
     }
 }

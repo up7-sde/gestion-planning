@@ -12,12 +12,12 @@ class CoursGETController extends Controller {
         $this->namespace = 'Cours';
 
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth?action=process');
+        $user = $this->auth->getUserInfos();
+        if (!$user) $this->request->redirect('/auth?action=process');
 
         /*on récupère tous les types de params*/
-        $params = $this->getParams();
-        $extraParams = $this->getExtraParams();
+        $params = $this->request->getParams();
+        $extraParams = $this->request->getExtraParams();
 
         /*
         case
@@ -34,8 +34,8 @@ class CoursGETController extends Controller {
                     $this->data = $this->db->findAll('VueListeService');
 
                     $titleButton = array(
-                        array('icon' => 'add', 'action' => '/web/cours?action=add', 'enabled'=> $this->isUserAdmin()),
-                        array('icon' => 'download', 'action' => '/web/cours?action=download', 'enabled'=> $this->isUserAdmin())
+                        array('icon' => 'add', 'action' => '/web/cours?action=add', 'enabled'=> $this->auth->isUserAdmin()),
+                        array('icon' => 'download', 'action' => '/web/cours?action=download', 'enabled'=> $this->auth->isUserAdmin())
 
                     );
 
@@ -120,9 +120,13 @@ class CoursGETController extends Controller {
                             'message'=>'Cours n°'.$params['id'].' supprimé')
                         );
                     } else {
+                        $this->messenger->push(array(
+                            'status'=>'fail',
+                            'message'=>'Impossible de supprimer le cours')
+                        );
                     }
 
-                    $this->redirect('/cours?action=show');
+                    $this->request->redirect('/cours?action=show');
                     break;
 
                 default:

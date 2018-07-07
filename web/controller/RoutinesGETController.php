@@ -13,10 +13,10 @@ class RoutinesGETController extends Controller {
    
         $this->namespace = 'Nouvelle année';
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        
-        if (!$user) $this->redirect('/auth?action=process');
-        if (!$this->isUserAdmin()) throw new Exception('401');
+        $user = $this->auth->getUserInfos();
+
+        if (!$user) $this->request->redirect('/auth?action=process');
+        if (!$this->auth->isUserAdmin()) throw new Exception('401');
         
         $this->pageType = 'Routine';
         $this->title = 'Nouvelle année';
@@ -28,7 +28,7 @@ class RoutinesGETController extends Controller {
             'annee2' => null
         );
 
-        $formActions = array('form' => '/web/routines/nvelleannee', 'back' => '/web' . $this->getLastDifferentUrl()); 
+        $formActions = array('form' => '/web/routines/nvelleannee', 'back' => '/web' . $this->request->getLastDifferentUrl()); 
         
         $hiddenInput = null;  
         

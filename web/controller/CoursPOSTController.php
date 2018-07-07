@@ -9,11 +9,11 @@ class CoursPOSTController extends Controller {
     public function render($args=null){
 
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        if (!$user || !$this->isUserAdmin()) throw new Exception('401');
+        $user = $this->auth->getUserInfos();
+        if (!$user || !$this->auth->isUserAdmin()) throw new Exception('401');
 
         /*on récupère tous les params*/
-        $params = $this->getParams();
+        $params = $this->request->getParams();
 
         /*
         case
@@ -32,7 +32,7 @@ class CoursPOSTController extends Controller {
             } else {
                 $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
             }
-            $this->redirect('/cours?action=show');
+            $this->request->redirect('/cours?action=show');
         /*
         case
         /cours/:id => modifie la ressource :id
@@ -50,7 +50,7 @@ class CoursPOSTController extends Controller {
             } else {
                 $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
             }
-            $this->redirect('/cours?action=show');
+            $this->request->redirect('/cours?action=show');
         }
     }
 }

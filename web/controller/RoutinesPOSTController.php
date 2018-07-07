@@ -9,8 +9,8 @@ class RoutinesPOSTController extends Controller {
     public function render($args=null){
 
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        if (!$user || !$this->isUserAdmin()) throw new Exception('401');
+        $user = $this->auth->getUserInfos();
+        if (!$user || !$this->auth->isUserAdmin()) throw new Exception('401');
 
         $this->csrf->verifyToken();
         
@@ -25,7 +25,7 @@ class RoutinesPOSTController extends Controller {
             $this->messenger->push(array('status'=>'fail', 'message'=>'Impossible de copier les services'));                        
         }
 
-        $this->redirect('/');
+        $this->request->redirect('/');
     }
 }
 ?>

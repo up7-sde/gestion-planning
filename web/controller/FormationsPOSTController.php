@@ -9,11 +9,11 @@ class FormationsPOSTController extends Controller {
     public function render($args=null){
         
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        if (!$user || !$this->isUserAdmin()) throw new Exception('401');
+        $user = $this->auth->getUserInfos();
+        if (!$user || !$this->auth->isUserAdmin()) throw new Exception('401');
         
         /*on récupère les params => l'id de la ressource*/
-        $params = $this->getParams();
+        $params = $this->request->getParams();
         
         /*
         case
@@ -32,7 +32,7 @@ class FormationsPOSTController extends Controller {
                 $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));                        
             }
             //$_SESSION["message"] = $res;                    
-            $this->redirect('/formations?action=show');
+            $this->request->redirect('/formations?action=show');
         /*
         case
         /cours/:id => modifie la ressource :id
@@ -50,7 +50,7 @@ class FormationsPOSTController extends Controller {
                 $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));                        
             }
             
-            $this->redirect('/formations?action=show');
+            $this->request->redirect('/formations?action=show');
         }
     }
 }

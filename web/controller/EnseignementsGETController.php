@@ -11,12 +11,12 @@ class EnseignementsGETController extends Controller {
 
         $this->namespace = 'Enseignements';
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth?action=process');
+        $user = $this->auth->getUserInfos();
+        if (!$user) $this->request->redirect('/auth?action=process');
 
         /*on récupère tous les types de params*/
-        $params = $this->getParams();
-        $extraParams = $this->getExtraParams();
+        $params = $this->request->getParams();
+        $extraParams = $this->request->getExtraParams();
 
         /*
         case
@@ -34,8 +34,8 @@ class EnseignementsGETController extends Controller {
                     $this->data = $this->db->findAll('VueListeEnseignement');
 
                     $titleButton = array(
-                        array('icon' => 'add', 'action' => '/web/enseignements?action=add', 'enabled'=> $this->isUserAdmin()),
-                        array('icon' => 'download', 'action' => '/web/enseignements?action=download', 'enabled'=> $this->isUserAdmin())
+                        array('icon' => 'add', 'action' => '/web/enseignements?action=add', 'enabled'=> $this->auth->isUserAdmin()),
+                        array('icon' => 'download', 'action' => '/web/enseignements?action=download', 'enabled'=> $this->auth->isUserAdmin())
 
                     );
 
@@ -140,7 +140,7 @@ class EnseignementsGETController extends Controller {
                         $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la suppression'));                        
                     }
 
-                    $this->redirect('/enseignements?action=show');
+                    $this->request->redirect('/enseignements?action=show');
                     break;
 
                 default:

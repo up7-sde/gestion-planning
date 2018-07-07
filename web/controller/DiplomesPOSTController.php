@@ -9,17 +9,17 @@ class DiplomesPOSTController extends Controller {
     public function render($args=null){
 
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        if (!$user || !$this->isUserAdmin()) throw new Exception('401');
+        $user = $this->auth->getUserInfos();
+        if (!$user || !$this->auth->isUserAdmin()) throw new Exception('401');
 
         /*on récupère tous les params*/
-        $params = $this->getParams();
+        $params = $this->request->getParams();
 
         /*
         case
         /cours => ajoute une nouvelle ressource
         */
-        if (!$params && $this->isUserAdmin()){
+        if (!$params){
             
             /*var_dump($this->sanitizer->filter($_POST));
             die();*/
@@ -33,7 +33,7 @@ class DiplomesPOSTController extends Controller {
             } else {
                 $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
             }
-            $this->redirect('/referentiels/diplomes?action=show');
+            $this->request->redirect('/referentiels/diplomes?action=show');
         /*
         case
         /cours/:id => modifie la ressource :id
@@ -51,7 +51,7 @@ class DiplomesPOSTController extends Controller {
             } else {
                 $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
             }
-            $this->redirect('/referentiels/diplomes?action=show');
+            $this->request->redirect('/referentiels/diplomes?action=show');
         }
     }
 }

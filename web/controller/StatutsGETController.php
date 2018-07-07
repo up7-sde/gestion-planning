@@ -13,12 +13,12 @@ class StatutsGETController extends Controller {
    
         $this->namespace = 'Statuts Enseignant';
         /*verifier auth*/
-        $user = $this->getUserInfos();
+        $user = $this->auth->getUserInfos();
         if (!$user) throw new Exception('401');
         
         /*on récupère tous les types de params*/
-        $params = $this->getParams();
-        $extraParams = $this->getExtraParams();
+        $params = $this->request->getParams();
+        $extraParams = $this->request->getExtraParams();
         
         /*
         case
@@ -34,8 +34,8 @@ class StatutsGETController extends Controller {
                     $this->title = 'Tous les Statuts Enseignant';
                     
                     $this->data = $this->db->findAll('VueListeStatut');
-                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=add', 'enabled'=> $this->isUserAdmin()),
-                                         array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=download', 'enabled'=> $this->isUserAdmin()));
+                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=add', 'enabled'=> $this->auth->isUserAdmin()),
+                                         array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=download', 'enabled'=> $this->auth->isUserAdmin()));
                     
                     $tableAction = '/web/referentiels/statuts';
                     //var_dump($_SESSION['message']);
@@ -109,7 +109,7 @@ class StatutsGETController extends Controller {
                     } else {
                         $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la suppression du statut'));                        
                     }
-                    $this->redirect('/referentiels/statuts?action=show');
+                    $this->request->redirect('/referentiels/statuts?action=show');
                     break;
                 
                 default:

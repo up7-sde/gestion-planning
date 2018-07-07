@@ -12,13 +12,13 @@ class UtilisateursGETController extends Controller {
         $this->namespace = 'Utilisateurs';
 
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth?action=process');
-        if (!$this->isUserAdmin()) throw new Exception('401');
+        $user = $this->auth->getUserInfos();
+        if (!$user) $this->request->redirect('/auth?action=process');
+        if (!$this->auth->isUserAdmin()) throw new Exception('401');
         
         /*on récupère tous les types de params*/
-        $params = $this->getParams();
-        $extraParams = $this->getExtraParams();
+        $params = $this->request->getParams();
+        $extraParams = $this->request->getExtraParams();
         
         /*
         case
@@ -35,8 +35,8 @@ class UtilisateursGETController extends Controller {
                     $this->data = $this->db->findAll('VueListeUtilisateur');
                     
                     $titleButton = array(
-                        array('icon' => 'add', 'action' => '/web/utilisateurs?action=add', 'enabled'=> $this->isUserAdmin()),
-                        array('icon' => 'download', 'action' => '/web/utilisateurs?action=download', 'enabled'=> $this->isUserAdmin())
+                        array('icon' => 'add', 'action' => '/web/utilisateurs?action=add', 'enabled'=> $this->auth->isUserAdmin()),
+                        array('icon' => 'download', 'action' => '/web/utilisateurs?action=download', 'enabled'=> $this->auth->isUserAdmin())
                         
                     );
 
@@ -125,7 +125,7 @@ class UtilisateursGETController extends Controller {
                         $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la suppression'));                        
                     }
 
-                    $this->redirect('/utilisateurs?action=show');
+                    $this->request->redirect('/utilisateurs?action=show');
                     break;
                 
                 default:

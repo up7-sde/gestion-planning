@@ -13,12 +13,12 @@ class DiplomesGETController extends Controller {
         $this->namespace = 'Diplômes';
 
         /*verifier auth*/
-        $user = $this->getUserInfos();
-        if (!$user) $this->redirect('/auth?action=process');
+        $user = $this->auth->getUserInfos();
+        if (!$user) $this->request->redirect('/auth?action=process');
 
         /*on récupère tous les types de params*/
-        $params = $this->getParams();
-        $extraParams = $this->getExtraParams();
+        $params = $this->request->getParams();
+        $extraParams = $this->request->getExtraParams();
 
         /*
         case
@@ -34,8 +34,8 @@ class DiplomesGETController extends Controller {
                     $this->title = 'Tous les Diplômes';
 
                     $this->data = $this->db->findAll('VueListeDiplome');
-                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/diplomes?action=add', 'enabled'=> $this->isUserAdmin()),
-                                    array('icon' => 'download', 'action' => '/web/referentiels/diplomes?action=download', 'enabled'=> $this->isUserAdmin()));
+                    $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/diplomes?action=add', 'enabled'=> $this->auth->isUserAdmin()),
+                                    array('icon' => 'download', 'action' => '/web/referentiels/diplomes?action=download', 'enabled'=> $this->auth->isUserAdmin()));
 
                     $tableAction = '/web/referentiels/diplomes';
                     //var_dump($_SESSION['message']);
@@ -106,7 +106,7 @@ class DiplomesGETController extends Controller {
                     } else {
                         $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la requête'));
                     }
-                    $this->redirect('/referentiels/diplomes?action=show');
+                    $this->request->redirect('/referentiels/diplomes?action=show');
                     break;
 
                 default:

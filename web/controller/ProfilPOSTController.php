@@ -9,7 +9,7 @@ class ProfilPOSTController extends Controller {
     public function render($args=null){
         
         /*verifier auth*/
-        $user = $this->getUserInfos();
+        $user = $this->auth->getUserInfos();
         if (!$user) throw new Exception('401');
         
             /*on hash le mot de passe*/
@@ -34,7 +34,7 @@ class ProfilPOSTController extends Controller {
                 $this->messenger->push(array('status'=>'fail', 'message'=>'Echec de la modification du profil'));                        
             }
 
-            $this->redirect('/');
+            $this->request->redirect('/');
     }
 }
 ?>

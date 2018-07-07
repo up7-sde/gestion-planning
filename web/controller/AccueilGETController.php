@@ -12,9 +12,9 @@ class AccueilGETController extends Controller {
         $this->title = 'Avancement du projet';
         $this->pageType = 'Home';
 
-        $user = $this->getUserInfos();
+        $user = $this->auth->getUserInfos();
         
-        if (!$user) $this->redirect('/auth?action=process');
+        if (!$user) $this->request->redirect('/auth?action=process');
 
         $titleButton = null;
         
