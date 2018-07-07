@@ -51,8 +51,6 @@ class CoursGETController extends Controller {
 
                     $this->data = null;
 
-                    $titleButton = null;
-
                     $formInputs = array('idEnseignant' =>  $this->db->findAll('VueLabelEnseignant'),
                                         'idTypeService' => $this->db->findAll('VueLabelTypeService'),
                                         'annee' => null,
