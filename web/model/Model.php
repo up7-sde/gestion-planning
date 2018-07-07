@@ -79,7 +79,7 @@ class Model {
             'required' => 'required',
             'invalid' => 'Non valide',
             'valid' => 'Valide',
-            'help' => 'Min 0 max INF step 1',
+            'help' => 'Doit être un entier.',
             'min' => 0,
             'max' => null,
             'step' => 1
@@ -202,7 +202,7 @@ class Model {
             'alias' => 'Semestre',
             'type' => PDO::PARAM_INT,
             'inputType' => 'options',
-            'default' => 0,
+            'default' => 'Choisissez un semestre',
             'required' => 'required',
             'invalid' => 'Non valide',
             'valid' => 'Valide',
@@ -218,7 +218,7 @@ class Model {
             'required' => 'required',
             'invalid' => 'Non valide',
             'valid' => 'Valide',
-            'help' => 'Entre 1 et 100 avec un pas de 1',
+            'help' => 'Le nombre de groupe doit être un chiffre entier.',
             'min' => 0,
             'max' => 20,
             'step' => 1
@@ -241,12 +241,12 @@ class Model {
             'alias' => 'Code Apogée',
             'type' => PDO::PARAM_STR,
             'inputType' => 'text',
-            'default' => 'Code Apogée',
+            'default' => 'Entrez un code apogée',
             'required' => 'required',
-            'invalid' => 'Non valide',
-            'valid' => 'Valide',
-            'help' => null,
-            'pattern' => null
+            'invalid' => 'Le champs n\'est pas valide',
+            'valid' => 'Le champs est valide',
+            'help' => 'Le code apogée ne doit contenir que des caractères alphanumériques et aucun espace.',
+            'pattern' => '^[a-zA-Z0-9]+$'
         ),
         'commentaire' =>
         array(
@@ -258,7 +258,7 @@ class Model {
             'required' => '',
             'invalid' => 'Non valide',
             'valid' => 'Valide',
-            'help' => 'Commentaire pour les cours spéciaux',
+            'help' => 'Commentaire pour les cours spéciaux (facultatif)',
         ),
         'poids' =>
         array(

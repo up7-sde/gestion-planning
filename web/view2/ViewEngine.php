@@ -313,6 +313,8 @@ class ViewEngine {
                             }
                         }
 
+                        $attributes['pattern'] !== null? $pattern = ' pattern=' . $attributes['pattern'] . ' ' : $pattern = null;
+
                         $placeholder = $attributes['default'] ;
                         
                         $form = $form . 
@@ -320,7 +322,7 @@ class ViewEngine {
                         <label for=' . $key . ' class="col-sm-2 col-form-label">' . $attributes['alias'] . 
                         '</label>
                             <div class="col-sm-10">
-                                <input maxlength="256" '.$attributes['required'].' '. $status .' name="' . $key . '" type="text" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
+                                <input '.$pattern.' maxlength="256" '.$attributes['required'].' '. $status .' name="' . $key . '" type="text" class="form-control" id="'. $key . '" placeholder="'.$placeholder.'" value="'. $inputValue .'">
                             '.$help. $valid . $invalid .'</div>
                             
                         </div>'; 
