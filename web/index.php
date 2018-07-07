@@ -1,6 +1,7 @@
 <?php
 /*le router*/
 require('Router.php');
+include_once('services/Request.php');
 
 $GLOBALS["DEBUG"] = "START DEBUG >";
 
@@ -15,7 +16,7 @@ try {
 
 } catch (Exception $e) {
     
-    (new Controller())->force($e->getMessage());   
+    Request::force($e->getMessage());   
 }
 
 ?>

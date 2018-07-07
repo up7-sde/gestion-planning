@@ -1,7 +1,6 @@
 <?php
 
 include_once('controller/Controller.php');
-include_once('services/Sanitizer.php');
 require('Route.php');
 
 /*
@@ -14,8 +13,8 @@ class Router {
         private $routes = []; // Contiendra la liste des routes
 
         public function __construct(){
-            (new Sanitizer())->filterGET();
-            $this->url = $_GET['url'];
+
+            $this->url = filter_var($_GET['url'], FILTER_SANITIZE_URL);
             $this->loadRoutes();
             $GLOBALS["DEBUG"] .= "construct router > "; // debug
         }
@@ -34,7 +33,7 @@ class Router {
                 $to = (string) $redirect->to;
 
                 $route = new Route($from, function() use($to) {
-                    (new Controller())->redirect($to);
+                    Request::redirect($to);
                 });
                 //ne redirect que les gets
                 $this->routes['GET'][] = $route;

@@ -1,6 +1,6 @@
 <?php
 class Request{
-    
+
     public static function getParams(){
         if (isset($_SESSION) && isset($_SESSION['params']) && count($_SESSION['params']) > 0 ){
             return $_SESSION['params'];
@@ -78,7 +78,7 @@ class Request{
                 $message = 'Une erreur est survenue, veuillez nous en excuser.';
                 break;
         }
-        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title, TRUE, intval($status));
+        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $title, TRUE, intval($status) or 500);
         include('view2/error.php');
         die();
     }
