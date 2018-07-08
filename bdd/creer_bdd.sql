@@ -79,7 +79,7 @@ CREATE UNIQUE INDEX `nom_UNIQUE` ON `sde`.`TypeService` (`nom` ASC);
 DROP TABLE IF EXISTS `sde`.`Enseignement` ;
 
 CREATE TABLE `sde`.`Enseignement` (
-    `apogee` VARCHAR(45) NOT NULL,
+    `apogee` VARCHAR(8) NOT NULL,
     `intitule` VARCHAR(45) NOT NULL,
     `heureCM` INT NOT NULL,
     `heureTP` INT NOT NULL,
@@ -103,7 +103,7 @@ CREATE TABLE `sde`.`Service` (
   `Enseignant_idEnseignant` INT NOT NULL,
   `TypeService_idTypeService` INT NOT NULL,
   `annee` INT NOT NULL,
-  `Enseignement_apogee` VARCHAR(45) NULL,
+  `Enseignement_apogee` VARCHAR(8) NULL,
   `commentaire` VARCHAR(100) NULL,
   `nbHeures` INT NOT NULL,
   PRIMARY KEY (`idService`),
@@ -271,14 +271,20 @@ DROP procedure IF EXISTS `sde`.`InsererEnseignement`;
 
 DELIMITER $$
 
-CREATE PROCEDURE InsererEnseignement(IN p_apogee VARCHAR(45), IN p_intitule VARCHAR(45), IN p_heureCM INT, IN p_heureTP INT, IN p_semestre INT, IN p_nbGroupes INT, IN p_idFormation INT)
+CREATE PROCEDURE InsererEnseignement(IN p_apogee VARCHAR(8), IN p_intitule VARCHAR(45), IN p_heureCM INT, IN p_heureTP INT, IN p_semestre INT, IN p_nbGroupes INT, IN p_idFormation INT)
 BEGIN
-    -- Ajouter l'enseignement
-	INSERT INTO `sde`.`Enseignement` (apogee, intitule, heureCM, heureTP, semestre, nbGroupes)
-	VALUES (UPPER(p_apogee), UPPER(p_intitule), p_heureCM, p_heureTP, p_semestre, p_nbGroupes);
-	-- Ajouter l'entrée dans la table de liaison EnseignementsFormations
-    INSERT INTO `sde`.`EnseignementFormation` (Formation_idFormation, Enseignement_apogee)
-    VALUES (p_idFormation, p_apogee);
+    -- On fixe ici le format du code apogee (8 caractères alphanum)
+    IF (p_apogee REGEXP '^[A-Za-z0-9]{8}$')
+    THEN
+        -- Ajouter l'enseignement
+    	INSERT INTO `sde`.`Enseignement` (apogee, intitule, heureCM, heureTP, semestre, nbGroupes)
+    	VALUES (UPPER(p_apogee), UPPER(p_intitule), p_heureCM, p_heureTP, p_semestre, p_nbGroupes);
+    	-- Ajouter l'entrée dans la table de liaison EnseignementsFormations
+        INSERT INTO `sde`.`EnseignementFormation` (Formation_idFormation, Enseignement_apogee)
+        VALUES (p_idFormation, p_apogee);
+    ELSE
+      SIGNAL sqlstate '45000' set message_text = 'Code apogee invalide!';
+    END IF;
 END;$$
 
 DELIMITER ;
@@ -291,7 +297,7 @@ DROP procedure IF EXISTS `sde`.`InsererService`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `InsererService` (IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT, IN p_commentaire VARCHAR(100))
+CREATE PROCEDURE `InsererService` (IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(8), IN p_nbHeures INT, IN p_commentaire VARCHAR(100))
 BEGIN
     -- Insérer le nouveau service
 	INSERT INTO `sde`.`Service` (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire)
@@ -347,7 +353,7 @@ DROP procedure IF EXISTS `sde`.`ModifierService`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `ModifierService` (IN p_idService INT, IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(45), IN p_nbHeures INT, IN p_commentaire VARCHAR(100))
+CREATE PROCEDURE `ModifierService` (IN p_idService INT, IN p_idEnseignant INT, IN p_idTypeService INT, IN p_annee INT, IN p_apogee VARCHAR(8), IN p_nbHeures INT, IN p_commentaire VARCHAR(100))
 BEGIN
     -- Effectuer la modification
     UPDATE `sde`.`Service`
@@ -364,6 +370,7 @@ END;$$
 
 DELIMITER ;
 
+
 /******************************************************/
 -- procedure ModifierEnseignement
 /******************************************************/
@@ -372,29 +379,31 @@ DROP procedure IF EXISTS `sde`.`ModifierEnseignement`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `ModifierEnseignement` (IN p_apogeeOri VARCHAR(45), IN p_apogee VARCHAR(45), IN p_intitule VARCHAR(45), IN p_heureCM INT, IN p_heureTP INT, IN p_semestre INT, IN p_nbGroupes INT, IN p_idFormation INT)
+CREATE PROCEDURE `ModifierEnseignement` (IN p_apogeeOri VARCHAR(8), IN p_apogee VARCHAR(8), IN p_intitule VARCHAR(45), IN p_heureCM INT, IN p_heureTP INT, IN p_semestre INT, IN p_nbGroupes INT, IN p_idFormation INT)
 BEGIN
-
-	-- Mettre à jour l'Enseignement
-	UPDATE `sde`.`Enseignement`
-    SET
-		apogee = UPPER(p_apogee),
-        intitule = UPPER(p_intitule),
-        heureCM = p_heureCM,
-        heureTP = p_heureTP,
-        semestre = p_semestre,
-        nbGroupes = p_nbGroupes
-	WHERE
-		apogee = p_apogeeOri;
-
-	-- Mettre à jour la table de liaison EnseignementsFormations
-    UPDATE `sde`.`EnseignementFormation`
-    SET
-		Formation_idFormation = p_idFormation,
-		Enseignement_apogee = p_apogee
-    WHERE
-		Enseignement_apogee = p_apogeeOri;
-    
+    IF (p_apogee REGEXP '^[A-Za-z0-9]{8}$')
+    THEN
+        -- Mettre à jour la table de liaison EnseignementsFormations
+        UPDATE `sde`.`EnseignementFormation`
+        SET
+        Formation_idFormation = p_idFormation,
+        Enseignement_apogee = p_apogee
+        WHERE
+        Enseignement_apogee = p_apogeeOri;
+        -- Mettre à jour l'Enseignement
+        UPDATE `sde`.`Enseignement`
+        SET
+            apogee = UPPER(p_apogee),
+            intitule = UPPER(p_intitule),
+            heureCM = p_heureCM,
+            heureTP = p_heureTP,
+            semestre = p_semestre,
+            nbGroupes = p_nbGroupes
+        WHERE
+            apogee = p_apogeeOri;
+    ELSE
+          SIGNAL sqlstate '45000' set message_text = 'Code apogee invalide!';
+    END IF;
 END;$$
 
 DELIMITER ;
@@ -498,7 +507,7 @@ DROP procedure IF EXISTS `sde`.`SupprimerEnseignement`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `SupprimerEnseignement` (IN p_apogee VARCHAR(45))
+CREATE PROCEDURE `SupprimerEnseignement` (IN p_apogee VARCHAR(8))
 BEGIN
     -- Supprimer l'enseignement
 	DELETE FROM `sde`.`Enseignement` WHERE `apogee` = p_apogee;
@@ -686,7 +695,6 @@ END$$
 
 DELIMITER ;
 
-
 /******************************************************/
 /******************** CREER LES VUES ******************/
 /******************************************************/
@@ -800,7 +808,7 @@ INNER JOIN
 DROP VIEW IF EXISTS `sde`.`VueListeFormation` ;
 CREATE VIEW `VueListeFormation` AS
 SELECT
-    `sde`.`VueListeEnseignement`.`idFormation` AS id,
+    `sde`.`Formation`.`idFormation` AS id,
     `sde`.`Diplome`.`nom` as diplome,
 	`sde`.`Formation`.`nom` as formation,
     COALESCE(SUM(heureCM), 0) AS heureCM,
@@ -859,7 +867,8 @@ SELECT
 	`sde`.`Enseignant`.`idEnseignant` AS id,
 	CONCAT(`sde`.`Enseignant`.`nom`, " ", `sde`.`Enseignant`.`prenom`) AS nom
 FROM
-	`sde`.`Enseignant`;
+	`sde`.`Enseignant`
+ORDER BY `sde`.`Enseignant`.`nom` ASC;
 
 /******************************************************/
 -- View `sde`.`VueLabelEnseignement`
@@ -868,9 +877,10 @@ DROP VIEW IF EXISTS `sde`.`VueLabelEnseignement` ;
 CREATE VIEW `VueLabelEnseignement` AS
 SELECT
 	`sde`.`Enseignement`.`apogee` as id,
-	`sde`.`Enseignement`.`intitule`as nom
+	CONCAT(`sde`.`Enseignement`.`apogee`, " - ", `sde`.`Enseignement`.`intitule`) as nom
 FROM
-	`sde`.`Enseignement`;
+	`sde`.`Enseignement`
+ORDER BY `sde`.`Enseignement`.`apogee`;
 
 /******************************************************/
 -- View `sde`.`VueLabelFormation`
@@ -881,7 +891,8 @@ SELECT
 	`sde`.`Formation`.`idFormation` as id,
 	`sde`.`Formation`.`nom` as nom
 FROM
-	`sde`.`Formation`;
+	`sde`.`Formation`
+ORDER BY `sde`.`Formation`.`nom` ASC;
 
 /******************************************************/
 -- View `sde`.`VueLabelDiplome`
@@ -983,31 +994,31 @@ VALUES
     ('54BEE3EC', 'ÉCONOMIE EUROP.', 26, 18, 2, 3),
     ('54BEM1EC', 'MACROÉCO. APPLIQUÉE', 26, 18, 2, 3),
     ('55BEE5EC', 'MATHS POUR SCIENCES SOCIALES', 26, 18, 2, 3),
-    ('54BEE1EC', 'ANALYSE MICROÉCO', 0, 18, 2, 6),
+    ('54BEE1EC', 'ANALYSE MICROÉCO', 24, 18, 2, 6),
     ('54BEE6EC', 'MÉTHODO. UNIVERS. PP2', 0, 18, 2, 3),
     ('54DEE3EC', 'ÉCO DE L\'ENTREPRISE', 26, 18, 3, 3),
     ('54DEE6EC', 'STAT. INFORMATIQUE (1)', 13, 30, 3, 4),
-    ('54DEE2EC', 'HIST DE LA PENSÉE ÉCO', 0, 18, 3, 5),
-    ('54DEE1EC', 'ANALYSE MACROÉCO', 0, 18, 3, 5),
+    ('54DEE2EC', 'HIST DE LA PENSÉE ÉCO', 26, 18, 3, 5),
+    ('54DEE1EC', 'ANALYSE MACROÉCO', 26, 18, 3, 5),
     ('54DEE4EC', 'SOCIO-ÉCO DES ORG.', 26, 18, 3, 3),
     ('54DEE5EC', 'MATHS POUR SCIENCES SOCIALES', 24, 18, 3, 2),
     ('54EEE5EC', 'STAT. INFORMATIQUE (2)', 24, 18, 4, 3),
-    ('54EEE1EC', 'ECO DU TRAVAIL', 0, 18, 4, 5),
-    ('54EEE2EC', 'THÉORIE DE LA  MONNAIE', 0, 18, 4, 4),
+    ('54EEE1EC', 'ECO DU TRAVAIL', 26, 18, 4, 5),
+    ('54EEE2EC', 'THÉORIE DE LA MONNAIE', 26, 18, 4, 4),
     ('54EEE3EC', 'POLITIQUE ÉCO. (1)', 26, 18, 4, 3),
     ('54EED4EC', 'DROIT DES CONTRATS', 36, 0, 4, 1),
     ('43GU01ES', 'SOCIO. DES SERVICES', 26, 18, 5, 2),
     ('43GU02ES', 'ÉCO INDUSTRIELLE', 26, 18, 5, 2),
     ('43GU03ES', '1 SOCIALE', 26, 0, 5, 0),
-    ('43GU11ES', 'THÉORIE DE LA CROISSANCE', 0, 18, 5, 4),
-    ('43GU12ES', 'ÉCO INTERNATIONALE', 0, 18, 5, 4),
+    ('43GU11ES', 'THÉORIE DE LA CROISSANCE', 26, 18, 5, 4),
+    ('43GU12ES', 'ÉCO INTERNATIONALE', 26, 18, 5, 4),
     ('43GU13ES', 'MARKETING', 26, 18, 5, 1),
     ('43GU21ES', 'GESTION RESS. HUM', 26, 18, 5, 1),
     ('43GU22ES', 'ANALYSE ECO MONDIALISATION', 26, 18, 5, 1),
     ('43GU23ES', 'EMPLOI ET FLEXIBILITÉ', 26, 18, 5, 1),
     ('43HU01ES', 'SOCIOLOGIE ÉCONOMIQUE', 26, 18, 6, 1),
     ('43HU02ES', 'ECO. DE L\'ENVIRONNT', 26, 18, 6, 2),
-    ('43HU11ES', 'MONNAIE, BANQUE, FINANCE', 0, 18, 6, 4),
+    ('43HU11ES', 'MONNAIE, BANQUE, FINANCE', 26, 18, 6, 4),
     ('43HU13ES', 'STAT. ET ÉCONOMÉTRIE', 26, 18, 6, 2),
     ('43HU14ES', 'COMPTABILITÉ ANALYTIQUE', 24, 18, 6, 1),
     ('43HU22ES', 'RELATIONS PROF EN EUROPE', 26, 18, 6, 0),
@@ -1086,7 +1097,8 @@ VALUES
     (6, 'PISE', 2),
     (7, 'E2S', 2),
     (8, 'EPOG', 2),
-    (9, 'APE', 2);
+    (9, 'APE', 2),
+    (10, 'ILTS', 2);
 
 /******************************************************/
 -- Table`sde`.`EnseignementFormation`
@@ -1203,7 +1215,9 @@ VALUES
     ("PRAG", 384, 1),
     ("ATER", 96, 0),
     ("MONITEUR", 384, 0),
-    ("EXTERIEUR", 0, 0);
+    ("EXTERIEUR", 0, 0),
+    ("DOCTORANT", 0, 0),
+    ("PAST", 96, 1) ;
 
 
 /******************************************************/
@@ -1211,24 +1225,299 @@ VALUES
 /******************************************************/
 INSERT INTO `sde`.`Enseignant`  (nom, prenom, depEco, statut_idStatut)
 VALUES
-    ("DARMANGEAT", "CHRISTOPHE", 1, 3),
-    ("GROUIEZ", "PASCALE", 1, 2),
-    ("LAMARCHE", "THIERY", 1, 1),
-    ("DOSQUET", "YVON", 1, 4),
-    ("DUPONT EXTERIEUR", "JEAN", 0, 5),
-    ("LERY", "JEAN-MICHEL", 0, 6);
+    ("AZOULAY","N.",1,2),
+    ("BELOT","QUENTIN",1,7),
+    ("BERTHE","A.",1,2),
+    ("BERTHONNET"," I.",1,2),
+    ("BAUDET-MICHEL","S.",1,2),
+    ("BERROIR","S.",1,2),
+    ("BLANDIN","O.",1,8),
+    ("BREBION","C.",1,7),
+    ("DARMANGEAT","CHRISTOPHE",1,3),
+    ("FERLAZZO","PRENOM",1,4),
+    ("FOURMOND","S.",1,2),
+    ("GROUIEZ","P.",1,2),
+    ("HEIT","S.",1,2),
+    ("JHONS","V.",1,7),
+    ("KOLEVA","P.",1,2),
+    ("LAMARCHE","T.",1,1),
+    ("MAGALHAES","N.",1,7),
+    ("MAGNIN","E.",1,2),
+    ("MORANGE","M.",1,2),
+    ("MOATI","PH.",1,1),
+    ("MORCILLO","S.",1,4),
+    ("MURAT","J.",1,2),
+    ("REBERIOUX","A.",1,2),
+    ("RIZOPOULOS","Y.",1,2),
+    ("RUBINSTEIN","M.",1,2),
+    ("SANTAMARIA","F.",1,2),
+    ("TCHERNIA","JF.",1,8),
+    ("VOISIN","M.-J.",1,2),
+    ("ROELANDTS","M.",0,6),
+    ("DOSQUET","Y.",0,6),
+    ("ARAB","A.",0,6),
+    ("SIOUNANDAN","N.",0,6),
+    ("PENEZ","J.",0,6),
+    ("GABRIEL","F.",0,6),
+    ("ZANNI","R.",0,6),
+    ("AYARI","S.",0,6),
+    ("PORRAS","L.",0,6),
+    ("BOURCELOT","",0,6),
+    ("BOURCELOT","F.",0,6),
+    ("BOUDJIT","A.",0,6),
+    ("ABBAS","H.",0,6),
+    ("LAH","M.",0,6),
+    ("LASCAUX","JM",0,6),
+    ("KHALFOUN","F.",0,6),
+    ("TAVOULARIS","G.",0,6),
+    ("FRANCOU","A.",0,6),
+    ("SEPOT","J.-Y.",0,6),
+    ("DUCOUDRÉ","B.",0,6),
+    ("RIEU","A.",0,6),
+    ("SOUISSI","A.",0,6),
+    ("LETISSIER","F.",0,6),
+    ("NOAH","A.",0,6),
+    ("HELLOU","S.",0,6),
+    ("DAMEZ","S.",0,6),
+    ("MARTIN","L.",0,6),
+    ("SIMONET","PRENOM",0,6),
+    ("OUAKI","PRENOM",0,6),
+    ("LACROIX","M.",0,6),
+    ("BENISTI","PRENOM",0,6),
+    ("SIOUNANDAN","PRENOM",0,6),
+    ("HOANG","PRENOM",0,6),
+    ("ANCELIN","N.",0,6),
+    ("LAMENIE","B.",0,6),
+    ("BAUDRY","S.",0,6),
+    ("ZNATY","S.",0,6),
+    ("PIAR","C.",0,6),
+    ("MARTIN","F.",0,6),
+    ("LEFEBVRE-NARE","F.",0,6),
+    ("FESNEAU","T.",0,6),
+    ("BOTTIAU","C.",0,6),
+    ("LOUBIGNAC","P.",0,6),
+    ("GAULT","G.",0,6),
+    ("MEUNIER","PRENOM",0,6),
+    ("COLLIN","I.",0,6),
+    ("ROUSSEL","E.",0,6),
+    ("ANDRE","N.",0,6),
+    ("DESTATTE","P.",0,6),
+    ("SALMON","M-M.",0,6),
+    ("BAZIN","F.",0,6),
+    ("DORION","F.",0,6),
+    ("DORION","A.",0,6),
+    ("LE VAN TINH","P.",0,6),
+    ("WEILL","PRENOM",0,6),
+    ("PETAT","A.",0,6),
+    ("LEIBOVICI","L.",0,6),
+    ("BOISSY","C.",0,6),
+    ("PARIS","L.",0,6),
+    ("FUKS","N.",0,6);
 
 /******************************************************/
 -- Table Service (debug : services fictifs à modifier !)
 /******************************************************/
-INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire)
-VALUES
-    (1, 2, 2018, "54AEE2EC", 18, NULL),
-    (2, 2, 2018, "54AEE2EC", 18, NULL),
-    (2, 1, 2018, "54AEE2EC", 3, NULL),
-    (3, 1, 2018, "54AEE2EC", 10, "Attention ce cours la est particuliers"),
-    -- Service de type spécial (3), ne correspondant pas à un cours (apogee = null)
-    (2, 3, 2018, null, 10, "Heures syndicales");
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (20,1,2017,"54AEE2EC",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (60,2,2017,"54AEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (60,2,2017,"54AEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (33,2,2017,"54AEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (33,2,2017,"54AEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (33,2,2017,"54AEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (34,2,2017,"54AEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (34,2,2017,"54AEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (50,1,2017,"54AEE5EC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (71,2,2017,"54AEE5EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (71,2,2017,"54AEE5EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (29,2,2017,"54AEE6EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (29,2,2017,"54AEE6EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (35,2,2017,"54AEE6EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (35,2,2017,"54AEE6EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (11,1,2017,"54AED3EC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (36,1,2017,"54BEE4EC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (36,2,2017,"54BEE4EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (36,2,2017,"54BEE4EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (36,2,2017,"54BEE4EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (37,1,2017,"54BEE2EC",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (37,2,2017,"54BEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (37,2,2017,"54BEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (39,2,2017,"54BEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (1,1,2017,"54BEE3EC",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (12,1,2017,"54BEM1EC",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (39,2,2017,"54BEM1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (39,2,2017,"54BEM1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (39,2,2017,"54BEM1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (40,2,2017,"55BEE5EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (3,1,2017,"54BEE1EC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (21,2,2017,"54BEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (21,2,2017,"54BEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (41,2,2017,"54BEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (42,2,2017,"54BEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (42,2,2017,"54BEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (42,2,2017,"54BEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (39,2,2017,"54BEE6EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (39,2,2017,"54BEE6EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (39,2,2017,"54BEE6EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (24,1,2017,"54DEE3EC",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (14,2,2017,"54DEE3EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (14,2,2017,"54DEE3EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (14,2,2017,"54DEE3EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (28,1,2017,"54DEE6EC",13,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (43,2,2017,"54DEE6EC",30,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (43,2,2017,"54DEE6EC",30,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (43,2,2017,"54DEE6EC",30,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (43,2,2017,"54DEE6EC",30,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (4,1,2017,"54DEE2EC",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (4,2,2017,"54DEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (4,2,2017,"54DEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (4,2,2017,"54DEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (36,2,2017,"54DEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (36,2,2017,"54DEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (15,1,2017,"54DEE1EC",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (10,2,2017,"54DEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (10,2,2017,"54DEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (10,2,2017,"54DEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (31,2,2017,"54DEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (31,2,2017,"54DEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (18,1,2017,"54DEE4EC",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (18,2,2017,"54DEE4EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (10,2,2017,"54DEE4EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (10,2,2017,"54DEE4EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (44,1,2017,"54DEE5EC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (44,2,2017,"54DEE5EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (44,2,2017,"54DEE5EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (45,1,2017,"54EEE5EC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (45,2,2017,"54EEE5EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (45,2,2017,"54EEE5EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (46,2,2017,"54EEE5EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (28,1,2017,"54EEE1EC",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (14,2,2017,"54EEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (10,2,2017,"54EEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (10,2,2017,"54EEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (31,2,2017,"54EEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (31,2,2017,"54EEE1EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (25,1,2017,"54EEE2EC",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (47,2,2017,"54EEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (47,2,2017,"54EEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (47,2,2017,"54EEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (30,2,2017,"54EEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (30,2,2017,"54EEE2EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (48,1,2017,"54EEE3EC",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (48,2,2017,"54EEE3EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (39,2,2017,"54EEE3EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (39,2,2017,"54EEE3EC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (13,1,2017,"54EED4EC",36,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (16,1,2017,"43GU01ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (71,2,2017,"43GU01ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (71,2,2017,"43GU01ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (25,1,2017,"43GU02ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (25,2,2017,"43GU02ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (25,2,2017,"43GU02ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (16,1,2017,"43GU03ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (12,1,2017,"43GU11ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (12,2,2017,"43GU11ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (12,2,2017,"43GU11ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (36,2,2017,"43GU11ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (36,2,2017,"43GU11ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (23,1,2017,"43GU12ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (21,2,2017,"43GU12ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (21,2,2017,"43GU12ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (21,2,2017,"43GU12ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (21,2,2017,"43GU12ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (15,1,2017,"43GU13ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (15,2,2017,"43GU13ES",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (7,1,2017,"43GU21ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (7,2,2017,"43GU21ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (21,1,2017,"43GU22ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (21,2,2017,"43GU22ES",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (49,1,2017,"43GU23ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (49,2,2017,"43GU23ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (4,1,2017,"43HU11ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (51,2,2017,"43HU11ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (52,2,2017,"43HU11ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (53,2,2017,"43HU11ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (53,2,2017,"43HU11ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (3,1,2017,"43HU13ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (21,2,2017,"43HU13ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (21,2,2017,"43HU13ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (54,1,2017,"43HU14ES",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (54,2,2017,"43HU14ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (8,1,2017,"43HU22ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (8,2,2017,"43HU22ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (13,1,2017,"43HU23ES",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (13,2,2017,"43HU23ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (28,1,2017,"43HU21ES",26,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (28,2,2017,"43HU21ES",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (12,1,2017,"43ME11MC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (27,1,2017,"44ME12MC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (6,1,2017,"43ME13MC",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (5,2,2017,"43ME22MC",30,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (18,1,2017,"43ME43MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (18,2,2017,"43ME43MC",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (1,1,2017,"43ME44MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (1,2,2017,"43ME44MC",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (20,1,2017,"43ME45MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (60,2,2017,"43ME45MC",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (24,1,2017,"43ME46MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (24,2,2017,"43ME46MC",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (69,1,2017,"43ME41MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (69,2,2017,"43ME41MC",36,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (3,1,2017,"43ME27MC",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (3,2,2017,"43ME27MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (20,1,2017,"43NE61MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (19,1,2017,"43NE63MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (15,1,2017,"43NE64MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (4,1,2017,"43ME65MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (61,1,2017,"43NE62MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (64,2,2017,"44NE06MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (65,1,2017,"43NE07MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (65,2,2017,"43NE07MC",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (48,1,2017,"43NE08MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (48,2,2017,"43NE08MC",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (66,1,2017,"43NE09MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (66,2,2017,"43NE09MC",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (23,1,2017,"43NE10MC",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (23,2,2017,"43NE10MC",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (67,2,2017,"43NE11MC",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (68,1,2017,"43NE12MC",16,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (68,2,2017,"43NE12MC",6,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (69,2,2017,"43NE12MC",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (70,2,2017,"43PE02E1",13,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (70,2,2017,"43PE02E1",13,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (71,1,2017,"43PE03E1",14,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (72,1,2017,"43PE04E1",8,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (73,1,2017,"43PE05E1",13,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (73,2,2017,"43PE05E1",13,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (74,1,2017,"43PE06E1",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (76,1,2017,"43QE2043",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (77,1,2017,"43PE30E1",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (77,2,2017,"43PE30E1",6,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (22,1,2017,"43PU05E1",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (22,2,2017,"43PU05E1",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (78,1,2017,"43PE08E1",14,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (27,1,2017,"43PE10E1",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (7,1,2017,"43PE11E1",10,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (79,1,2017,"43PE12E1",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (79,2,2017,"43PE12E1",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (79,2,2017,"43PE12E1",12,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (20,1,2017,"43PE09E1",6,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (16,1,2017,"43PE09E1",6,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (23,1,2017,"43QE1343",20,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (16,1,2017,"43QE1443",20,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (24,1,2017,"43QE1543",20,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (1,1,2017,"43QE1643",20,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (43,1,2017,"43QE1843",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (83,1,2017,"43QE1943",18,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (20,1,2017,"43QE2243",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (20,1,2017,"43QE2143",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (87,1,2017,"43QE24E1",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (88,1,2017,"43QE25E1",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (18,1,2017,"43QE26E1",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (7,1,2017,"43QE27E1",24,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (16,1,2017,"43U2DE53",15,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (16,1,2017,"43IF5044",6,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (12,1,2017,"43IF5044",21,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (9,1,2017,"43IF5073",48,NULL);
+INSERT INTO `sde`.`Service`  (Enseignant_idEnseignant, TypeService_idTypeService, annee, Enseignement_apogee, nbHeures, commentaire) VALUES (9,1,2017,"43IF5084",40,NULL);
 
 
 /******************************************************/
@@ -1237,7 +1526,7 @@ VALUES
 /******************************************************/
 INSERT INTO `sde`.`Utilisateur` (nom, email, authLevel, mdp, headerColor)
 VALUES
-    ("Rémi", "remidelannoy@hotmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", "#000000"),
+    ("Rémi", "remidelannoy@hotmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", "#FF2233"),
     ("David", "david.ayache90@gmail.com", 1, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", "#000000"),
     ("Prof", "prof@gmail.com", 0, "$2y$10$eRGp3LBGr01zn48AutPc8u4A0rMLzdzN1Tb8Z2J/OoMxL0i0zA1nC", "#000000");
 

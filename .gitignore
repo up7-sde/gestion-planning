@@ -4,3 +4,6 @@ documents/*
 # Contient les ids / login / nom de bdd / etc
 .env
 deployer_dev.sh
+
+# On veut pas la bdd sur github
+bdd/*
