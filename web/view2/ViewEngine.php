@@ -342,8 +342,8 @@ class ViewEngine {
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ok</button>
-                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
+                        <button id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ok</button>
+                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
             </form>';
@@ -352,8 +352,8 @@ class ViewEngine {
                     $form = $form . 
                     '<div class="form-group row">
                         <div class="col-sm-10">
-                            <button ' .$status. ' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ajouter</button>
-                            <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
+                            <button ' .$status. ' id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Ajouter</button>
+                            <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
                         </div>
                     </div>
                 </form>';
@@ -361,9 +361,9 @@ class ViewEngine {
                     $form = $form . 
                     '<div class="form-group row">
                         <div class="col-sm-10">
-                            <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Modifier</button>
-                            <a id="deleteButton" href="'. $actions['delete'] . '" role="button" class="btn btn-danger '. $status .'"><i class="far fa-trash-alt"></i> Supprimer</a>                        
-                            <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
+                            <button '.$status.' id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Modifier</button>
+                            <a id="deleteButton" href="'. $actions['delete'] . '" role="button" class="btn btn-danger btn-sm '. $status .'"><i class="far fa-trash-alt"></i> Supprimer</a>                        
+                            <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
                             </div>
                         </div>
                     </form>';
@@ -371,8 +371,8 @@ class ViewEngine {
                     $form = $form . 
                     '<div class="form-group row">
                         <div class="col-sm-10">
-                            <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Modifier</button>
-                            <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
+                            <button '.$status.' id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Modifier</button>
+                            <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
                         </div>
                     </div>
                 </form>';
