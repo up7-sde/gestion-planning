@@ -6,4 +6,8 @@ documents/*
 deployer_dev.sh
 
 # On veut pas la bdd sur github
-bdd/creer_bdd.sql
+bdd/*
+
+
+# On veut pas la bdd sur github
+mep/*
