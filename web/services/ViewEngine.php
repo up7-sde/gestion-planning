@@ -1,14 +1,10 @@
 <?php
 class ViewEngine {
-        public function __construct(){
-            $this->attributes = Model::$inputs;
-            $this->tables = Model::$tables;
-        }
 
         public function generateTable2($name, $data, $path, $admin){
             
             $table = "";
-            $model = $this->tables[$name];
+            $model = Model::$tables[$name];
          
             if (!isset($data) || !$data || count($data) == 0){
                 $table = '<div class="alert alert-warning" role="alert">
@@ -99,7 +95,7 @@ class ViewEngine {
 
             foreach($inputs as $key => $value){
                 
-                $attributes = $this->attributes[$key];
+                $attributes = Model::$inputs[$key];
                 $attributes['help'] !== null? $help = '<small id="emailHelp" class="form-text text-muted">' . $attributes['help'] . '</small>'
                                             : $help = null;
                 
