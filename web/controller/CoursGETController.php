@@ -60,6 +60,7 @@ class CoursGETController extends Controller {
 
                     $formActions = array('form' => '/web/cours', 'back' => '/web/cours?action=show');
                     $hiddenInput = null;
+                    $titleButton =null;
 
                     include('view2/forms.php');
                     break;

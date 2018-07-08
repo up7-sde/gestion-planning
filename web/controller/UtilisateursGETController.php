@@ -36,8 +36,7 @@ class UtilisateursGETController extends Controller {
                     
                     $titleButton = array(
                         array('icon' => 'add', 'action' => '/web/utilisateurs?action=add', 'enabled'=> $this->auth->isUserAdmin()),
-                        array('icon' => 'download', 'action' => '/web/utilisateurs?action=download', 'enabled'=> $this->auth->isUserAdmin())
-                        
+                        array('icon' => 'download', 'action' => '#', 'enabled'=> FALSE)
                     );
 
                     $tableAction = '/web/utilisateurs';
@@ -68,11 +67,6 @@ class UtilisateursGETController extends Controller {
                     $hiddenInput = null;
                     
                     include('view2/forms.php');
-                    break;
-
-                case "download":
-                    $data = $this->data = $this->db->findAll('VueListeUtilisateur');
-                    $this->fileMaker->passToBrowser($data);
                     break;
 
                 default:
