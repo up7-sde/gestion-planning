@@ -328,36 +328,57 @@ class ViewEngine {
 
             /*les bouttons*/
             /*if data delete button*/
-            if ($data === null){
+            if ($pageType === 'User'){
+                $form = $form . 
+                '<div class="form-group row">
+                    <div class="col-sm-12">
+                        <button disabled id="modifyButton" type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Modifier</button>
+                        <a id="deleteButton" href="'. $actions['delete'] . '" role="button" class="btn btn-danger btn-sm'. $status .'"><i class="far fa-trash-alt"></i> Supprimer</a>                                                                        
+                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary btn-sm"><i class="fas fa-undo-alt"></i> Retour</a>
+                    </div>
+                </div>
+            </form>';
+            } elseif ($pageType === 'Routine') {
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button ' .$status. ' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ajouter</button>
+                        <button disabled id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check">Modifier</i> Ok</button>
                         <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
             </form>';
-            } elseif ($data !== null && isset($actions['delete'])) {
-                $form = $form . 
-                '<div class="form-group row">
-                    <div class="col-sm-10">
-                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Modifier</button>
-                        <a id="deleteButton" href="'. $actions['delete'] . '" role="button" class="btn btn-danger '. $status .'"><i class="far fa-trash-alt"></i> Supprimer</a>                        
-                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
+            } else {
+                if ($data === null){
+                    $form = $form . 
+                    '<div class="form-group row">
+                        <div class="col-sm-10">
+                            <button ' .$status. ' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ajouter</button>
+                            <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
                         </div>
                     </div>
                 </form>';
-            } else {
-                $form = $form . 
-                '<div class="form-group row">
-                    <div class="col-sm-10">
-                        <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Modifier</button>
-                        <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
+                } elseif ($data !== null && isset($actions['delete'])) {
+                    $form = $form . 
+                    '<div class="form-group row">
+                        <div class="col-sm-10">
+                            <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Modifier</button>
+                            <a id="deleteButton" href="'. $actions['delete'] . '" role="button" class="btn btn-danger '. $status .'"><i class="far fa-trash-alt"></i> Supprimer</a>                        
+                            <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
+                            </div>
+                        </div>
+                    </form>';
+                } else {
+                    $form = $form . 
+                    '<div class="form-group row">
+                        <div class="col-sm-10">
+                            <button '.$status.' id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Modifier</button>
+                            <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
+                        </div>
                     </div>
-                </div>
-            </form>';
+                </form>';
+                }    
             }
-
+            
             $form = $form . '</form>';
             return $form;
         }
@@ -442,12 +463,6 @@ class ViewEngine {
           $nav = preg_replace('/">'. $active . '/', ' active">'. $active, $nav);
           return $nav;
         
-        }
-
-        public function generateScript($data){
-            echo '<script>';
-            echo 'var data = ' . json_encode($data) . ';';
-            echo '</script>';
         }
 
         public function generateMessage($message){

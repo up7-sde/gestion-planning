@@ -1,13 +1,16 @@
 <?php
 
+/*les services*/
 include_once('services/Db.php');
 include_once('services/Auth.php');
 include_once('services/Messenger.php');
-include_once('services/ViewEngine.php');
 include_once('services/FileMaker.php');
 include_once('services/Sanitizer.php');
 include_once('services/CSRF.php');
 include_once('services/Request.php');
+
+/*les composants de la vue*/
+include_once('view2/ViewEngine.php');
 
 class Controller {
 
@@ -26,6 +29,7 @@ class Controller {
     protected $csrf;
     
     public function __construct(){
+        
         /*args de la db ici? => non*/
         $this->request = new Request();
         $this->db = new Db();

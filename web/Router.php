@@ -16,7 +16,7 @@ class Router {
 
             $this->url = filter_var($_GET['url'], FILTER_SANITIZE_URL);
             $this->loadRoutes();
-            $GLOBALS["DEBUG"] .= "construct router > "; // debug
+            //$GLOBALS["DEBUG"] .= "construct router > "; // debug
         }
 
         /*

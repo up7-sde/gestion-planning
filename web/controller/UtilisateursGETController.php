@@ -113,7 +113,9 @@ class UtilisateursGETController extends Controller {
                     
                     $hiddenInput = null;
 
-                    $formActions = array('form' => '#', 'back' => '/web/utilisateurs/?action=show'); 
+                    $formActions = array('form' => '#', 
+                                         'back' => '/web/utilisateurs/?action=show',
+                                        'delete' => '/web/utilisateurs/'.$params['id'].'?action=delete'); 
                     
                     $this->data = $this->db->findOne('Utilisateur', $params['id']);                    
     
