@@ -29,7 +29,7 @@
        
         <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
 
-        <div class="row p-5 m-4">
+        <div class="row p-5 m-5">
           <div class="col-lg-6 text-center">
             <div class="text-primary">
             <i class="fas fa-6x fa-users-cog"></i>
