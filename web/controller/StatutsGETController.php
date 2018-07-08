@@ -79,7 +79,7 @@ class StatutsGETController extends Controller {
                 case "edit":
                     
                     $this->pageType = 'Edit';
-                    $this->title = 'Modification du statut enseignant n°'.$params['id'];
+                    $this->title = 'Statut enseignant n°'.$params['id'];
 
                     $this->data = $this->db->findOne('Statut', $params['id']);                    
                     if (!$this->data) $this->request->force('404');

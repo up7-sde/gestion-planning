@@ -31,7 +31,7 @@ class TypesGETController extends Controller {
                 case "show":
                     // Get sans argument : vue de la liste
                     $this->pageType = 'Table';
-                    $this->title = 'Tous les Types de Cours';
+                    $this->title = 'Tous les types de cours';
                     
                     $this->data = $this->db->findAll('VueListeType');
                     $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/types?action=add', 'enabled'=> $this->auth->isUserAdmin()),
@@ -80,7 +80,7 @@ class TypesGETController extends Controller {
                 case "edit":
                     
                     $this->pageType = 'Edit';
-                    $this->title = 'Type de service n°'.$params['id'];
+                    $this->title = 'Type de cours n°'.$params['id'];
                     
                     $this->data = $this->db->findOne('TypeService', $params['id']);                    
                     if (!$this->data) throw new Exception('404');

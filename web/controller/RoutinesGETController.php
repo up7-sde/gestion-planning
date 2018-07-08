@@ -19,7 +19,7 @@ class RoutinesGETController extends Controller {
         if (!$this->auth->isUserAdmin()) $this->request->force('401');
         
         $this->pageType = 'Routine';
-        $this->title = 'Nouvelle année';
+        $this->title = 'Reconduire';
         
         $titleButton = null;
 

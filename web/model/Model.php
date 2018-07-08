@@ -423,14 +423,14 @@ class Model {
         'annee1' =>
         array(
             'name' => 'annee1',
-            'alias' => 'Reconduire l\'année',
+            'alias' => 'Année cible',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
             'default' => 'YYYY',
             'required' => 'required',
             'invalid' => 'Non valide',
             'valid' => 'Valide',
-            'help' => 'Minimum 1900',
+            'help' => null,
             'min' => 1900,
             'max' => null,
             'step' => null
@@ -438,16 +438,16 @@ class Model {
         'annee2' =>
         array(
             'name' => 'annee2',
-            'alias' => 'Pour',
+            'alias' => 'Année de destination',
             'type' => PDO::PARAM_INT,
             'inputType' => 'number',
             'default' => 'YYYY',
             'required' => 'required',
             'invalid' => 'Non valide',
             'valid' => 'Valide',
-            'help' => 'Entrer une année valide',
-            'min' => 2000,
-            'max' => 2050,
+            'help' => null,
+            'min' => 1900,
+            'max' => null,
             'step' => null
         )
     );
@@ -478,7 +478,7 @@ class Model {
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'Titulaire' => array( //nom dans la bdd
-                'name' => 'Est titulaire?', //nom à afficher
+                'name' => 'Titulaire?', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -492,21 +492,21 @@ class Model {
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'HeuresDues' => array( //nom dans la bdd
-                'name' => 'Heures dues', //nom à afficher
+                'name' => 'H. dues', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'HeuresAffectees' => array( //nom dans la bdd
-                'name' => 'Heures afféctées', //nom à afficher
+                'name' => 'H. afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => 'HeuresDues', //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctH' => array( //nom dans la bdd
-                'name' => 'Pct. d\'heures afféctées', //nom à afficher
+                'name' => '% H. afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -517,7 +517,7 @@ class Model {
         /**table enseignements */
         'Enseignements' => array( //la table dans la base
             'apogee2' => array( //nom dans la bdd
-                'name' => 'Référence Apogée', //nom à afficher
+                'name' => 'Réf. Apogée', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -531,7 +531,7 @@ class Model {
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureCM' => array( //nom dans la bdd
-                'name' => 'Heures CM', //nom à afficher
+                'name' => 'H. CM', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -539,49 +539,49 @@ class Model {
             ),
 
             'heureCMAffectee' => array( //nom dans la bdd
-                'name' => 'Heures CM afféctées', //nom à afficher
+                'name' => 'H. CM afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => 'heureCM', //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctCM' => array( //nom dans la bdd
-                'name' => 'Pct. hCM afféctées', //nom à afficher
+                'name' => '% h. CM afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'hTPparGroupe' => array( //nom dans la bdd
-                'name' => 'Heures TP par groupe', //nom à afficher
+                'name' => 'H. TP/groupe', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'nbGroupe' => array( //nom dans la bdd
-                'name' => 'Nombre de groupes', //nom à afficher
+                'name' => 'Nb groupes', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'hTPtotal' => array( //nom dans la bdd
-                'name' => 'Heures TP total', //nom à afficher
+                'name' => 'H. TP total', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureTPAffectee' => array( //nom dans la bdd
-                'name' => 'Heures TP afféctées', //nom à afficher
+                'name' => 'H. TP afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => 'hTPtotal', //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctTP' => array( //nom dans la bdd
-                'name' => 'Pct. hTP afféctées', //nom à afficher
+                'name' => '% h. TP afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -619,7 +619,7 @@ class Model {
         /**Table services */
         'Cours' => array( //la table dans la base
             'apogee' => array( //nom dans la bdd
-                'name' => 'Code Apogée', //nom à afficher
+                'name' => 'Réf. apogée', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -640,7 +640,7 @@ class Model {
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heure' => array( //nom dans la bdd
-                'name' => 'Nombre d\'heures', //nom à afficher
+                'name' => 'Nb h.', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -661,14 +661,14 @@ class Model {
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'nom' => array( //nom dans la bdd
-                'name' => 'Nom enseignant', //nom à afficher
+                'name' => 'Nom prof.', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'prenom' => array( //nom dans la bdd
-                'name' => 'Prénom enseignant', //nom à afficher
+                'name' => 'Prénom prof.', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -714,42 +714,42 @@ class Model {
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureCM' => array( //nom dans la bdd
-                'name' => 'Heures CM', //nom à afficher
+                'name' => 'H. CM', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureCMAffectee' => array( //nom dans la bdd
-                'name' => 'Heures CM afféctées', //nom à afficher
+                'name' => 'H. CM afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctCM' => array( //nom dans la bdd
-                'name' => 'Pct hCM affectées', //nom à afficher
+                'name' => '%H. CM affectées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureTP' => array( //nom dans la bdd
-                'name' => 'Heures TP', //nom à afficher
+                'name' => 'H. TP', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'heureTPAffectee' => array( //nom dans la bdd
-                'name' => 'Heures TP afféctées', //nom à afficher
+                'name' => 'H. TP afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctTP' => array( //nom dans la bdd
-                'name' => 'Pct. hTP afféctées', //nom à afficher
+                'name' => '%H. TP afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -796,14 +796,14 @@ class Model {
                 'labels' => FALSE
             ),
             'heureService' => array( //nom dans la bdd
-                'name' => 'Heures de service dûes', //nom à afficher
+                'name' => 'H. dûes', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite Libbéllé
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'titulaire' => array( //nom dans la bdd
-                'name' => 'Est titulaire?', //nom à afficher
+                'name' => 'Titulaire?', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -813,7 +813,7 @@ class Model {
                /*table utilisateurs*/
         'Utilisateurs' => array( //la table dans la base
             'nom' => array( //nom dans la bdd
-                'name' => 'Nom utilisateur', //nom à afficher
+                'name' => 'Nom', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -821,13 +821,13 @@ class Model {
             ),
             'email' => array( //nom dans la bdd
                 'name' => 'Email', //nom à afficher
-                'type' => 1, //type pr alignement gauche droite
+                'type' => 1, //type pr algnement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
                 'labels' => FALSE
             ),
             'mdp' => array( //nom dans la bdd
-                'name' => 'Mot de passe', //nom à afficher
+                'name' => 'MDP ', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite
                 'show' => FALSE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -849,7 +849,7 @@ class Model {
                 'labels' => FALSE
             ),
             'authLevel' => array( //nom dans la bdd
-                'name' => 'Admin', //nom à afficher
+                'name' => 'Admin?', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage

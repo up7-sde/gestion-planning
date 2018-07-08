@@ -85,7 +85,7 @@ class FormationsGETController extends Controller {
 
                 case "edit":
                     $this->pageType = 'Edit';
-                    $this->title = 'Modification de la formation n°'.$params['id'];
+                    $this->title = 'Formation n°'.$params['id'];
 
                     $this->data = $this->db->findOne('Formation', $params['id']);                    
                     if (!$this->data) $this->request->force('404');
