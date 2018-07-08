@@ -435,7 +435,8 @@ class ViewEngine {
                     Routines
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a href="/web/routines/nvelleannee" class="dropdown-item">Reconduire</a>      
+                    <a href="/web/routines/nvelleannee" class="dropdown-item">Reconduire année</a>
+                    <a href="/web/routines/suppannee" class="dropdown-item">Supprimer année</a>      
                 </div>
                 </li>
                 <li class="nav-item">

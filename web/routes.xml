@@ -200,6 +200,18 @@
         <controller>RoutinesPOSTController</controller>
     </route>
 
+    <route>
+        <method>GET</method>
+        <path>/routines/suppannee</path>
+        <controller>RoutinesGETController</controller>
+    </route>
+
+    <route>
+        <method>POST</method>
+        <path>/routines/suppannee</path>
+        <controller>RoutinesPOSTController</controller>
+    </route>
+
     <redirect>
         <from>/</from>
         <to>/accueil</to>

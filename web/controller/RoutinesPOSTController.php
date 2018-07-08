@@ -16,13 +16,22 @@ class RoutinesPOSTController extends Controller {
         
         $this->sanitizer->filter();
 
-        $res = $this->db->callProcedure('DuppliquerService', $_POST);
-
-        if ($res) {
-            $this->messenger->push(array('status'=>'success', 'message'=>'Services copiés'));
+        if (preg_match('/nvelle/', $this->request->getCurrentUrl())){
+            $res = $this->db->callProcedure('DuppliquerService', $_POST); 
+            $success= 'Services copiés';
+            $fail = 'Impossible de copier les services';           
 
         } else {
-            $this->messenger->push(array('status'=>'fail', 'message'=>'Impossible de copier les services'));                        
+            $res = $this->db->callProcedure('SupprimerAnnee', $_POST); 
+            $success = 'Services supprimés';
+            $fail = 'Impossible de supprimer les services'; 
+        }
+        
+        if ($res) {
+            $this->messenger->push(array('status'=>'success', 'message'=>$success));
+
+        } else {
+            $this->messenger->push(array('status'=>'fail', 'message'=>$fail));                        
         }
 
         $this->request->redirect('/cours?action=show');

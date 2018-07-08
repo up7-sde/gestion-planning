@@ -11,7 +11,7 @@ class RoutinesGETController extends Controller {
     
     public function render($args=null){
    
-        $this->namespace = 'Reconduire';
+        
         /*verifier auth*/
         $user = $this->auth->getUserInfos();
 
@@ -19,21 +19,43 @@ class RoutinesGETController extends Controller {
         if (!$this->auth->isUserAdmin()) $this->request->force('401');
         
         $this->pageType = 'Routine';
-        $this->title = 'Reconduire';
         
-        $titleButton = null;
+        if (preg_match('/nvelle/', $this->request->getCurrentUrl())){
 
-        $formInputs = array(
-            'annee1' =>null,
-            'annee2' => null
-        );
+            $this->title = 'Reconduire année';
+            $this->namespace = 'Reconduire année';
+    
+            $titleButton = null;
+    
+            $formInputs = array(
+                'annee1' =>null,
+                'annee2' => null
+            );
+    
+            $formActions = array('form' => '/web/routines/nvelleannee', 'back' => '/web' . $this->request->getLastDifferentUrl()); 
+            
+            $hiddenInput = null;  
+            
+            $this->data = null;
 
-        $formActions = array('form' => '/web/routines/nvelleannee', 'back' => '/web' . $this->request->getLastDifferentUrl()); 
+        } else {
+
+            $this->title = 'Supprimer année';
+            $this->namespace = 'Supprimer année';
+    
+            $titleButton = null;
+    
+            $formInputs = array(
+                'annee1' =>null
+            );
+    
+            $formActions = array('form' => '/web/routines/suppannee', 'back' => '/web' . $this->request->getLastDifferentUrl()); 
+            
+            $hiddenInput = null;  
+            
+            $this->data = null;
+        }
         
-        $hiddenInput = null;  
-        
-        $this->data = array(array('annee1' => date("Y"), 'annee2' => intval(date("Y"))+1));
-
         include('view2/forms.php'); 
     }
 }
