@@ -20,10 +20,11 @@ class Request{
         die();
     }
 
+    /**/
     public static function getReferrer(){
 
         for ($i = count($_SESSION["history"])-1; $i>=0; $i--){
-            if (!preg_match('/auth/', $_SESSION["history"][$i])){
+            if (!preg_match('/auth/', $_SESSION["history"][$i]) && !preg_match('/download/', $_SESSION["history"][$i])){
                 return $_SESSION["history"][$i];
             }
         }
@@ -38,15 +39,11 @@ class Request{
         return $_SESSION["history"][count($_SESSION["history"])-1];
     }
 
-    public static function getLastUrl(){
-        return isset($_SESSION["history"][count($_SESSION["history"])-2])?
-            $_SESSION["history"][count($_SESSION["history"])-2] : '/';
-    }
-
     public static function getLastDifferentURL(){
         
         for ($i = count($_SESSION["history"])-1; $i>=0; $i--){
-            if ($_SESSION["history"][$i]!==$_SESSION["history"][count($_SESSION["history"])-1]){
+            if (($_SESSION["history"][$i]!==$_SESSION["history"][count($_SESSION["history"])-1])
+                    && (!preg_match('/download/', $_SESSION["history"][$i]))){
             return $_SESSION["history"][$i];
             }
         }

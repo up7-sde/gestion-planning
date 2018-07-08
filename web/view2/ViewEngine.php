@@ -342,7 +342,7 @@ class ViewEngine {
                 $form = $form . 
                 '<div class="form-group row">
                     <div class="col-sm-10">
-                        <button disabled id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check">Modifier</i> Ok</button>
+                        <button disabled id="modifyButton" type="submit" class="btn btn-success"><i class="fas fa-check"></i> Ok</button>
                         <a href="'. $actions['back'] . '" role="button" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Retour</a>
                     </div>
                 </div>
