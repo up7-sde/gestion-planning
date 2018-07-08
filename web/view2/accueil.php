@@ -35,20 +35,18 @@
             <i class="fas fa-6x fa-users-cog"></i>
 
             </div>
-            <div class="h4 mt-2">Administrateur</div>
-            <p class="mx-5">Il peut ajouter/modifier/supprimer des formations, enseignements, enseignants et cours. Il administre également les référentiels (types de cours, status des enseignants) et les utilisateurs.</p>
+            <h4 class="mt-2">Vous êtes administrateur?</h4>
+            <p class="mx-5">Consultez, éditez en seulement quelques clics votre base de données, gérez vos référentiel, administrez votre application et bien plus encore.</p>
           </div>
           <div class="col-lg-6 text-center">
           <div class="text-info">
 
           <i class="fas fa-6x fa-chalkboard-teacher"></i>
           </div>
-          <div class="h4 mt-2">Enseignant</div>
-            <p class="mx-5">Il peut accéder à toutes les informations concernant les formations, les enseignements, les enseignant et les cours. Mais il n'a aucun droit d'édition.</p>
+          <h4 class="mt-2">Vous êtes enseignant?</h4>
+            <p class="mx-5">Consultez la base de données servant à gérer vos heures de cours, visualisez vos informations personnelles en un coup d'oeuil.</p>
           </div>
         </div>
-
-
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="https://d3js.org/d3.v3.min.js"></script>
