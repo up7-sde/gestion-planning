@@ -36,7 +36,7 @@
 
             </div>
             <div class="h4 mt-2">Administrateur</div>
-            <p class="mx-5">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            <p class="mx-5">Il peut ajouter/modifier/supprimer des formations, enseignements, enseignants et cours. Il administre également les référentiels (types de cours, status des enseignants) et les utilisateurs.</p>
           </div>
           <div class="col-lg-6 text-center">
           <div class="text-info">
@@ -44,7 +44,7 @@
           <i class="fas fa-6x fa-chalkboard-teacher"></i>
           </div>
           <div class="h4 mt-2">Enseignant</div>
-            <p class="mx-5">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
+            <p class="mx-5">Il peut accéder à toutes les informations concernant les formations, les enseignements, les enseignant et les cours. Mais il n'a aucun droit d'édition.</p>
           </div>
         </div>
 
