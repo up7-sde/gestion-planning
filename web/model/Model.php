@@ -506,7 +506,7 @@ class Model {
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctH' => array( //nom dans la bdd
-                'name' => '% H. afféctées', //nom à afficher
+                'name' => '%H. afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -546,7 +546,7 @@ class Model {
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctCM' => array( //nom dans la bdd
-                'name' => '% h. CM afféctées', //nom à afficher
+                'name' => '%H. CM afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage
@@ -581,7 +581,7 @@ class Model {
                 'labels' => FALSE //avec quelle colonne de la table on fait le pourcentage
             ),
             'pctTP' => array( //nom dans la bdd
-                'name' => '% h. TP afféctées', //nom à afficher
+                'name' => '%H. TP afféctées', //nom à afficher
                 'type' => 0, //type pr alignement gauche droite
                 'show' => TRUE, //on le montre ou pas
                 'gauge' => FALSE, //avec quelle colonne de la table on fait le pourcentage

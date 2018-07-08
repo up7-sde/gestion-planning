@@ -1,4 +1,4 @@
-$(document).ready(()=> {
+$(document).ready(function() {
     //console.log(data[0]["action"]);
     $("#table").DataTable({
         "order": [[ 1, "desc" ]],
@@ -40,12 +40,10 @@ $(document).ready(()=> {
                $('.table').removeClass('invisible');
                $('#table').removeClass('invisible');
                $('input[type="search"]').unwrap();
-               $('input[type="search"]').wrap(() => {
-                                   return `<div id="customSearch" class="input-group input-group-sm"></div>`;
+               $('input[type="search"]').wrap(function() {
+                                   return '<div id="customSearch" class="input-group input-group-sm"></div>';
                                });
-               $('#customSearch').append(`<div class="input-group-append">
-               <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-             </div>`);
+               $('#customSearch').append('<div class="input-group-append"><span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span></div>');
              $('input[type="search"]').css('margin-left', '0');
              $('input[type="search"]').attr('placeholder', 'Rechercher');
          }  
