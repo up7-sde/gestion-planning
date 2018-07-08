@@ -425,7 +425,7 @@ class Model {
             'name' => 'annee1',
             'alias' => 'Année cible',
             'type' => PDO::PARAM_INT,
-            'inputType' => 'number',
+            'inputType' => 'options',
             'default' => 'YYYY',
             'required' => 'required',
             'invalid' => 'Non valide',

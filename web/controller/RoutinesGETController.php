@@ -28,7 +28,7 @@ class RoutinesGETController extends Controller {
             $titleButton = null;
     
             $formInputs = array(
-                'annee1' =>null,
+                'annee1' =>$this->db->findAll('VueLabelAnnee'),
                 'annee2' => null
             );
     
@@ -46,7 +46,7 @@ class RoutinesGETController extends Controller {
             $titleButton = null;
     
             $formInputs = array(
-                'annee1' =>null
+                'annee1' =>$this->db->findAll('VueLabelAnnee')
             );
     
             $formActions = array('form' => '/web/routines/suppannee', 'back' => '/web' . $this->request->getLastDifferentUrl()); 
