@@ -787,7 +787,7 @@ class Model {
             ),
 
             /*table diplomes*/
-        'Statuts Enseignant' => array( //la table dans la base
+        'Statuts enseignant' => array( //la table dans la base
             'nom' => array( //nom dans la bdd
                 'name' => 'Intitulé', //nom à afficher
                 'type' => 1, //type pr alignement gauche droite

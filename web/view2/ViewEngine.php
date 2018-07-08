@@ -425,7 +425,7 @@ class ViewEngine {
                     
                     <a href="/web/referentiels/diplomes?action=show" class="dropdown-item">Diplômes</a>
                     <a href="/web/referentiels/types?action=show" class="dropdown-item">Types de cours</a>
-                    <a href="/web/referentiels/statuts?action=show" class="dropdown-item">Statuts Enseignant</a>
+                    <a href="/web/referentiels/statuts?action=show" class="dropdown-item">Statuts enseignant</a>
                          
                   </div>
                 </li>
@@ -435,7 +435,7 @@ class ViewEngine {
                     Routines
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a href="/web/routines/nvelleannee" class="dropdown-item">Nouvelle année</a>      
+                    <a href="/web/routines/nvelleannee" class="dropdown-item">Reconduire</a>      
                 </div>
                 </li>
                 <li class="nav-item">

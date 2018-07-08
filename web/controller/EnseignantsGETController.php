@@ -29,7 +29,7 @@ class EnseignantsGETController extends Controller {
                 case "show":
                     // Get sans argument : vue de la liste
                     $this->pageType = 'Table';
-                    $this->title = 'Enseignants';
+                    $this->title = 'Tous les enseignants';
                     $this->data = $this->db->findAll('VueListeEnseignant');
 
                     $titleButton = array(
@@ -45,7 +45,7 @@ class EnseignantsGETController extends Controller {
 
                 case "add":
                     $this->pageType = 'New';
-                    $this->title = "Nouvel Enseignant";
+                    $this->title = "Nouvel enseignant";
 
                     $titleButton = null;
 

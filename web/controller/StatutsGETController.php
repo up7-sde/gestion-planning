@@ -11,7 +11,7 @@ class StatutsGETController extends Controller {
     
     public function render($args=null){
    
-        $this->namespace = 'Statuts Enseignant';
+        $this->namespace = 'Statuts enseignant';
         /*verifier auth*/
         $user = $this->auth->getUserInfos();
         if (!$user) $this->request->redirect('/auth?action=process');
@@ -31,7 +31,7 @@ class StatutsGETController extends Controller {
                 case "show":
                     // Get sans argument : vue de la liste
                     $this->pageType = 'Table';
-                    $this->title = 'Tous les Statuts Enseignant';
+                    $this->title = 'Tous les statuts enseignant';
                     
                     $this->data = $this->db->findAll('VueListeStatut');
                     $titleButton = array(array('icon' => 'add', 'action' => '/web/referentiels/statuts?action=add', 'enabled'=> $this->auth->isUserAdmin()),

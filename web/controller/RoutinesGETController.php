@@ -11,7 +11,7 @@ class RoutinesGETController extends Controller {
     
     public function render($args=null){
    
-        $this->namespace = 'Nouvelle année';
+        $this->namespace = 'Reconduire';
         /*verifier auth*/
         $user = $this->auth->getUserInfos();
 

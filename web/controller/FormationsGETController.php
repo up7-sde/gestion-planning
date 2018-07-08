@@ -32,7 +32,7 @@ class FormationsGETController extends Controller {
                 case "show":
                     // Get sans argument : vue de la liste
                     $this->pageType = 'Table';
-                    $this->title = 'Toutes les Formations';
+                    $this->title = 'Toutes les formations';
 
                     $this->data = $this->db->findAll('VueListeFormation');
 
@@ -48,7 +48,7 @@ class FormationsGETController extends Controller {
 
                 case "add":
                     $this->pageType = 'New';
-                    $this->title = 'Nouvelle Formation';
+                    $this->title = 'Nouvelle formation';
 
                     $titleButton = null;
 
