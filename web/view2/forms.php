@@ -16,10 +16,10 @@
     
     <title>Up7-SDE | <?=$this->title?></title>
   </head>
-  <body style="padding-top:56px;" class="bg-light">
+  <body style="padding-top:56px;" class="bg-light pb-5">
 
       
-    <div class="container">
+    <div class="container mb-5">
    
         <?=$this->viewEngine->generateNavbar($this->namespace, $user);?>
 

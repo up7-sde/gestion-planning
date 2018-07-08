@@ -15,8 +15,8 @@
   
     <title>Up7-SDE | <?=$this->title?></title>
   </head>
-  <body style="padding-top:56px;" class="bg-light">
-  <div class="container">
+  <body style="padding-top:56px;" class="bg-light pb-5">
+  <div class="container mb-5">
   
   
   <div class="card align-self-center mt-5">

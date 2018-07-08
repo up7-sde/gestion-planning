@@ -15,7 +15,7 @@
     
   </head>
 
-  <body class="bg-light container-fluid d-flex justify-content-center" style="min-height:100%;">
+  <body class="bg-light container-fluid d-flex justify-content-center pb-5" style="min-height:100%;">
       <!--logo-->
       
     <div class="col-md-4 col-sm-12 align-self-center mt-5">
