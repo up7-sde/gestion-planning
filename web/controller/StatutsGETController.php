@@ -14,7 +14,7 @@ class StatutsGETController extends Controller {
         $this->namespace = 'Statuts Enseignant';
         /*verifier auth*/
         $user = $this->auth->getUserInfos();
-        if (!$user) throw new Exception('401');
+        if (!$user) $this->request->redirect('/auth?action=process');
         
         /*on récupère tous les types de params*/
         $params = $this->request->getParams();
@@ -64,7 +64,7 @@ class StatutsGETController extends Controller {
                     $this->fileMaker->passToBrowser($data);
                     break;
                 default:
-                    throw new Exception('404');
+                    $this->request->force('404');
                     break;
             }
         /*
@@ -124,11 +124,11 @@ class StatutsGETController extends Controller {
                     break;
                 
                 default:
-                    throw new Exception('404');
+                    $this->request->force('404');
                     break;
             }
         } else {
-            throw new Exception('404');
+            $this->request->force('404');
         }
     }
 }

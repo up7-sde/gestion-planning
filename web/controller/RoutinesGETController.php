@@ -16,7 +16,7 @@ class RoutinesGETController extends Controller {
         $user = $this->auth->getUserInfos();
 
         if (!$user) $this->request->redirect('/auth?action=process');
-        if (!$this->auth->isUserAdmin()) throw new Exception('401');
+        if (!$this->auth->isUserAdmin()) $this->request->force('401');
         
         $this->pageType = 'Routine';
         $this->title = 'Nouvelle année';

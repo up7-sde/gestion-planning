@@ -26,7 +26,7 @@ class AuthGETController extends Controller {
         
         /*not found*/
         } else {
-            throw new Exception('404');
+            $this->request->force('404');
         }
     }
 }

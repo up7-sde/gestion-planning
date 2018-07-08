@@ -71,7 +71,7 @@ class FormationsGETController extends Controller {
 
 
                 default:
-                    throw new Exception('404');
+                $this->request->force('404');
                     break;
             }
         /*
@@ -124,11 +124,11 @@ class FormationsGETController extends Controller {
                     break;
 
                 default:
-                    throw new Exception('404');
+                $this->request->force('404');
                     break;
             }
         } else {
-            throw new Exception('404');
+            $this->request->force('404');
         }
     }
 }

@@ -71,7 +71,7 @@ class EnseignantsGETController extends Controller {
                     break;
 
                 default:
-                    throw new Exception('404');
+                    $this->request->force('404');
                     break;
             }
         /*
@@ -130,11 +130,11 @@ class EnseignantsGETController extends Controller {
                     break;
 
                 default:
-                    throw new Exception('404');
+                    $this->request->force('404');
                     break;
             }
         } else {
-            throw new Exception('404');
+            $this->request->force('404');
         }
     }
 }

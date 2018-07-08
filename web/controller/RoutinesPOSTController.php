@@ -10,7 +10,7 @@ class RoutinesPOSTController extends Controller {
 
         /*verifier auth*/
         $user = $this->auth->getUserInfos();
-        if (!$user || !$this->auth->isUserAdmin()) throw new Exception('401');
+        if (!$user || !$this->auth->isUserAdmin()) $this->request->force('401');
 
         $this->csrf->verifyToken();
         
