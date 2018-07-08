@@ -14,11 +14,13 @@ include_once('view2/ViewEngine.php');
 
 class Controller {
 
+    /*variables*/
     protected $namespace;
     protected $title;
     protected $pageType;
     protected $data;
 
+    /*objets*/
     protected $request;
     protected $db;
     protected $auth;
@@ -30,18 +32,24 @@ class Controller {
     
     public function __construct(){
         
-        /*args de la db ici? => non*/
+        /*classes*/
         $this->request = new Request();
         $this->db = new Db();
         $this->messenger = new Messenger();
         $this->sanitizer = new Sanitizer();
         $this->auth = new Auth($this->db);
-        $this->viewEngine = new ViewEngine();
         $this->fileMaker = new FileMaker();
         $this->csrf = new CSRF();    
+
+        /*pour la vue*/
+        $this->viewEngine = new ViewEngine();
+        
     }
 
-    // Prends une liste d'arguments $args
+    //fonction unique à appeler quand route mach
+    //comme un main
+    //on y met la logique de l'application
+    //on y utilise les services créés dans le constructeur
     public function render($args=null){
         echo 'Hello world!';
     }

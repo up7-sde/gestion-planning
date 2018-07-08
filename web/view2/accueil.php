@@ -29,10 +29,18 @@
        
         <?=$this->viewEngine->generateMessage($this->messenger->pop());?>
 
-        <div class="d-flex flex-row justify-content-center my-5">
-            <div id="donut" data-donut="80"></div> 
+        <div class="row m-5 p-5">
+          <div class="col-sm-6 text-center">
+            <i class="fas fa-6x fa-users-cog"></i>
+            <div class="h4 mt-2">Administrateur</div>
+            <p class="mx-5">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+          </div>
+          <div class="col-sm-6 text-center">
+          <i class="fas fa-6x fa-chalkboard-teacher"></i>
+          <div class="h4 mt-2">Enseignant</div>
+            <p class="mx-5">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
+          </div>
         </div>
-
 
 
 
