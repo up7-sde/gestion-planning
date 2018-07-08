@@ -151,9 +151,9 @@ class Db{
         /*on cherche le type du param dans la liste des params puis on le bind*/
         foreach($args as $key => $value){
               $param = ':'.$key;
-              
+
               $statement->bindParam($param, $args[$key], Model::$inputs[$key]['type']);
-              //var_dump($args[$key]);
+              var_dump($args[$key]);
               //var_dump($this->attributes[$key]['type']);
         }
         
@@ -161,7 +161,7 @@ class Db{
         die();*/
         
         try{
-            $res = $statement->execute() or die(print_r($req->errorInfo(), TRUE));
+            $res = $statement->execute();
 
             if ($statement->rowCount()){
                 /*en attendant l'autocommit*/

@@ -24,7 +24,7 @@ class EnseignementsPOSTController extends Controller {
             $this->csrf->verifyToken();
             
             $this->sanitizer->filter(); 
-
+            
             $res = $this->db->callProcedure('InsererEnseignement', $_POST);
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Enseignement ajouté'));
@@ -43,7 +43,7 @@ class EnseignementsPOSTController extends Controller {
             $this->sanitizer->filter(); 
 
             $res = $this->db->callProcedure('ModifierEnseignement', $_POST);
-
+            var_dump($_POST);
             if ($res) {
                 $this->messenger->push(array('status'=>'success', 'message'=>'Enseignement modifié'));
             } else {

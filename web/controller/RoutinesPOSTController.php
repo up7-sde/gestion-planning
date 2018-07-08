@@ -25,7 +25,7 @@ class RoutinesPOSTController extends Controller {
             $this->messenger->push(array('status'=>'fail', 'message'=>'Impossible de copier les services'));                        
         }
 
-        $this->request->redirect('/');
+        $this->request->redirect('/cours?action=show');
     }
 }
 ?>

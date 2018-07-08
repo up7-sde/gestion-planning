@@ -248,6 +248,19 @@ class Model {
             'help' => 'Le code apogée ne doit contenir que des caractères alphanumériques et aucun espace.',
             'pattern' => '^[a-zA-Z0-9]+$'
         ),
+        'id' =>
+        array(
+            'name' => 'id',
+            'alias' => 'Code Apogée',
+            'type' => PDO::PARAM_STR,
+            'inputType' => 'text',
+            'default' => 'Entrez un code apogée',
+            'required' => 'required',
+            'invalid' => 'Le champs n\'est pas valide',
+            'valid' => 'Le champs est valide',
+            'help' => 'Le code apogée ne doit contenir que des caractères alphanumériques et aucun espace.',
+            'pattern' => '^[a-zA-Z0-9]+$'
+        ),
         'commentaire' =>
         array(
             'name' => 'nom',

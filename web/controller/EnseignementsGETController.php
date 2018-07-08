@@ -133,7 +133,8 @@ class EnseignementsGETController extends Controller {
                     $formActions = array('form' => '/web/enseignements/'.$params['id'],
                                         'back' => '/web/enseignements?action=show',
                                         'delete' => '/web/enseignements/'.$params['id'].'?action=delete');
-                    $hiddenInput = 'apogee2';
+                    
+                    $hiddenInput = 'id';
 
                     include('view2/forms.php');
 

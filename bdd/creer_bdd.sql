@@ -394,6 +394,7 @@ BEGIN
 		Enseignement_apogee = p_apogee
     WHERE
 		Enseignement_apogee = p_apogeeOri;
+    
 END;$$
 
 DELIMITER ;
